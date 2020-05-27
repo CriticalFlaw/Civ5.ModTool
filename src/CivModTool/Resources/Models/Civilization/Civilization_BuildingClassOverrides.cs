@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.Civilization.BuildingClassOverrides
 {
-    [XmlRoot(ElementName = "Civilization_BuildingClassOverrides")]
+    [XmlRoot(ElementName = "Civilization_BuildingClassOverrides", Namespace = "BuildingClassOverrides")]
     public class Civilization_BuildingClassOverrides
     {
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }

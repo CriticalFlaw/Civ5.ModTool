@@ -10,7 +10,7 @@ namespace CivModTool.Models.IconAtlas
         public IconTextureAtlases IconTextureAtlases { get; set; }
     }
 
-    [XmlRoot(ElementName = "IconTextureAtlases")]
+    [XmlRoot(ElementName = "IconTextureAtlases", Namespace = "IconAtlas")]
     public class IconTextureAtlases
     {
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }

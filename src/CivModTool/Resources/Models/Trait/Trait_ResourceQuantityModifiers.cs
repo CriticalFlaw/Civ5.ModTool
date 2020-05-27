@@ -9,7 +9,7 @@ namespace CivModTool.Models.Trait.ResourceQuantityModifiers
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }
     }
 
-    [XmlRoot(ElementName = "Row")]
+    [XmlRoot(ElementName = "Row", Namespace = "ResourceQuantityModifiers")]
     public class Row
     {
         [XmlElement(ElementName = "TraitType")]

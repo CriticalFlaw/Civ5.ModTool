@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.Civilization.SpyNames
 {
-    [XmlRoot(ElementName = "Civilization_SpyNames")]
+    [XmlRoot(ElementName = "Civilization_SpyNames", Namespace = "SpyNames")]
     public class Civilization_SpyNames
     {
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Buildings.YieldChanges
 {
-    [XmlRoot(ElementName = "Building_YieldChanges")]
+    [XmlRoot(ElementName = "Building_YieldChanges", Namespace = "YieldChanges")]
     public class Building_YieldChanges
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Leader.Traits
 {
-    [XmlRoot(ElementName = "Leader_Traits")]
+    [XmlRoot(ElementName = "Leader_Traits", Namespace = "Traits")]
     public class Leader_Traits
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }

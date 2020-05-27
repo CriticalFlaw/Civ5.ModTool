@@ -10,7 +10,7 @@ namespace CivModTool.Models.GameText
         public Language_en_US Language_en_US { get; set; }
     }
 
-    [XmlRoot(ElementName = "Language_en_US")]
+    [XmlRoot(ElementName = "Language_en_US", Namespace = "GameText")]
     public class Language_en_US
     {
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }

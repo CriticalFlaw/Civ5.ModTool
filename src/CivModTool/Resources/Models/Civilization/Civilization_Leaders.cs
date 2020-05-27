@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Civilization.Leaders
 {
-    [XmlRoot(ElementName = "Civilization_Leaders")]
+    [XmlRoot(ElementName = "Civilization_Leaders", Namespace = "Leaders")]
     public class Civilization_Leaders
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }

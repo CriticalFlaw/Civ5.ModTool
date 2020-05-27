@@ -24,7 +24,7 @@ namespace CivModTool.Models.Leader
         public Leader_Flavors Leader_Flavors { get; set; }
     }
 
-    [XmlRoot(ElementName = "Leaders")]
+    [XmlRoot(ElementName = "Leaders", Namespace = "Leader")]
     public class Leaders
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }

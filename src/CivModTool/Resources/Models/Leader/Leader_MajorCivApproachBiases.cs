@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.Leader.MajorCivApproachBiases
 {
-    [XmlRoot(ElementName = "Leader_MajorCivApproachBiases")]
+    [XmlRoot(ElementName = "Leader_MajorCivApproachBiases", Namespace = "MajorCivApproachBiases")]
     public class Leader_MajorCivApproachBiases
     {
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }

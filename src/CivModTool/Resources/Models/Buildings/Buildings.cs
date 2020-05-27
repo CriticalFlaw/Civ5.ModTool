@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 using CivModTool.Models.Buildings.Flavors;
 using CivModTool.Models.Buildings.YieldChanges;
 using CivModTool.Models.Buildings.YieldChangesPerPop;
@@ -26,10 +25,10 @@ namespace CivModTool.Models.Buildings
         public Building_YieldModifiers Building_YieldModifiers { get; set; }
     }
 
-    [XmlRoot(ElementName = "Buildings")]
+    [XmlRoot(ElementName = "Buildings", Namespace = "Buildings")]
     public class Buildings
     {
-        [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }
+        [XmlElement(ElementName = "Row")] public Row Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]

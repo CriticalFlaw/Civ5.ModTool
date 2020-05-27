@@ -16,7 +16,7 @@ namespace CivModTool.Models.Trait
         public Trait_ResourceQuantityModifiers Trait_ResourceQuantityModifiers { get; set; }
     }
 
-    [XmlRoot(ElementName = "Traits")]
+    [XmlRoot(ElementName = "Traits", Namespace = "Trait")]
     public class Traits
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }

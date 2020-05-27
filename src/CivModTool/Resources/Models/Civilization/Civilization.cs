@@ -1,39 +1,49 @@
 ﻿using System.Xml.Serialization;
+using CivModTool.Models.Civilization.BuildingClassOverrides;
+using CivModTool.Models.Civilization.CityNames;
+using CivModTool.Models.Civilization.FreeBuildingClasses;
+using CivModTool.Models.Civilization.FreeTechs;
+using CivModTool.Models.Civilization.FreeUnits;
+using CivModTool.Models.Civilization.Leaders;
+using CivModTool.Models.Civilization.Religions;
+using CivModTool.Models.Civilization.SpyNames;
 
 namespace CivModTool.Models.Civilization
 {
     [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
+        [XmlNamespaceDeclarations] public XmlSerializerNamespaces xmlns;
+
         [XmlElement(ElementName = "Civilizations")]
         public Civilizations Civilizations { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_Leaders")]
-        //public Civilization_Leaders Civilization_Leaders { get; set; }
+        [XmlElement(ElementName = "Civilization_Leaders")]
+        public Civilization_Leaders Civilization_Leaders { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_CityNames")]
-        //public Civilization_CityNames Civilization_CityNames { get; set; }
+        [XmlElement(ElementName = "Civilization_CityNames")]
+        public Civilization_CityNames Civilization_CityNames { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_FreeBuildingClasses")]
-        //public Civilization_FreeBuildingClasses Civilization_FreeBuildingClasses { get; set; }
+        [XmlElement(ElementName = "Civilization_FreeBuildingClasses")]
+        public Civilization_FreeBuildingClasses Civilization_FreeBuildingClasses { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_FreeTechs")]
-        //public Civilization_FreeTechs Civilization_FreeTechs { get; set; }
+        [XmlElement(ElementName = "Civilization_FreeTechs")]
+        public Civilization_FreeTechs Civilization_FreeTechs { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_FreeUnits")]
-        //public Civilization_FreeUnits Civilization_FreeUnits { get; set; }
+        [XmlElement(ElementName = "Civilization_FreeUnits")]
+        public Civilization_FreeUnits Civilization_FreeUnits { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_Religions")]
-        //public Civilization_Religions Civilization_Religions { get; set; }
+        [XmlElement(ElementName = "Civilization_Religions")]
+        public Civilization_Religions Civilization_Religions { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_BuildingClassOverrides")]
-        //public Civilization_BuildingClassOverrides Civilization_BuildingClassOverrides { get; set; }
+        [XmlElement(ElementName = "Civilization_BuildingClassOverrides")]
+        public Civilization_BuildingClassOverrides Civilization_BuildingClassOverrides { get; set; }
 
-        //[XmlElement(ElementName = "Civilization_SpyNames")]
-        //public Civilization_SpyNames Civilization_SpyNames { get; set; }
+        [XmlElement(ElementName = "Civilization_SpyNames")]
+        public Civilization_SpyNames Civilization_SpyNames { get; set; }
     }
 
-    [XmlRoot(ElementName = "Civilizations")]
+    [XmlRoot(ElementName = "Civilizations", Namespace = "Civilization")]
     public class Civilizations
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }

@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.PlayerColor.Color
 {
-    [XmlRoot(ElementName = "Colors")]
+    [XmlRoot(ElementName = "Colors", Namespace = "Color")]
     public class Colors
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }
