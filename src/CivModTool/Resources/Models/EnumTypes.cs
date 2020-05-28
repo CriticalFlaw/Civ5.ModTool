@@ -1,0 +1,70 @@
+﻿namespace CivModTool.Resources.EnumTypes
+{
+    public enum Civs
+    {
+        America,
+        Arabia,
+        Assyria,
+        Austria,
+        Aztec,
+        Babylon,
+        Brazil,
+        Byzantium,
+        Carthage,
+        Celts,
+        China,
+        Denmark,
+        Egypt,
+        England,
+        Ethiopia,
+        France,
+        Germany,
+        Greece,
+        Huns,
+        Inca,
+        India,
+        Indonesia,
+        Iroquois,
+        Japan,
+        Korea,
+        Maya,
+        Mongol,
+        Morocco,
+        Netherlands,
+        Ottoman,
+        Persia,
+        Poland,
+        Polynesia,
+        Portugal,
+        Rome,
+        Russia,
+        Shoshone,
+        Siam,
+        Songhai,
+        Spain,
+        Sweden,
+        Venice,
+        Zulu
+    }
+
+    public enum ArtStyles
+    {
+        African,
+        American,
+        Asian,
+        European,
+        Mediterranean
+    }
+
+    public enum FileCategory
+    {
+        Buildings,
+        Civilization,
+        GameText,
+        IconAtlas,
+        Leader,
+        PlayerCount,
+        Trait,
+        Units
+    }
+}

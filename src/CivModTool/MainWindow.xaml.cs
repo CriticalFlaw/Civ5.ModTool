@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows;
@@ -30,6 +29,8 @@ using CivModTool.Models.PlayerColor.Color;
 using CivModTool.Models.Trait;
 using CivModTool.Models.Trait.ResourceQuantityModifiers;
 using CivModTool.Models.Trait.YieldChangesStrategicResources;
+using CivModTool.Properties;
+using CivModTool.Resources.EnumTypes;
 using log4net;
 using log4net.Config;
 using GameData = CivModTool.Models.Civilization.GameData;
@@ -40,8 +41,55 @@ namespace CivModTool
     /// <summary>
     ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow
+    public partial class MainWindow : Window
     {
+        public static readonly Dictionary<Civs, Tuple<int, int>> civilizations = new Dictionary<Civs, Tuple<int, int>>
+        {
+            {Civs.America, new Tuple<int, int>(102, 99)},
+            {Civs.Arabia, new Tuple<int, int>(103, 100)},
+            {Civs.Assyria, new Tuple<int, int>(100, 96)},
+            {Civs.Austria, new Tuple<int, int>(84, 100)},
+            {Civs.Aztec, new Tuple<int, int>(84, 100)},
+            {Civs.Babylon, new Tuple<int, int>(99, 99)},
+            {Civs.Brazil, new Tuple<int, int>(100, 96)},
+            {Civs.Byzantium, new Tuple<int, int>(100, 97)},
+            {Civs.Carthage, new Tuple<int, int>(100, 97)},
+            {Civs.Celts, new Tuple<int, int>(100, 97)},
+            {Civs.China, new Tuple<int, int>(100, 97)},
+            {Civs.Denmark, new Tuple<int, int>(108, 99)},
+            {Civs.Egypt, new Tuple<int, int>(108, 99)},
+            {Civs.England, new Tuple<int, int>(108, 99)},
+            {Civs.Ethiopia, new Tuple<int, int>(108, 99)},
+            {Civs.France, new Tuple<int, int>(108, 99)},
+            {Civs.Germany, new Tuple<int, int>(108, 99)},
+            {Civs.Greece, new Tuple<int, int>(108, 99)},
+            {Civs.Huns, new Tuple<int, int>(108, 99)},
+            {Civs.Inca, new Tuple<int, int>(108, 99)},
+            {Civs.India, new Tuple<int, int>(108, 99)},
+            {Civs.Indonesia, new Tuple<int, int>(108, 99)},
+            {Civs.Iroquois, new Tuple<int, int>(108, 99)},
+            {Civs.Japan, new Tuple<int, int>(108, 99)},
+            {Civs.Korea, new Tuple<int, int>(108, 99)},
+            {Civs.Maya, new Tuple<int, int>(108, 99)},
+            {Civs.Mongol, new Tuple<int, int>(108, 99)},
+            {Civs.Morocco, new Tuple<int, int>(108, 99)},
+            {Civs.Netherlands, new Tuple<int, int>(108, 99)},
+            {Civs.Ottoman, new Tuple<int, int>(108, 99)},
+            {Civs.Persia, new Tuple<int, int>(108, 99)},
+            {Civs.Poland, new Tuple<int, int>(108, 99)},
+            {Civs.Polynesia, new Tuple<int, int>(108, 99)},
+            {Civs.Portugal, new Tuple<int, int>(108, 99)},
+            {Civs.Rome, new Tuple<int, int>(108, 99)},
+            {Civs.Russia, new Tuple<int, int>(108, 99)},
+            {Civs.Shoshone, new Tuple<int, int>(108, 99)},
+            {Civs.Siam, new Tuple<int, int>(108, 99)},
+            {Civs.Songhai, new Tuple<int, int>(108, 99)},
+            {Civs.Spain, new Tuple<int, int>(108, 99)},
+            {Civs.Sweden, new Tuple<int, int>(108, 99)},
+            {Civs.Venice, new Tuple<int, int>(108, 99)},
+            {Civs.Zulu, new Tuple<int, int>(108, 99)}
+        };
+
         public readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string OutputPath = Directory.GetCurrentDirectory() + "\\XML";
 
@@ -51,6 +99,7 @@ namespace CivModTool
             XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
             Logger.Info("INITIALIZING...");
             InitializeComponent();
+            LoadGUIElements();
             AutoUpdater.OpenDownloadPage = true;
             AutoUpdater.Start(Properties.Resources.app_update);
         }
@@ -73,13 +122,14 @@ namespace CivModTool
         {
             try
             {
+                var settings = Settings.Default;
                 var gameData = new GameData
                 {
                     Civilizations = new Civilizations
                     {
                         Row = new Row
                         {
-                            Type = "CIVILIZATION_MANNCO",
+                            Type = settings.civ_name,
                             DerivativeCiv = "CIVILIZATION_AMERICA",
                             Description = "TXT_KEY_CIV_MANNCO_DESC",
                             ShortDescription = "TXT_KEY_CIV_MANNCO_DESC_SHORT",
@@ -105,7 +155,7 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.Leaders.Row
                         {
-                            CivilizationType = "CIVILIZATION_MANNCO",
+                            CivilizationType = settings.civ_name,
                             LeaderheadType = "LEADER_SAXTON"
                         }
                     },
@@ -119,7 +169,7 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.FreeBuildingClasses.Row
                         {
-                            CivilizationType = "CIVILIZATION_MANNCO",
+                            CivilizationType = settings.civ_name,
                             BuildingClassType = "BUILDINGCLASS_PALACE"
                         }
                     },
@@ -128,7 +178,7 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.FreeTechs.Row
                         {
-                            CivilizationType = "CIVILIZATION_MANNCO",
+                            CivilizationType = settings.civ_name,
                             TechType = "TECH_AGRICULTURE"
                         }
                     },
@@ -137,7 +187,7 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.FreeUnits.Row
                         {
-                            CivilizationType = "CIVILIZATION_MANNCO",
+                            CivilizationType = settings.civ_name,
                             UnitClassType = "TECH_AGRICULTURE",
                             UnitAIType = "UNITAI_SETTLE",
                             Count = "1"
@@ -148,7 +198,7 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.Religions.Row
                         {
-                            CivilizationType = "CIVILIZATION_MANNCO",
+                            CivilizationType = settings.civ_name,
                             ReligionType = "RELIGION_BUDDHISM"
                         }
                     },
@@ -166,14 +216,14 @@ namespace CivModTool
 
                 var city = new Models.Civilization.CityNames.Row
                 {
-                    CivilizationType = "CIVILIZATION_MANNCO",
+                    CivilizationType = settings.civ_name,
                     CityName = "TXT_KEY_CITY_NAME_BADLANDS"
                 };
                 gameData.Civilization_CityNames.Row.Add(city);
 
                 var building = new Models.Civilization.BuildingClassOverrides.Row
                 {
-                    CivilizationType = "CIVILIZATION_MANNCO",
+                    CivilizationType = settings.civ_name,
                     BuildingClassType = "BUILDINGCLASS_MARKET",
                     BuildingType = "BUILDING_MANNCO_STORE"
                 };
@@ -181,7 +231,7 @@ namespace CivModTool
 
                 var spy = new Models.Civilization.SpyNames.Row
                 {
-                    CivilizationType = "CIVILIZATION_MANNCO",
+                    CivilizationType = settings.civ_name,
                     SpyName = "TXT_KEY_SPY_NAME_MANNCO_1"
                 };
                 gameData.Civilization_SpyNames.Row.Add(spy);
@@ -206,28 +256,28 @@ namespace CivModTool
                     {
                         Row = new Models.Leader.Row
                         {
-                            Type = "CIVILIZATION_MANNCO",
-                            Description = "TXT_KEY_CIV_MANNCO_DESC",
-                            Civilopedia = "TXT_KEY_CIV_MANNCO_DESC_SHORT",
-                            CivilopediaTag = "TXT_KEY_CIV_MANNCO_ADJECTIVE",
-                            ArtDefineTag = "TXT_KEY_CIV_MANNCO_PEDIA_HEADER1",
-                            VictoryCompetitiveness = "TXT_KEY_CIV_MANNCO_PEDIA_TEXT1",
-                            WonderCompetitiveness = "PLAYERCOLOR_MANNCO",
-                            MinorCivCompetitiveness = "ART_DEF_CIVILIZATION_AMERICA",
-                            Boldness = "ARTSTYLE_AMERICAN",
-                            DiploBalance = "_AMER",
-                            WarmongerHate = "AMERICAN",
+                            Type = "LEADER_SAXTON",
+                            Description = "TXT_KEY_LEADER_SAXTON",
+                            Civilopedia = "TXT_KEY_LEADER_SAXTON_PEDIA",
+                            CivilopediaTag = "TXT_KEY_LEADER_SAXTON_PEDIA",
+                            ArtDefineTag = "Saxton_Scene.xml",
+                            VictoryCompetitiveness = "4",
+                            WonderCompetitiveness = "3",
+                            MinorCivCompetitiveness = "5",
+                            Boldness = "7",
+                            DiploBalance = "6",
+                            WarmongerHate = "7",
                             WorkAgainstWillingness = "0",
-                            WorkWithWillingness = "CIV_MANNCO_ICON_ATLAS",
-                            DenounceWillingness = "CIV_MANNCO_ALPHA_ATLAS",
-                            DoFWillingness = "America",
-                            Loyalty = "MannCo_Map_512",
-                            Neediness = "TXT_KEY_CIV_MANNCO_DOM",
-                            Forgiveness = "Saxton_DOM.dds",
-                            Chattiness = "Saxton_DOM.dds",
-                            Meanness = "Saxton_DOM.dds",
-                            PortraitIndex = "Saxton_DOM.dds",
-                            IconAtlas = "Saxton_DOM.dds"
+                            WorkWithWillingness = "0",
+                            DenounceWillingness = "4",
+                            DoFWillingness = "6",
+                            Loyalty = "6",
+                            Neediness = "7",
+                            Forgiveness = "7",
+                            Chattiness = "5",
+                            Meanness = "4",
+                            PortraitIndex = "1",
+                            IconAtlas = "CIV_MANNCO_ICON_ATLAS"
                         }
                     },
 
@@ -814,6 +864,57 @@ namespace CivModTool
                 Logger.Error(e.Message);
                 return false;
             }
+        }
+
+        private void LoadGUIElements()
+        {
+            foreach (var item in Enum.GetValues(typeof(Civs)))
+                cbDerivative.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(ArtStyles)))
+                cbArtStyle.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Civs)))
+                cbSoundtrack.Items.Add(item.ToString());
+        }
+
+        private double FormatColorSelection(double value)
+        {
+            return Math.Round(value / 255, 3);
+        }
+
+        private string GetStringKey(string text, FileCategory category = FileCategory.GameText)
+        {
+            var settings = Settings.Default;
+            text = text.Replace(' ', '_').ToUpper();
+            switch (category)
+            {
+                case FileCategory.Buildings:
+                    return $"BUILDING_{settings.civ_name}_{text}";
+                case FileCategory.Civilization:
+                    return $"CIVILIZATION_{(string.IsNullOrWhiteSpace(text) ? settings.civ_name : text)}";
+                case FileCategory.GameText:
+                    return $"TXT_KEY_{settings.civ_name}_{text}";
+                case FileCategory.IconAtlas:
+                    return $"CIV_{settings.civ_name}_{text}_ATLAS";
+                case FileCategory.Leader:
+                    return $"LEADER_{settings.civ_name}";
+                case FileCategory.PlayerCount:
+                    return $"PLAYERCOLOR_{settings.civ_name}_{text}";
+                case FileCategory.Trait:
+                    return $"TRAIT_{text}";
+                case FileCategory.Units:
+                    return $"UNIT_{settings.civ_name}_{text}";
+            }
+
+            return string.Empty;
+        }
+
+        private void TbType_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var settings = Settings.Default;
+            settings.civ_name = GetStringKey(tbType.Text, FileCategory.Civilization);
+            settings.Save();
         }
     }
 }
