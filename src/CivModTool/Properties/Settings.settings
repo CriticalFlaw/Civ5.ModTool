@@ -7,5 +7,11 @@
     <Setting Name="civ_name" Type="System.String" Scope="User">
       <Value Profile="(Default)">CIV</Value>
     </Setting>
+    <Setting Name="leader_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">JOHN</Value>
+    </Setting>
+    <Setting Name="trait_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">POWER</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

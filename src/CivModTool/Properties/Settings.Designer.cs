@@ -34,5 +34,29 @@ namespace CivModTool.Properties {
                 this["civ_name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("JOHN")]
+        public string leader_name {
+            get {
+                return ((string)(this["leader_name"]));
+            }
+            set {
+                this["leader_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("POWER")]
+        public string trait_name {
+            get {
+                return ((string)(this["trait_name"]));
+            }
+            set {
+                this["trait_name"] = value;
+            }
+        }
     }
 }

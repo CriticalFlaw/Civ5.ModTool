@@ -120,4 +120,103 @@
   <data name="app_update" xml:space="preserve">
     <value>https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml</value>
   </data>
+  <data name="key_building" xml:space="preserve">
+    <value>BUILDING_{0}</value>
+  </data>
+  <data name="key_building_class" xml:space="preserve">
+    <value>BUILDINGCLASS_{0}</value>
+  </data>
+  <data name="key_city_name" xml:space="preserve">
+    <value>TXT_KEY_CITY_NAME_{0}</value>
+  </data>
+  <data name="key_civ_adjective" xml:space="preserve">
+    <value>TXT_KEY_CIV_{0}_ADJECTIVE</value>
+  </data>
+  <data name="key_civ_art_def" xml:space="preserve">
+    <value>ART_DEF_{0}</value>
+  </data>
+  <data name="key_civ_art_style" xml:space="preserve">
+    <value>ARTSTYLE_{0}</value>
+  </data>
+  <data name="key_civ_atlas_alpha" xml:space="preserve">
+    <value>CIV_{0}_ALPHA_ATLAS</value>
+  </data>
+  <data name="key_civ_atlas_alpha_file" xml:space="preserve">
+    <value>{0}_AlphaAtlas_{1}.dds</value>
+  </data>
+  <data name="key_civ_atlas_icon" xml:space="preserve">
+    <value>CIV_{0}_ICON_ATLAS</value>
+  </data>
+  <data name="key_civ_atlas_icon_file" xml:space="preserve">
+    <value>{0}_IconAtlas_{1}.dds</value>
+  </data>
+  <data name="key_civ_color" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}</value>
+  </data>
+  <data name="key_civ_color_primary" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}_PRIMARY</value>
+  </data>
+  <data name="key_civ_color_secondary" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}_SECONDARY</value>
+  </data>
+  <data name="key_civ_color_text" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}_TEXT</value>
+  </data>
+  <data name="key_civ_desc" xml:space="preserve">
+    <value>TXT_KEY_CIV_{0}_DESC</value>
+  </data>
+  <data name="key_civ_desc_short" xml:space="preserve">
+    <value>TXT_KEY_CIV_{0}_DESC_SHORT</value>
+  </data>
+  <data name="key_civ_dom_image" xml:space="preserve">
+    <value>{0}_DOM.dds</value>
+  </data>
+  <data name="key_civ_dom_text" xml:space="preserve">
+    <value>TXT_KEY_CIV_{0}_DOM</value>
+  </data>
+  <data name="key_civ_leader" xml:space="preserve">
+    <value>LEADER_{0}</value>
+  </data>
+  <data name="key_civ_map" xml:space="preserve">
+    <value>{0}_Map_512</value>
+  </data>
+  <data name="key_civ_pedia_header" xml:space="preserve">
+    <value>TXT_KEY_CIV_{0}_PEDIA_HEADER1</value>
+  </data>
+  <data name="key_civ_pedia_text" xml:space="preserve">
+    <value>TXT_KEY_CIV_{0}_PEDIA_TEXT1</value>
+  </data>
+  <data name="key_leader" xml:space="preserve">
+    <value>TXT_KEY_LEADER_{0}</value>
+  </data>
+  <data name="key_leader_pedia" xml:space="preserve">
+    <value>TXT_KEY_LEADER_{0}_PEDIA</value>
+  </data>
+  <data name="key_leader_scene" xml:space="preserve">
+    <value>{0}_Scene.xml</value>
+  </data>
+  <data name="key_religion" xml:space="preserve">
+    <value>RELIGION_{0}</value>
+  </data>
+  <data name="key_resource" xml:space="preserve">
+    <value>RESOURCE_{0}</value>
+  </data>
+  <data name="key_spy_name" xml:space="preserve">
+    <value>TXT_KEY_SPY_NAME_{0}_{1}</value>
+  </data>
+  <data name="key_tech" xml:space="preserve">
+    <value>TECH_{0}</value>
+  </data>
+  <data name="key_trait" xml:space="preserve">
+    <value>TXT_KEY_TRAIT_{0}</value>
+  </data>
+  <data name="key_trait_desc" xml:space="preserve">
+    <value>TXT_KEY_TRAIT_{0}_DESC</value>
+  </data>
+  <data name="key_unit_ai" xml:space="preserve">
+    <value>UNITAI_{0}</value>
+  </data>
+  <data name="key_yield" xml:space="preserve">
+    <value>YIELD_{0}</value>
+  </data>
 </root>
