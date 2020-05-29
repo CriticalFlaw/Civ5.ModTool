@@ -22,80 +22,84 @@
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
                     <TextBox x:Name="tbType" HorizontalAlignment="Left" Margin="130,10,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" LostFocus="TbType_OnLostFocus" CharacterCasing="Upper" />
+                             VerticalAlignment="Top" Width="120" LostFocus="TbType_OnLostFocus" CharacterCasing="Upper"  />
                     <ComboBox x:Name="cbDerivative" HorizontalAlignment="Left" Margin="130,40,0,0"
-                              VerticalAlignment="Top" Width="120" SelectedIndex="0" />
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0"  />
                     <TextBox HorizontalAlignment="Left" Margin="130,70,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" />
+                             VerticalAlignment="Top" Width="120"  />
                     <TextBox HorizontalAlignment="Left" Margin="130,100,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" />
+                             VerticalAlignment="Top" Width="120"  />
                     <TextBox HorizontalAlignment="Left" Margin="130,130,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" />
+                             VerticalAlignment="Top" Width="120"  />
                     <TextBox HorizontalAlignment="Left" Margin="130,160,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" />
+                             VerticalAlignment="Top" Width="120"  />
                     <TextBox HorizontalAlignment="Left" Margin="130,190,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" />
+                             VerticalAlignment="Top" Width="120"  />
                     <ComboBox x:Name="cbArtStyle" HorizontalAlignment="Left" Margin="130,220,0,0"
-                              VerticalAlignment="Top" Width="120" SelectedIndex="1" />
+                              VerticalAlignment="Top" Width="120" SelectedIndex="1"  />
                     <x2:IntegerUpDown x:Name="intCivPortraitIndex" Margin="130,250,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="120" AllowTextInput="False" />
+                                      Maximum="4" Width="120" AllowTextInput="False"  />
                     <ComboBox x:Name="cbSoundtrack" HorizontalAlignment="Left" Margin="130,280,0,0"
-                              VerticalAlignment="Top" Width="120" SelectedIndex="0" />
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0"  />
                     <TextBox HorizontalAlignment="Left" Margin="130,310,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" />
+                             VerticalAlignment="Top" Width="120"  />
                     <Label Content="Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Derivative:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
                     <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,100,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top" />
                     <Label Content="Adjective:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" />
                     <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,160,0,0"
                            VerticalAlignment="Top" />
                     <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,190,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top" />
                     <Label Content="Art Style:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
                     <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top" />
                     <Label Content="Soundtrack:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" />
                     <Label Content="Dawn of Man:" HorizontalAlignment="Left" Margin="10,310,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="270,10,0,0"
                            VerticalAlignment="Top" />
-                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="270,40,0,0"
-                           VerticalAlignment="Top" />
-                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="270,70,0,0" VerticalAlignment="Top" />
+                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="128,10,0,0"
+                           VerticalAlignment="Top"  />
+                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="128,40,0,0"
+                           VerticalAlignment="Top"  />
+                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="128,70,0,0" VerticalAlignment="Top"  />
                     <x2:ColorPicker
                         x:Name="cpPrimaryColor"
                         Width="70"
-                        Margin="400,10,0,0"
+                        Margin="258,10,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
                         ShowRecentColors="True"
-                        Foreground="Black" />
+                        Foreground="Black"  />
                     <x2:ColorPicker
                         x:Name="cpSecondaryColor"
                         Width="70"
-                        Margin="400,40,0,0"
+                        Margin="258,40,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
                         ShowRecentColors="True"
-                        Foreground="Black" />
+                        Foreground="Black"  />
                     <x2:ColorPicker
                         x:Name="cpTextColor"
                         Width="70"
-                        Margin="400,70,0,0"
+                        Margin="258,70,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
                         ShowRecentColors="True"
-                        Foreground="Black" />
+                        Foreground="Black"  />
 
                     <Button x:Name="btnGenerateXML" Content="Generate" HorizontalAlignment="Left"
                             Margin="10,350,0,0" VerticalAlignment="Top" Height="25" Width="100"
                             Click="btnGenerateXML_Click" />
+                    <ListBox x:Name="lbCityNames"  HorizontalAlignment="Left" Height="100" Margin="333,10,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
+                    <Button x:Name="bAddCity" Content="Add" HorizontalAlignment="Left" Margin="438,10,0,0" VerticalAlignment="Top" Width="75" Click="BAddCity_OnClick"  />
+                    <Button x:Name="bRemoveCity"  Content="Remove" HorizontalAlignment="Left" Margin="438,34,0,0" VerticalAlignment="Top" Width="75" Click="BRemoveCity_OnClick" Grid.Column="1"/>
+                    <Button x:Name="bClearCity"  Content="Clear" HorizontalAlignment="Left" Margin="438,58,0,0" VerticalAlignment="Top" Width="75" Click="BClearCity_OnClick" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Leader">
@@ -103,16 +107,14 @@
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
-                    <TextBox x:Name="tbLeaderType" HorizontalAlignment="Left" Margin="120,10,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="tbLeaderType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="70" LostFocus="TbLeaderType_OnLostFocus"
                              CharacterCasing="Upper" />
-                    <TextBox HorizontalAlignment="Left" Margin="120,40,0,0" TextWrapping="Wrap"
+                    <TextBox HorizontalAlignment="Left" Margin="125,40,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="70" />
-                    <TextBox HorizontalAlignment="Left" Margin="120,70,0,0" TextWrapping="Wrap"
+                    <TextBox HorizontalAlignment="Left" Margin="125,70,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="70" />
-                    <TextBox HorizontalAlignment="Left" Margin="120,100,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="70" />
-                    <TextBox HorizontalAlignment="Left" Margin="120,130,0,0" TextWrapping="Wrap"
+                    <TextBox HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="70" />
                     <x2:IntegerUpDown x:Name="intLeaderPortraitIndex" Margin="155,160,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
@@ -144,36 +146,34 @@
                     <x2:IntegerUpDown x:Name="intDenounceWill" Margin="155,430,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <Label Content="Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
-                           Grid.ColumnSpan="2" />
+                    <Label Content="Leader:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
+                            />
                     <Label Content="Description:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"
-                           Grid.ColumnSpan="2" />
+                            />
                     <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"
-                           Grid.ColumnSpan="2" />
+                            />
                     <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,100,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <Label Content="Scene:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"
-                           Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,160,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Competitive - Victory:" HorizontalAlignment="Left" Margin="10,190,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Competitive - Wonder:" HorizontalAlignment="Left" Margin="10,220,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Competitive - Minor:" HorizontalAlignment="Left" Margin="10,250,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Boldness:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"
-                           Grid.ColumnSpan="2" />
+                            />
                     <Label Content="Diplomacy Balance:" HorizontalAlignment="Left" Margin="10,310,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Warmonger Hate:" HorizontalAlignment="Left" Margin="10,340,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Work vs. Willingness:" HorizontalAlignment="Left" Margin="10,370,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Work With Willingness:" HorizontalAlignment="Left" Margin="10,400,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Denounce Willingness:" HorizontalAlignment="Left" Margin="10,430,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                           VerticalAlignment="Top"  />
                     <Label Content="Loyalty:" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Neediness:" HorizontalAlignment="Left" Margin="235,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="235,70,0,0"
@@ -366,13 +366,18 @@
                     <x2:IntegerUpDown x:Name="intAirList" Margin="765,430,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
+                    <Button Content="Randomize" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="185" Click="ButtonBase_OnClick"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Trait" IsEnabled="False">
+            <TabItem Header="Trait">
                 <Grid>
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
+                    <TextBox x:Name="tbTraitType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="70" LostFocus="TbTraitType_OnLostFocus"
+                             CharacterCasing="Upper" />
+                    <Label Content="Trait:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
                 </Grid>
             </TabItem>
             <TabItem Header="Buildings" IsEnabled="False">

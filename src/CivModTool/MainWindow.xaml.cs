@@ -4,6 +4,9 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using Microsoft.VisualBasic;
 using System.Xml.Serialization;
 using AutoUpdaterDotNET;
 using CivModTool.Models.Buildings;
@@ -26,7 +29,6 @@ using CivModTool.Models.Leader.MajorCivApproachBiases;
 using CivModTool.Models.Leader.MinorCivApproachBiases;
 using CivModTool.Models.Leader.Traits;
 using CivModTool.Models.PlayerColor;
-using CivModTool.Models.PlayerColor.Color;
 using CivModTool.Models.Trait;
 using CivModTool.Models.Trait.ResourceQuantityModifiers;
 using CivModTool.Models.Trait.YieldChangesStrategicResources;
@@ -34,7 +36,10 @@ using CivModTool.Properties;
 using CivModTool.Resources.EnumTypes;
 using log4net;
 using log4net.Config;
+using Xceed.Wpf.Toolkit;
+using Colors = CivModTool.Models.PlayerColor.Color.Colors;
 using GameData = CivModTool.Models.Civilization.GameData;
+using MessageBox = System.Windows.MessageBox;
 using Row = CivModTool.Models.Civilization.Row;
 
 namespace CivModTool
@@ -218,12 +223,15 @@ namespace CivModTool
                     }
                 };
 
-                var city = new Models.Civilization.CityNames.Row
+                foreach (var x in lbCityNames.Items)
                 {
-                    CivilizationType = settings.civ_name,
-                    CityName = string.Format(Properties.Resources.key_city_name, "BADLANDS")
-                };
-                gameData.Civilization_CityNames.Row.Add(city);
+                    var city = new Models.Civilization.CityNames.Row
+                    {
+                        CivilizationType = settings.civ_name,
+                        CityName = x.ToString().ToUpper()
+                    };
+                    gameData.Civilization_CityNames.Row.Add(city);
+                }
 
                 var building = new Models.Civilization.BuildingClassOverrides.Row
                 {
@@ -871,6 +879,17 @@ namespace CivModTool
                     }
 
                     break;
+
+                case FileCategories.Trait:
+                    if (string.IsNullOrWhiteSpace(tbLeaderType.Text))
+                    {
+                        MessageBox.Show("Invalid Trait Name", "Invalid Trait Name", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        TabControls.SelectedIndex = 2;
+                        result = false;
+                    }
+
+                    break;
             }
 
             return result;
@@ -905,6 +924,10 @@ namespace CivModTool
 
         private void LoadGuiElements()
         {
+            tbType.Text = Settings.Default.civ_name;
+            tbLeaderType.Text = Settings.Default.leader_name;
+            tbTraitType.Text = Settings.Default.trait_name;
+
             foreach (var item in Enum.GetValues(typeof(Civs)))
                 cbDerivative.Items.Add(item.ToString());
 
@@ -988,10 +1011,89 @@ namespace CivModTool
             var settings = Settings.Default;
             settings.leader_name = GetStringKey(tbLeaderType.Text, FileCategories.Leader);
             settings.Save();
+        }
 
-            //var settings = Settings.Default;
-            //settings.trait_name = GetStringKey(tbLeaderType.Text, FileCategories.Trait);
-            //settings.Save();
+        private void TbTraitType_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var settings = Settings.Default;
+            settings.trait_name = GetStringKey(tbLeaderType.Text, FileCategories.Trait);
+            settings.Save();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var random = new Random();
+            intCompVictory.Text = random.Next(1, 10).ToString();
+            intCompWonder.Text = random.Next(1, 10).ToString();
+            intCompMinor.Text = random.Next(1, 10).ToString();
+            intBoldness.Text = random.Next(1, 10).ToString();
+            intDiploBalance.Text = random.Next(1, 10).ToString();
+            intWarmongerHate.Text = random.Next(1, 10).ToString();
+            intWorkAgainstWill.Text = random.Next(1, 10).ToString();
+            intWorkWithWill.Text = random.Next(1, 10).ToString();
+            intDenounceWill.Text = random.Next(1, 10).ToString();
+            intLoyalty.Text = random.Next(1, 10).ToString();
+            intNeediness.Text = random.Next(1, 10).ToString();
+            intForgiveness.Text = random.Next(1, 10).ToString();
+            intChattiness.Text = random.Next(1, 10).ToString();
+            intMeanness.Text = random.Next(1, 10).ToString();
+            intWar.Text = random.Next(1, 10).ToString();
+            intHostile.Text = random.Next(1, 10).ToString();
+            intDeceptive.Text = random.Next(1, 10).ToString();
+            intGuarded.Text = random.Next(1, 10).ToString();
+            intAfraid.Text = random.Next(1, 10).ToString();
+            intFriendlyMajor.Text = random.Next(1, 10).ToString();
+            intNeutral.Text = random.Next(1, 10).ToString();
+            intIgnore.Text = random.Next(1, 10).ToString();
+            intFriendlyMinor.Text = random.Next(1, 10).ToString();
+            intProtective.Text = random.Next(1, 10).ToString();
+            intConquest.Text = random.Next(1, 10).ToString();
+            intBully.Text = random.Next(1, 10).ToString();
+            intOffense.Text = random.Next(1, 10).ToString();
+            intDefense.Text = random.Next(1, 10).ToString();
+            intExpansion.Text = random.Next(1, 10).ToString();
+            intGrowth.Text = random.Next(1, 10).ToString();
+            intTileImprove.Text = random.Next(1, 10).ToString();
+            intInfrastructure.Text = random.Next(1, 10).ToString();
+            intProduction.Text = random.Next(1, 10).ToString();
+            intGold.Text = random.Next(1, 10).ToString();
+            intScience.Text = random.Next(1, 10).ToString();
+            intCulture.Text = random.Next(1, 10).ToString();
+            intHappiness.Text = random.Next(1, 10).ToString();
+            intGreatPeople.Text = random.Next(1, 10).ToString();
+            intGreatWonders.Text = random.Next(1, 10).ToString();
+            intReligions.Text = random.Next(1, 10).ToString();
+            intDiplomacy.Text = random.Next(1, 10).ToString();
+            intSpaceship.Text = random.Next(1, 10).ToString();
+            intWaterConnection.Text = random.Next(1, 10).ToString();
+            intNuke.Text = random.Next(1, 10).ToString();
+            intUseNuke.Text = random.Next(1, 10).ToString();
+            intEspionage.Text = random.Next(1, 10).ToString();
+            intAntiAir.Text = random.Next(1, 10).ToString();
+            intAirCarrier.Text = random.Next(1, 10).ToString();
+            intArchaeology.Text = random.Next(1, 10).ToString();
+            intLandTradeRoutes.Text = random.Next(1, 10).ToString();
+            intSeaTradeRoutes.Text = random.Next(1, 10).ToString();
+            intTradeOrigin.Text = random.Next(1, 10).ToString();
+            intTradeDestination.Text = random.Next(1, 10).ToString();
+            intAirList.Text = random.Next(1, 10).ToString();
+        }
+
+        private void BAddCity_OnClick(object sender, RoutedEventArgs e)
+        {
+            var input = Interaction.InputBox("Please input a new city name:", "Add City Name", "", 0, 0);
+            lbCityNames.Items.Add(input);
+        }
+
+        private void BRemoveCity_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (lbCityNames.SelectedItem == null) return;
+            lbCityNames.Items.RemoveAt(lbCityNames.Items.IndexOf(lbCityNames.SelectedItem));
+        }
+
+        private void BClearCity_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbCityNames.Items.Clear();
         }
     }
 }
