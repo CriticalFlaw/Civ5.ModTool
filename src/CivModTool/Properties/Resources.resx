@@ -117,106 +117,191 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="app_update" xml:space="preserve">
-    <value>https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml</value>
+  <data name="key_building_desc" xml:space="preserve">
+    <value>TXT_KEY_BUILDING_{0}_{1}_DESC</value>
+    <comment>0 = Civilization, 1 = Building</comment>
   </data>
-  <data name="key_building" xml:space="preserve">
-    <value>BUILDING_{0}</value>
+  <data name="key_building_help" xml:space="preserve">
+    <value>TXT_KEY_BUILDING_{0}_{1}_HELP</value>
+    <comment>0 = Civilization, 1 = Building</comment>
   </data>
-  <data name="key_building_class" xml:space="preserve">
-    <value>BUILDINGCLASS_{0}</value>
+  <data name="key_building_pedia" xml:space="preserve">
+    <value>TXT_KEY_BUILDING_{0}_{1}_TEXT</value>
+    <comment>0 = Civilization, 1 = Building</comment>
+  </data>
+  <data name="key_building_strategy" xml:space="preserve">
+    <value>TXT_KEY_BUILDING_{0}_{1}_STRATEGY</value>
+    <comment>0 = Civilization, 1 = Building</comment>
   </data>
   <data name="key_city_name" xml:space="preserve">
     <value>TXT_KEY_CITY_NAME_{0}</value>
+    <comment>0 = City</comment>
   </data>
   <data name="key_civ_adjective" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_ADJECTIVE</value>
-  </data>
-  <data name="key_civ_art_def" xml:space="preserve">
-    <value>ART_DEF_{0}</value>
-  </data>
-  <data name="key_civ_art_style" xml:space="preserve">
-    <value>ARTSTYLE_{0}</value>
-  </data>
-  <data name="key_civ_atlas_alpha" xml:space="preserve">
-    <value>CIV_{0}_ALPHA_ATLAS</value>
-  </data>
-  <data name="key_civ_atlas_alpha_file" xml:space="preserve">
-    <value>{0}_AlphaAtlas_{1}.dds</value>
-  </data>
-  <data name="key_civ_atlas_icon" xml:space="preserve">
-    <value>CIV_{0}_ICON_ATLAS</value>
-  </data>
-  <data name="key_civ_atlas_icon_file" xml:space="preserve">
-    <value>{0}_IconAtlas_{1}.dds</value>
-  </data>
-  <data name="key_civ_color" xml:space="preserve">
-    <value>PLAYERCOLOR_{0}</value>
-  </data>
-  <data name="key_civ_color_primary" xml:space="preserve">
-    <value>PLAYERCOLOR_{0}_PRIMARY</value>
-  </data>
-  <data name="key_civ_color_secondary" xml:space="preserve">
-    <value>PLAYERCOLOR_{0}_SECONDARY</value>
-  </data>
-  <data name="key_civ_color_text" xml:space="preserve">
-    <value>PLAYERCOLOR_{0}_TEXT</value>
+    <comment>0 = Civilization</comment>
   </data>
   <data name="key_civ_desc" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_DESC</value>
+    <comment>0 = Civilization</comment>
   </data>
   <data name="key_civ_desc_short" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_DESC_SHORT</value>
-  </data>
-  <data name="key_civ_dom_image" xml:space="preserve">
-    <value>{0}_DOM.dds</value>
+    <comment>0 = Civilization</comment>
   </data>
   <data name="key_civ_dom_text" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_DOM</value>
-  </data>
-  <data name="key_civ_leader" xml:space="preserve">
-    <value>LEADER_{0}</value>
-  </data>
-  <data name="key_civ_map" xml:space="preserve">
-    <value>{0}_Map_512</value>
+    <comment>0 = Leader</comment>
   </data>
   <data name="key_civ_pedia_header" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_PEDIA_HEADER1</value>
+    <comment>0 = Civilization</comment>
   </data>
   <data name="key_civ_pedia_text" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_PEDIA_TEXT1</value>
+    <comment>0 = Civilization</comment>
   </data>
   <data name="key_leader" xml:space="preserve">
     <value>TXT_KEY_LEADER_{0}</value>
+    <comment>0 = Leader</comment>
   </data>
   <data name="key_leader_pedia" xml:space="preserve">
     <value>TXT_KEY_LEADER_{0}_PEDIA</value>
-  </data>
-  <data name="key_leader_scene" xml:space="preserve">
-    <value>{0}_Scene.xml</value>
-  </data>
-  <data name="key_religion" xml:space="preserve">
-    <value>RELIGION_{0}</value>
-  </data>
-  <data name="key_resource" xml:space="preserve">
-    <value>RESOURCE_{0}</value>
+    <comment>0 = Leader</comment>
   </data>
   <data name="key_spy_name" xml:space="preserve">
     <value>TXT_KEY_SPY_NAME_{0}_{1}</value>
-  </data>
-  <data name="key_tech" xml:space="preserve">
-    <value>TECH_{0}</value>
+    <comment>0 = Civilization, 1 = Spy</comment>
   </data>
   <data name="key_trait" xml:space="preserve">
     <value>TXT_KEY_TRAIT_{0}</value>
+    <comment>0 = Trait</comment>
   </data>
   <data name="key_trait_desc" xml:space="preserve">
     <value>TXT_KEY_TRAIT_{0}_DESC</value>
+    <comment>0 = Trait</comment>
   </data>
-  <data name="key_unit_ai" xml:space="preserve">
+  <data name="txt_app_update" xml:space="preserve">
+    <value>https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml</value>
+  </data>
+  <data name="txt_building" xml:space="preserve">
+    <value>BUILDING_{0}_{1}</value>
+    <comment>0 = Civilization, 1 = Building</comment>
+  </data>
+  <data name="txt_building_art_def" xml:space="preserve">
+    <value>ART_DEF_BUILDING_{0}</value>
+    <comment>0 = Building</comment>
+  </data>
+  <data name="txt_building_class" xml:space="preserve">
+    <value>BUILDINGCLASS_{0}</value>
+    <comment>0 = Building</comment>
+  </data>
+  <data name="txt_civ" xml:space="preserve">
+    <value>CIVILIZATION_{0}</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_art_def" xml:space="preserve">
+    <value>ART_DEF_CIVILIZATION_{0}</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_art_style" xml:space="preserve">
+    <value>ARTSTYLE_{0}</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_atlas_alpha" xml:space="preserve">
+    <value>CIV_{0}_ALPHA_ATLAS</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_atlas_alpha_file" xml:space="preserve">
+    <value>{0}_AlphaAtlas_{1}.dds</value>
+    <comment>0 = Civilization, 1 = Size</comment>
+  </data>
+  <data name="txt_civ_atlas_icon" xml:space="preserve">
+    <value>CIV_{0}_ICON_ATLAS</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_atlas_icon_file" xml:space="preserve">
+    <value>{0}_IconAtlas_{1}.dds</value>
+    <comment>0 = Civilization, 1 = Size</comment>
+  </data>
+  <data name="txt_civ_color" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_color_primary" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}_PRIMARY</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_color_secondary" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}_SECONDARY</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_color_text" xml:space="preserve">
+    <value>PLAYERCOLOR_{0}_TEXT</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_civ_dom_image" xml:space="preserve">
+    <value>{0}_DOM.dds</value>
+    <comment>0 = Leader</comment>
+  </data>
+  <data name="txt_civ_map" xml:space="preserve">
+    <value>{0}_MAP_512.dds</value>
+    <comment>0 = Civilization</comment>
+  </data>
+  <data name="txt_era" xml:space="preserve">
+    <value>ERA_{0}</value>
+    <comment>0 = Era</comment>
+  </data>
+  <data name="txt_flavor" xml:space="preserve">
+    <value>FLAVOR_{0}</value>
+    <comment>0 = Flavor</comment>
+  </data>
+  <data name="txt_leader" xml:space="preserve">
+    <value>LEADER_{0}</value>
+    <comment>0 = Leader</comment>
+  </data>
+  <data name="txt_leader_scene" xml:space="preserve">
+    <value>{0}_SCENE.xml</value>
+    <comment>0 = Leader</comment>
+  </data>
+  <data name="txt_major_approach" xml:space="preserve">
+    <value>MAJOR_CIV_APPROACH_{0}</value>
+    <comment>0 = Approach</comment>
+  </data>
+  <data name="txt_minor_approach" xml:space="preserve">
+    <value>MINOR_CIV_APPROACH_{0}</value>
+    <comment>0 = Approach</comment>
+  </data>
+  <data name="txt_religion" xml:space="preserve">
+    <value>RELIGION_{0}</value>
+    <comment>0 = Religion</comment>
+  </data>
+  <data name="txt_resource" xml:space="preserve">
+    <value>RESOURCE_{0}</value>
+    <comment>0 = Resource</comment>
+  </data>
+  <data name="txt_specialist" xml:space="preserve">
+    <value>SPECIALIST_{0}</value>
+    <comment>0 = Specialist</comment>
+  </data>
+  <data name="txt_tech" xml:space="preserve">
+    <value>TECH_{0}</value>
+    <comment>0 = Technology</comment>
+  </data>
+  <data name="txt_trait" xml:space="preserve">
+    <value>TRAIT_{0}</value>
+    <comment>0 = Trait</comment>
+  </data>
+  <data name="txt_unit_ai" xml:space="preserve">
     <value>UNITAI_{0}</value>
+    <comment>0 = Unit</comment>
   </data>
-  <data name="key_yield" xml:space="preserve">
+  <data name="txt_unit_class" xml:space="preserve">
+    <value>UNITCLASS_{0}</value>
+    <comment>0 = Unit</comment>
+  </data>
+  <data name="txt_yield" xml:space="preserve">
     <value>YIELD_{0}</value>
+    <comment>0 = Yield</comment>
   </data>
 </root>

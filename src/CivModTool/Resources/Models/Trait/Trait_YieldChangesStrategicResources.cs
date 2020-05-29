@@ -2,13 +2,13 @@
 
 namespace CivModTool.Models.Trait.YieldChangesStrategicResources
 {
-    [XmlRoot(ElementName = "Trait_YieldChangesStrategicResources")]
+    [XmlRoot(ElementName = "Trait_YieldChangesStrategicResources", Namespace = "YieldChangesStrategicResources")]
     public class Trait_YieldChangesStrategicResources
     {
         [XmlElement(ElementName = "Row")] public Row Row { get; set; }
     }
 
-    [XmlRoot(ElementName = "Row", Namespace = "YieldChangesStrategicResources")]
+    [XmlRoot(ElementName = "Row")]
     public class Row
     {
         [XmlElement(ElementName = "TraitType")]

@@ -33,7 +33,6 @@ using CivModTool.Models.Trait;
 using CivModTool.Models.Trait.ResourceQuantityModifiers;
 using CivModTool.Models.Trait.YieldChangesStrategicResources;
 using CivModTool.Properties;
-using CivModTool.Resources.EnumTypes;
 using log4net;
 using log4net.Config;
 using Xceed.Wpf.Toolkit;
@@ -41,6 +40,9 @@ using Colors = CivModTool.Models.PlayerColor.Color.Colors;
 using GameData = CivModTool.Models.Civilization.GameData;
 using MessageBox = System.Windows.MessageBox;
 using Row = CivModTool.Models.Civilization.Row;
+using CivModTool.Resources;
+using CivModTool.Models.Buildings.YieldChanges;
+using CivModTool.Models.Buildings.YieldModifiers;
 
 namespace CivModTool
 {
@@ -49,54 +51,6 @@ namespace CivModTool
     /// </summary>
     public partial class MainWindow
     {
-        public static readonly Dictionary<Civs, Tuple<int, string, ArtStyles>> CivDictionary =
-            new Dictionary<Civs, Tuple<int, string, ArtStyles>>
-            {
-                {Civs.America, new Tuple<int, string, ArtStyles>(1, "American", ArtStyles.American)},
-                {Civs.Arabia, new Tuple<int, string, ArtStyles>(2, "Arabian", ArtStyles.African)},
-                {Civs.Assyria, new Tuple<int, string, ArtStyles>(3, "Assyrian", ArtStyles.Mediterranean)},
-                {Civs.Austria, new Tuple<int, string, ArtStyles>(4, "Austrian", ArtStyles.European)},
-                {Civs.Aztec, new Tuple<int, string, ArtStyles>(5, "Aztec", ArtStyles.American)},
-                {Civs.Babylon, new Tuple<int, string, ArtStyles>(6, "Babylonian", ArtStyles.Mediterranean)},
-                {Civs.Brazil, new Tuple<int, string, ArtStyles>(7, "Brazilian", ArtStyles.American)},
-                {Civs.Byzantium, new Tuple<int, string, ArtStyles>(8, "Byzantine", ArtStyles.Mediterranean)},
-                {Civs.Carthage, new Tuple<int, string, ArtStyles>(9, "Carthaginian", ArtStyles.Mediterranean)},
-                {Civs.Celts, new Tuple<int, string, ArtStyles>(10, "Celts", ArtStyles.European)},
-                {Civs.China, new Tuple<int, string, ArtStyles>(11, "Chinese", ArtStyles.Asian)},
-                {Civs.Denmark, new Tuple<int, string, ArtStyles>(12, "Dutch", ArtStyles.European)},
-                {Civs.Egypt, new Tuple<int, string, ArtStyles>(13, "Egyptian", ArtStyles.African)},
-                {Civs.England, new Tuple<int, string, ArtStyles>(14, "English", ArtStyles.European)},
-                {Civs.Ethiopia, new Tuple<int, string, ArtStyles>(15, "Ethiopian", ArtStyles.African)},
-                {Civs.France, new Tuple<int, string, ArtStyles>(16, "French", ArtStyles.American)},
-                {Civs.Germany, new Tuple<int, string, ArtStyles>(17, "German", ArtStyles.European)},
-                {Civs.Greece, new Tuple<int, string, ArtStyles>(18, "Greek", ArtStyles.Mediterranean)},
-                {Civs.Huns, new Tuple<int, string, ArtStyles>(19, "Hunnic", ArtStyles.Asian)},
-                {Civs.Inca, new Tuple<int, string, ArtStyles>(20, "Incan", ArtStyles.American)},
-                {Civs.India, new Tuple<int, string, ArtStyles>(21, "Indian", ArtStyles.Asian)},
-                {Civs.Indonesia, new Tuple<int, string, ArtStyles>(22, "Indonesian", ArtStyles.Asian)},
-                {Civs.Iroquois, new Tuple<int, string, ArtStyles>(23, "Iroquois", ArtStyles.American)},
-                {Civs.Japan, new Tuple<int, string, ArtStyles>(24, "Japanese", ArtStyles.Asian)},
-                {Civs.Korea, new Tuple<int, string, ArtStyles>(25, "Korean", ArtStyles.Asian)},
-                {Civs.Maya, new Tuple<int, string, ArtStyles>(26, "Mayan", ArtStyles.American)},
-                {Civs.Mongol, new Tuple<int, string, ArtStyles>(27, "Mongolian", ArtStyles.Asian)},
-                {Civs.Morocco, new Tuple<int, string, ArtStyles>(28, "Moroccan", ArtStyles.African)},
-                {Civs.Netherlands, new Tuple<int, string, ArtStyles>(29, "Dutch", ArtStyles.European)},
-                {Civs.Ottoman, new Tuple<int, string, ArtStyles>(30, "Ottoman", ArtStyles.African)},
-                {Civs.Persia, new Tuple<int, string, ArtStyles>(31, "Persian", ArtStyles.African)},
-                {Civs.Poland, new Tuple<int, string, ArtStyles>(32, "Polish", ArtStyles.European)},
-                {Civs.Polynesia, new Tuple<int, string, ArtStyles>(33, "Polynesian", ArtStyles.Asian)},
-                {Civs.Portugal, new Tuple<int, string, ArtStyles>(34, "Portuguese", ArtStyles.European)},
-                {Civs.Rome, new Tuple<int, string, ArtStyles>(35, "Roman", ArtStyles.Mediterranean)},
-                {Civs.Russia, new Tuple<int, string, ArtStyles>(36, "Russian", ArtStyles.European)},
-                {Civs.Shoshone, new Tuple<int, string, ArtStyles>(37, "Shoshone", ArtStyles.American)},
-                {Civs.Siam, new Tuple<int, string, ArtStyles>(38, "Siamese", ArtStyles.Asian)},
-                {Civs.Songhai, new Tuple<int, string, ArtStyles>(39, "Songhai", ArtStyles.African)},
-                {Civs.Spain, new Tuple<int, string, ArtStyles>(40, "Spanish", ArtStyles.European)},
-                {Civs.Sweden, new Tuple<int, string, ArtStyles>(41, "Swedish", ArtStyles.European)},
-                {Civs.Venice, new Tuple<int, string, ArtStyles>(42, "Venetian", ArtStyles.Mediterranean)},
-                {Civs.Zulu, new Tuple<int, string, ArtStyles>(43, "Zulu", ArtStyles.African)}
-            };
-
         public readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private readonly string _outputPath = Directory.GetCurrentDirectory() + "\\XML";
 
@@ -108,19 +62,22 @@ namespace CivModTool
             InitializeComponent();
             LoadGuiElements();
             AutoUpdater.OpenDownloadPage = true;
-            AutoUpdater.Start(Properties.Resources.app_update);
+            AutoUpdater.Start(Properties.Resources.txt_app_update);
         }
 
         private void btnGenerateXML_Click(object sender, RoutedEventArgs e)
         {
+            btnGenerateXML.IsEnabled = false;
+            if (!SaveValuesToConfig()) return;
             if (!GenerateCivilizationXml()) return;
+            if (!GeneratePlayerColorXml()) return;
             if (!GenerateLeaderXml()) return;
             if (!GenerateTraitXml()) return;
-            if (!GeneratePlayerColorXml()) return;
-            if (!GenerateIconAtlasXml()) return;
-            if (!GenerateGameTextXml()) return;
             if (!GenerateBuildingsXml()) return;
-            GenerateUnitsXml();
+            if (!GenerateUnitsXml()) return;
+            if (!GenerateIconAtlasXml()) return;
+            GenerateGameTextXml();
+            btnGenerateXML.IsEnabled = true;
         }
 
         private bool GenerateCivilizationXml()
@@ -129,34 +86,33 @@ namespace CivModTool
             {
                 if (!ValidationForm(FileCategories.Civilization)) return false;
                 var settings = Settings.Default;
-                var derivative = GetStringKey(cbDerivative.SelectedValue.ToString(), FileCategories.Civilization);
-                var artStyle =
-                    GetArtPrefix((ArtStyles) Enum.Parse(typeof(ArtStyles), cbArtStyle.SelectedValue.ToString()));
+                var civType = string.Format(Properties.Resources.txt_civ, settings.civ_name);
+                Enum.TryParse(cbFreeUnit.SelectedValue.ToString(), out Units unit);
                 var gameData = new GameData
                 {
                     Civilizations = new Civilizations
                     {
                         Row = new Row
                         {
-                            Type = settings.civ_name,
-                            DerivativeCiv = derivative,
+                            Type = civType,
+                            DerivativeCiv = string.Format(Properties.Resources.txt_civ, cbDerivative.SelectedValue.ToString().ToUpper()),
                             Description = string.Format(Properties.Resources.key_civ_desc, tbType.Text),
                             ShortDescription = string.Format(Properties.Resources.key_civ_desc_short, tbType.Text),
                             Adjective = string.Format(Properties.Resources.key_civ_adjective, tbType.Text),
                             Civilopedia = string.Format(Properties.Resources.key_civ_pedia_header, tbType.Text),
                             CivilopediaTag = string.Format(Properties.Resources.key_civ_pedia_text, tbType.Text),
-                            DefaultPlayerColor = string.Format(Properties.Resources.key_civ_color, tbType.Text),
-                            ArtDefineTag = string.Format(Properties.Resources.key_civ_art_def, derivative),
-                            ArtStyleType = string.Format(Properties.Resources.key_civ_art_style, cbArtStyle.SelectedValue.ToString().ToUpper()),
-                            ArtStyleSuffix = artStyle,
+                            DefaultPlayerColor = string.Format(Properties.Resources.txt_civ_color, tbType.Text),
+                            ArtDefineTag = string.Format(Properties.Resources.txt_civ_art_def, cbDerivative.SelectedValue.ToString().ToUpper()),
+                            ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style, cbArtStyle.SelectedValue.ToString().ToUpper()),
+                            ArtStyleSuffix = GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles), cbArtStyle.SelectedValue.ToString())),
                             ArtStylePrefix = cbArtStyle.SelectedValue.ToString().ToUpper(),
                             PortraitIndex = intCivPortraitIndex.Value.ToString(),
-                            IconAtlas = string.Format(Properties.Resources.key_civ_atlas_icon, tbType.Text),
-                            AlphaIconAtlas = string.Format(Properties.Resources.key_civ_atlas_alpha, tbType.Text),
+                            IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text),
+                            AlphaIconAtlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, tbType.Text),
                             SoundtrackTag = cbSoundtrack.SelectedValue.ToString(),
-                            MapImage = string.Format(Properties.Resources.key_civ_map, tbType.Text),
+                            MapImage = string.Format(Properties.Resources.txt_civ_map, tbType.Text),
                             DawnOfManQuote = string.Format(Properties.Resources.key_civ_dom_text, tbType.Text),
-                            DawnOfManImage = string.Format(Properties.Resources.key_civ_dom_image, tbLeaderType.Text)
+                            DawnOfManImage = string.Format(Properties.Resources.txt_civ_dom_image, tbLeaderType.Text)
                         }
                     },
 
@@ -164,8 +120,8 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.Leaders.Row
                         {
-                            CivilizationType = settings.civ_name,
-                            LeaderheadType = string.Format(Properties.Resources.key_civ_leader, tbLeaderType.Text)
+                            CivilizationType = civType,
+                            LeaderheadType = string.Format(Properties.Resources.txt_leader, tbLeaderType.Text)
                         }
                     },
 
@@ -174,12 +130,17 @@ namespace CivModTool
                         Row = new List<Models.Civilization.CityNames.Row>()
                     },
 
+                    Civilization_SpyNames = new Civilization_SpyNames
+                    {
+                        Row = new List<Models.Civilization.SpyNames.Row>()
+                    },
+
                     Civilization_FreeBuildingClasses = new Civilization_FreeBuildingClasses
                     {
                         Row = new Models.Civilization.FreeBuildingClasses.Row
                         {
-                            CivilizationType = settings.civ_name,
-                            BuildingClassType = string.Format(Properties.Resources.key_building_class, Building.Palace)
+                            CivilizationType = civType,
+                            BuildingClassType = string.Format(Properties.Resources.txt_building_class, cbFreeBuilding.SelectedValue.ToString().ToUpper())
                         }
                     },
 
@@ -187,8 +148,8 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.FreeTechs.Row
                         {
-                            CivilizationType = settings.civ_name,
-                            TechType = string.Format(Properties.Resources.key_tech, Technologies.Agriculture)
+                            CivilizationType = civType,
+                            TechType = string.Format(Properties.Resources.txt_tech, cbFreeTech.SelectedValue.ToString().ToUpper())
                         }
                     },
 
@@ -196,9 +157,9 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.FreeUnits.Row
                         {
-                            CivilizationType = settings.civ_name,
-                            UnitClassType = string.Format(Properties.Resources.key_tech, Technologies.Agriculture),
-                            UnitAIType = string.Format(Properties.Resources.key_tech, Units.Settler),
+                            CivilizationType = civType,
+                            UnitClassType = string.Format(Properties.Resources.txt_unit_class, cbFreeUnit.SelectedValue.ToString().ToUpper()),
+                            UnitAIType = string.Format(Properties.Resources.txt_unit_ai, Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper()),
                             Count = "1"
                         }
                     },
@@ -207,48 +168,50 @@ namespace CivModTool
                     {
                         Row = new Models.Civilization.Religions.Row
                         {
-                            CivilizationType = settings.civ_name,
-                            ReligionType = string.Format(Properties.Resources.key_tech, Religions.Buddhism)
+                            CivilizationType = civType,
+                            ReligionType = string.Format(Properties.Resources.txt_religion, cbReligion.SelectedValue.ToString().ToUpper())
                         }
                     },
 
                     Civilization_BuildingClassOverrides = new Civilization_BuildingClassOverrides
                     {
                         Row = new List<Models.Civilization.BuildingClassOverrides.Row>()
-                    },
-
-                    Civilization_SpyNames = new Civilization_SpyNames
-                    {
-                        Row = new List<Models.Civilization.SpyNames.Row>()
                     }
                 };
 
                 foreach (var x in lbCityNames.Items)
                 {
+                    var name = x.ToString().ToUpper();
                     var city = new Models.Civilization.CityNames.Row
                     {
-                        CivilizationType = settings.civ_name,
-                        CityName = x.ToString().ToUpper()
+                        CivilizationType = civType,
+                        CityName = name
                     };
                     gameData.Civilization_CityNames.Row.Add(city);
                 }
 
+                foreach (var x in lbSpyNames.Items)
+                {
+                    var name = x.ToString();
+                    var spy = new Models.Civilization.SpyNames.Row
+                    {
+                        CivilizationType = civType,
+                        SpyName = name
+                    };
+                    gameData.Civilization_SpyNames.Row.Add(spy);
+                }
+
                 var building = new Models.Civilization.BuildingClassOverrides.Row
                 {
-                    CivilizationType = settings.civ_name,
-                    BuildingClassType = string.Format(Properties.Resources.key_building_class, Building.Market),
-                    BuildingType = string.Format(Properties.Resources.key_building, "MANNCO_STORE")
+                    CivilizationType = civType,
+                    BuildingClassType = string.Format(Properties.Resources.txt_building_class, cbBuildingOverride.SelectedValue.ToString().ToUpper()),
+                    BuildingType = string.Format(Properties.Resources.txt_building, settings.civ_name, settings.building_name)
                 };
                 gameData.Civilization_BuildingClassOverrides.Row.Add(building);
 
-                var spy = new Models.Civilization.SpyNames.Row
-                {
-                    CivilizationType = settings.civ_name,
-                    SpyName = string.Format(Properties.Resources.key_spy_name, "MANNCO", "1")
-                };
-                gameData.Civilization_SpyNames.Row.Add(spy);
+                // TO-DO: Add Unit Override
 
-                SerializeXml(gameData, FileCategories.Civilization.ToString());
+                SerializeXml(gameData, nameof(FileCategories.Civilization));
                 return true;
             }
             catch (Exception e)
@@ -264,17 +227,18 @@ namespace CivModTool
             {
                 if (!ValidationForm(FileCategories.Leader)) return false;
                 var settings = Settings.Default;
+                var leaderType = string.Format(Properties.Resources.txt_leader, settings.leader_name);
                 var gameData = new Models.Leader.GameData
                 {
                     Leaders = new Leaders
                     {
                         Row = new Models.Leader.Row
                         {
-                            Type = settings.leader_name,
-                            Description = string.Format(Properties.Resources.key_civ_leader, tbLeaderType.Text),
+                            Type = leaderType,
+                            Description = string.Format(Properties.Resources.key_leader, tbLeaderType.Text),
                             Civilopedia = string.Format(Properties.Resources.key_leader_pedia, tbLeaderType.Text),
                             CivilopediaTag = string.Format(Properties.Resources.key_leader_pedia, tbLeaderType.Text),
-                            ArtDefineTag = string.Format(Properties.Resources.key_leader_scene, tbLeaderType.Text),
+                            ArtDefineTag = string.Format(Properties.Resources.txt_leader_scene, tbLeaderType.Text),
                             VictoryCompetitiveness = intCompVictory.Text,
                             WonderCompetitiveness = intCompWonder.Text,
                             MinorCivCompetitiveness = intCompMinor.Text,
@@ -290,7 +254,7 @@ namespace CivModTool
                             Chattiness = intChattiness.Text,
                             Meanness = intMeanness.Text,
                             PortraitIndex = intLeaderPortraitIndex.Text,
-                            IconAtlas = string.Format(Properties.Resources.key_civ_atlas_icon, tbType.Text)
+                            IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text)
                         }
                     },
 
@@ -298,8 +262,8 @@ namespace CivModTool
                     {
                         Row = new Models.Leader.Traits.Row
                         {
-                            LeaderType = settings.leader_name,
-                            TraitType = settings.trait_name
+                            LeaderType = leaderType,
+                            TraitType = string.Format(Properties.Resources.txt_trait, settings.trait_name)
                         }
                     },
 
@@ -321,24 +285,24 @@ namespace CivModTool
 
                 var major = new Models.Leader.MajorCivApproachBiases.Row
                 {
-                    LeaderType = settings.leader_name,
-                    MajorCivApproachType = "MAJOR_CIV_APPROACH_WAR",
+                    LeaderType = leaderType,
+                    MajorCivApproachType = string.Format(Properties.Resources.txt_major_approach, "WAR"),
                     Bias = "4"
                 };
                 gameData.Leader_MajorCivApproachBiases.Row.Add(major);
 
                 var minor = new Models.Leader.MinorCivApproachBiases.Row
                 {
-                    LeaderType = settings.leader_name,
-                    MinorCivApproachType = "MINOR_CIV_APPROACH_IGNORE",
+                    LeaderType = leaderType,
+                    MinorCivApproachType = string.Format(Properties.Resources.txt_minor_approach, "IGNORE"),
                     Bias = "6"
                 };
                 gameData.Leader_MinorCivApproachBiases.Row.Add(minor);
 
                 var flavor = new Models.Leader.Flavors.Row
                 {
-                    LeaderType = settings.leader_name,
-                    FlavorType = "FLAVOR_OFFENSE",
+                    LeaderType = leaderType,
+                    FlavorType = string.Format(Properties.Resources.txt_flavor, "OFFENSE"),
                     Flavor = "6"
                 };
                 gameData.Leader_Flavors.Row.Add(flavor);
@@ -358,15 +322,16 @@ namespace CivModTool
             try
             {
                 var settings = Settings.Default;
+                var traitType = string.Format(Properties.Resources.txt_trait, settings.trait_name);
                 var gameData = new Models.Trait.GameData
                 {
                     Traits = new Traits
                     {
                         Row = new Models.Trait.Row
                         {
-                            Type = settings.trait_name,
-                            ShortDescription = string.Format(Properties.Resources.key_trait, "MANNCONOMY"),
-                            Description = string.Format(Properties.Resources.key_trait_desc, "MANNCONOMY"),
+                            Type = traitType,
+                            ShortDescription = string.Format(Properties.Resources.key_trait, tbTraitType.Text),
+                            Description = string.Format(Properties.Resources.key_trait_desc, tbTraitType.Text),
                             LevelExperienceModifier = "0",
                             GreatPeopleRateModifier = "0",
                             GreatScientistRateModifier = "0",
@@ -463,8 +428,8 @@ namespace CivModTool
                     {
                         Row = new Models.Trait.YieldChangesStrategicResources.Row
                         {
-                            TraitType = settings.trait_name,
-                            YieldType = string.Format(Properties.Resources.key_yield, Resource.Gold.ToString()),
+                            TraitType = traitType,
+                            YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
                             Yield = "3"
                         }
                     },
@@ -477,24 +442,24 @@ namespace CivModTool
 
                 var resModifier = new Models.Trait.ResourceQuantityModifiers.Row
                 {
-                    TraitType = settings.trait_name,
-                    ResourceType = string.Format(Properties.Resources.key_resource, Resource.Iron.ToString()),
+                    TraitType = traitType,
+                    ResourceType = string.Format(Properties.Resources.txt_resource, Resource.Iron.ToString().ToUpper()),
                     ResourceQuantityModifier = "100"
                 };
                 gameData.Trait_ResourceQuantityModifiers.Row.Add(resModifier);
 
                 resModifier = new Models.Trait.ResourceQuantityModifiers.Row
                 {
-                    TraitType = settings.trait_name,
-                    ResourceType = string.Format(Properties.Resources.key_resource, Resource.Coal.ToString()),
+                    TraitType = traitType,
+                    ResourceType = string.Format(Properties.Resources.txt_resource, Resource.Coal.ToString().ToUpper()),
                     ResourceQuantityModifier = "100"
                 };
                 gameData.Trait_ResourceQuantityModifiers.Row.Add(resModifier);
 
                 resModifier = new Models.Trait.ResourceQuantityModifiers.Row
                 {
-                    TraitType = settings.trait_name,
-                    ResourceType = string.Format(Properties.Resources.key_resource, Resource.Oil.ToString()),
+                    TraitType = traitType,
+                    ResourceType = string.Format(Properties.Resources.txt_resource, Resource.Oil.ToString().ToUpper()),
                     ResourceQuantityModifier = "100"
                 };
                 gameData.Trait_ResourceQuantityModifiers.Row.Add(resModifier);
@@ -519,10 +484,10 @@ namespace CivModTool
                     {
                         Row = new Models.PlayerColor.Row
                         {
-                            Type = string.Format(Properties.Resources.key_civ_color, tbType.Text),
-                            PrimaryColor = string.Format(Properties.Resources.key_civ_color_primary, tbType.Text),
-                            SecondaryColor = string.Format(Properties.Resources.key_civ_color_secondary, tbType.Text),
-                            TextColor = string.Format(Properties.Resources.key_civ_color_text, tbType.Text)
+                            Type = string.Format(Properties.Resources.txt_civ_color, tbType.Text),
+                            PrimaryColor = string.Format(Properties.Resources.txt_civ_color_primary, tbType.Text),
+                            SecondaryColor = string.Format(Properties.Resources.txt_civ_color_secondary, tbType.Text),
+                            TextColor = string.Format(Properties.Resources.txt_civ_color_text, tbType.Text)
                         }
                     },
 
@@ -533,7 +498,7 @@ namespace CivModTool
                 {
                     Row = new Models.PlayerColor.Color.Row
                     {
-                        Type = string.Format(Properties.Resources.key_civ_color_primary, tbType.Text),
+                        Type = string.Format(Properties.Resources.txt_civ_color_primary, tbType.Text),
                         Red = FormatColorSelection(cpPrimaryColor.SelectedColor.Value.R.ToString()),
                         Green = FormatColorSelection(cpPrimaryColor.SelectedColor.Value.G.ToString()),
                         Blue = FormatColorSelection(cpPrimaryColor.SelectedColor.Value.B.ToString()),
@@ -546,7 +511,7 @@ namespace CivModTool
                 {
                     Row = new Models.PlayerColor.Color.Row
                     {
-                        Type = string.Format(Properties.Resources.key_civ_color_secondary, tbType.Text),
+                        Type = string.Format(Properties.Resources.txt_civ_color_secondary, tbType.Text),
                         Red = FormatColorSelection(cpSecondaryColor.SelectedColor.Value.R.ToString()),
                         Green = FormatColorSelection(cpSecondaryColor.SelectedColor.Value.G.ToString()),
                         Blue = FormatColorSelection(cpSecondaryColor.SelectedColor.Value.B.ToString()),
@@ -559,7 +524,7 @@ namespace CivModTool
                 {
                     Row = new Models.PlayerColor.Color.Row
                     {
-                        Type = string.Format(Properties.Resources.key_civ_color_text, tbType.Text),
+                        Type = string.Format(Properties.Resources.txt_civ_color_text, tbType.Text),
                         Red = FormatColorSelection(cpTextColor.SelectedColor.Value.R.ToString()),
                         Green = FormatColorSelection(cpTextColor.SelectedColor.Value.G.ToString()),
                         Blue = FormatColorSelection(cpTextColor.SelectedColor.Value.B.ToString()),
@@ -568,68 +533,7 @@ namespace CivModTool
                 };
                 gameData.Colors.Add(colorList);
 
-                SerializeXml(gameData, FileCategories.PlayerCount.ToString());
-                return true;
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e.Message);
-                return false;
-            }
-        }
-
-        private bool GenerateIconAtlasXml()
-        {
-            try
-            {
-                var gameData = new Models.IconAtlas.GameData
-                {
-                    IconTextureAtlases = new IconTextureAtlases
-                    {
-                        Row = new List<Models.IconAtlas.Row>()
-                    }
-                };
-
-                var image = new Models.IconAtlas.Row
-                {
-                    Atlas = string.Format(Properties.Resources.key_civ_atlas_alpha, tbType.Text),
-                    IconSize = "128",
-                    Filename = string.Format(Properties.Resources.key_civ_atlas_alpha, tbType.Text, "128"),
-                    IconsPerRow = "1",
-                    IconsPerColumn = "1"
-                };
-                gameData.IconTextureAtlases.Row.Add(image);
-
-                SerializeXml(gameData, FileCategories.IconAtlas.ToString());
-                return true;
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e.Message);
-                return false;
-            }
-        }
-
-        private bool GenerateGameTextXml()
-        {
-            try
-            {
-                var gameData = new Models.GameText.GameData
-                {
-                    Language_en_US = new Language_en_US
-                    {
-                        Row = new List<Models.GameText.Row>()
-                    }
-                };
-
-                var text = new Models.GameText.Row
-                {
-                    Tag = string.Format(Properties.Resources.key_civ_adjective, tbType.Text),
-                    Text = "Mann Co."
-                };
-                gameData.Language_en_US.Row.Add(text);
-
-                SerializeXml(gameData, FileCategories.GameText.ToString());
+                SerializeXml(gameData, FileCategories.PlayerColor.ToString());
                 return true;
             }
             catch (Exception e)
@@ -643,20 +547,27 @@ namespace CivModTool
         {
             try
             {
+                var settings = Settings.Default;
+                var buildingType = string.Format(Properties.Resources.txt_building, settings.civ_name, settings.building_name);
                 var gameData = new Models.Buildings.GameData
                 {
                     Buildings = new Buildings
                     {
                         Row = new Models.Buildings.Row
                         {
-                            Type = "BUILDING_MANNCO_MANOR",
-                            Description = "TXT_KEY_BUILDING_MANNCO_MANOR_DESC",
-                            Civilopedia = "TXT_KEY_BUILDING_MANNCO_MANOR_TEXT",
-                            Strategy = "TXT_KEY_BUILDING_MANNCO_MANOR_STRATEGY",
-                            Help = "TXT_KEY_BUILDING_MANNCO_MANOR_HELP",
+                            Type = buildingType,
+                            Description = string.Format(Properties.Resources.key_building_desc, tbType.Text, settings.building_name),
+                            Civilopedia = string.Format(Properties.Resources.key_building_pedia, tbType.Text, settings.building_name),
+                            Strategy = string.Format(Properties.Resources.key_building_strategy, tbType.Text, settings.building_name),
+                            Help = string.Format(Properties.Resources.key_building_help, tbType.Text, settings.building_name),
+                            BuildingClass = string.Format(Properties.Resources.txt_building_class, cbBuildingOverride.SelectedValue.ToString().ToUpper()),
+                            ArtDefineTag = string.Format(Properties.Resources.txt_building_art_def, cbBuildingOverride.SelectedValue.ToString().ToUpper()),
+                            FreeStartEra = string.Format(Properties.Resources.txt_era, cbBuildingStartEra.SelectedValue.ToString().ToUpper()),
+                            PrereqTech = string.Format(Properties.Resources.txt_tech, cbBuildingReqTech.SelectedValue.ToString().ToUpper()),
+                            IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text),
                             ThemingBonusHelp = "",
                             Quote = "",
-                            GoldMaintenance = "1",
+                            GoldMaintenance = "0",
                             MutuallyExclusiveGroup = "-1",
                             TeamShare = "0",
                             Water = "0",
@@ -680,7 +591,7 @@ namespace CivModTool
                             DiplomaticVoting = "0",
                             AffectSpiesNow = "0",
                             NullifyInfluenceModifier = "0",
-                            Cost = "75",
+                            Cost = "100",
                             FaithCost = "0",
                             LeagueCost = "0",
                             UnlockedByBelief = "0",
@@ -751,8 +662,8 @@ namespace CivModTool
                             ExtraSpies = "0",
                             SpyRankChange = "0",
                             InstantSpyRankChange = "0",
-                            TradeRouteRecipientBonus = "0",
-                            TradeRouteTargetBonus = "0",
+                            TradeRouteRecipientBonus = "1",
+                            TradeRouteTargetBonus = "1",
                             NumTradeRouteBonus = "0",
                             LandmarksTourismPercent = "0",
                             InstantMilitaryIncrease = "0",
@@ -764,12 +675,9 @@ namespace CivModTool
                             TradeRouteLandGoldBonus = "0",
                             CityStateTradeRouteProductionModifier = "0",
                             GreatScientistBeakerModifier = "0",
-                            BuildingClass = "BUILDINGCLASS_LIBRARY",
-                            ArtDefineTag = "ART_DEF_BUILDING_LIBRARY",
                             NearbyTerrainRequired = "",
                             ProhibitedCityTerrain = "",
                             VictoryPrereq = "",
-                            FreeStartEra = "ERA_INDUSTRIAL",
                             MaxStartEra = "",
                             ObsoleteTech = "",
                             EnhancedYieldTech = "",
@@ -780,10 +688,9 @@ namespace CivModTool
                             TrainedFreePromotion = "",
                             FreePromotionRemoved = "",
                             ReplacementBuildingClass = "",
-                            PrereqTech = "TECH_WRITING",
                             PolicyBranchType = "",
-                            SpecialistType = "",
-                            SpecialistCount = "0",
+                            SpecialistType = string.Format(Properties.Resources.txt_specialist, Units.Merchant.ToString().ToUpper()),
+                            SpecialistCount = "1",
                             GreatWorkSlotType = "",
                             FreeGreatWork = "",
                             GreatWorkCount = "0",
@@ -792,11 +699,10 @@ namespace CivModTool
                             ExtraLeagueVotes = "0",
                             CityWall = "0",
                             DisplayPosition = "0",
-                            PortraitIndex = "2",
+                            PortraitIndex = intBuildingPortraitIndex.Text,
                             WonderSplashImage = "",
                             WonderSplashAnchor = "R,T",
                             WonderSplashAudio = "",
-                            IconAtlas = "CIV_MANNCO_ICON_ATLAS",
                             ArtInfoCulturalVariation = "0",
                             ArtInfoEraVariation = "0",
                             ArtInfoRandomVariation = "0"
@@ -808,22 +714,32 @@ namespace CivModTool
                         Row = new List<Models.Buildings.Flavors.Row>()
                     },
 
-                    Building_YieldChangesPerPop = new Building_YieldChangesPerPop
+                    Building_YieldChanges = new Building_YieldChanges
                     {
-                        Row = new Models.Buildings.YieldChangesPerPop.Row
+                        Row = new Models.Buildings.YieldChanges.Row
                         {
-                            BuildingType = "BUILDING_MANNCO_MANOR",
-                            YieldType = "YIELD_SCIENCE",
-                            Yield = "50"
+                            BuildingType = buildingType,
+                            YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
+                            Yield = "5"
+                        }
+                    },
+
+                    Building_YieldModifiers = new Building_YieldModifiers
+                    {
+                        Row = new Models.Buildings.YieldModifiers.Row
+                        {
+                            BuildingType = buildingType,
+                            YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
+                            Yield = "25"
                         }
                     }
                 };
 
                 var flavor = new Models.Buildings.Flavors.Row
                 {
-                    BuildingType = "BUILDING_MANNCO_MANOR",
-                    FlavorType = "FLAVOR_SCIENCE",
-                    Flavor = "40"
+                    BuildingType = buildingType,
+                    FlavorType = string.Format(Properties.Resources.txt_flavor, Resource.Gold.ToString().ToUpper()),
+                    Flavor = "25"
                 };
                 gameData.Building_Flavors.Row.Add(flavor);
 
@@ -853,6 +769,87 @@ namespace CivModTool
             }
         }
 
+        private bool GenerateIconAtlasXml()
+        {
+            try
+            {
+                var gameData = new Models.IconAtlas.GameData
+                {
+                    IconTextureAtlases = new IconTextureAtlases
+                    {
+                        Row = new List<Models.IconAtlas.Row>()
+                    }
+                };
+
+                var image = new Models.IconAtlas.Row
+                {
+                    Atlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, tbType.Text),
+                    IconSize = "128",
+                    Filename = string.Format(Properties.Resources.txt_civ_atlas_alpha_file, tbType.Text, "128"),
+                    IconsPerRow = "1",
+                    IconsPerColumn = "1"
+                };
+                gameData.IconTextureAtlases.Row.Add(image);
+
+                SerializeXml(gameData, FileCategories.IconAtlas.ToString());
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return false;
+            }
+        }
+
+        private bool GenerateGameTextXml()
+        {
+            try
+            {
+                var gameData = new Models.GameText.GameData
+                {
+                    Language_en_US = new Language_en_US
+                    {
+                        Row = new List<Models.GameText.Row>()
+                    }
+                };
+
+                var text = new Models.GameText.Row
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_adjective, tbType.Text),
+                    Text = "Mann Co."
+                };
+                gameData.Language_en_US.Row.Add(text);
+
+                SerializeXml(gameData, FileCategories.GameText.ToString());
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return false;
+            }
+        }
+
+        private bool SaveValuesToConfig()
+        {
+            try
+            {
+                var settings = Settings.Default;
+                settings.civ_name = tbType.Text;
+                settings.leader_name = tbLeaderType.Text;
+                settings.trait_name = tbTraitType.Text;
+                settings.building_name = tbBuildingType.Text;
+                settings.unit_name = tbBuildingType.Text;
+                settings.Save();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return false;
+            }
+        }
+
         private bool ValidationForm(FileCategories civilization)
         {
             var result = true;
@@ -861,8 +858,7 @@ namespace CivModTool
                 case FileCategories.Civilization:
                     if (string.IsNullOrWhiteSpace(tbType.Text))
                     {
-                        MessageBox.Show("Invalid Civilization Name", "Invalid Civ Name", MessageBoxButton.OK,
-                            MessageBoxImage.Error);
+                        MessageBox.Show("Invalid Civilization Name", "Invalid Civilization Name", MessageBoxButton.OK, MessageBoxImage.Error);
                         TabControls.SelectedIndex = 0;
                         result = false;
                     }
@@ -872,8 +868,7 @@ namespace CivModTool
                 case FileCategories.Leader:
                     if (string.IsNullOrWhiteSpace(tbLeaderType.Text))
                     {
-                        MessageBox.Show("Invalid Leader Name", "Invalid Leader Name", MessageBoxButton.OK,
-                            MessageBoxImage.Error);
+                        MessageBox.Show("Invalid Leader Name", "Invalid Leader Name", MessageBoxButton.OK, MessageBoxImage.Error);
                         TabControls.SelectedIndex = 1;
                         result = false;
                     }
@@ -881,10 +876,9 @@ namespace CivModTool
                     break;
 
                 case FileCategories.Trait:
-                    if (string.IsNullOrWhiteSpace(tbLeaderType.Text))
+                    if (string.IsNullOrWhiteSpace(tbTraitType.Text))
                     {
-                        MessageBox.Show("Invalid Trait Name", "Invalid Trait Name", MessageBoxButton.OK,
-                            MessageBoxImage.Error);
+                        MessageBox.Show("Invalid Trait Name", "Invalid Trait Name", MessageBoxButton.OK, MessageBoxImage.Error);
                         TabControls.SelectedIndex = 2;
                         result = false;
                     }
@@ -924,9 +918,8 @@ namespace CivModTool
 
         private void LoadGuiElements()
         {
-            tbType.Text = Settings.Default.civ_name;
-            tbLeaderType.Text = Settings.Default.leader_name;
-            tbTraitType.Text = Settings.Default.trait_name;
+            // Civilization
+            tbType.Text = Settings.Default.civ_name.Replace($"CIVILIZATION_", string.Empty);
 
             foreach (var item in Enum.GetValues(typeof(Civs)))
                 cbDerivative.Items.Add(item.ToString());
@@ -936,6 +929,42 @@ namespace CivModTool
 
             foreach (var item in Enum.GetValues(typeof(Civs)))
                 cbSoundtrack.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Building)))
+                cbFreeBuilding.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Units)))
+                cbFreeUnit.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Technologies)))
+                cbFreeTech.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Religions)))
+                cbReligion.Items.Add(item.ToString());
+
+            // Leader
+            tbLeaderType.Text = Settings.Default.leader_name.Replace($"LEADER_", string.Empty);
+
+            // Trait
+            tbTraitType.Text = Settings.Default.trait_name.Replace($"TRAIT_", string.Empty);
+
+            // Building
+            tbBuildingType.Text = Settings.Default.building_name.Replace($"BUILDING_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(Building)))
+                cbBuildingOverride.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Eras)))
+                cbBuildingStartEra.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Technologies)))
+                cbBuildingReqTech.Items.Add(item.ToString());
+
+            // Unit
+            tbUnitType.Text = Settings.Default.unit_name.Replace($"UNIT_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(Units)))
+                cbUnitOverride.Items.Add(item.ToString());
         }
 
         private string FormatColorSelection(string value)
@@ -965,7 +994,7 @@ namespace CivModTool
                 case FileCategories.Leader:
                     return $"LEADER_{settings.civ_name}";
 
-                case FileCategories.PlayerCount:
+                case FileCategories.PlayerColor:
                     return $"PLAYERCOLOR_{settings.civ_name}_{text}";
 
                 case FileCategories.Trait:
@@ -997,27 +1026,6 @@ namespace CivModTool
                 default:
                     return "_MED";
             }
-        }
-
-        private void TbType_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            var settings = Settings.Default;
-            settings.civ_name = GetStringKey(tbType.Text, FileCategories.Civilization);
-            settings.Save();
-        }
-
-        private void TbLeaderType_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            var settings = Settings.Default;
-            settings.leader_name = GetStringKey(tbLeaderType.Text, FileCategories.Leader);
-            settings.Save();
-        }
-
-        private void TbTraitType_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            var settings = Settings.Default;
-            settings.trait_name = GetStringKey(tbLeaderType.Text, FileCategories.Trait);
-            settings.Save();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -1081,7 +1089,7 @@ namespace CivModTool
 
         private void BAddCity_OnClick(object sender, RoutedEventArgs e)
         {
-            var input = Interaction.InputBox("Please input a new city name:", "Add City Name", "", 0, 0);
+            var input = Interaction.InputBox("Please input a new city name:", "Add City Name", "");
             lbCityNames.Items.Add(input);
         }
 
@@ -1094,6 +1102,23 @@ namespace CivModTool
         private void BClearCity_OnClick(object sender, RoutedEventArgs e)
         {
             lbCityNames.Items.Clear();
+        }
+
+        private void bAddSpy_Click(object sender, RoutedEventArgs e)
+        {
+            var input = Interaction.InputBox("Please input a new spy name:", "Add Spy Name", "");
+            lbSpyNames.Items.Add(input);
+        }
+
+        private void bRemoveSpy_Click(object sender, RoutedEventArgs e)
+        {
+            if (lbSpyNames.SelectedItem == null) return;
+            lbSpyNames.Items.RemoveAt(lbSpyNames.Items.IndexOf(lbSpyNames.SelectedItem));
+        }
+
+        private void bClearSpy_Click(object sender, RoutedEventArgs e)
+        {
+            lbSpyNames.Items.Clear();
         }
     }
 }

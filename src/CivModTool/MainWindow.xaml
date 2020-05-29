@@ -13,93 +13,115 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Resources/background.jpg" />
+            <ImageBrush ImageSource="Resources/Style/background.jpg" />
         </Grid.Background>
         <TabControl x:Name="TabControls" Margin="10,10,10,10" Background="Transparent">
             <TabItem Header="Civilization">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="103*" />
+                        <ColumnDefinition Width="865*" />
+                    </Grid.ColumnDefinitions>
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
-                    <TextBox x:Name="tbType" HorizontalAlignment="Left" Margin="130,10,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" LostFocus="TbType_OnLostFocus" CharacterCasing="Upper"  />
-                    <ComboBox x:Name="cbDerivative" HorizontalAlignment="Left" Margin="130,40,0,0"
-                              VerticalAlignment="Top" Width="120" SelectedIndex="0"  />
-                    <TextBox HorizontalAlignment="Left" Margin="130,70,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120"  />
-                    <TextBox HorizontalAlignment="Left" Margin="130,100,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120"  />
-                    <TextBox HorizontalAlignment="Left" Margin="130,130,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120"  />
-                    <TextBox HorizontalAlignment="Left" Margin="130,160,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120"  />
-                    <TextBox HorizontalAlignment="Left" Margin="130,190,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120"  />
-                    <ComboBox x:Name="cbArtStyle" HorizontalAlignment="Left" Margin="130,220,0,0"
-                              VerticalAlignment="Top" Width="120" SelectedIndex="1"  />
-                    <x2:IntegerUpDown x:Name="intCivPortraitIndex" Margin="130,250,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="120" AllowTextInput="False"  />
-                    <ComboBox x:Name="cbSoundtrack" HorizontalAlignment="Left" Margin="130,280,0,0"
-                              VerticalAlignment="Top" Width="120" SelectedIndex="0"  />
-                    <TextBox HorizontalAlignment="Left" Margin="130,310,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120"  />
-                    <Label Content="Type:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilization:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Derivative:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,100,0,0"
-                           VerticalAlignment="Top" />
+                    <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <Label Content="Adjective:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" />
-                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,160,0,0"
-                           VerticalAlignment="Top" />
-                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,190,0,0"
-                           VerticalAlignment="Top" />
+                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <Label Content="Art Style:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0"
-                           VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
                     <Label Content="Soundtrack:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Dawn of Man:" HorizontalAlignment="Left" Margin="10,310,0,0"
-                           VerticalAlignment="Top" />
-                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="128,10,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="128,40,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="128,70,0,0" VerticalAlignment="Top"  />
+                    <Label Content="Dawn of Man:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" />
+                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="175,10,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="175,40,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="175,70,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Free Building:" HorizontalAlignment="Left" Margin="175,100,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Free Unit:" HorizontalAlignment="Left" Margin="175,130,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Free Technology:" HorizontalAlignment="Left" Margin="175,160,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="175,190,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="City Names:" HorizontalAlignment="Left" Margin="435,10,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Spy Names:" HorizontalAlignment="Left" Margin="660,10,0,0" VerticalAlignment="Top" Grid.Column="1" />
+
+                    <TextBox x:Name="tbType" HorizontalAlignment="Left" Margin="26.6,10,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" Grid.Column="1" />
+                    <ComboBox x:Name="cbDerivative" HorizontalAlignment="Left" Margin="26.6,40,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
+                    <TextBox HorizontalAlignment="Left" Margin="26.6,70,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox HorizontalAlignment="Left" Margin="26.6,100,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox HorizontalAlignment="Left" Margin="26.6,130,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox HorizontalAlignment="Left" Margin="26.6,160,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <TextBox HorizontalAlignment="Left" Margin="26.6,190,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                    <ComboBox x:Name="cbArtStyle" HorizontalAlignment="Left" Margin="26.6,220,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="1" Grid.Column="1" />
+                    <x2:IntegerUpDown x:Name="intCivPortraitIndex" Margin="26.6,250,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="0" Increment="1" Minimum="0"
+                                      Maximum="4" Width="120" AllowTextInput="False" Grid.Column="1" />
+                    <ComboBox x:Name="cbSoundtrack" HorizontalAlignment="Left" Margin="26.6,280,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
+                    <TextBox HorizontalAlignment="Left" Margin="26.6,310,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
+
                     <x2:ColorPicker
                         x:Name="cpPrimaryColor"
-                        Width="70"
-                        Margin="258,10,0,0"
+                        Width="120"
+                        Margin="294.8,10,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
                         ShowRecentColors="True"
-                        Foreground="Black"  />
+                        DisplayColorAndName="True"
+                        ShowDropDownButton="False"
+                        SelectedColor="Black"  Grid.Column="1" />
                     <x2:ColorPicker
                         x:Name="cpSecondaryColor"
-                        Width="70"
-                        Margin="258,40,0,0"
+                        Width="120"
+                        Margin="294.8,40,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
                         ShowRecentColors="True"
-                        Foreground="Black"  />
+                        DisplayColorAndName="True"
+                        ShowDropDownButton="False"
+                        SelectedColor="Yellow"  Grid.Column="1" />
                     <x2:ColorPicker
                         x:Name="cpTextColor"
-                        Width="70"
-                        Margin="258,70,0,0"
+                        Width="120"
+                        Margin="294.8,70,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
                         ShowRecentColors="True"
-                        Foreground="Black"  />
+                        DisplayColorAndName="True"
+                        ShowDropDownButton="False"
+                        SelectedColor="White"  Grid.Column="1" />
+
+                    <ComboBox x:Name="cbFreeBuilding" HorizontalAlignment="Left" Margin="295,100,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="64" Grid.Column="1" />
+                    <ComboBox x:Name="cbFreeUnit" HorizontalAlignment="Left" Margin="295,130,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="60" Grid.Column="1" />
+                    <ComboBox x:Name="cbFreeTech" HorizontalAlignment="Left" Margin="295,160,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
+                    <ComboBox x:Name="cbReligion" HorizontalAlignment="Left" Margin="295,190,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
+
+                    <ListBox x:Name="lbCityNames"  HorizontalAlignment="Left" Height="170" Margin="434.8,41,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" />
+                    <Button x:Name="bAddCity" Content="Add" HorizontalAlignment="Left" Margin="554.8,51,0,0" VerticalAlignment="Top" Width="75" Click="BAddCity_OnClick" Grid.Column="1" />
+                    <Button x:Name="bRemoveCity"  Content="Remove" HorizontalAlignment="Left" Margin="554.8,81,0,0" VerticalAlignment="Top" Width="75" Click="BRemoveCity_OnClick" Grid.Column="1" />
+                    <Button x:Name="bClearCity"  Content="Clear" HorizontalAlignment="Left" Margin="554.8,111,0,0" VerticalAlignment="Top" Width="75" Click="BClearCity_OnClick" Grid.Column="1" />
+
+                    <ListBox x:Name="lbSpyNames"  HorizontalAlignment="Left" Height="170" Margin="659.8,41,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" />
+                    <Button x:Name="bAddSpy" Content="Add" HorizontalAlignment="Left" Margin="779.8,51,0,0" VerticalAlignment="Top" Width="75" Click="bAddSpy_Click"  Grid.Column="1" />
+                    <Button x:Name="bRemoveSpy"  Content="Remove" HorizontalAlignment="Left" Margin="779.8,81,0,0" VerticalAlignment="Top" Width="75" Click="bRemoveSpy_Click"  Grid.Column="1" />
+                    <Button x:Name="bClearSpy"  Content="Clear" HorizontalAlignment="Left" Margin="779.8,111,0,0" VerticalAlignment="Top" Width="75" Click="bClearSpy_Click"  Grid.Column="1" />
 
                     <Button x:Name="btnGenerateXML" Content="Generate" HorizontalAlignment="Left"
                             Margin="10,350,0,0" VerticalAlignment="Top" Height="25" Width="100"
-                            Click="btnGenerateXML_Click" />
-                    <ListBox x:Name="lbCityNames"  HorizontalAlignment="Left" Height="100" Margin="333,10,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
-                    <Button x:Name="bAddCity" Content="Add" HorizontalAlignment="Left" Margin="438,10,0,0" VerticalAlignment="Top" Width="75" Click="BAddCity_OnClick"  />
-                    <Button x:Name="bRemoveCity"  Content="Remove" HorizontalAlignment="Left" Margin="438,34,0,0" VerticalAlignment="Top" Width="75" Click="BRemoveCity_OnClick" Grid.Column="1"/>
-                    <Button x:Name="bClearCity"  Content="Clear" HorizontalAlignment="Left" Margin="438,58,0,0" VerticalAlignment="Top" Width="75" Click="BClearCity_OnClick" Grid.Column="1"/>
+                            Click="btnGenerateXML_Click" Grid.ColumnSpan="2" />
                 </Grid>
             </TabItem>
             <TabItem Header="Leader">
@@ -107,139 +129,39 @@
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
-                    <TextBox x:Name="tbLeaderType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="70" LostFocus="TbLeaderType_OnLostFocus"
-                             CharacterCasing="Upper" />
-                    <TextBox HorizontalAlignment="Left" Margin="125,40,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="70" />
-                    <TextBox HorizontalAlignment="Left" Margin="125,70,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="70" />
-                    <TextBox HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="70" />
-                    <x2:IntegerUpDown x:Name="intLeaderPortraitIndex" Margin="155,160,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intCompVictory" Margin="155,190,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intCompWonder" Margin="155,220,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intCompMinor" Margin="155,250,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intBoldness" Margin="155,280,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intDiploBalance" Margin="155,310,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intWarmongerHate" Margin="155,340,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intWorkAgainstWill" Margin="155,370,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intWorkWithWill" Margin="155,400,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intDenounceWill" Margin="155,430,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <Label Content="Leader:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"
-                            />
-                    <Label Content="Description:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"
-                            />
-                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"
-                            />
-                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,100,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,160,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Competitive - Victory:" HorizontalAlignment="Left" Margin="10,190,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Competitive - Wonder:" HorizontalAlignment="Left" Margin="10,220,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Competitive - Minor:" HorizontalAlignment="Left" Margin="10,250,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Boldness:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top"
-                            />
-                    <Label Content="Diplomacy Balance:" HorizontalAlignment="Left" Margin="10,310,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Warmonger Hate:" HorizontalAlignment="Left" Margin="10,340,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Work vs. Willingness:" HorizontalAlignment="Left" Margin="10,370,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Work With Willingness:" HorizontalAlignment="Left" Margin="10,400,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Denounce Willingness:" HorizontalAlignment="Left" Margin="10,430,0,0"
-                           VerticalAlignment="Top"  />
-                    <Label Content="Loyalty:" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" />
-                    <Label Content="Neediness:" HorizontalAlignment="Left" Margin="235,40,0,0" VerticalAlignment="Top" />
-                    <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="235,70,0,0"
-                           VerticalAlignment="Top" />
-                    <Label Content="Chattiness:" HorizontalAlignment="Left" Margin="235,100,0,0"
-                           VerticalAlignment="Top" />
-                    <Label Content="Meanness:" HorizontalAlignment="Left" Margin="235,130,0,0" VerticalAlignment="Top" />
-                    <Label Content="War:" HorizontalAlignment="Left" Margin="235,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Hostile:" HorizontalAlignment="Left" Margin="235,190,0,0" VerticalAlignment="Top" />
-                    <Label Content="Deceptive:" HorizontalAlignment="Left" Margin="235,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Guarded:" HorizontalAlignment="Left" Margin="235,250,0,0" VerticalAlignment="Top" />
-                    <Label Content="Afraid:" HorizontalAlignment="Left" Margin="235,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Friendly (Major):" HorizontalAlignment="Left" Margin="235,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Neutral:" HorizontalAlignment="Left" Margin="235,340,0,0" VerticalAlignment="Top" />
-                    <Label Content="Ignore:" HorizontalAlignment="Left" Margin="235,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Friendly (Minor):" HorizontalAlignment="Left" Margin="235,400,0,0" VerticalAlignment="Top" />
-                    <Label Content="Protective:" HorizontalAlignment="Left" Margin="235,430,0,0" VerticalAlignment="Top" />
-                    <x2:IntegerUpDown x:Name="intLoyalty" Margin="355,10,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intNeediness" Margin="355,40,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intForgiveness" Margin="355,70,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intChattiness" Margin="355,100,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intMeanness" Margin="355,130,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intWar" Margin="355,160,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intHostile" Margin="355,190,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intDeceptive" Margin="355,220,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intGuarded" Margin="355,250,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intAfraid" Margin="355,280,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intFriendlyMajor" Margin="355,310,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intNeutral" Margin="355,340,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intIgnore" Margin="355,370,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intFriendlyMinor" Margin="355,400,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intProtective" Margin="355,430,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                    <Label Content="Conquest:" HorizontalAlignment="Left" Margin="425,10,0,0" VerticalAlignment="Top" />
-                    <Label Content="Bully:" HorizontalAlignment="Left" Margin="425,40,0,0" VerticalAlignment="Top" />
-                    <Label Content="Offense:" HorizontalAlignment="Left" Margin="425,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Defense:" HorizontalAlignment="Left" Margin="425,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Leader:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Description:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
+                    <Label Content="Competitive - Victory:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" />
+                    <Label Content="Competitive - Wonder:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
+                    <Label Content="Competitive - Minor:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Boldness:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" />
+                    <Label Content="Diplomacy Balance:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" />
+                    <Label Content="Warmonger Hate:" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" />
+                    <Label Content="Work vs. Willingness:" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" />
+                    <Label Content="Work With Willingness:" HorizontalAlignment="Left" Margin="10,400,0,0" VerticalAlignment="Top" />
+                    <Label Content="Denounce Willingness:" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" />
+                    <Label Content="Loyalty:" HorizontalAlignment="Left" Margin="269,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Neediness:" HorizontalAlignment="Left" Margin="269,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="269,70,0,0" VerticalAlignment="Top" />
+                    <Label Content="Chattiness:" HorizontalAlignment="Left" Margin="269,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Meanness:" HorizontalAlignment="Left" Margin="269,130,0,0" VerticalAlignment="Top" />
+                    <Label Content="War:" HorizontalAlignment="Left" Margin="269,160,0,0" VerticalAlignment="Top" />
+                    <Label Content="Hostile:" HorizontalAlignment="Left" Margin="269,190,0,0" VerticalAlignment="Top" />
+                    <Label Content="Deceptive:" HorizontalAlignment="Left" Margin="269,220,0,0" VerticalAlignment="Top" />
+                    <Label Content="Guarded:" HorizontalAlignment="Left" Margin="269,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Afraid:" HorizontalAlignment="Left" Margin="269,280,0,0" VerticalAlignment="Top" />
+                    <Label Content="Friendly (Major):" HorizontalAlignment="Left" Margin="269,310,0,0" VerticalAlignment="Top" />
+                    <Label Content="Neutral:" HorizontalAlignment="Left" Margin="269,340,0,0" VerticalAlignment="Top" />
+                    <Label Content="Ignore:" HorizontalAlignment="Left" Margin="269,370,0,0" VerticalAlignment="Top" />
+                    <Label Content="Friendly (Minor):" HorizontalAlignment="Left" Margin="269,400,0,0" VerticalAlignment="Top" />
+                    <Label Content="Protective:" HorizontalAlignment="Left" Margin="269,430,0,0" VerticalAlignment="Top" />
+                    <Label Content="Conquest:" HorizontalAlignment="Left" Margin="459,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Bully:" HorizontalAlignment="Left" Margin="459,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Offense:" HorizontalAlignment="Left" Margin="459,70,0,0" VerticalAlignment="Top" />
+                    <Label Content="Defense:" HorizontalAlignment="Left" Margin="459,100,0,0" VerticalAlignment="Top" />
                     <!--<Label Content="City Defense:" HorizontalAlignment="Left" Margin="500,130,0,0" VerticalAlignment="Top" />
                     <Label Content="Military Training:" HorizontalAlignment="Left" Margin="500,160,0,0" VerticalAlignment="Top" />
                     <Label Content="Recon:" HorizontalAlignment="Left" Margin="500,190,0,0" VerticalAlignment="Top" />
@@ -250,123 +172,206 @@
                     <Label Content="Naval Growth:" HorizontalAlignment="Left" Margin="500,340,0,0" VerticalAlignment="Top" />
                     <Label Content="Naval Tile Improvement:" HorizontalAlignment="Left" Margin="500,370,0,0" VerticalAlignment="Top" />
                     <Label Content="Air:" HorizontalAlignment="Left" Margin="500,400,0,0" VerticalAlignment="Top" />-->
-                    <Label Content="Expansion:" HorizontalAlignment="Left" Margin="425,130,0,0" VerticalAlignment="Top" />
-                    <Label Content="Growth:" HorizontalAlignment="Left" Margin="425,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Tile Improvement:" HorizontalAlignment="Left" Margin="425,190,0,0" VerticalAlignment="Top" />
-                    <Label Content="Infrastructure:" HorizontalAlignment="Left" Margin="425,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Production:" HorizontalAlignment="Left" Margin="425,250,0,0" VerticalAlignment="Top" />
-                    <Label Content="Gold:" HorizontalAlignment="Left" Margin="425,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Science:" HorizontalAlignment="Left" Margin="425,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Culture:" HorizontalAlignment="Left" Margin="425,340,0,0" VerticalAlignment="Top" />
-                    <Label Content="Happiness:" HorizontalAlignment="Left" Margin="425,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Great People:" HorizontalAlignment="Left" Margin="425,400,0,0" VerticalAlignment="Top" />
-                    <Label Content="Wonders:" HorizontalAlignment="Left" Margin="425,430,0,0" VerticalAlignment="Top" />
-                    <x2:IntegerUpDown x:Name="intConquest" Margin="555,10,0,0" HorizontalAlignment="Left"
+                    <Label Content="Expansion:" HorizontalAlignment="Left" Margin="459,130,0,0" VerticalAlignment="Top" />
+                    <Label Content="Growth:" HorizontalAlignment="Left" Margin="459,160,0,0" VerticalAlignment="Top" />
+                    <Label Content="Tile Improvement:" HorizontalAlignment="Left" Margin="459,190,0,0" VerticalAlignment="Top" />
+                    <Label Content="Infrastructure:" HorizontalAlignment="Left" Margin="459,220,0,0" VerticalAlignment="Top" />
+                    <Label Content="Production:" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Gold:" HorizontalAlignment="Left" Margin="459,280,0,0" VerticalAlignment="Top" />
+                    <Label Content="Science:" HorizontalAlignment="Left" Margin="459,310,0,0" VerticalAlignment="Top" />
+                    <Label Content="Culture:" HorizontalAlignment="Left" Margin="459,340,0,0" VerticalAlignment="Top" />
+                    <Label Content="Happiness:" HorizontalAlignment="Left" Margin="459,370,0,0" VerticalAlignment="Top" />
+                    <Label Content="Great People:" HorizontalAlignment="Left" Margin="459,400,0,0" VerticalAlignment="Top" />
+                    <Label Content="Wonders:" HorizontalAlignment="Left" Margin="459,430,0,0" VerticalAlignment="Top" />
+                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="659,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Diplomacy:" HorizontalAlignment="Left" Margin="659,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Spaceship:" HorizontalAlignment="Left" Margin="659,70,0,0" VerticalAlignment="Top" />
+                    <Label Content="Water Connection:" HorizontalAlignment="Left" Margin="659,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Nuke:" HorizontalAlignment="Left" Margin="659,130,0,0" VerticalAlignment="Top" />
+                    <Label Content="Use Nuke:" HorizontalAlignment="Left" Margin="659,160,0,0" VerticalAlignment="Top" />
+                    <Label Content="Espionage:" HorizontalAlignment="Left" Margin="659,190,0,0" VerticalAlignment="Top" />
+                    <Label Content="Anti-Air:" HorizontalAlignment="Left" Margin="659,220,0,0" VerticalAlignment="Top" />
+                    <Label Content="Air Carrier:" HorizontalAlignment="Left" Margin="659,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Archaeology:" HorizontalAlignment="Left" Margin="659,280,0,0" VerticalAlignment="Top" />
+                    <Label Content="Land Trade Routes:" HorizontalAlignment="Left" Margin="659,310,0,0" VerticalAlignment="Top" />
+                    <Label Content="Sea Trade Routes:" HorizontalAlignment="Left" Margin="659,340,0,0" VerticalAlignment="Top" />
+                    <Label Content="Trade Origin:" HorizontalAlignment="Left" Margin="659,370,0,0" VerticalAlignment="Top" />
+                    <Label Content="Trade Destination:" HorizontalAlignment="Left" Margin="659,400,0,0" VerticalAlignment="Top" />
+                    <Label Content="Air Lift:" HorizontalAlignment="Left" Margin="659,430,0,0" VerticalAlignment="Top" />
+                    <TextBox x:Name="tbLeaderType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
+                    <TextBox HorizontalAlignment="Left" Margin="125,40,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <TextBox HorizontalAlignment="Left" Margin="125,70,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <TextBox HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <x2:IntegerUpDown x:Name="intLeaderPortraitIndex" Margin="205,160,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
+                                      Maximum="4" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intCompVictory" Margin="205,190,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intBully" Margin="555,40,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intCompWonder" Margin="205,220,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intOffense" Margin="555,70,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intCompMinor" Margin="205,250,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intDefense" Margin="555,100,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intBoldness" Margin="205,280,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intExpansion" Margin="555,130,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intDiploBalance" Margin="205,310,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intGrowth" Margin="555,160,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intWarmongerHate" Margin="205,340,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intTileImprove" Margin="555,190,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intWorkAgainstWill" Margin="205,370,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intInfrastructure" Margin="555,220,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intWorkWithWill" Margin="205,400,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intProduction" Margin="555,250,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intDenounceWill" Margin="205,430,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intGold" Margin="555,280,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intLoyalty" Margin="389,10,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intScience" Margin="555,310,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intNeediness" Margin="389,40,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intCulture" Margin="555,340,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intForgiveness" Margin="389,70,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intHappiness" Margin="555,370,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intChattiness" Margin="389,100,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intGreatPeople" Margin="555,400,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intMeanness" Margin="389,130,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intGreatWonders" Margin="555,430,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intWar" Margin="389,160,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="625,10,0,0" VerticalAlignment="Top" />
-                    <Label Content="Diplomacy:" HorizontalAlignment="Left" Margin="625,40,0,0" VerticalAlignment="Top" />
-                    <Label Content="Spaceship:" HorizontalAlignment="Left" Margin="625,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Water Connection:" HorizontalAlignment="Left" Margin="625,100,0,0" VerticalAlignment="Top" />
-                    <Label Content="Nuke:" HorizontalAlignment="Left" Margin="625,130,0,0" VerticalAlignment="Top" />
-                    <Label Content="Use Nuke:" HorizontalAlignment="Left" Margin="625,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Espionage:" HorizontalAlignment="Left" Margin="625,190,0,0" VerticalAlignment="Top" />
-                    <Label Content="Anti-Air:" HorizontalAlignment="Left" Margin="625,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Air Carrier:" HorizontalAlignment="Left" Margin="625,250,0,0" VerticalAlignment="Top" />
-                    <Label Content="Archaeology:" HorizontalAlignment="Left" Margin="625,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Land Trade Routes:" HorizontalAlignment="Left" Margin="625,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Sea Trade Routes:" HorizontalAlignment="Left" Margin="625,340,0,0" VerticalAlignment="Top" />
-                    <Label Content="Trade Origin:" HorizontalAlignment="Left" Margin="625,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Trade Destination:" HorizontalAlignment="Left" Margin="625,400,0,0" VerticalAlignment="Top" />
-                    <Label Content="Air Lift:" HorizontalAlignment="Left" Margin="625,430,0,0" VerticalAlignment="Top" />
-                    <x2:IntegerUpDown x:Name="intReligions" Margin="765,10,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intHostile" Margin="389,190,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intDiplomacy" Margin="765,40,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intDeceptive" Margin="389,220,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intSpaceship" Margin="765,70,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intGuarded" Margin="389,250,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intWaterConnection" Margin="765,100,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intAfraid" Margin="389,280,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intNuke" Margin="765,130,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intFriendlyMajor" Margin="389,310,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intUseNuke" Margin="765,160,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intNeutral" Margin="389,340,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intEspionage" Margin="765,190,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intIgnore" Margin="389,370,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intAntiAir" Margin="765,220,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intFriendlyMinor" Margin="389,400,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intAirCarrier" Margin="765,250,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intProtective" Margin="389,430,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intArchaeology" Margin="765,280,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intConquest" Margin="589,10,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intLandTradeRoutes" Margin="765,310,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intBully" Margin="589,40,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intSeaTradeRoutes" Margin="765,340,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intOffense" Margin="589,70,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intTradeOrigin" Margin="765,370,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intDefense" Margin="589,100,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intTradeDestination" Margin="765,400,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intExpansion" Margin="589,130,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <x2:IntegerUpDown x:Name="intAirList" Margin="765,430,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="intGrowth" Margin="589,160,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <Button Content="Randomize" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="185" Click="ButtonBase_OnClick"/>
+                    <x2:IntegerUpDown x:Name="intTileImprove" Margin="589,190,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intInfrastructure" Margin="589,220,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intProduction" Margin="589,250,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intGold" Margin="589,280,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intScience" Margin="589,310,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intCulture" Margin="589,340,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intHappiness" Margin="589,370,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intGreatPeople" Margin="589,400,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intGreatWonders" Margin="589,430,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intReligions" Margin="799,10,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intDiplomacy" Margin="799,40,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intSpaceship" Margin="799,70,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intWaterConnection" Margin="799,100,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intNuke" Margin="799,130,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intUseNuke" Margin="799,160,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intEspionage" Margin="799,190,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intAntiAir" Margin="799,220,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intAirCarrier" Margin="799,250,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intArchaeology" Margin="799,280,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intLandTradeRoutes" Margin="799,310,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intSeaTradeRoutes" Margin="799,340,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intTradeOrigin" Margin="799,370,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intTradeDestination" Margin="799,400,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <x2:IntegerUpDown x:Name="intAirList" Margin="799,430,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
+                                      Maximum="10" Width="40" AllowTextInput="False" />
+                    <Button Content="Randomize" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="235" Click="ButtonBase_OnClick" />
                 </Grid>
             </TabItem>
             <TabItem Header="Trait">
@@ -374,17 +379,44 @@
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
-                    <TextBox x:Name="tbTraitType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="70" LostFocus="TbTraitType_OnLostFocus"
-                             CharacterCasing="Upper" />
                     <Label Content="Trait:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <TextBox x:Name="tbTraitType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Buildings" IsEnabled="False">
+            <TabItem Header="Buildings">
                 <Grid>
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
+                    <Label Content="Building:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Building Type:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Strategy:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" />
+                    <Label Content="Help:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
+                    <Label Content="Starting Era:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" />
+                    <Label Content="Required Tech:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
+                    <TextBox x:Name="tbBuildingType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
+                    <ComboBox x:Name="cbBuildingOverride" HorizontalAlignment="Left" Margin="125,40,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="38" Grid.Column="1" />
+                    <TextBox x:Name="tbBuildingDesc" HorizontalAlignment="Left" Margin="125,70,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <TextBox x:Name="tbBuildingPedia" HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <TextBox x:Name="tbBuildingStrat" HorizontalAlignment="Left" Margin="125,130,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <TextBox x:Name="tbBuildingHelp" HorizontalAlignment="Left" Margin="125,160,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" />
+                    <ComboBox x:Name="cbBuildingStartEra" HorizontalAlignment="Left" Margin="125,190,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="4" Grid.Column="1" />
+                    <ComboBox x:Name="cbBuildingReqTech" HorizontalAlignment="Left" Margin="125,220,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="20" Grid.Column="1" />
+                    <x2:IntegerUpDown x:Name="intBuildingPortraitIndex" Margin="125,250,0,0" HorizontalAlignment="Left"
+                                      VerticalAlignment="Top" FormatString="N0" Value="3" Increment="1" Minimum="0"
+                                      Maximum="4" Width="120" AllowTextInput="False" Grid.Column="1" />
                 </Grid>
             </TabItem>
             <TabItem Header="Units" IsEnabled="False">
@@ -392,6 +424,12 @@
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
+                    <Label Content="Unit:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Unit Type:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+                    <TextBox x:Name="tbUnitType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
+                    <ComboBox x:Name="cbUnitOverride" HorizontalAlignment="Left" Margin="125,40,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
                 </Grid>
             </TabItem>
             <TabItem Header="Icon Atlas" IsEnabled="False">

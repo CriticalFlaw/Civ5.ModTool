@@ -58,5 +58,29 @@ namespace CivModTool.Properties {
                 this["trait_name"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("HOUSE")]
+        public string building_name {
+            get {
+                return ((string)(this["building_name"]));
+            }
+            set {
+                this["building_name"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SOLDIER")]
+        public string unit_name {
+            get {
+                return ((string)(this["unit_name"]));
+            }
+            set {
+                this["unit_name"] = value;
+            }
+        }
     }
 }

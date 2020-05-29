@@ -3,13 +3,13 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.Trait.ResourceQuantityModifiers
 {
-    [XmlRoot(ElementName = "Trait_ResourceQuantityModifiers")]
+    [XmlRoot(ElementName = "Trait_ResourceQuantityModifiers", Namespace = "ResourceQuantityModifiers")]
     public class Trait_ResourceQuantityModifiers
     {
         [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }
     }
 
-    [XmlRoot(ElementName = "Row", Namespace = "ResourceQuantityModifiers")]
+    [XmlRoot(ElementName = "Row")]
     public class Row
     {
         [XmlElement(ElementName = "TraitType")]

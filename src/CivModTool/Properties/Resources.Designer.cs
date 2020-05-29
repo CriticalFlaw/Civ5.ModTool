@@ -61,29 +61,38 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml.
+        ///   Looks up a localized string similar to TXT_KEY_BUILDING_{0}_{1}_DESC.
         /// </summary>
-        internal static string app_update {
+        internal static string key_building_desc {
             get {
-                return ResourceManager.GetString("app_update", resourceCulture);
+                return ResourceManager.GetString("key_building_desc", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BUILDING_{0}.
+        ///   Looks up a localized string similar to TXT_KEY_BUILDING_{0}_{1}_HELP.
         /// </summary>
-        internal static string key_building {
+        internal static string key_building_help {
             get {
-                return ResourceManager.GetString("key_building", resourceCulture);
+                return ResourceManager.GetString("key_building_help", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BUILDINGCLASS_{0}.
+        ///   Looks up a localized string similar to TXT_KEY_BUILDING_{0}_{1}_TEXT.
         /// </summary>
-        internal static string key_building_class {
+        internal static string key_building_pedia {
             get {
-                return ResourceManager.GetString("key_building_class", resourceCulture);
+                return ResourceManager.GetString("key_building_pedia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TXT_KEY_BUILDING_{0}_{1}_STRATEGY.
+        /// </summary>
+        internal static string key_building_strategy {
+            get {
+                return ResourceManager.GetString("key_building_strategy", resourceCulture);
             }
         }
         
@@ -106,96 +115,6 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ART_DEF_{0}.
-        /// </summary>
-        internal static string key_civ_art_def {
-            get {
-                return ResourceManager.GetString("key_civ_art_def", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ARTSTYLE_{0}.
-        /// </summary>
-        internal static string key_civ_art_style {
-            get {
-                return ResourceManager.GetString("key_civ_art_style", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CIV_{0}_ALPHA_ATLAS.
-        /// </summary>
-        internal static string key_civ_atlas_alpha {
-            get {
-                return ResourceManager.GetString("key_civ_atlas_alpha", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}_AlphaAtlas_{1}.dds.
-        /// </summary>
-        internal static string key_civ_atlas_alpha_file {
-            get {
-                return ResourceManager.GetString("key_civ_atlas_alpha_file", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CIV_{0}_ICON_ATLAS.
-        /// </summary>
-        internal static string key_civ_atlas_icon {
-            get {
-                return ResourceManager.GetString("key_civ_atlas_icon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}_IconAtlas_{1}.dds.
-        /// </summary>
-        internal static string key_civ_atlas_icon_file {
-            get {
-                return ResourceManager.GetString("key_civ_atlas_icon_file", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PLAYERCOLOR_{0}.
-        /// </summary>
-        internal static string key_civ_color {
-            get {
-                return ResourceManager.GetString("key_civ_color", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PLAYERCOLOR_{0}_PRIMARY.
-        /// </summary>
-        internal static string key_civ_color_primary {
-            get {
-                return ResourceManager.GetString("key_civ_color_primary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PLAYERCOLOR_{0}_SECONDARY.
-        /// </summary>
-        internal static string key_civ_color_secondary {
-            get {
-                return ResourceManager.GetString("key_civ_color_secondary", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PLAYERCOLOR_{0}_TEXT.
-        /// </summary>
-        internal static string key_civ_color_text {
-            get {
-                return ResourceManager.GetString("key_civ_color_text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to TXT_KEY_CIV_{0}_DESC.
         /// </summary>
         internal static string key_civ_desc {
@@ -214,38 +133,11 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}_DOM.dds.
-        /// </summary>
-        internal static string key_civ_dom_image {
-            get {
-                return ResourceManager.GetString("key_civ_dom_image", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to TXT_KEY_CIV_{0}_DOM.
         /// </summary>
         internal static string key_civ_dom_text {
             get {
                 return ResourceManager.GetString("key_civ_dom_text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to LEADER_{0}.
-        /// </summary>
-        internal static string key_civ_leader {
-            get {
-                return ResourceManager.GetString("key_civ_leader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0}_Map_512.
-        /// </summary>
-        internal static string key_civ_map {
-            get {
-                return ResourceManager.GetString("key_civ_map", resourceCulture);
             }
         }
         
@@ -286,47 +178,11 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}_Scene.xml.
-        /// </summary>
-        internal static string key_leader_scene {
-            get {
-                return ResourceManager.GetString("key_leader_scene", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RELIGION_{0}.
-        /// </summary>
-        internal static string key_religion {
-            get {
-                return ResourceManager.GetString("key_religion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to RESOURCE_{0}.
-        /// </summary>
-        internal static string key_resource {
-            get {
-                return ResourceManager.GetString("key_resource", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to TXT_KEY_SPY_NAME_{0}_{1}.
         /// </summary>
         internal static string key_spy_name {
             get {
                 return ResourceManager.GetString("key_spy_name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to TECH_{0}.
-        /// </summary>
-        internal static string key_tech {
-            get {
-                return ResourceManager.GetString("key_tech", resourceCulture);
             }
         }
         
@@ -349,20 +205,281 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml.
+        /// </summary>
+        internal static string txt_app_update {
+            get {
+                return ResourceManager.GetString("txt_app_update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BUILDING_{0}_{1}.
+        /// </summary>
+        internal static string txt_building {
+            get {
+                return ResourceManager.GetString("txt_building", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ART_DEF_BUILDING_{0}.
+        /// </summary>
+        internal static string txt_building_art_def {
+            get {
+                return ResourceManager.GetString("txt_building_art_def", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BUILDINGCLASS_{0}.
+        /// </summary>
+        internal static string txt_building_class {
+            get {
+                return ResourceManager.GetString("txt_building_class", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIVILIZATION_{0}.
+        /// </summary>
+        internal static string txt_civ {
+            get {
+                return ResourceManager.GetString("txt_civ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ART_DEF_CIVILIZATION_{0}.
+        /// </summary>
+        internal static string txt_civ_art_def {
+            get {
+                return ResourceManager.GetString("txt_civ_art_def", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ARTSTYLE_{0}.
+        /// </summary>
+        internal static string txt_civ_art_style {
+            get {
+                return ResourceManager.GetString("txt_civ_art_style", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIV_{0}_ALPHA_ATLAS.
+        /// </summary>
+        internal static string txt_civ_atlas_alpha {
+            get {
+                return ResourceManager.GetString("txt_civ_atlas_alpha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}_AlphaAtlas_{1}.dds.
+        /// </summary>
+        internal static string txt_civ_atlas_alpha_file {
+            get {
+                return ResourceManager.GetString("txt_civ_atlas_alpha_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CIV_{0}_ICON_ATLAS.
+        /// </summary>
+        internal static string txt_civ_atlas_icon {
+            get {
+                return ResourceManager.GetString("txt_civ_atlas_icon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}_IconAtlas_{1}.dds.
+        /// </summary>
+        internal static string txt_civ_atlas_icon_file {
+            get {
+                return ResourceManager.GetString("txt_civ_atlas_icon_file", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLAYERCOLOR_{0}.
+        /// </summary>
+        internal static string txt_civ_color {
+            get {
+                return ResourceManager.GetString("txt_civ_color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLAYERCOLOR_{0}_PRIMARY.
+        /// </summary>
+        internal static string txt_civ_color_primary {
+            get {
+                return ResourceManager.GetString("txt_civ_color_primary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLAYERCOLOR_{0}_SECONDARY.
+        /// </summary>
+        internal static string txt_civ_color_secondary {
+            get {
+                return ResourceManager.GetString("txt_civ_color_secondary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PLAYERCOLOR_{0}_TEXT.
+        /// </summary>
+        internal static string txt_civ_color_text {
+            get {
+                return ResourceManager.GetString("txt_civ_color_text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}_DOM.dds.
+        /// </summary>
+        internal static string txt_civ_dom_image {
+            get {
+                return ResourceManager.GetString("txt_civ_dom_image", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}_MAP_512.dds.
+        /// </summary>
+        internal static string txt_civ_map {
+            get {
+                return ResourceManager.GetString("txt_civ_map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERA_{0}.
+        /// </summary>
+        internal static string txt_era {
+            get {
+                return ResourceManager.GetString("txt_era", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FLAVOR_{0}.
+        /// </summary>
+        internal static string txt_flavor {
+            get {
+                return ResourceManager.GetString("txt_flavor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LEADER_{0}.
+        /// </summary>
+        internal static string txt_leader {
+            get {
+                return ResourceManager.GetString("txt_leader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}_SCENE.xml.
+        /// </summary>
+        internal static string txt_leader_scene {
+            get {
+                return ResourceManager.GetString("txt_leader_scene", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MAJOR_CIV_APPROACH_{0}.
+        /// </summary>
+        internal static string txt_major_approach {
+            get {
+                return ResourceManager.GetString("txt_major_approach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MINOR_CIV_APPROACH_{0}.
+        /// </summary>
+        internal static string txt_minor_approach {
+            get {
+                return ResourceManager.GetString("txt_minor_approach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RELIGION_{0}.
+        /// </summary>
+        internal static string txt_religion {
+            get {
+                return ResourceManager.GetString("txt_religion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RESOURCE_{0}.
+        /// </summary>
+        internal static string txt_resource {
+            get {
+                return ResourceManager.GetString("txt_resource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SPECIALIST_{0}.
+        /// </summary>
+        internal static string txt_specialist {
+            get {
+                return ResourceManager.GetString("txt_specialist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TECH_{0}.
+        /// </summary>
+        internal static string txt_tech {
+            get {
+                return ResourceManager.GetString("txt_tech", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TRAIT_{0}.
+        /// </summary>
+        internal static string txt_trait {
+            get {
+                return ResourceManager.GetString("txt_trait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UNITAI_{0}.
         /// </summary>
-        internal static string key_unit_ai {
+        internal static string txt_unit_ai {
             get {
-                return ResourceManager.GetString("key_unit_ai", resourceCulture);
+                return ResourceManager.GetString("txt_unit_ai", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UNITCLASS_{0}.
+        /// </summary>
+        internal static string txt_unit_class {
+            get {
+                return ResourceManager.GetString("txt_unit_class", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to YIELD_{0}.
         /// </summary>
-        internal static string key_yield {
+        internal static string txt_yield {
             get {
-                return ResourceManager.GetString("key_yield", resourceCulture);
+                return ResourceManager.GetString("txt_yield", resourceCulture);
             }
         }
     }

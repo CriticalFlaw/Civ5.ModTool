@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="CivModTool.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CivModTool.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="civ_name" Type="System.String" Scope="User">
@@ -12,6 +10,12 @@
     </Setting>
     <Setting Name="trait_name" Type="System.String" Scope="User">
       <Value Profile="(Default)">POWER</Value>
+    </Setting>
+    <Setting Name="building_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">HOUSE</Value>
+    </Setting>
+    <Setting Name="unit_name" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SOLDIER</Value>
     </Setting>
   </Settings>
 </SettingsFile>

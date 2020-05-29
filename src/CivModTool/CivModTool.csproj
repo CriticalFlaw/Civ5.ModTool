@@ -53,7 +53,7 @@
     <StartupObject>CivModTool.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Style\favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -77,6 +77,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resources\Dictionaries.cs" />
     <Compile Include="Resources\Models\Buildings\Buildings.cs" />
     <Compile Include="Resources\Models\Buildings\Building_Flavors.cs" />
     <Compile Include="Resources\Models\Buildings\Building_YieldChanges.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Resources\Models\Civilization\Civilization_Leaders.cs" />
     <Compile Include="Resources\Models\Civilization\Civilization_Religions.cs" />
     <Compile Include="Resources\Models\Civilization\Civilization_SpyNames.cs" />
-    <Compile Include="Resources\Models\EnumTypes.cs" />
+    <Compile Include="Resources\EnumTypes.cs" />
     <Compile Include="Resources\Models\GameText.cs" />
     <Compile Include="Resources\Models\IconAtlas.cs" />
     <Compile Include="Resources\Models\Leader\Leader.cs" />
@@ -171,8 +172,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\background.jpg" />
-    <Resource Include="Resources\favicon.ico" />
+    <Resource Include="Resources\Style\background.jpg" />
+    <Resource Include="Resources\Style\favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

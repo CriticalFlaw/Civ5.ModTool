@@ -1,4 +1,4 @@
-﻿namespace CivModTool.Resources.EnumTypes
+﻿namespace CivModTool.Resources
 {
     public enum Civs
     {
@@ -63,7 +63,7 @@
         GameText,
         IconAtlas,
         Leader,
-        PlayerCount,
+        PlayerColor,
         Trait,
         Units
     }
@@ -78,6 +78,18 @@
         Shintoism,
         Spiritualism,
         Zoroastrianism
+    }
+
+    public enum Eras
+    {
+        Ancient,
+        Classical,
+        Medieval,
+        Renaissance,
+        Industrial,
+        Modern,
+        Atomic,
+        Information
     }
 
     public enum Resource
@@ -112,10 +124,17 @@
         Wine
     }
 
+    public enum Yields  // TO-DO: Complete the list
+    {
+        Gold,
+        Science
+    }
+
     public enum Building
     {
         // Unique
         Bazaar,
+
         BurialTomb,
         Courthouse,
         FloatingGardens,
@@ -129,6 +148,7 @@
 
         // Special
         Forge,
+
         Garden,
         HydroPlant,
         Mint,
@@ -139,10 +159,11 @@
         Stable,
         Watermill,
         Windmill,
-        circus,
+        Circus,
 
         // Normal
         Aqueduct,
+
         Armory,
         Arsenal,
         Bank,
@@ -178,6 +199,7 @@
 
         // National Wonders
         CircusMaximus,
+
         Hermitage,
         HeroicEpic,
         Ironworks,
@@ -189,6 +211,7 @@
 
         // Wonders
         AngkorWat,
+
         BigBen,
         BrandenburgGate,
         ChichenItza,
@@ -319,6 +342,7 @@
         Crossbowman_Chukonu,
         Crossbowman_Longbowman,
         Destroyer,
+        Fighter,
         Fighter_JapaneseZero,
         Frigate,
         Frigate_ShipOfTheLine,
@@ -376,21 +400,66 @@
 
         // Barbarians
         Barbarian_Archer,
+
         Barbarian_Spearman,
         Barbarian_Swordman,
         Barbarian_Warrior,
 
         // SpaceShip
         SpaceShip_Booster,
+
         SpaceShip_Cockpit,
         SpaceShip_Engine,
         SpaceShip_StasisChamber,
 
         // Great Person
         Artist,
+
         Engineer,
         General,
         Merchant,
         Scientist
+    }
+
+    public enum UnitAI
+    {
+        Unknown,
+        Settle,
+        Worker,
+        Attack,
+        City_Bombard,
+        Fast_Attack,
+        Defense,
+        Counter,
+        Ranged,
+        City_Special,
+        Explore,
+        Artist,
+        Scientist,
+        General,
+        Merchant,
+        Engineer,
+        ICBM,
+        Worker_Sea,
+        Attack_Sea,
+        Reserve_Sea,
+        Escort_Sea,
+        Explore_Sea,
+        Assault_Sea,
+        Settler_Sea,
+        Carrier_Sea,
+        Missle_Carrier_Sea,
+        Pirate_Sea,
+        Attack_Air,
+        Defense_Air,
+        Carrier_Air,
+        Missle_Air,
+        Paradrop,
+        Spaceship_Part,
+        Treasure,
+        Prophet,
+        Missionary,
+        Inquisitor,
+        Admiral
     }
 }
