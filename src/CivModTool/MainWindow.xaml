@@ -25,26 +25,41 @@
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
-                    <Label Content="Civilization:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilization:" HorizontalAlignment="Left" Margin="10,10,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Derivative:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,100,0,0"
+                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <Label Content="Adjective:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" />
-                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,160,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,190,0,0"
+                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
                     <Label Content="Art Style:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Soundtrack:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Dawn of Man:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="175,10,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="175,40,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="175,70,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Free Building:" HorizontalAlignment="Left" Margin="175,100,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Free Unit:" HorizontalAlignment="Left" Margin="175,130,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Free Technology:" HorizontalAlignment="Left" Margin="175,160,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="175,190,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="City Names:" HorizontalAlignment="Left" Margin="435,10,0,0" VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Spy Names:" HorizontalAlignment="Left" Margin="660,10,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Dawn of Man:" HorizontalAlignment="Left" Margin="10,310,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="175,10,0,0"
+                           VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="175,40,0,0"
+                           VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="175,70,0,0" VerticalAlignment="Top"
+                           Grid.Column="1" />
+                    <Label Content="Free Building:" HorizontalAlignment="Left" Margin="175,100,0,0"
+                           VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Free Unit:" HorizontalAlignment="Left" Margin="175,130,0,0" VerticalAlignment="Top"
+                           Grid.Column="1" />
+                    <Label Content="Free Technology:" HorizontalAlignment="Left" Margin="175,160,0,0"
+                           VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="175,190,0,0" VerticalAlignment="Top"
+                           Grid.Column="1" />
+                    <Label Content="City Names:" HorizontalAlignment="Left" Margin="435,10,0,0" VerticalAlignment="Top"
+                           Grid.Column="1" />
+                    <Label Content="Spy Names:" HorizontalAlignment="Left" Margin="660,10,0,0" VerticalAlignment="Top"
+                           Grid.Column="1" />
 
                     <TextBox x:Name="tbType" HorizontalAlignment="Left" Margin="26.6,10,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" CharacterCasing="Upper" Grid.Column="1" />
@@ -80,7 +95,7 @@
                         ShowRecentColors="True"
                         DisplayColorAndName="True"
                         ShowDropDownButton="False"
-                        SelectedColor="Black"  Grid.Column="1" />
+                        SelectedColor="Black" Grid.Column="1" />
                     <x2:ColorPicker
                         x:Name="cpSecondaryColor"
                         Width="120"
@@ -91,7 +106,7 @@
                         ShowRecentColors="True"
                         DisplayColorAndName="True"
                         ShowDropDownButton="False"
-                        SelectedColor="Yellow"  Grid.Column="1" />
+                        SelectedColor="Yellow" Grid.Column="1" />
                     <x2:ColorPicker
                         x:Name="cpTextColor"
                         Width="120"
@@ -102,22 +117,34 @@
                         ShowRecentColors="True"
                         DisplayColorAndName="True"
                         ShowDropDownButton="False"
-                        SelectedColor="White"  Grid.Column="1" />
+                        SelectedColor="White" Grid.Column="1" />
 
-                    <ComboBox x:Name="cbFreeBuilding" HorizontalAlignment="Left" Margin="295,100,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="64" Grid.Column="1" />
-                    <ComboBox x:Name="cbFreeUnit" HorizontalAlignment="Left" Margin="295,130,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="60" Grid.Column="1" />
-                    <ComboBox x:Name="cbFreeTech" HorizontalAlignment="Left" Margin="295,160,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
-                    <ComboBox x:Name="cbReligion" HorizontalAlignment="Left" Margin="295,190,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
+                    <ComboBox x:Name="cbFreeBuilding" HorizontalAlignment="Left" Margin="295,100,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="64" Grid.Column="1" />
+                    <ComboBox x:Name="cbFreeUnit" HorizontalAlignment="Left" Margin="295,130,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="60" Grid.Column="1" />
+                    <ComboBox x:Name="cbFreeTech" HorizontalAlignment="Left" Margin="295,160,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
+                    <ComboBox x:Name="cbReligion" HorizontalAlignment="Left" Margin="295,190,0,0"
+                              VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
 
-                    <ListBox x:Name="lbCityNames"  HorizontalAlignment="Left" Height="170" Margin="434.8,41,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" />
-                    <Button x:Name="bAddCity" Content="Add" HorizontalAlignment="Left" Margin="554.8,51,0,0" VerticalAlignment="Top" Width="75" Click="BAddCity_OnClick" Grid.Column="1" />
-                    <Button x:Name="bRemoveCity"  Content="Remove" HorizontalAlignment="Left" Margin="554.8,81,0,0" VerticalAlignment="Top" Width="75" Click="BRemoveCity_OnClick" Grid.Column="1" />
-                    <Button x:Name="bClearCity"  Content="Clear" HorizontalAlignment="Left" Margin="554.8,111,0,0" VerticalAlignment="Top" Width="75" Click="BClearCity_OnClick" Grid.Column="1" />
+                    <ListBox x:Name="lbCityNames" HorizontalAlignment="Left" Height="170" Margin="434.8,41,0,0"
+                             VerticalAlignment="Top" Width="100" Grid.Column="1" />
+                    <Button x:Name="bAddCity" Content="Add" HorizontalAlignment="Left" Margin="554.8,51,0,0"
+                            VerticalAlignment="Top" Width="75" Click="BAddCity_OnClick" Grid.Column="1" />
+                    <Button x:Name="bRemoveCity" Content="Remove" HorizontalAlignment="Left" Margin="554.8,81,0,0"
+                            VerticalAlignment="Top" Width="75" Click="BRemoveCity_OnClick" Grid.Column="1" />
+                    <Button x:Name="bClearCity" Content="Clear" HorizontalAlignment="Left" Margin="554.8,111,0,0"
+                            VerticalAlignment="Top" Width="75" Click="BClearCity_OnClick" Grid.Column="1" />
 
-                    <ListBox x:Name="lbSpyNames"  HorizontalAlignment="Left" Height="170" Margin="659.8,41,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1" />
-                    <Button x:Name="bAddSpy" Content="Add" HorizontalAlignment="Left" Margin="779.8,51,0,0" VerticalAlignment="Top" Width="75" Click="bAddSpy_Click"  Grid.Column="1" />
-                    <Button x:Name="bRemoveSpy"  Content="Remove" HorizontalAlignment="Left" Margin="779.8,81,0,0" VerticalAlignment="Top" Width="75" Click="bRemoveSpy_Click"  Grid.Column="1" />
-                    <Button x:Name="bClearSpy"  Content="Clear" HorizontalAlignment="Left" Margin="779.8,111,0,0" VerticalAlignment="Top" Width="75" Click="bClearSpy_Click"  Grid.Column="1" />
+                    <ListBox x:Name="lbSpyNames" HorizontalAlignment="Left" Height="170" Margin="659.8,41,0,0"
+                             VerticalAlignment="Top" Width="100" Grid.Column="1" />
+                    <Button x:Name="bAddSpy" Content="Add" HorizontalAlignment="Left" Margin="779.8,51,0,0"
+                            VerticalAlignment="Top" Width="75" Click="bAddSpy_Click" Grid.Column="1" />
+                    <Button x:Name="bRemoveSpy" Content="Remove" HorizontalAlignment="Left" Margin="779.8,81,0,0"
+                            VerticalAlignment="Top" Width="75" Click="bRemoveSpy_Click" Grid.Column="1" />
+                    <Button x:Name="bClearSpy" Content="Clear" HorizontalAlignment="Left" Margin="779.8,111,0,0"
+                            VerticalAlignment="Top" Width="75" Click="bClearSpy_Click" Grid.Column="1" />
 
                     <Button x:Name="btnGenerateXML" Content="Generate" HorizontalAlignment="Left"
                             Margin="10,350,0,0" VerticalAlignment="Top" Height="25" Width="100"
@@ -132,32 +159,47 @@
                     <Label Content="Leader:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Description:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" />
-                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Competitive - Victory:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" />
-                    <Label Content="Competitive - Wonder:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Competitive - Minor:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia Tag:" HorizontalAlignment="Left" Margin="10,100,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,160,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Competitive - Victory:" HorizontalAlignment="Left" Margin="10,190,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Competitive - Wonder:" HorizontalAlignment="Left" Margin="10,220,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Competitive - Minor:" HorizontalAlignment="Left" Margin="10,250,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Boldness:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Diplomacy Balance:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Warmonger Hate:" HorizontalAlignment="Left" Margin="10,340,0,0" VerticalAlignment="Top" />
-                    <Label Content="Work vs. Willingness:" HorizontalAlignment="Left" Margin="10,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Work With Willingness:" HorizontalAlignment="Left" Margin="10,400,0,0" VerticalAlignment="Top" />
-                    <Label Content="Denounce Willingness:" HorizontalAlignment="Left" Margin="10,430,0,0" VerticalAlignment="Top" />
+                    <Label Content="Diplomacy Balance:" HorizontalAlignment="Left" Margin="10,310,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Warmonger Hate:" HorizontalAlignment="Left" Margin="10,340,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Work vs. Willingness:" HorizontalAlignment="Left" Margin="10,370,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Work With Willingness:" HorizontalAlignment="Left" Margin="10,400,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Denounce Willingness:" HorizontalAlignment="Left" Margin="10,430,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Loyalty:" HorizontalAlignment="Left" Margin="269,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Neediness:" HorizontalAlignment="Left" Margin="269,40,0,0" VerticalAlignment="Top" />
-                    <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="269,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Chattiness:" HorizontalAlignment="Left" Margin="269,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="269,70,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Chattiness:" HorizontalAlignment="Left" Margin="269,100,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Meanness:" HorizontalAlignment="Left" Margin="269,130,0,0" VerticalAlignment="Top" />
                     <Label Content="War:" HorizontalAlignment="Left" Margin="269,160,0,0" VerticalAlignment="Top" />
                     <Label Content="Hostile:" HorizontalAlignment="Left" Margin="269,190,0,0" VerticalAlignment="Top" />
                     <Label Content="Deceptive:" HorizontalAlignment="Left" Margin="269,220,0,0" VerticalAlignment="Top" />
                     <Label Content="Guarded:" HorizontalAlignment="Left" Margin="269,250,0,0" VerticalAlignment="Top" />
                     <Label Content="Afraid:" HorizontalAlignment="Left" Margin="269,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Friendly (Major):" HorizontalAlignment="Left" Margin="269,310,0,0" VerticalAlignment="Top" />
+                    <Label Content="Friendly (Major):" HorizontalAlignment="Left" Margin="269,310,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Neutral:" HorizontalAlignment="Left" Margin="269,340,0,0" VerticalAlignment="Top" />
                     <Label Content="Ignore:" HorizontalAlignment="Left" Margin="269,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Friendly (Minor):" HorizontalAlignment="Left" Margin="269,400,0,0" VerticalAlignment="Top" />
-                    <Label Content="Protective:" HorizontalAlignment="Left" Margin="269,430,0,0" VerticalAlignment="Top" />
+                    <Label Content="Friendly (Minor):" HorizontalAlignment="Left" Margin="269,400,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Protective:" HorizontalAlignment="Left" Margin="269,430,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Conquest:" HorizontalAlignment="Left" Margin="459,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Bully:" HorizontalAlignment="Left" Margin="459,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Offense:" HorizontalAlignment="Left" Margin="459,70,0,0" VerticalAlignment="Top" />
@@ -174,29 +216,40 @@
                     <Label Content="Air:" HorizontalAlignment="Left" Margin="500,400,0,0" VerticalAlignment="Top" />-->
                     <Label Content="Expansion:" HorizontalAlignment="Left" Margin="459,130,0,0" VerticalAlignment="Top" />
                     <Label Content="Growth:" HorizontalAlignment="Left" Margin="459,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Tile Improvement:" HorizontalAlignment="Left" Margin="459,190,0,0" VerticalAlignment="Top" />
-                    <Label Content="Infrastructure:" HorizontalAlignment="Left" Margin="459,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Production:" HorizontalAlignment="Left" Margin="459,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Tile Improvement:" HorizontalAlignment="Left" Margin="459,190,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Infrastructure:" HorizontalAlignment="Left" Margin="459,220,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Production:" HorizontalAlignment="Left" Margin="459,250,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Gold:" HorizontalAlignment="Left" Margin="459,280,0,0" VerticalAlignment="Top" />
                     <Label Content="Science:" HorizontalAlignment="Left" Margin="459,310,0,0" VerticalAlignment="Top" />
                     <Label Content="Culture:" HorizontalAlignment="Left" Margin="459,340,0,0" VerticalAlignment="Top" />
                     <Label Content="Happiness:" HorizontalAlignment="Left" Margin="459,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Great People:" HorizontalAlignment="Left" Margin="459,400,0,0" VerticalAlignment="Top" />
+                    <Label Content="Great People:" HorizontalAlignment="Left" Margin="459,400,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Wonders:" HorizontalAlignment="Left" Margin="459,430,0,0" VerticalAlignment="Top" />
                     <Label Content="Religion:" HorizontalAlignment="Left" Margin="659,10,0,0" VerticalAlignment="Top" />
                     <Label Content="Diplomacy:" HorizontalAlignment="Left" Margin="659,40,0,0" VerticalAlignment="Top" />
                     <Label Content="Spaceship:" HorizontalAlignment="Left" Margin="659,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Water Connection:" HorizontalAlignment="Left" Margin="659,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Water Connection:" HorizontalAlignment="Left" Margin="659,100,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Nuke:" HorizontalAlignment="Left" Margin="659,130,0,0" VerticalAlignment="Top" />
                     <Label Content="Use Nuke:" HorizontalAlignment="Left" Margin="659,160,0,0" VerticalAlignment="Top" />
                     <Label Content="Espionage:" HorizontalAlignment="Left" Margin="659,190,0,0" VerticalAlignment="Top" />
                     <Label Content="Anti-Air:" HorizontalAlignment="Left" Margin="659,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Air Carrier:" HorizontalAlignment="Left" Margin="659,250,0,0" VerticalAlignment="Top" />
-                    <Label Content="Archaeology:" HorizontalAlignment="Left" Margin="659,280,0,0" VerticalAlignment="Top" />
-                    <Label Content="Land Trade Routes:" HorizontalAlignment="Left" Margin="659,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Sea Trade Routes:" HorizontalAlignment="Left" Margin="659,340,0,0" VerticalAlignment="Top" />
-                    <Label Content="Trade Origin:" HorizontalAlignment="Left" Margin="659,370,0,0" VerticalAlignment="Top" />
-                    <Label Content="Trade Destination:" HorizontalAlignment="Left" Margin="659,400,0,0" VerticalAlignment="Top" />
+                    <Label Content="Air Carrier:" HorizontalAlignment="Left" Margin="659,250,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Archaeology:" HorizontalAlignment="Left" Margin="659,280,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Land Trade Routes:" HorizontalAlignment="Left" Margin="659,310,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Sea Trade Routes:" HorizontalAlignment="Left" Margin="659,340,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Trade Origin:" HorizontalAlignment="Left" Margin="659,370,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Trade Destination:" HorizontalAlignment="Left" Margin="659,400,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Air Lift:" HorizontalAlignment="Left" Margin="659,430,0,0" VerticalAlignment="Top" />
                     <TextBox x:Name="tbLeaderType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
@@ -371,7 +424,8 @@
                     <x2:IntegerUpDown x:Name="intAirList" Margin="799,430,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
                                       Maximum="10" Width="40" AllowTextInput="False" />
-                    <Button Content="Randomize" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" Width="235" Click="ButtonBase_OnClick" />
+                    <Button Content="Randomize" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top"
+                            Width="235" Click="ButtonBase_OnClick" />
                 </Grid>
             </TabItem>
             <TabItem Header="Trait">
@@ -390,25 +444,33 @@
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
                     <Label Content="Building:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
-                    <Label Content="Building Type:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Building Type:" HorizontalAlignment="Left" Margin="10,40,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,100,0,0"
+                           VerticalAlignment="Top" />
                     <Label Content="Strategy:" HorizontalAlignment="Left" Margin="10,130,0,0" VerticalAlignment="Top" />
                     <Label Content="Help:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Starting Era:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" />
-                    <Label Content="Required Tech:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Starting Era:" HorizontalAlignment="Left" Margin="10,190,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Required Tech:" HorizontalAlignment="Left" Margin="10,220,0,0"
+                           VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="10,250,0,0"
+                           VerticalAlignment="Top" />
                     <TextBox x:Name="tbBuildingType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
                     <ComboBox x:Name="cbBuildingOverride" HorizontalAlignment="Left" Margin="125,40,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="38" Grid.Column="1" />
                     <TextBox x:Name="tbBuildingDesc" HorizontalAlignment="Left" Margin="125,70,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
-                    <TextBox x:Name="tbBuildingPedia" HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="tbBuildingPedia" HorizontalAlignment="Left" Margin="125,100,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
-                    <TextBox x:Name="tbBuildingStrat" HorizontalAlignment="Left" Margin="125,130,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="tbBuildingStrat" HorizontalAlignment="Left" Margin="125,130,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
-                    <TextBox x:Name="tbBuildingHelp" HorizontalAlignment="Left" Margin="125,160,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="tbBuildingHelp" HorizontalAlignment="Left" Margin="125,160,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
                     <ComboBox x:Name="cbBuildingStartEra" HorizontalAlignment="Left" Margin="125,190,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="4" Grid.Column="1" />

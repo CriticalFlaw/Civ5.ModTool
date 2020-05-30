@@ -124,7 +124,7 @@
         Wine
     }
 
-    public enum Yields  // TO-DO: Complete the list
+    public enum Yields // TO-DO: Complete the list
     {
         Gold,
         Science

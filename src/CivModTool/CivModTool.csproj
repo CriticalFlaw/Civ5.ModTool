@@ -77,6 +77,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Resources\Common\Building.cs" />
+    <Compile Include="Resources\Common\Civilization.cs" />
+    <Compile Include="Resources\Common\GameText.cs" />
+    <Compile Include="Resources\Common\IconAtlas.cs" />
+    <Compile Include="Resources\Common\Leader.cs" />
+    <Compile Include="Resources\Common\PlayerColor.cs" />
+    <Compile Include="Resources\Common\Trait.cs" />
+    <Compile Include="Resources\Common\Unit.cs" />
+    <Compile Include="Resources\XMLController.cs" />
     <Compile Include="Resources\Dictionaries.cs" />
     <Compile Include="Resources\Models\Buildings\Buildings.cs" />
     <Compile Include="Resources\Models\Buildings\Building_Flavors.cs" />

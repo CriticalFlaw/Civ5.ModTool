@@ -412,6 +412,15 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}\\XML\\{1}.xml.
+        /// </summary>
+        internal static string txt_output {
+            get {
+                return ResourceManager.GetString("txt_output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RELIGION_{0}.
         /// </summary>
         internal static string txt_religion {

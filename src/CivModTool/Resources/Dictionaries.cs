@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CivModTool.Resources
 {
@@ -56,7 +53,8 @@ namespace CivModTool.Resources
                 {Civs.Zulu, new Tuple<int, string, ArtStyles>(43, "Zulu", ArtStyles.African)}
             };
 
-        public static readonly Dictionary<Units, Tuple<int, UnitAI>> UnitDictionary = new Dictionary<Units, Tuple<int, UnitAI>>
+        public static readonly Dictionary<Units, Tuple<int, UnitAI>> UnitDictionary =
+            new Dictionary<Units, Tuple<int, UnitAI>>
             {
                 {Units.AntiAircraftGun, new Tuple<int, UnitAI>(1, UnitAI.Unknown)},
                 {Units.AntiTankGun, new Tuple<int, UnitAI>(2, UnitAI.Unknown)},

@@ -272,6 +272,10 @@
     <value>MINOR_CIV_APPROACH_{0}</value>
     <comment>0 = Approach</comment>
   </data>
+  <data name="txt_output" xml:space="preserve">
+    <value>{0}\\XML\\{1}.xml</value>
+    <comment>0 = Directory, 1 = File Name</comment>
+  </data>
   <data name="txt_religion" xml:space="preserve">
     <value>RELIGION_{0}</value>
     <comment>0 = Religion</comment>
