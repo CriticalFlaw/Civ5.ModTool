@@ -92,7 +92,7 @@
         Information
     }
 
-    public enum Resource
+    public enum ResourceList
     {
         Aluminum,
         Bananas,
@@ -130,7 +130,7 @@
         Science
     }
 
-    public enum Building
+    public enum Buildings
     {
         // Unique
         Bazaar,
@@ -421,7 +421,7 @@
         Scientist
     }
 
-    public enum UnitAI
+    public enum AiTypes
     {
         Unknown,
         Settle,

@@ -1,26 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Xml.Serialization;
-
-namespace CivModTool.Models.GameText
+﻿namespace CivModTool.Models
 {
-    [XmlRoot(ElementName = "GameData")]
-    public class GameData
+    internal class GameText
     {
-        [XmlElement(ElementName = "Language_en_US")]
-        public Language_en_US Language_en_US { get; set; }
-    }
-
-    [XmlRoot(ElementName = "Language_en_US", Namespace = "GameText")]
-    public class Language_en_US
-    {
-        [XmlElement(ElementName = "Row")] public List<Row> Row { get; set; }
-    }
-
-    [XmlRoot(ElementName = "Row")]
-    public class Row
-    {
-        [XmlElement(ElementName = "Text")] public string Text { get; set; }
-
-        [XmlAttribute(AttributeName = "Tag")] public string Tag { get; set; }
+        public string Tag;
+        public string Text;
     }
 }

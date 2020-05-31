@@ -4,7 +4,8 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using AutoUpdaterDotNET;
-using CivModTool.Models.Civilization;
+using CivModTool.Common;
+using CivModTool.Models;
 using CivModTool.Properties;
 using CivModTool.Resources;
 using log4net;
@@ -138,7 +139,7 @@ namespace CivModTool
             foreach (var item in Enum.GetValues(typeof(Civs)))
                 cbSoundtrack.Items.Add(item.ToString());
 
-            foreach (var item in Enum.GetValues(typeof(Building)))
+            foreach (var item in Enum.GetValues(typeof(Buildings)))
                 cbFreeBuilding.Items.Add(item.ToString());
 
             foreach (var item in Enum.GetValues(typeof(Units)))
@@ -159,7 +160,7 @@ namespace CivModTool
             // Building
             tbBuildingType.Text = Settings.Default.building_name.Replace("BUILDING_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(Building)))
+            foreach (var item in Enum.GetValues(typeof(Buildings)))
                 cbBuildingOverride.Items.Add(item.ToString());
 
             foreach (var item in Enum.GetValues(typeof(Eras)))
@@ -268,357 +269,283 @@ namespace CivModTool
             lbSpyNames.Items.Clear();
         }
 
+
         private bool GenerateCivilizationXml()
         {
             if (!ValidationForm(FileCategories.Civilization)) return false;
             var settings = Settings.Default;
-            var civType = string.Format(Properties.Resources.txt_civ, settings.civ_name);
             Enum.TryParse(cbFreeUnit.SelectedValue.ToString(), out Units unit);
+            var value = Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper();
 
-            var gameData = new Row
+            var gameData = new Civilization
             {
-                Type = civType,
-                DerivativeCiv = string.Format(Properties.Resources.txt_civ,
-                    cbDerivative.SelectedValue.ToString().ToUpper()),
+                Type = string.Format(Properties.Resources.txt_civ, settings.civ_name),
                 Description = string.Format(Properties.Resources.key_civ_desc, tbType.Text),
+                CivilopediaTag = string.Format(Properties.Resources.key_civ_pedia_text, tbType.Text),
                 ShortDescription = string.Format(Properties.Resources.key_civ_desc_short, tbType.Text),
                 Adjective = string.Format(Properties.Resources.key_civ_adjective, tbType.Text),
-                Civilopedia = string.Format(Properties.Resources.key_civ_pedia_header, tbType.Text),
-                CivilopediaTag = string.Format(Properties.Resources.key_civ_pedia_text, tbType.Text),
                 DefaultPlayerColor = string.Format(Properties.Resources.txt_civ_color, tbType.Text),
-                ArtDefineTag = string.Format(Properties.Resources.txt_civ_art_def,
-                    cbDerivative.SelectedValue.ToString().ToUpper()),
-                ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,
-                    cbArtStyle.SelectedValue.ToString().ToUpper()),
-                ArtStyleSuffix =
-                    XMLController.GetArtPrefix((ArtStyles) Enum.Parse(typeof(ArtStyles),
-                        cbArtStyle.SelectedValue.ToString())),
+                ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,  cbArtStyle.SelectedValue.ToString().ToUpper()),
+                ArtStyleSuffix = XmlController.GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles), cbArtStyle.SelectedValue.ToString())),
                 ArtStylePrefix = cbArtStyle.SelectedValue.ToString().ToUpper(),
-                PortraitIndex = intCivPortraitIndex.Value.ToString(),
+                PortraitIndex = intCivPortraitIndex.Value ?? default,
                 IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text),
                 AlphaIconAtlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, tbType.Text),
-                SoundtrackTag = cbSoundtrack.SelectedValue.ToString(),
                 MapImage = string.Format(Properties.Resources.txt_civ_map, tbType.Text),
                 DawnOfManQuote = string.Format(Properties.Resources.key_civ_dom_text, tbType.Text),
-                DawnOfManImage = string.Format(Properties.Resources.txt_civ_dom_image, tbLeaderType.Text)
+                DawnOfManImage = string.Format(Properties.Resources.txt_civ_dom_image, tbLeaderType.Text),
+                DawnOfManAudio = cbSoundtrack.SelectedValue.ToString(),
+                LeaderheadType = string.Format(Properties.Resources.txt_leader, tbLeaderType.Text),
+                FreeBuilding = string.Format(Properties.Resources.txt_building_class, cbFreeBuilding.SelectedValue.ToString().ToUpper()),
+                FreeTech = string.Format(Properties.Resources.txt_tech, cbFreeTech.SelectedValue.ToString().ToUpper()),
+                FreeUnit = string.Format(Properties.Resources.txt_unit_class,  cbFreeUnit.SelectedValue.ToString().ToUpper()),
+                FreeUnitAi = string.Format(Properties.Resources.txt_unit_ai, value),
+                Religion = string.Format(Properties.Resources.txt_religion,  cbReligion.SelectedValue.ToString().ToUpper()),
+                UniqueBuilding = new BuildingOverride
+                {
+                    BuildingClassType = string.Format(Properties.Resources.txt_building_class,
+                        cbBuildingOverride.SelectedValue.ToString().ToUpper()),
+                    BuildingType = string.Format(Properties.Resources.txt_building, settings.civ_name,
+                        settings.building_name)
+                },
+                Cities = new List<string>(),
+                Spies = new List<string>()
+
+                // TO-DO: Add UnitOverride
             };
 
-            var leader = new Models.Civilization.Leaders.Row
-            {
-                CivilizationType = civType,
-                LeaderheadType = string.Format(Properties.Resources.txt_leader, tbLeaderType.Text)
-            };
-
-            var cities = new List<Models.Civilization.CityNames.Row>();
             foreach (var x in lbCityNames.Items)
-            {
-                var name = x.ToString().ToUpper();
-                var city = new Models.Civilization.CityNames.Row
-                {
-                    CivilizationType = civType,
-                    CityName = name
-                };
-                cities.Add(city);
-            }
+                gameData.Cities.Add(x.ToString().ToUpper());
 
-            ;
-
-            var spies = new List<Models.Civilization.SpyNames.Row>();
             foreach (var x in lbSpyNames.Items)
-            {
-                var name = x.ToString();
-                var spy = new Models.Civilization.SpyNames.Row
-                {
-                    CivilizationType = civType,
-                    SpyName = name
-                };
-                spies.Add(spy);
-            }
+                gameData.Spies.Add(x.ToString());
 
-            ;
-
-            var building = new Models.Civilization.BuildingClassOverrides.Row
-            {
-                CivilizationType = civType,
-                BuildingClassType = string.Format(Properties.Resources.txt_building_class,
-                    cbBuildingOverride.SelectedValue.ToString().ToUpper()),
-                BuildingType = string.Format(Properties.Resources.txt_building, settings.civ_name,
-                    settings.building_name)
-            };
-
-            var freeBuilding = new Models.Civilization.FreeBuildingClasses.Row
-            {
-                CivilizationType = civType,
-                BuildingClassType = string.Format(Properties.Resources.txt_building_class,
-                    cbFreeBuilding.SelectedValue.ToString().ToUpper())
-            };
-
-            var freeTech = new Models.Civilization.FreeTechs.Row
-            {
-                CivilizationType = civType,
-                TechType = string.Format(Properties.Resources.txt_tech,
-                    cbFreeTech.SelectedValue.ToString().ToUpper())
-            };
-
-            var freeUnit = new Models.Civilization.FreeUnits.Row
-            {
-                CivilizationType = civType,
-                UnitClassType = string.Format(Properties.Resources.txt_unit_class,
-                    cbFreeUnit.SelectedValue.ToString().ToUpper()),
-                UnitAIType = string.Format(Properties.Resources.txt_unit_ai,
-                    Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper()),
-                Count = "1"
-            };
-
-            var religion = new Models.Civilization.Religions.Row
-            {
-                CivilizationType = civType,
-                ReligionType = string.Format(Properties.Resources.txt_religion,
-                    cbReligion.SelectedValue.ToString().ToUpper())
-            };
-
-            // TO-DO: Add Unit Override
-
-            return XMLController.GenerateCivilizationXml(gameData, leader, cities, spies, building, freeBuilding,
-                freeTech, freeUnit, religion);
+            return XmlController.GenerateCivilizationXml(gameData);
         }
 
         private bool GenerateLeaderXml()
         {
             if (!ValidationForm(FileCategories.Leader)) return false;
             var settings = Settings.Default;
-            var leaderType = string.Format(Properties.Resources.txt_leader, settings.leader_name);
-            var gameData = new Models.Leader.Row
+            var gameData = new Leader
             {
-                Type = leaderType,
+                Type = string.Format(Properties.Resources.txt_leader, settings.leader_name),
                 Description = string.Format(Properties.Resources.key_leader, tbLeaderType.Text),
                 Civilopedia = string.Format(Properties.Resources.key_leader_pedia, tbLeaderType.Text),
                 CivilopediaTag = string.Format(Properties.Resources.key_leader_pedia, tbLeaderType.Text),
                 ArtDefineTag = string.Format(Properties.Resources.txt_leader_scene, tbLeaderType.Text),
-                VictoryCompetitiveness = intCompVictory.Text,
-                WonderCompetitiveness = intCompWonder.Text,
-                MinorCivCompetitiveness = intCompMinor.Text,
-                Boldness = intBoldness.Text,
-                DiploBalance = intDiploBalance.Text,
-                WarmongerHate = intWarmongerHate.Text,
-                WorkAgainstWillingness = intWorkAgainstWill.Text,
-                WorkWithWillingness = intWorkWithWill.Text,
-                DenounceWillingness = intDenounceWill.Text,
-                Loyalty = intLoyalty.Text,
-                Neediness = intNeediness.Text,
-                Forgiveness = intForgiveness.Text,
-                Chattiness = intChattiness.Text,
-                Meanness = intMeanness.Text,
-                PortraitIndex = intLeaderPortraitIndex.Text,
-                IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text)
+                VictoryCompetitiveness = intCompVictory.Value ?? default,
+                WonderCompetitiveness = intCompWonder.Value ?? default,
+                MinorCivCompetitiveness = intCompMinor.Value ?? default,
+                Boldness = intBoldness.Value ?? default,
+                DiploBalance = intDiploBalance.Value ?? default,
+                WarmongerHate = intWarmongerHate.Value ?? default,
+                WorkAgainstWillingness = intWorkAgainstWill.Value ?? default,
+                WorkWithWillingness = intWorkWithWill.Value ?? default,
+                DenounceWillingness = intDenounceWill.Value ?? default,
+                Loyalty = intLoyalty.Value ?? default,
+                Neediness = intNeediness.Value ?? default,
+                Forgiveness = intForgiveness.Value ?? default,
+                Chattiness = intChattiness.Value ?? default,
+                Meanness = intMeanness.Value ?? default,
+                PortraitIndex = intLeaderPortraitIndex.Value ?? default,
+                IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text),
+                TraitType = string.Format(Properties.Resources.txt_trait, settings.trait_name),
+                MajorBiases = new List<ApproachBias>(),
+                MinorBiases = new List<ApproachBias>(),
+                Flavors = new List<Flavor>()
             };
 
-            var trait = new Models.Leader.Traits.Row
+            var bias = new ApproachBias
             {
-                LeaderType = leaderType,
-                TraitType = string.Format(Properties.Resources.txt_trait, settings.trait_name)
+                CivApproachType = string.Format(Properties.Resources.txt_major_approach, "WAR"),
+                Bias = 4
             };
+            gameData.MajorBiases.Add(bias);
 
-            var majorBias = new List<Models.Leader.MajorCivApproachBiases.Row>();
-            var major = new Models.Leader.MajorCivApproachBiases.Row
+            bias = new ApproachBias
             {
-                LeaderType = leaderType,
-                MajorCivApproachType = string.Format(Properties.Resources.txt_major_approach, "WAR"),
-                Bias = "4"
+                CivApproachType = string.Format(Properties.Resources.txt_minor_approach, "IGNORE"),
+                Bias = 6
             };
-            majorBias.Add(major);
+            gameData.MinorBiases.Add(bias);
 
-            var minorBias = new List<Models.Leader.MinorCivApproachBiases.Row>();
-            var minor = new Models.Leader.MinorCivApproachBiases.Row
+            var flavor = new Flavor
             {
-                LeaderType = leaderType,
-                MinorCivApproachType = string.Format(Properties.Resources.txt_minor_approach, "IGNORE"),
-                Bias = "6"
-            };
-            minorBias.Add(minor);
-
-            var flavors = new List<Models.Leader.Flavors.Row>();
-            var flavor = new Models.Leader.Flavors.Row
-            {
-                LeaderType = leaderType,
                 FlavorType = string.Format(Properties.Resources.txt_flavor, "OFFENSE"),
-                Flavor = "6"
+                Count = 6
             };
-            flavors.Add(flavor);
+            gameData.Flavors.Add(flavor);
 
-            return XMLController.GenerateLeaderXml(gameData);
+            return XmlController.GenerateLeaderXml(gameData);
         }
 
         private bool GenerateTraitXml()
         {
-            var settings = Settings.Default;
-            var traitType = string.Format(Properties.Resources.txt_trait, settings.trait_name);
-            var gameData = new Models.Trait.Row
+            var gameData = new Trait
             {
-                Type = traitType,
+                Type = string.Format(Properties.Resources.txt_trait, Settings.Default.trait_name),
                 ShortDescription = string.Format(Properties.Resources.key_trait, tbTraitType.Text),
                 Description = string.Format(Properties.Resources.key_trait_desc, tbTraitType.Text),
-                LevelExperienceModifier = "0",
-                GreatPeopleRateModifier = "0",
-                GreatScientistRateModifier = "0",
-                GreatGeneralRateModifier = "0",
-                GreatGeneralExtraBonus = "0",
-                GreatPersonGiftInfluence = "0",
-                MaxGlobalBuildingProductionModifier = "0",
-                MaxTeamBuildingProductionModifier = "0",
-                MaxPlayerBuildingProductionModifier = "0",
-                CityUnhappinessModifier = "0",
-                PopulationUnhappinessModifier = "0",
-                CityStateBonusModifier = "0",
-                CityStateFriendshipModifier = "0",
-                CityStateCombatModifier = "0",
-                LandBarbarianConversionPercent = "0",
-                LandBarbarianConversionExtraUnits = "0",
-                SeaBarbarianConversionPercent = "0",
-                LandUnitMaintenanceModifier = "0",
-                NavalUnitMaintenanceModifier = "0",
-                CapitalBuildingModifier = "0",
-                PlotBuyCostModifier = "-50",
-                PlotCultureCostModifier = "0",
-                CultureFromKills = "0",
-                CityCultureBonus = "0",
-                CapitalThemingBonusModifier = "0",
-                PolicyCostModifier = "0",
-                CityConnectionTradeRouteChange = "0",
-                WonderProductionModifier = "0",
-                PlunderModifier = "0",
-                ImprovementMaintenanceModifier = "0",
-                GoldenAgeDurationModifier = "0",
-                GoldenAgeMoveChange = "0",
-                GoldenAgeCombatModifier = "0",
-                GoldenAgeTourismModifier = "0",
-                GoldenAgeGreatArtistRateModifier = "0",
-                GoldenAgeGreatMusicianRateModifier = "0",
-                GoldenAgeGreatWriterRateModifier = "0",
-                ExtraEmbarkMoves = "0",
-                NaturalWonderFirstFinderGold = "0",
-                NaturalWonderSubsequentFinderGold = "0",
-                NaturalWonderYieldModifier = "0",
-                NaturalWonderHappinessModifier = "0",
-                NearbyImprovementCombatBonus = "0",
-                NearbyImprovementBonusRange = "0",
-                CultureBuildingYieldChange = "0",
-                CombatBonusVsHigherTech = "0",
-                CombatBonusVsLargerCiv = "0",
-                RazeSpeedModifier = "0",
-                DOFGreatPersonModifier = "0",
-                LuxuryHappinessRetention = "0",
-                ExtraSpies = "0",
-                UnresearchedTechBonusFromKills = "0",
-                ExtraFoundedCityTerritoryClaimRange = "0",
-                FreeSocialPoliciesPerEra = "0",
-                NumTradeRoutesModifier = "0",
-                TradeRouteResourceModifier = "0",
-                UniqueLuxuryCities = "0",
-                UniqueLuxuryQuantity = "0",
-                WorkerSpeedModifier = "0",
-                AfraidMinorPerTurnInfluence = "0",
-                LandTradeRouteRangeBonus = "0",
-                TradeReligionModifier = "0",
-                TradeBuildingModifier = "0",
-                FightWellDamaged = "0",
-                MoveFriendlyWoodsAsRoad = "0",
-                FasterAlongRiver = "0",
-                FasterInHills = "0",
-                EmbarkedAllWater = "0",
-                EmbarkedToLandFlatCost = "0",
-                NoHillsImprovementMaintenance = "0",
-                TechBoostFromCapitalScienceBuildings = "0",
-                StaysAliveZeroCities = "0",
-                FaithFromUnimprovedForest = "0",
-                BonusReligiousBelief = "0",
-                AbleToAnnexCityStates = "0",
-                CrossesMountainsAfterGreatGeneral = "0",
-                MayaCalendarBonuses = "0",
-                NoAnnexing = "0",
-                TechFromCityConquer = "0",
-                UniqueLuxuryRequiresNewArea = "0",
-                RiverTradeRoad = "0",
-                AngerFreeIntrusionOfCityStates = "0",
+                LevelExperienceModifier = 0,
+                GreatPeopleRateModifier = 0,
+                GreatScientistRateModifier = 0,
+                GreatGeneralRateModifier = 0,
+                GreatGeneralExtraBonus = 0,
+                GreatPersonGiftInfluence = 0,
+                MaxGlobalBuildingProductionModifier = 0,
+                MaxTeamBuildingProductionModifier = 0,
+                MaxPlayerBuildingProductionModifier = 0,
+                CityUnhappinessModifier = 0,
+                PopulationUnhappinessModifier = 0,
+                CityStateBonusModifier = 0,
+                CityStateFriendshipModifier = 0,
+                CityStateCombatModifier = 0,
+                LandBarbarianConversionPercent = 0,
+                LandBarbarianConversionExtraUnits = 0,
+                SeaBarbarianConversionPercent = 0,
+                LandUnitMaintenanceModifier = 0,
+                NavalUnitMaintenanceModifier = 0,
+                CapitalBuildingModifier = 0,
+                PlotBuyCostModifier = -50,
+                PlotCultureCostModifier = 0,
+                CultureFromKills = 0,
+                CityCultureBonus = 0,
+                CapitalThemingBonusModifier = 0,
+                PolicyCostModifier = 0,
+                CityConnectionTradeRouteChange = 0,
+                WonderProductionModifier = 0,
+                PlunderModifier = 0,
+                ImprovementMaintenanceModifier = 0,
+                GoldenAgeDurationModifier = 0,
+                GoldenAgeMoveChange = 0,
+                GoldenAgeCombatModifier = 0,
+                GoldenAgeTourismModifier = 0,
+                GoldenAgeGreatArtistRateModifier = 0,
+                GoldenAgeGreatMusicianRateModifier = 0,
+                GoldenAgeGreatWriterRateModifier = 0,
+                ExtraEmbarkMoves = 0,
+                NaturalWonderFirstFinderGold = 0,
+                NaturalWonderSubsequentFinderGold = 0,
+                NaturalWonderYieldModifier = 0,
+                NaturalWonderHappinessModifier = 0,
+                NearbyImprovementCombatBonus = 0,
+                NearbyImprovementBonusRange = 0,
+                CultureBuildingYieldChange = 0,
+                CombatBonusVsHigherTech = 0,
+                CombatBonusVsLargerCiv = 0,
+                RazeSpeedModifier = 0,
+                DofGreatPersonModifier = 0,
+                LuxuryHappinessRetention = 0,
+                ExtraSpies = 0,
+                UnresearchedTechBonusFromKills = 0,
+                ExtraFoundedCityTerritoryClaimRange = 0,
+                FreeSocialPoliciesPerEra = 0,
+                NumTradeRoutesModifier = 0,
+                TradeRouteResourceModifier = 0,
+                UniqueLuxuryCities = 0,
+                UniqueLuxuryQuantity = 0,
+                WorkerSpeedModifier = 0,
+                AfraidMinorPerTurnInfluence = 0,
+                LandTradeRouteRangeBonus = 0,
+                TradeReligionModifier = 0,
+                TradeBuildingModifier = 0,
+                FightWellDamaged = false,
+                MoveFriendlyWoodsAsRoad = false,
+                FasterAlongRiver = false,
+                FasterInHills = 0,
+                EmbarkedAllWater = 0,
+                EmbarkedToLandFlatCost = 0,
+                NoHillsImprovementMaintenance = 0,
+                TechBoostFromCapitalScienceBuildings = 0,
+                StaysAliveZeroCities = 0,
+                FaithFromUnimprovedForest = 0,
+                BonusReligiousBelief = 0,
+                AbleToAnnexCityStates = 0,
+                CrossesMountainsAfterGreatGeneral = 0,
+                MayaCalendarBonuses = 0,
+                NoAnnexing = 0,
+                TechFromCityConquer = 0,
+                UniqueLuxuryRequiresNewArea = 0,
+                RiverTradeRoad = 0,
+                AngerFreeIntrusionOfCityStates = 0,
                 FreeUnit = " ",
                 FreeUnitPrereqTech = " ",
                 CombatBonusImprovement = " ",
                 FreeBuilding = " ",
                 FreeBuildingOnConquest = " ",
                 ObsoleteTech = " ",
-                PrereqTech = " "
+                PrereqTech = " ",
+                YieldChangesStrategicResources = new List<YieldChangesStrategicResources>(),
+                ResourceQuantityModifiers = new List<ResourceQuantityModifiers>()
             };
 
-            var yieldChangeStrategicResources = new Models.Trait.YieldChangesStrategicResources.Row
+            var yieldChangeStrategicResource = new YieldChangesStrategicResources
             {
-                TraitType = traitType,
                 YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
-                Yield = "3"
+                Yield = 3
             };
+            gameData.YieldChangesStrategicResources.Add(yieldChangeStrategicResource);
 
-            var resourceQtyModifiers = new List<Models.Trait.ResourceQuantityModifiers.Row>();
-            var resModifier = new Models.Trait.ResourceQuantityModifiers.Row
+            var resourceQuantityModifier = new ResourceQuantityModifiers
             {
-                TraitType = traitType,
-                ResourceType = string.Format(Properties.Resources.txt_resource, Resource.Iron.ToString().ToUpper()),
-                ResourceQuantityModifier = "100"
+                ResourceType = string.Format(Properties.Resources.txt_resource, ResourceList.Iron.ToString().ToUpper()),
+                ResourceQuantityModifier = 100
             };
-            resourceQtyModifiers.Add(resModifier);
+            gameData.ResourceQuantityModifiers.Add(resourceQuantityModifier);
 
-            resModifier = new Models.Trait.ResourceQuantityModifiers.Row
+            resourceQuantityModifier = new ResourceQuantityModifiers
             {
-                TraitType = traitType,
-                ResourceType = string.Format(Properties.Resources.txt_resource, Resource.Coal.ToString().ToUpper()),
-                ResourceQuantityModifier = "100"
+                ResourceType = string.Format(Properties.Resources.txt_resource, ResourceList.Coal.ToString().ToUpper()),
+                ResourceQuantityModifier = 100
             };
-            resourceQtyModifiers.Add(resModifier);
+            gameData.ResourceQuantityModifiers.Add(resourceQuantityModifier);
 
-            resModifier = new Models.Trait.ResourceQuantityModifiers.Row
+            resourceQuantityModifier = new ResourceQuantityModifiers
             {
-                TraitType = traitType,
-                ResourceType = string.Format(Properties.Resources.txt_resource, Resource.Oil.ToString().ToUpper()),
-                ResourceQuantityModifier = "100"
+                ResourceType = string.Format(Properties.Resources.txt_resource, ResourceList.Oil.ToString().ToUpper()),
+                ResourceQuantityModifier = 100
             };
-            resourceQtyModifiers.Add(resModifier);
+            gameData.ResourceQuantityModifiers.Add(resourceQuantityModifier);
 
-            return XMLController.GenerateTraitXml(gameData);
+            return XmlController.GenerateTraitXml(gameData);
         }
 
         private bool GeneratePlayerColorXml()
         {
-            var gameData = new List<Models.PlayerColor.Color.Row>();
+            var gameData = new List<PlayerColor>();
 
-            var color = new Models.PlayerColor.Color.Row
+            var color = new PlayerColor
             {
-                Type = string.Format(Properties.Resources.txt_civ_color_text, tbType.Text),
-                Red = cpTextColor.SelectedColor.Value.R.ToString(),
-                Green = cpTextColor.SelectedColor.Value.G.ToString(),
-                Blue = cpTextColor.SelectedColor.Value.B.ToString(),
-                Alpha = cpTextColor.SelectedColor.Value.A.ToString()
+                Type = string.Format(Properties.Resources.txt_civ_color_primary, tbType.Text),
+                Red = cpTextColor.SelectedColor.Value.R,
+                Green = cpTextColor.SelectedColor.Value.G,
+                Blue = cpTextColor.SelectedColor.Value.B,
+                Alpha = cpTextColor.SelectedColor.Value.A
             };
             gameData.Add(color);
 
-            color = new Models.PlayerColor.Color.Row
+            color = new PlayerColor
             {
-                Type = string.Format(Properties.Resources.txt_civ_color_text, tbType.Text),
-                Red = cpTextColor.SelectedColor.Value.R.ToString(),
-                Green = cpTextColor.SelectedColor.Value.G.ToString(),
-                Blue = cpTextColor.SelectedColor.Value.B.ToString(),
-                Alpha = cpTextColor.SelectedColor.Value.A.ToString()
+                Type = string.Format(Properties.Resources.txt_civ_color_secondary, tbType.Text),
+                Red = cpTextColor.SelectedColor.Value.R,
+                Green = cpTextColor.SelectedColor.Value.G,
+                Blue = cpTextColor.SelectedColor.Value.B,
+                Alpha = cpTextColor.SelectedColor.Value.A
             };
             gameData.Add(color);
 
-            color = new Models.PlayerColor.Color.Row
+            color = new PlayerColor
             {
                 Type = string.Format(Properties.Resources.txt_civ_color_text, tbType.Text),
-                Red = cpTextColor.SelectedColor.Value.R.ToString(),
-                Green = cpTextColor.SelectedColor.Value.G.ToString(),
-                Blue = cpTextColor.SelectedColor.Value.B.ToString(),
-                Alpha = cpTextColor.SelectedColor.Value.A.ToString()
+                Red = cpTextColor.SelectedColor.Value.R,
+                Green = cpTextColor.SelectedColor.Value.G,
+                Blue = cpTextColor.SelectedColor.Value.B,
+                Alpha = cpTextColor.SelectedColor.Value.A
             };
             gameData.Add(color);
 
-            return XMLController.GeneratePlayerColorXml(gameData, tbType.Text);
+            return XmlController.GeneratePlayerColorXml(gameData, tbType.Text);
         }
 
         private bool GenerateBuildingsXml()
@@ -626,7 +553,7 @@ namespace CivModTool
             var settings = Settings.Default;
             var buildingType =
                 string.Format(Properties.Resources.txt_building, settings.civ_name, settings.building_name);
-            var gameData = new Models.Buildings.Row
+            var gameData = new Building
             {
                 Type = buildingType,
                 Description =
@@ -647,121 +574,121 @@ namespace CivModTool
                 IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, tbType.Text),
                 ThemingBonusHelp = "",
                 Quote = "",
-                GoldMaintenance = "0",
-                MutuallyExclusiveGroup = "-1",
-                TeamShare = "0",
-                Water = "0",
-                River = "0",
-                FreshWater = "0",
-                Mountain = "0",
-                NearbyMountainRequired = "0",
-                Hill = "0",
-                Flat = "0",
-                FoundsReligion = "0",
-                IsReligious = "0",
-                BorderObstacle = "0",
-                PlayerBorderObstacle = "0",
-                Capital = "0",
-                GoldenAge = "0",
-                MapCentering = "0",
-                NeverCapture = "0",
-                NukeImmune = "0",
-                AllowsWaterRoutes = "0",
-                ExtraLuxuries = "0",
-                DiplomaticVoting = "0",
-                AffectSpiesNow = "0",
-                NullifyInfluenceModifier = "0",
-                Cost = "100",
-                FaithCost = "0",
-                LeagueCost = "0",
-                UnlockedByBelief = "0",
-                UnlockedByLeague = "0",
-                HolyCity = "0",
-                NumCityCostMod = "0",
-                HurryCostModifier = "25",
-                MinAreaSize = "-1",
-                ConquestProb = "66",
-                CitiesPrereq = "0",
-                LevelPrereq = "0",
-                CultureRateModifier = "0",
-                GlobalCultureRateModifier = "0",
-                GreatPeopleRateModifier = "0",
-                GlobalGreatPeopleRateModifier = "0",
-                GreatGeneralRateModifier = "0",
-                GreatPersonExpendGold = "0",
-                GoldenAgeModifier = "0",
-                UnitUpgradeCostMod = "0",
-                Experience = "0",
-                GlobalExperience = "0",
-                FoodKept = "0",
-                Airlift = "0",
-                AirModifier = "0",
-                NukeModifier = "0",
-                NukeExplosionRand = "0",
-                HealRateChange = "0",
-                Happiness = "0",
-                UnmoddedHappiness = "0",
-                UnhappinessModifier = "0",
-                HappinessPerCity = "0",
-                HappinessPerXPolicies = "0",
-                CityCountUnhappinessMod = "0",
-                NoOccupiedUnhappiness = "0",
-                WorkerSpeedModifier = "0",
-                MilitaryProductionModifier = "0",
-                SpaceProductionModifier = "0",
-                GlobalSpaceProductionModifier = "0",
-                BuildingProductionModifier = "0",
-                WonderProductionModifier = "0",
-                CityConnectionTradeRouteModifier = "0",
-                CapturePlunderModifier = "0",
-                PolicyCostModifier = "0",
-                PlotCultureCostModifier = "0",
-                GlobalPlotCultureCostModifier = "0",
-                PlotBuyCostModifier = "0",
-                GlobalPlotBuyCostModifier = "0",
-                GlobalPopulationChange = "0",
-                TechShare = "0",
-                FreeTechs = "0",
-                FreePolicies = "0",
-                FreeGreatPeople = "0",
-                MedianTechPercentChange = "0",
-                Gold = "0",
-                AllowsRangeStrike = "0",
-                Espionage = "0",
-                AllowsFoodTradeRoutes = "0",
-                AllowsProductionTradeRoutes = "0",
-                Defense = "0",
-                ExtraCityHitPoints = "0",
-                GlobalDefenseMod = "0",
-                MinorFriendshipChange = "0",
-                VictoryPoints = "0",
-                ExtraMissionarySpreads = "0",
-                ReligiousPressureModifier = "0",
-                EspionageModifier = "0",
-                GlobalEspionageModifier = "0",
-                ExtraSpies = "0",
-                SpyRankChange = "0",
-                InstantSpyRankChange = "0",
-                TradeRouteRecipientBonus = "1",
-                TradeRouteTargetBonus = "1",
-                NumTradeRouteBonus = "0",
-                LandmarksTourismPercent = "0",
-                InstantMilitaryIncrease = "0",
-                GreatWorksTourismModifier = "0",
-                XBuiltTriggersIdeologyChoice = "0",
-                TradeRouteSeaDistanceModifier = "0",
-                TradeRouteSeaGoldBonus = "0",
-                TradeRouteLandDistanceModifier = "0",
-                TradeRouteLandGoldBonus = "0",
-                CityStateTradeRouteProductionModifier = "0",
-                GreatScientistBeakerModifier = "0",
+                GoldMaintenance = 0,
+                MutuallyExclusiveGroup = -1,
+                TeamShare = false,
+                Water = false,
+                River = false,
+                FreshWater = false,
+                Mountain = false,
+                NearbyMountainRequired = false,
+                Hill = false,
+                Flat = false,
+                FoundsReligion = false,
+                IsReligious = false,
+                BorderObstacle = false,
+                PlayerBorderObstacle = false,
+                Capital = false,
+                GoldenAge = false,
+                MapCentering = false,
+                NeverCapture = false,
+                NukeImmune = false,
+                AllowsWaterRoutes = false,
+                ExtraLuxuries = false,
+                DiplomaticVoting = false,
+                AffectSpiesNow = false,
+                NullifyInfluenceModifier = false,
+                Cost = 100,
+                FaithCost = 0,
+                LeagueCost = 0,
+                UnlockedByBelief = 0,
+                UnlockedByLeague = 0,
+                HolyCity = 0,
+                NumCityCostMod = 0,
+                HurryCostModifier = 25,
+                MinAreaSize = -1,
+                ConquestProb = 66,
+                CitiesPrereq = 0,
+                LevelPrereq = 0,
+                CultureRateModifier = 0,
+                GlobalCultureRateModifier = 0,
+                GreatPeopleRateModifier = 0,
+                GlobalGreatPeopleRateModifier = 0,
+                GreatGeneralRateModifier = 0,
+                GreatPersonExpendGold = 0,
+                GoldenAgeModifier = 0,
+                UnitUpgradeCostMod = 0,
+                Experience = 0,
+                GlobalExperience = 0,
+                FoodKept = 0,
+                Airlift = 0,
+                AirModifier = 0,
+                NukeModifier = 0,
+                NukeExplosionRand = 0,
+                HealRateChange = 0,
+                Happiness = 0,
+                UnmoddedHappiness = 0,
+                UnhappinessModifier = 0,
+                HappinessPerCity = 0,
+                HappinessPerXPolicies = 0,
+                CityCountUnhappinessMod = 0,
+                NoOccupiedUnhappiness = false,
+                WorkerSpeedModifier = 0,
+                MilitaryProductionModifier = 0,
+                SpaceProductionModifier = 0,
+                GlobalSpaceProductionModifier = 0,
+                BuildingProductionModifier = 0,
+                WonderProductionModifier = 0,
+                CityConnectionTradeRouteModifier = 0,
+                CapturePlunderModifier = 0,
+                PolicyCostModifier = 0,
+                PlotCultureCostModifier = 0,
+                GlobalPlotCultureCostModifier = 0,
+                PlotBuyCostModifier = 0,
+                GlobalPlotBuyCostModifier = 0,
+                GlobalPopulationChange = 0,
+                TechShare = 0,
+                FreeTechs = 0,
+                FreePolicies = 0,
+                FreeGreatPeople = 0,
+                MedianTechPercentChange = 0,
+                Gold = 0,
+                AllowsRangeStrike = false,
+                Espionage = false,
+                AllowsFoodTradeRoutes = false,
+                AllowsProductionTradeRoutes = false,
+                Defense = 0,
+                ExtraCityHitPoints = 0,
+                GlobalDefenseMod = 0,
+                MinorFriendshipChange = 0,
+                VictoryPoints = 0,
+                ExtraMissionarySpreads = 0,
+                ReligiousPressureModifier = 0,
+                EspionageModifier = 0,
+                GlobalEspionageModifier = 0,
+                ExtraSpies = 0,
+                SpyRankChange = 0,
+                InstantSpyRankChange = 0,
+                TradeRouteRecipientBonus = 1,
+                TradeRouteTargetBonus = 1,
+                NumTradeRouteBonus = 0,
+                LandmarksTourismPercent = 0,
+                InstantMilitaryIncrease = 0,
+                GreatWorksTourismModifier = 0,
+                XBuiltTriggersIdeologyChoice = 0,
+                TradeRouteSeaDistanceModifier = 0,
+                TradeRouteSeaGoldBonus = 0,
+                TradeRouteLandDistanceModifier = 0,
+                TradeRouteLandGoldBonus = 0,
+                CityStateTradeRouteProductionModifier = 0,
+                GreatScientistBeakerModifier = 0,
                 NearbyTerrainRequired = "",
                 ProhibitedCityTerrain = "",
                 VictoryPrereq = "",
                 MaxStartEra = "",
                 ObsoleteTech = "",
                 EnhancedYieldTech = "",
-                TechEnhancedTourism = "0",
+                TechEnhancedTourism = 0,
                 FreeBuilding = "",
                 FreeBuildingThisCity = "",
                 FreePromotion = "",
@@ -771,41 +698,41 @@ namespace CivModTool
                 PolicyBranchType = "",
                 SpecialistType =
                     string.Format(Properties.Resources.txt_specialist, Units.Merchant.ToString().ToUpper()),
-                SpecialistCount = "1",
+                SpecialistCount = 1,
                 GreatWorkSlotType = "",
                 FreeGreatWork = "",
-                GreatWorkCount = "0",
-                SpecialistExtraCulture = "0",
-                GreatPeopleRateChange = "0",
-                ExtraLeagueVotes = "0",
-                CityWall = "0",
-                DisplayPosition = "0",
-                PortraitIndex = intBuildingPortraitIndex.Text,
+                GreatWorkCount = 0,
+                SpecialistExtraCulture = 0,
+                GreatPeopleRateChange = 0,
+                ExtraLeagueVotes = 0,
+                CityWall = false,
+                DisplayPosition = 0,
+                PortraitIndex = intBuildingPortraitIndex.Value ?? default,
                 WonderSplashImage = "",
                 WonderSplashAnchor = "R,T",
                 WonderSplashAudio = "",
-                ArtInfoCulturalVariation = "0",
-                ArtInfoEraVariation = "0",
-                ArtInfoRandomVariation = "0"
+                ArtInfoCulturalVariation = false,
+                ArtInfoEraVariation = false,
+                ArtInfoRandomVariation = false,
+                YieldChanges = new List<YieldChanges>(),
+                YieldModifiers = new List<YieldChanges>()
             };
 
-            var flavors = new List<Models.Buildings.Flavors.Row>();
-
-            var yieldChanges = new Models.Buildings.YieldChanges.Row
+            var yieldChange = new YieldChanges
             {
-                BuildingType = buildingType,
                 YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
-                Yield = "5"
+                Yield = 5
             };
+            gameData.YieldChanges.Add(yieldChange);
 
-            var yieldModifiers = new Models.Buildings.YieldModifiers.Row
+            var yieldModifier = new YieldChanges
             {
-                BuildingType = buildingType,
                 YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
-                Yield = "25"
+                Yield = 25
             };
+            gameData.YieldModifiers.Add(yieldModifier);
 
-            return XMLController.GenerateBuildingsXml(gameData);
+            return XmlController.GenerateBuildingsXml(gameData);
         }
 
         private bool GenerateUnitsXml()
@@ -817,29 +744,29 @@ namespace CivModTool
 
         private bool GenerateIconAtlasXml()
         {
-            var gameData = new List<Models.IconAtlas.Row>();
-            var image = new Models.IconAtlas.Row
+            var gameData = new List<IconAtlas>();
+            var image = new IconAtlas
             {
                 Atlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, tbType.Text),
-                IconSize = "128",
+                IconSize = 128,
                 Filename = string.Format(Properties.Resources.txt_civ_atlas_alpha_file, tbType.Text, "128"),
-                IconsPerRow = "1",
-                IconsPerColumn = "1"
+                IconsPerRow = 1,
+                IconsPerColumn = 1
             };
             gameData.Add(image);
-            return XMLController.GenerateIconAtlasXml(gameData);
+            return XmlController.GenerateIconAtlasXml(gameData);
         }
 
         private bool GenerateGameTextXml()
         {
-            var gameData = new List<Models.GameText.Row>();
-            var text = new Models.GameText.Row
+            var gameData = new List<GameText>();
+            var text = new GameText
             {
                 Tag = string.Format(Properties.Resources.key_civ_adjective, tbType.Text),
                 Text = "Mann Co."
             };
             gameData.Add(text);
-            return XMLController.GenerateGameTextXml(gameData);
+            return XmlController.GenerateGameTextXml(gameData);
         }
     }
 }
