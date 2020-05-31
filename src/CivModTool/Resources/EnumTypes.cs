@@ -462,4 +462,57 @@
         Inquisitor,
         Admiral
     }
+
+    public enum MajorBiases
+    {
+        War,
+        Hostile,
+        Deceptive,
+        Guarded,
+        Afraid,
+        Friendly,
+        Neutral
+    }
+
+    public enum MinorBiases
+    {
+        Ignore,
+        Friendly,
+        Protective,
+        Conquest
+    }
+
+    public enum Flavors
+    {
+        Offense,
+        Defense,
+        Military_Training,
+        Recon,
+        Ranged,
+        Mobile,
+        Naval,
+        Naval_Recon,
+        Naval_Growth,
+        Naval_Tile_Improvement,
+        Air,
+        Expansion,
+        Growth,
+        Tile_Improvement,
+        Infrastructure,
+        Production,
+        Gold,
+        Science,
+        Culture,
+        Happiness,
+        Great_People,
+        Wonder,
+        Religion,
+        Diplomacy,
+        Spaceship,
+        Water_Connection,
+        Nuke,
+        Use_Nuke,
+        Air_Carrier
+
+    }
 }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using AutoUpdaterDotNET;
 using CivModTool.Common;
 using CivModTool.Models;
@@ -130,9 +132,6 @@ namespace CivModTool
             // Civilization
             tbType.Text = Settings.Default.civ_name.Replace("CIVILIZATION_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(Civs)))
-                cbDerivative.Items.Add(item.ToString());
-
             foreach (var item in Enum.GetValues(typeof(ArtStyles)))
                 cbArtStyle.Items.Add(item.ToString());
 
@@ -153,6 +152,15 @@ namespace CivModTool
 
             // Leader
             tbLeaderType.Text = Settings.Default.leader_name.Replace("LEADER_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(MajorBiases)))
+                cbMajorBias.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(MinorBiases)))
+                cbMinorBias.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Flavors)))
+                cbFlavors.Items.Add(item.ToString());
 
             // Trait
             tbTraitType.Text = Settings.Default.trait_name.Replace("TRAIT_", string.Empty);
@@ -176,6 +184,8 @@ namespace CivModTool
                 cbUnitOverride.Items.Add(item.ToString());
         }
 
+        #region CLICK_EVENTS
+
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var random = new Random();
@@ -193,46 +203,6 @@ namespace CivModTool
             intForgiveness.Text = random.Next(1, 10).ToString();
             intChattiness.Text = random.Next(1, 10).ToString();
             intMeanness.Text = random.Next(1, 10).ToString();
-            intWar.Text = random.Next(1, 10).ToString();
-            intHostile.Text = random.Next(1, 10).ToString();
-            intDeceptive.Text = random.Next(1, 10).ToString();
-            intGuarded.Text = random.Next(1, 10).ToString();
-            intAfraid.Text = random.Next(1, 10).ToString();
-            intFriendlyMajor.Text = random.Next(1, 10).ToString();
-            intNeutral.Text = random.Next(1, 10).ToString();
-            intIgnore.Text = random.Next(1, 10).ToString();
-            intFriendlyMinor.Text = random.Next(1, 10).ToString();
-            intProtective.Text = random.Next(1, 10).ToString();
-            intConquest.Text = random.Next(1, 10).ToString();
-            intBully.Text = random.Next(1, 10).ToString();
-            intOffense.Text = random.Next(1, 10).ToString();
-            intDefense.Text = random.Next(1, 10).ToString();
-            intExpansion.Text = random.Next(1, 10).ToString();
-            intGrowth.Text = random.Next(1, 10).ToString();
-            intTileImprove.Text = random.Next(1, 10).ToString();
-            intInfrastructure.Text = random.Next(1, 10).ToString();
-            intProduction.Text = random.Next(1, 10).ToString();
-            intGold.Text = random.Next(1, 10).ToString();
-            intScience.Text = random.Next(1, 10).ToString();
-            intCulture.Text = random.Next(1, 10).ToString();
-            intHappiness.Text = random.Next(1, 10).ToString();
-            intGreatPeople.Text = random.Next(1, 10).ToString();
-            intGreatWonders.Text = random.Next(1, 10).ToString();
-            intReligions.Text = random.Next(1, 10).ToString();
-            intDiplomacy.Text = random.Next(1, 10).ToString();
-            intSpaceship.Text = random.Next(1, 10).ToString();
-            intWaterConnection.Text = random.Next(1, 10).ToString();
-            intNuke.Text = random.Next(1, 10).ToString();
-            intUseNuke.Text = random.Next(1, 10).ToString();
-            intEspionage.Text = random.Next(1, 10).ToString();
-            intAntiAir.Text = random.Next(1, 10).ToString();
-            intAirCarrier.Text = random.Next(1, 10).ToString();
-            intArchaeology.Text = random.Next(1, 10).ToString();
-            intLandTradeRoutes.Text = random.Next(1, 10).ToString();
-            intSeaTradeRoutes.Text = random.Next(1, 10).ToString();
-            intTradeOrigin.Text = random.Next(1, 10).ToString();
-            intTradeDestination.Text = random.Next(1, 10).ToString();
-            intAirList.Text = random.Next(1, 10).ToString();
         }
 
         private void BAddCity_OnClick(object sender, RoutedEventArgs e)
@@ -269,6 +239,45 @@ namespace CivModTool
             lbSpyNames.Items.Clear();
         }
 
+        private void BtnAddMajorBias_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbMajorBias.Items.Add($"{cbMajorBias.Text}-{intMajorBiasCount.Value}");
+            cbMajorBias.Items.RemoveAt(cbMajorBias.SelectedIndex);
+            cbMajorBias.SelectedIndex = 0;
+
+            if (cbMajorBias.Items.Count > 0) return;
+            cbMajorBias.IsEnabled = false;
+            intMajorBiasCount.IsEnabled = false;
+            btnAddMajorBias.IsEnabled = false;
+        }
+
+        private void BtnAddMinorBias_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbMinorBias.Items.Add($"{cbMinorBias.Text}-{intMinorBiasCount.Value}");
+            cbMinorBias.Items.RemoveAt(cbMinorBias.SelectedIndex);
+            cbMinorBias.SelectedIndex = 0;
+
+            if (cbMinorBias.Items.Count > 0) return;
+            cbMinorBias.IsEnabled = false;
+            intMinorBiasCount.IsEnabled = false;
+            btnAddMinorBias.IsEnabled = false;
+        }
+
+        private void BtnAddFlavor_OnClick(object sender, RoutedEventArgs e)
+        {
+            lbFlavors.Items.Add($"{cbFlavors.Text}-{intFlavorCount.Value}");
+            cbFlavors.Items.RemoveAt(cbFlavors.SelectedIndex);
+            cbFlavors.SelectedIndex = 0;
+
+            if (cbFlavors.Items.Count > 0) return;
+            cbFlavors.IsEnabled = false;
+            intFlavorCount.IsEnabled = false;
+            btnAddFlavor.IsEnabled = false;
+        }
+
+        #endregion CLICK_EVENTS
+
+        #region CREATE_XML
 
         private bool GenerateCivilizationXml()
         {
@@ -356,26 +365,38 @@ namespace CivModTool
                 Flavors = new List<Flavor>()
             };
 
-            var bias = new ApproachBias
+            foreach (var item in lbMajorBias.Items)
             {
-                CivApproachType = string.Format(Properties.Resources.txt_major_approach, "WAR"),
-                Bias = 4
-            };
-            gameData.MajorBiases.Add(bias);
+                var split = item.ToString().Split('-');
+                var row = new ApproachBias
+                {
+                    CivApproachType = string.Format(Properties.Resources.txt_major_approach, split[0].ToUpper()),
+                    Bias = Convert.ToInt32(split[1])
+                };
+                gameData.MajorBiases.Add(row);
+            }
 
-            bias = new ApproachBias
+            foreach (var item in lbMinorBias.Items)
             {
-                CivApproachType = string.Format(Properties.Resources.txt_minor_approach, "IGNORE"),
-                Bias = 6
-            };
-            gameData.MinorBiases.Add(bias);
+                var split = item.ToString().Split('-');
+                var row = new ApproachBias
+                {
+                    CivApproachType = string.Format(Properties.Resources.txt_minor_approach, split[0].ToUpper()),
+                    Bias = Convert.ToInt32(split[1])
+                };
+                gameData.MinorBiases.Add(row);
+            }
 
-            var flavor = new Flavor
+            foreach (var item in lbFlavors.Items)
             {
-                FlavorType = string.Format(Properties.Resources.txt_flavor, "OFFENSE"),
-                Count = 6
-            };
-            gameData.Flavors.Add(flavor);
+                var split = item.ToString().Split('-');
+                var row = new Flavor
+                {
+                    FlavorType = string.Format(Properties.Resources.txt_flavor, split[0].ToUpper()),
+                    Count = Convert.ToInt32(split[1])
+                };
+                gameData.Flavors.Add(row);
+            }
 
             return XmlController.GenerateLeaderXml(gameData);
         }
@@ -768,5 +789,7 @@ namespace CivModTool
             gameData.Add(text);
             return XmlController.GenerateGameTextXml(gameData);
         }
+
+        #endregion CREATE_XML
     }
 }

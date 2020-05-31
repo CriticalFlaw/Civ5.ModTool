@@ -45,7 +45,7 @@ namespace CivModTool.Models
         public int ExtraSpies;
         public int FaithCost;
         public bool Flat; //Requires that the city not be built on a hill
-        public List<Flavors> Flavors;
+        public List<Flavor> Flavors;
         public int FoodKept;
         public bool FoundsReligion;
         public string FreeBuilding; //BuildingClasses
@@ -169,7 +169,7 @@ namespace CivModTool.Models
         public string YieldType;
     }
 
-    internal class Flavors
+    internal class BuildingFlavor
     {
         public int Count;
         public string FlavorType;

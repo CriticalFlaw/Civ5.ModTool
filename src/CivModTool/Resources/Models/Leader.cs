@@ -4,44 +4,46 @@ namespace CivModTool.Models
 {
     internal class Leader
     {
-        public string ArtDefineTag;
-        public int Boldness;
-        public int Chattiness;
+        public string Type;
+        public string Description;
         public string Civilopedia;
         public string CivilopediaTag;
-        public int DenounceWillingness;
-        public string Description;
-        public int DiploBalance;
-        public List<Flavor> Flavors;
-        public int Forgiveness;
-        public string IconAtlas; //IconTextureAtlases
-        public int Id;
-        public int Loyalty;
-        public List<ApproachBias> MajorBiases;
-        public int Meanness;
-        public List<ApproachBias> MinorBiases;
-        public int MinorCivCompetitiveness;
-        public int Neediness;
         public int PortraitIndex;
-        public string TraitType;
-        public string Type;
         public int VictoryCompetitiveness;
-        public int WarmongerHate;
         public int WonderCompetitiveness;
-        public int WorkAgainstWillingness;
+        public int MinorCivCompetitiveness;
+        public int Boldness;
+        public int DiploBalance;
+        public int WarmongerHate;
         public int WorkWithWillingness;
+        public int WorkAgainstWillingness;
+        public int DenounceWillingness;
+        public int Loyalty;
+        public int Neediness;
+        public int Forgiveness;
+        public int Chattiness;
+        public int Meanness;
+
+        public List<ApproachBias> MajorBiases;
+        public List<ApproachBias> MinorBiases;
+        public List<Flavor> Flavors;
+
+        public string TraitType;
+        public string IconAtlas;
+
+        // UNUSED
+        public string ArtDefineTag;
     }
 
     internal class ApproachBias
     {
-        public int Bias;
         public string CivApproachType;
-        public string LeaderType;
+        public int Bias;
     }
 
     internal class Flavor
     {
-        public int Count;
         public string FlavorType;
+        public int Count;
     }
 }

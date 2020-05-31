@@ -88,10 +88,8 @@
     <Compile Include="Resources\EnumTypes.cs" />
     <Compile Include="Resources\Models\Building.cs" />
     <Compile Include="Resources\Models\Civilization.cs" />
-    <Compile Include="Resources\Models\GameText.cs" />
-    <Compile Include="Resources\Models\IconAtlas.cs" />
+    <Compile Include="Resources\Models\Misc.cs" />
     <Compile Include="Resources\Models\Leader.cs" />
-    <Compile Include="Resources\Models\PlayerColor.cs" />
     <Compile Include="Resources\Models\Trait.cs" />
     <Compile Include="Resources\Models\Unit.cs" />
     <Compile Include="Resources\Models\XML\Buildings\Buildings.cs" />
