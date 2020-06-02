@@ -11,7 +11,7 @@ using Row = CivModTool.Models.XML.Buildings.Row;
 
 namespace CivModTool.Common
 {
-    internal class BuildingToXml
+    internal static class BuildingToXml
     {
         internal static bool GenerateBuildingsXml(Building data)
         {

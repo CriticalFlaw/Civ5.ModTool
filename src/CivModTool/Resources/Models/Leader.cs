@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace CivModTool.Models
 {
@@ -23,9 +24,8 @@ namespace CivModTool.Models
         public int Forgiveness;
         public int Chattiness;
         public int Meanness;
-
-        public List<ApproachBias> MajorBiases;
-        public List<ApproachBias> MinorBiases;
+        public Tuple<string, int?>[] MajorApproaches;
+        public Tuple<string, int?>[] MinorApproaches;
         public List<Flavor> Flavors;
 
         public string TraitType;
@@ -33,12 +33,6 @@ namespace CivModTool.Models
 
         // UNUSED
         public string ArtDefineTag;
-    }
-
-    internal class ApproachBias
-    {
-        public string CivApproachType;
-        public int Bias;
     }
 
     internal class Flavor

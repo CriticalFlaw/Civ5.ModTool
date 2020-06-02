@@ -134,8 +134,8 @@
     <comment>0 = Civilization, 1 = Building</comment>
   </data>
   <data name="key_city_name" xml:space="preserve">
-    <value>TXT_KEY_CITY_NAME_{0}</value>
-    <comment>0 = City</comment>
+    <value>TXT_KEY_{0}_CITY_NAME_{1}</value>
+    <comment>0 = Civilization, 1 = City</comment>
   </data>
   <data name="key_civ_adjective" xml:space="preserve">
     <value>TXT_KEY_CIV_{0}_ADJECTIVE</value>
@@ -169,8 +169,12 @@
     <value>TXT_KEY_LEADER_{0}_PEDIA</value>
     <comment>0 = Leader</comment>
   </data>
+  <data name="key_leader_pedia_tag" xml:space="preserve">
+    <value>TXT_KEY_LEADER_{0}_PEDIA_TAG</value>
+    <comment>0 = Leader</comment>
+  </data>
   <data name="key_spy_name" xml:space="preserve">
-    <value>TXT_KEY_SPY_NAME_{0}_{1}</value>
+    <value>TXT_KEY_{0}_SPY_NAME_{1}</value>
     <comment>0 = Civilization, 1 = Spy</comment>
   </data>
   <data name="key_trait" xml:space="preserve">

@@ -97,7 +97,7 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TXT_KEY_CITY_NAME_{0}.
+        ///   Looks up a localized string similar to TXT_KEY_{0}_CITY_NAME_{1}.
         /// </summary>
         internal static string key_city_name {
             get {
@@ -178,7 +178,16 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to TXT_KEY_SPY_NAME_{0}_{1}.
+        ///   Looks up a localized string similar to TXT_KEY_LEADER_{0}_PEDIA_TAG.
+        /// </summary>
+        internal static string key_leader_pedia_tag {
+            get {
+                return ResourceManager.GetString("key_leader_pedia_tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TXT_KEY_{0}_SPY_NAME_{1}.
         /// </summary>
         internal static string key_spy_name {
             get {

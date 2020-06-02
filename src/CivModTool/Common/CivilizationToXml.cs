@@ -15,7 +15,7 @@ using Row = CivModTool.Models.XML.Civilization.Row;
 
 namespace CivModTool.Common
 {
-    internal class CivilizationToXml
+    internal static class CivilizationToXml
     {
         internal static bool GenerateCivilizationXml(Civilization data)
         {
@@ -110,39 +110,40 @@ namespace CivModTool.Common
                     {
                         Row = new List<Models.XML.Civilization.BuildingClassOverrides.Row>()
                     }
+
+                    //Civilization_UnitClassOverrides = new Civilization_UnitClassOverrides
+                    //{
+                    //    Row = new List<Models.XML.Civilization.UnitClassOverrides.Row>()
+                    //}
                 };
 
                 foreach (var x in data.Cities)
-                {
-                    var name = x.ToUpper();
-                    var city = new Models.XML.Civilization.CityNames.Row
-                    {
-                        CivilizationType = data.Type,
-                        CityName = name
-                    };
-                    gameData.Civilization_CityNames.Row.Add(city);
-                }
+                    gameData.Civilization_CityNames.Row.Add(new Models.XML.Civilization.CityNames.Row { CivilizationType = data.Type, CityName = x.ToUpper() });
 
                 foreach (var x in data.Spies)
+                    gameData.Civilization_SpyNames.Row.Add(new Models.XML.Civilization.SpyNames.Row { CivilizationType = data.Type, SpyName = x.ToUpper() });
+
+                foreach (var x in data.UniqueBuildings)
                 {
-                    var name = x;
-                    var spy = new Models.XML.Civilization.SpyNames.Row
-                    {
-                        CivilizationType = data.Type,
-                        SpyName = name
-                    };
-                    gameData.Civilization_SpyNames.Row.Add(spy);
+                    gameData.Civilization_BuildingClassOverrides.Row.Add(
+                        new Models.XML.Civilization.BuildingClassOverrides.Row
+                        {
+                            CivilizationType = data.Type,
+                            BuildingClassType = x.BuildingClassType,
+                            BuildingType = x.BuildingType
+                        });
                 }
 
-                var building = new Models.XML.Civilization.BuildingClassOverrides.Row
-                {
-                    CivilizationType = data.Type,
-                    BuildingClassType = data.UniqueBuilding.BuildingClassType,
-                    BuildingType = data.UniqueBuilding.BuildingType
-                };
-                gameData.Civilization_BuildingClassOverrides.Row.Add(building);
-
-                // TO-DO: Add Unit Override
+                //foreach (var x in data.UniqueUnits)
+                //{
+                //    gameData.Civilization_UnitClassOverrides.Row.Add(
+                //        new Models.XML.Civilization.UnitClassOverrides.Row
+                //        {
+                //            CivilizationType = data.Type,
+                //            BuildingClassType = x.UnitClassType,
+                //            BuildingType = x.UnitType
+                //        });
+                //}
 
                 XmlController.SerializeXml(gameData, nameof(FileCategories.Civilization));
                 return true;

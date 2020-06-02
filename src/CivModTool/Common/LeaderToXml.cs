@@ -12,13 +12,12 @@ using Row = CivModTool.Models.XML.Leader.Row;
 
 namespace CivModTool.Common
 {
-    internal class LeaderToXml
+    internal static class LeaderToXml
     {
         internal static bool GenerateLeaderXml(Leader data)
         {
             try
             {
-                var settings = Settings.Default;
                 var gameData = new GameData
                 {
                     Leaders = new Leaders
@@ -54,7 +53,7 @@ namespace CivModTool.Common
                         Row = new Models.XML.Leader.Traits.Row
                         {
                             LeaderType = data.Type,
-                            TraitType = string.Format(Properties.Resources.txt_trait, settings.trait_name)
+                            TraitType = string.Format(Properties.Resources.txt_trait, Settings.Default.trait_name)
                         }
                     },
 
@@ -74,40 +73,16 @@ namespace CivModTool.Common
                     }
                 };
 
-                foreach (var major in data.MajorBiases)
-                {
-                    var row = new Models.XML.Leader.MajorCivApproachBiases.Row
-                    {
-                        LeaderType = data.Type,
-                        MajorCivApproachType = major.CivApproachType,
-                        Bias = major.Bias
-                    };
-                    gameData.Leader_MajorCivApproachBiases.Row.Add(row);
-                }
+                foreach (var x in data.MajorApproaches)
+                    gameData.Leader_MajorCivApproachBiases.Row.Add(new Models.XML.Leader.MajorCivApproachBiases.Row { LeaderType = data.Type, MajorCivApproachType = x.Item1, Bias = x.Item2 ?? default });
 
-                foreach (var minor in data.MinorBiases)
-                {
-                    var row = new Models.XML.Leader.MinorCivApproachBiases.Row
-                    {
-                        LeaderType = data.Type,
-                        MinorCivApproachType = minor.CivApproachType,
-                        Bias = minor.Bias
-                    };
-                    gameData.Leader_MinorCivApproachBiases.Row.Add(row);
-                }
+                foreach (var x in data.MinorApproaches)
+                    gameData.Leader_MinorCivApproachBiases.Row.Add(new Models.XML.Leader.MinorCivApproachBiases.Row { LeaderType = data.Type, MinorCivApproachType = x.Item1, Bias = x.Item2 ?? default });
 
-                foreach (var flavor in data.Flavors)
-                {
-                    var row = new Models.XML.Leader.Flavors.Row
-                    {
-                        LeaderType = data.Type,
-                        FlavorType = flavor.FlavorType,
-                        Flavor = flavor.Count
-                    };
-                    gameData.Leader_Flavors.Row.Add(row);
-                }
+                foreach (var x in data.Flavors)
+                    gameData.Leader_Flavors.Row.Add(new Models.XML.Leader.Flavors.Row { LeaderType = data.Type, FlavorType = x.FlavorType, Flavor = x.Count });
 
-                XmlController.SerializeXml(gameData, FileCategories.Leader.ToString());
+                XmlController.SerializeXml(gameData, nameof(FileCategories.Leader));
                 return true;
             }
             catch (Exception e)

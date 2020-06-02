@@ -22,10 +22,10 @@ namespace CivModTool.Models
         public int PortraitIndex = -1;
         public List<string> Cities;
         public List<string> Spies;
-        
         public string LeaderheadType;
         public string DefaultPlayerColor;
-        public BuildingOverride UniqueBuilding;
+        public List<BuildingOverride> UniqueBuildings;
+        public List<UnitOverride> UniqueUnits;
         public string IconAtlas;
         public string AlphaIconAtlas;
         public string MapImage;
@@ -33,6 +33,7 @@ namespace CivModTool.Models
 
         //NOT USED
         public bool AiPlayable = true;
+
         public bool Playable = true;
         public string DerivativeCiv;
         public string ArtDefineTag;
