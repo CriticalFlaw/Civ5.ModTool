@@ -74,13 +74,16 @@ namespace CivModTool.Common
                 };
 
                 foreach (var x in data.MajorApproaches)
-                    gameData.Leader_MajorCivApproachBiases.Row.Add(new Models.XML.Leader.MajorCivApproachBiases.Row { LeaderType = data.Type, MajorCivApproachType = x.Item1, Bias = x.Item2 ?? default });
+                    gameData.Leader_MajorCivApproachBiases.Row.Add(new Models.XML.Leader.MajorCivApproachBiases.Row
+                        {LeaderType = data.Type, MajorCivApproachType = x.Item1, Bias = x.Item2 ?? default});
 
                 foreach (var x in data.MinorApproaches)
-                    gameData.Leader_MinorCivApproachBiases.Row.Add(new Models.XML.Leader.MinorCivApproachBiases.Row { LeaderType = data.Type, MinorCivApproachType = x.Item1, Bias = x.Item2 ?? default });
+                    gameData.Leader_MinorCivApproachBiases.Row.Add(new Models.XML.Leader.MinorCivApproachBiases.Row
+                        {LeaderType = data.Type, MinorCivApproachType = x.Item1, Bias = x.Item2 ?? default});
 
                 foreach (var x in data.Flavors)
-                    gameData.Leader_Flavors.Row.Add(new Models.XML.Leader.Flavors.Row { LeaderType = data.Type, FlavorType = x.FlavorType, Flavor = x.Count });
+                    gameData.Leader_Flavors.Row.Add(new Models.XML.Leader.Flavors.Row
+                        {LeaderType = data.Type, FlavorType = x.FlavorType, Flavor = x.Count});
 
                 XmlController.SerializeXml(gameData, nameof(FileCategories.Leader));
                 return true;

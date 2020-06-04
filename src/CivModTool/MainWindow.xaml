@@ -58,9 +58,11 @@
                              VerticalAlignment="Top" Width="120" Grid.Column="1" />
                     <TextBox x:Name="TbDescription" HorizontalAlignment="Left" Margin="26.6,70,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" Grid.Column="1" />
-                    <TextBox x:Name="TbDescriptionShort" HorizontalAlignment="Left" Margin="26.6,100,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbDescriptionShort" HorizontalAlignment="Left" Margin="26.6,100,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" Grid.Column="1" />
-                    <TextBox x:Name="TbCivilopedia"  HorizontalAlignment="Left" Margin="26.6,130,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbCivilopedia" HorizontalAlignment="Left" Margin="26.6,130,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" Grid.Column="1" />
                     <ComboBox x:Name="CbArtStyle" HorizontalAlignment="Left" Margin="26.6,160,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="1" Grid.Column="1" />
@@ -116,29 +118,33 @@
                                       Maximum="4" Width="120" AllowTextInput="False" Grid.Column="1" />
                     <Button x:Name="BtnGenerateXML" Content="Generate" HorizontalAlignment="Left"
                             Margin="10,340,0,0" VerticalAlignment="Top" Height="25" Width="240"
-                            Click="BtnGenerateXML_Click"  Grid.ColumnSpan="2" />
-                    <GroupBox Grid.Column="1" Header="City Names" HorizontalAlignment="Left" Height="142" Margin="432.8,0,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
+                            Click="BtnGenerateXML_Click" Grid.ColumnSpan="2" />
+                    <GroupBox Grid.Column="1" Header="City Names" HorizontalAlignment="Left" Height="142"
+                              Margin="432.8,0,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
                         <Grid>
                             <Button x:Name="BtnAddCity" Content="Add" HorizontalAlignment="Left" Margin="10,15,0,0"
-                            VerticalAlignment="Top" Width="75" Click="BtnAddCity_OnClick" />
-                            <Button x:Name="BtnRemoveCity" Content="Remove" HorizontalAlignment="Left" Margin="10,45,0,0"
-                            VerticalAlignment="Top" Width="75" Click="BtnRemoveCity_OnClick" />
+                                    VerticalAlignment="Top" Width="75" Click="BtnAddCity_OnClick" />
+                            <Button x:Name="BtnRemoveCity" Content="Remove" HorizontalAlignment="Left"
+                                    Margin="10,45,0,0"
+                                    VerticalAlignment="Top" Width="75" Click="BtnRemoveCity_OnClick" />
                             <Button x:Name="BtnClearCity" Content="Clear" HorizontalAlignment="Left" Margin="10,75,0,0"
-                            VerticalAlignment="Top" Width="75" Click="BtnClearCity_OnClick" />
+                                    VerticalAlignment="Top" Width="75" Click="BtnClearCity_OnClick" />
                             <ListBox x:Name="LbCityNames" HorizontalAlignment="Left" Height="102" Margin="93,10,0,0"
-                             VerticalAlignment="Top" Width="307" />
+                                     VerticalAlignment="Top" Width="307" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Spy Names" HorizontalAlignment="Left" Height="142" Margin="432.8,160,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
+                    <GroupBox Grid.Column="1" Header="Spy Names" HorizontalAlignment="Left" Height="142"
+                              Margin="432.8,160,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
                         <Grid>
                             <Button x:Name="BtnAddSpy" Content="Add" HorizontalAlignment="Left" Margin="10,15,0,0"
-                            VerticalAlignment="Top" Width="75" Click="BtnAddSpy_Click" />
-                            <Button x:Name="BtnRemoveSpy" Content="Remove" HorizontalAlignment="Left" Margin="10,45,0,0"
-                            VerticalAlignment="Top" Width="75" Click="BtnRemoveSpy_Click" />
+                                    VerticalAlignment="Top" Width="75" Click="BtnAddSpy_Click" />
+                            <Button x:Name="BtnRemoveSpy" Content="Remove" HorizontalAlignment="Left"
+                                    Margin="10,45,0,0"
+                                    VerticalAlignment="Top" Width="75" Click="BtnRemoveSpy_Click" />
                             <Button x:Name="BtnClearSpy" Content="Clear" HorizontalAlignment="Left" Margin="10,75,0,0"
-                            VerticalAlignment="Top" Width="75" Click="BtnClearSpy_Click" />
+                                    VerticalAlignment="Top" Width="75" Click="BtnClearSpy_Click" />
                             <ListBox x:Name="LbSpyNames" HorizontalAlignment="Left" Height="102" Margin="90,10,0,0"
-                             VerticalAlignment="Top" Width="310" />
+                                     VerticalAlignment="Top" Width="310" />
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -157,145 +163,209 @@
                            VerticalAlignment="Top" />
                     <TextBox x:Name="TbLeaderType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
-                    <TextBox x:Name="TbLeaderDescription" HorizontalAlignment="Left" Margin="125,40,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbLeaderDescription" HorizontalAlignment="Left" Margin="125,40,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
-                    <TextBox x:Name="TbLeaderCivilopedia" HorizontalAlignment="Left" Margin="125,70,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbLeaderCivilopedia" HorizontalAlignment="Left" Margin="125,70,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
-                    <TextBox x:Name="TbLeaderCivilopediaTag" HorizontalAlignment="Left" Margin="125,100,0,0" TextWrapping="Wrap"
+                    <TextBox x:Name="TbLeaderCivilopediaTag" HorizontalAlignment="Left" Margin="125,100,0,0"
+                             TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" />
                     <x2:IntegerUpDown x:Name="IntLeaderPortraitIndex" Margin="125,129,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
                                       Maximum="4" Width="120" AllowTextInput="False" />
-                    <Button x:Name="BtnRandomizeStats" Content="Randomize Stats" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top" Width="235" Click="BtnRandomizeStats_Click" />
+                    <Button x:Name="BtnRandomizeStats" Content="Randomize Stats" HorizontalAlignment="Left"
+                            Margin="10,158,0,0" VerticalAlignment="Top" Width="235" Click="BtnRandomizeStats_Click" />
 
-                    <GroupBox Header="Flavors" HorizontalAlignment="Left" Height="243" Margin="10,221,0,0" VerticalAlignment="Top" Width="235" Foreground="White">
+                    <GroupBox Header="Flavors" HorizontalAlignment="Left" Height="243" Margin="10,221,0,0"
+                              VerticalAlignment="Top" Width="235" Foreground="White">
                         <Grid>
-                            <Label Content="Count:" HorizontalAlignment="Left" Margin="115,5,0,0" VerticalAlignment="Top" Width="53" />
-                            <ComboBox x:Name="CbFlavors" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="98" SelectedIndex="1" RenderTransformOrigin="-2.768,-1.25" Height="21" />
-                            <x2:IntegerUpDown x:Name="IntFlavorCount" Margin="173,5,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" Height="21" />
-                            <Button x:Name="BtnAddFlavor"  Content="Add" HorizontalAlignment="Left" Margin="10,31,0,0" VerticalAlignment="Top" Width="98" Click="BtnAddFlavor_OnClick"  Height="19" />
-                            <Button x:Name="BtnClearFlavors"  Content="Clear" HorizontalAlignment="Left" Margin="115,31,0,0" VerticalAlignment="Top" Width="98" Click="BtnClearFlavors_Click"  Height="19" />
-                            <ListBox x:Name="LbFlavors" HorizontalAlignment="Left" Height="157" Margin="10,55,0,0" VerticalAlignment="Top" Width="203" />
+                            <Label Content="Count:" HorizontalAlignment="Left" Margin="115,5,0,0"
+                                   VerticalAlignment="Top" Width="53" />
+                            <ComboBox x:Name="CbFlavors" HorizontalAlignment="Left" Margin="10,5,0,0"
+                                      VerticalAlignment="Top" Width="98" SelectedIndex="1"
+                                      RenderTransformOrigin="-2.768,-1.25" Height="21" />
+                            <x2:IntegerUpDown x:Name="IntFlavorCount" Margin="170,5,0,0" HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" Height="21" />
+                            <Button x:Name="BtnAddFlavor" Content="Add" HorizontalAlignment="Left" Margin="10,31,0,0"
+                                    VerticalAlignment="Top" Width="60" Click="BtnAddFlavor_OnClick" Height="19" />
+                            <Button x:Name="BtnRemoveFlavors" Content="Clear" HorizontalAlignment="Left"
+                                    Margin="75,31,0,0" VerticalAlignment="Top" Width="70"
+                                    Click="BtnRemoveFlavors_Click" Height="19" />
+                            <Button x:Name="BtnClearFlavors" Content="Clear" HorizontalAlignment="Left"
+                                    Margin="150,31,0,0" VerticalAlignment="Top" Width="60"
+                                    Click="BtnClearFlavors_Click" Height="19" />
+                            <ListBox x:Name="LbFlavors" HorizontalAlignment="Left" Height="157" Margin="10,55,0,0"
+                                     VerticalAlignment="Top" Width="200" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Characteristics" HorizontalAlignment="Left" Height="243" Margin="250,221,0,0" VerticalAlignment="Top" Width="385" Foreground="White">
+                    <GroupBox Header="Characteristics" HorizontalAlignment="Left" Height="243" Margin="250,221,0,0"
+                              VerticalAlignment="Top" Width="385" Foreground="White">
                         <Grid>
                             <Label Content="Competitive - Victory:" HorizontalAlignment="Left" Margin="5,10,0,0"
-                           VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
                             <Label Content="Competitive - Wonder:" HorizontalAlignment="Left" Margin="5,40,0,0"
-                           VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
                             <Label Content="Competitive - Minor:" HorizontalAlignment="Left" Margin="5,70,0,0"
-                           VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
                             <Label Content="Warmonger Hate:" HorizontalAlignment="Left" Margin="5,100,0,0"
-                           VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
                             <Label Content="Work vs. Willingness:" HorizontalAlignment="Left" Margin="5,130,0,0"
-                           VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
                             <Label Content="Work With Willingness:" HorizontalAlignment="Left" Margin="5,160,0,0"
-                           VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
                             <Label Content="Denounce Willingness:" HorizontalAlignment="Left" Margin="5,190,0,0"
-                           VerticalAlignment="Top" />
-                            <Label Content="Diplomacy:" HorizontalAlignment="Left" Margin="215,7,0,0" VerticalAlignment="Top" />
-                            <Label Content="Boldness:" HorizontalAlignment="Left" Margin="215,37,0,0" VerticalAlignment="Top" />
-                            <Label Content="Loyalty:" HorizontalAlignment="Left" Margin="215,67,0,0" VerticalAlignment="Top" />
-                            <Label Content="Neediness:" HorizontalAlignment="Left" Margin="215,97,0,0" VerticalAlignment="Top" />
-                            <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="215,127,0,0" VerticalAlignment="Top" />
-                            <Label Content="Chattiness:" HorizontalAlignment="Left" Margin="215,157,0,0" VerticalAlignment="Top" />
-                            <Label Content="Meanness:" HorizontalAlignment="Left" Margin="215,187,0,0" VerticalAlignment="Top" />
+                                   VerticalAlignment="Top" />
+                            <Label Content="Diplomacy:" HorizontalAlignment="Left" Margin="215,7,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Boldness:" HorizontalAlignment="Left" Margin="215,37,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Loyalty:" HorizontalAlignment="Left" Margin="215,67,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Neediness:" HorizontalAlignment="Left" Margin="215,97,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Forgiveness:" HorizontalAlignment="Left" Margin="215,127,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Chattiness:" HorizontalAlignment="Left" Margin="215,157,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Meanness:" HorizontalAlignment="Left" Margin="215,187,0,0"
+                                   VerticalAlignment="Top" />
                             <x2:IntegerUpDown x:Name="IntCompVictory" Margin="160,10,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntCompWonder" Margin="160,40,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntCompMinor" Margin="160,70,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntWarmongerHate" Margin="160,100,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
-                            <x2:IntegerUpDown x:Name="IntWorkAgainstWill" Margin="160,130,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
+                            <x2:IntegerUpDown x:Name="IntWorkAgainstWill" Margin="160,130,0,0"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntWorkWithWill" Margin="160,160,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntDenounceWill" Margin="160,190,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntDiplomacy" Margin="320,10,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntBoldness" Margin="320,37,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntLoyalty" Margin="320,67,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntNeediness" Margin="320,97,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntForgiveness" Margin="320,127,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntChattiness" Margin="320,157,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntMeanness" Margin="320,187,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="1"
-                                      Maximum="10" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="40" AllowTextInput="False" />
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="Approach to Civilizations/City States" HorizontalAlignment="Left" Height="243" Margin="640,221,0,0" VerticalAlignment="Top" Width="318" Foreground="White">
+                    <GroupBox Header="Approach to Civilizations/City States" HorizontalAlignment="Left" Height="243"
+                              Margin="640,221,0,0" VerticalAlignment="Top" Width="318" Foreground="White">
                         <Grid>
                             <Label Content="War:" HorizontalAlignment="Left" Margin="5,10,0,0" VerticalAlignment="Top" />
-                            <Label Content="Hostile:" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" />
-                            <Label Content="Deceptive:" HorizontalAlignment="Left" Margin="5,70,0,0" VerticalAlignment="Top" />
-                            <Label Content="Guarded:" HorizontalAlignment="Left" Margin="5,100,0,0" VerticalAlignment="Top" />
-                            <Label Content="Afraid:" HorizontalAlignment="Left" Margin="5,130,0,0" VerticalAlignment="Top" />
-                            <Label Content="Friendly:" HorizontalAlignment="Left" Margin="5,160,0,0" VerticalAlignment="Top" />
-                            <Label Content="Neutral:" HorizontalAlignment="Left" Margin="5,190,0,0" VerticalAlignment="Top" />
+                            <Label Content="Hostile:" HorizontalAlignment="Left" Margin="5,40,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Deceptive:" HorizontalAlignment="Left" Margin="5,70,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Guarded:" HorizontalAlignment="Left" Margin="5,100,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Afraid:" HorizontalAlignment="Left" Margin="5,130,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Friendly:" HorizontalAlignment="Left" Margin="5,160,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="Neutral:" HorizontalAlignment="Left" Margin="5,190,0,0"
+                                   VerticalAlignment="Top" />
 
                             <x2:IntegerUpDown x:Name="IntWarBias" Margin="100,10,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntHostileBias" Margin="100,40,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntDeceptiveBias" Margin="100,70,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntGuardedBias" Margin="100,100,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntAfraidBias" Margin="100,130,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntFriendlyBias" Margin="100,160,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                             <x2:IntegerUpDown x:Name="IntNeutralBias" Margin="100,190,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
-                            <Label Content="*Ignore:" HorizontalAlignment="Left" Margin="156,10,0,0" VerticalAlignment="Top" />
-                            <Label Content="*Friendly:" HorizontalAlignment="Left" Margin="156,40,0,0" VerticalAlignment="Top" />
-                            <Label Content="*Protective:" HorizontalAlignment="Left" Margin="156,70,0,0" VerticalAlignment="Top" />
-                            <Label Content="*Conquest:" HorizontalAlignment="Left" Margin="156,100,0,0" VerticalAlignment="Top" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
+                            <Label Content="*Ignore:" HorizontalAlignment="Left" Margin="156,10,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="*Friendly:" HorizontalAlignment="Left" Margin="156,40,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="*Protective:" HorizontalAlignment="Left" Margin="156,70,0,0"
+                                   VerticalAlignment="Top" />
+                            <Label Content="*Conquest:" HorizontalAlignment="Left" Margin="156,100,0,0"
+                                   VerticalAlignment="Top" />
 
                             <x2:IntegerUpDown x:Name="IntIgnoreApproach" Margin="250,10,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
-                            <x2:IntegerUpDown x:Name="IntFriendlyApproach" Margin="250,40,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
-                            <x2:IntegerUpDown x:Name="IntProtectiveApproach" Margin="250,70,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
-                            <x2:IntegerUpDown x:Name="IntConquestApproach" Margin="250,100,0,0" HorizontalAlignment="Left"
-                                      VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1" Minimum="0"
-                                      Maximum="4" Width="40" AllowTextInput="False" />
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
+                            <x2:IntegerUpDown x:Name="IntFriendlyApproach" Margin="250,40,0,0"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
+                            <x2:IntegerUpDown x:Name="IntProtectiveApproach" Margin="250,70,0,0"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
+                            <x2:IntegerUpDown x:Name="IntConquestApproach" Margin="250,100,0,0"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="0"
+                                              Maximum="4" Width="40" AllowTextInput="False" />
                         </Grid>
                     </GroupBox>
                 </Grid>
@@ -306,8 +376,42 @@
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
                     <Label Content="Trait:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+                    <Label Content="Description:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,70,0,0"
+                           VerticalAlignment="Top" />
                     <TextBox x:Name="TbTraitType" HorizontalAlignment="Left" Margin="125,10,0,0" TextWrapping="Wrap"
                              VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
+                    <TextBox x:Name="TbTraitDescription" HorizontalAlignment="Left" Margin="125,40,0,0"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
+                    <TextBox x:Name="TbTraitDescriptionShort" HorizontalAlignment="Left" Margin="125,70,0,0"
+                             TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" />
+                    <GroupBox Header="Attributes" HorizontalAlignment="Left" Height="365" Margin="10,99,0,0"
+                              VerticalAlignment="Top" Width="235" Foreground="White">
+                        <Grid>
+                            <Label Content="Attribute Value:" HorizontalAlignment="Left" Margin="10,32,0,0"
+                                   VerticalAlignment="Top" Width="135" />
+                            <ComboBox x:Name="CbTraitAttributes" HorizontalAlignment="Left" Margin="10,5,0,0"
+                                      VerticalAlignment="Top" Width="200" SelectedIndex="1"
+                                      RenderTransformOrigin="-2.768,-1.25" Height="25" />
+                            <x2:IntegerUpDown x:Name="IntAttributeValue" Margin="150,35,0,0" HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" FormatString="N0" Value="1" Increment="1"
+                                              Minimum="1"
+                                              Maximum="10" Width="60" AllowTextInput="False" Height="21" />
+                            <Button x:Name="BtnAddAttribute" Content="Add" HorizontalAlignment="Left"
+                                    Margin="10,61,0,0" VerticalAlignment="Top" Width="60" Click="BtnAddAttribute_Click"
+                                    Height="19" />
+                            <Button x:Name="BtnRemoveAttribute" Content="Remove" HorizontalAlignment="Left"
+                                    Margin="75,61,0,0" VerticalAlignment="Top" Width="70"
+                                    Click="BtnRemoveAttribute_Click" Height="19" />
+                            <Button x:Name="BtnClearAttributes" Content="Clear" HorizontalAlignment="Left"
+                                    Margin="150,61,0,0" VerticalAlignment="Top" Width="60"
+                                    Click="BtnClearAttributes_Click" Height="19" />
+                            <ListBox x:Name="LbTraitAttributes" HorizontalAlignment="Left" Height="249"
+                                     Margin="10,85,0,0" VerticalAlignment="Top" Width="203" />
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
             <TabItem Header="Buildings">
@@ -366,11 +470,54 @@
                               VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
                 </Grid>
             </TabItem>
-            <TabItem Header="Icon Atlas" IsEnabled="False">
+            <TabItem Header="Icon Atlas">
                 <Grid>
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
+
+                    <GroupBox Header="Icon Atlas" HorizontalAlignment="Left" Height="394" Margin="10,10,0,0"
+                              VerticalAlignment="Top" Width="609" Foreground="White">
+                        <Grid>
+                            <Label x:Name="lblImagePath" Content="..." HorizontalAlignment="Left" Margin="10,5,0,0"
+                                   VerticalAlignment="Top" Width="353" />
+                            <Button x:Name="BtnUploadImage" Content="Upload" HorizontalAlignment="Left"
+                                    Margin="10,34,0,0" VerticalAlignment="Top" Height="25" Width="150"
+                                    Click="BtnUploadImage_Click" />
+                            <Button x:Name="BtnGetTemplate" Content="Get Template" HorizontalAlignment="Left"
+                                    Margin="165,34,0,0" VerticalAlignment="Top" Height="25" Width="150"
+                                    Click="BtnGetTemplate_Click" />
+                            <Image x:Name="imgIconPreview" HorizontalAlignment="Left" Height="299" Margin="10,64,0,0"
+                                   VerticalAlignment="Top" Width="577">
+                                <Image.Source>
+                                    <BitmapImage UriSource="IconAtlas256.jpg" />
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </GroupBox>
+                    <GroupBox Header="Alpha Atlas" HorizontalAlignment="Left" Height="394" Margin="624,10,0,0"
+                              VerticalAlignment="Top" Width="334" Foreground="White">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="127*" />
+                                <RowDefinition Height="246*" />
+                            </Grid.RowDefinitions>
+                            <Label x:Name="lblAlphaPath" Content="..." HorizontalAlignment="Left" Margin="10,5,0,0"
+                                   VerticalAlignment="Top" />
+                            <Button x:Name="BtnUploadAlpha" Content="Upload" HorizontalAlignment="Left"
+                                    Margin="10,34,0,0" VerticalAlignment="Top" Height="25" Width="150"
+                                    Click="BtnUploadAlpha_Click" />
+                            <Button x:Name="BtnGetTemplateAlpha" Content="Get Template" HorizontalAlignment="Left"
+                                    Margin="165,34,0,0" VerticalAlignment="Top" Height="25" Width="150"
+                                    Click="BtnGetTemplate_Click" />
+                            <Image x:Name="imgAlphaPreview" HorizontalAlignment="Left" Height="302" Margin="10,64,0,0"
+                                   VerticalAlignment="Top" Width="302" Grid.RowSpan="2">
+                                <Image.Source>
+                                    <BitmapImage UriSource="AlphaAtlas128.jpg" />
+                                </Image.Source>
+                            </Image>
+                        </Grid>
+                    </GroupBox>
                 </Grid>
             </TabItem>
         </TabControl>

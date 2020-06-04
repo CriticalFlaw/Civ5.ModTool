@@ -28,7 +28,7 @@ namespace CivModTool.Common
                 };
 
                 foreach (var text in data)
-                    gameData.Language_en_US.Row.Add(new Row { Tag = text.Tag, Text = text.Text });
+                    gameData.Language_en_US.Row.Add(new Row {Tag = text.Tag, Text = text.Text});
 
                 XmlController.SerializeXml(gameData, nameof(FileCategories.GameText));
                 return true;

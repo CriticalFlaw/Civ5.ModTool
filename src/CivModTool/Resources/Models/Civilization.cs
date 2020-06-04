@@ -4,41 +4,41 @@ namespace CivModTool.Models
 {
     internal class Civilization
     {
-        public string Type;
         public string Adjective;
-        public string Description;
-        public string ShortDescription;
-        public string CivilopediaTag;
+
+        //NOT USED
+        public bool AiPlayable = true;
+        public string AlphaIconAtlas;
+        public string ArtDefineTag;
         public string ArtStylePrefix;
         public string ArtStyleSuffix;
         public string ArtStyleType;
+        public List<string> Cities;
+        public string Civilopedia;
+        public string CivilopediaTag;
+        public string DawnOfManAudio;
+        public string DawnOfManImage;
+        public string DawnOfManQuote;
+        public string DefaultPlayerColor;
+        public string DerivativeCiv;
+        public string Description;
         public string FreeBuilding;
         public string FreeTech;
         public string FreeUnit;
         public string FreeUnitAi;
-        public string Religion;
-        public string DawnOfManAudio;
-        public string DawnOfManQuote;
-        public int PortraitIndex = -1;
-        public List<string> Cities;
-        public List<string> Spies;
-        public string LeaderheadType;
-        public string DefaultPlayerColor;
-        public List<BuildingOverride> UniqueBuildings;
-        public List<UnitOverride> UniqueUnits;
         public string IconAtlas;
-        public string AlphaIconAtlas;
+        public string LeaderheadType;
         public string MapImage;
-        public string DawnOfManImage;
-
-        //NOT USED
-        public bool AiPlayable = true;
 
         public bool Playable = true;
-        public string DerivativeCiv;
-        public string ArtDefineTag;
+        public int PortraitIndex = -1;
+        public string Religion;
+        public string ShortDescription;
+        public List<string> Spies;
         public string Strategy;
-        public string Civilopedia;
+        public string Type;
+        public List<BuildingOverride> UniqueBuildings;
+        public List<UnitOverride> UniqueUnits;
     }
 
     internal class BuildingOverride

@@ -19,7 +19,7 @@ namespace CivModTool.Models
 
     internal class PlayerColor
     {
-        public string Type;
         public Color Color;
+        public string Type;
     }
 }

@@ -118,13 +118,14 @@ namespace CivModTool.Common
                 };
 
                 foreach (var x in data.Cities)
-                    gameData.Civilization_CityNames.Row.Add(new Models.XML.Civilization.CityNames.Row { CivilizationType = data.Type, CityName = x.ToUpper() });
+                    gameData.Civilization_CityNames.Row.Add(new Models.XML.Civilization.CityNames.Row
+                        {CivilizationType = data.Type, CityName = x.ToUpper()});
 
                 foreach (var x in data.Spies)
-                    gameData.Civilization_SpyNames.Row.Add(new Models.XML.Civilization.SpyNames.Row { CivilizationType = data.Type, SpyName = x.ToUpper() });
+                    gameData.Civilization_SpyNames.Row.Add(new Models.XML.Civilization.SpyNames.Row
+                        {CivilizationType = data.Type, SpyName = x.ToUpper()});
 
                 foreach (var x in data.UniqueBuildings)
-                {
                     gameData.Civilization_BuildingClassOverrides.Row.Add(
                         new Models.XML.Civilization.BuildingClassOverrides.Row
                         {
@@ -132,7 +133,6 @@ namespace CivModTool.Common
                             BuildingClassType = x.BuildingClassType,
                             BuildingType = x.BuildingType
                         });
-                }
 
                 //foreach (var x in data.UniqueUnits)
                 //{

@@ -9,7 +9,7 @@ using Row = CivModTool.Models.XML.Trait.Row;
 
 namespace CivModTool.Common
 {
-    internal class TraitToXml
+    internal static class TraitToXml
     {
         internal static bool GenerateTraitXml(Trait data)
         {
@@ -149,7 +149,7 @@ namespace CivModTool.Common
                     gameData.Trait_ResourceQuantityModifiers.Row.Add(row);
                 }
 
-                XmlController.SerializeXml(gameData, FileCategories.Trait.ToString());
+                XmlController.SerializeXml(gameData, nameof(FileCategories.Trait));
                 return true;
             }
             catch (Exception e)

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Xml.Serialization;
 using CivModTool.Models;
-using CivModTool.Properties;
 using CivModTool.Resources;
 
 namespace CivModTool.Common

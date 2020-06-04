@@ -51,7 +51,6 @@ namespace CivModTool.Models
         public int GreatPeopleRateModifier;
         public int GreatPersonGiftInfluence; // ?
         public int GreatScientistRateModifier;
-        public int Id;
         public int ImprovementMaintenanceModifier; //?
         public int LandBarbarianConversionExtraUnits; //?
         public int LandBarbarianConversionPercent;

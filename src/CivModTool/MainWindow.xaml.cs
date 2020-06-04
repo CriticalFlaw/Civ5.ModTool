@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using AutoUpdaterDotNET;
+using System.Windows.Media.Imaging;
 using CivModTool.Common;
 using CivModTool.Models;
 using CivModTool.Properties;
 using CivModTool.Resources;
-using log4net;
-using log4net.Config;
 using Microsoft.VisualBasic;
+using Microsoft.Win32;
 
 namespace CivModTool
 {
@@ -22,7 +22,7 @@ namespace CivModTool
     public partial class MainWindow
     {
         public static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly string _outputPath = Directory.GetCurrentDirectory() + "\\XML";
+        private readonly string _outputPath = Directory.GetCurrentDirectory();
 
         public MainWindow()
         {
@@ -30,31 +30,77 @@ namespace CivModTool
             XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
             Logger.Info("INITIALIZING...");
             InitializeComponent();
-            LoadGuiElements();
+            InitializeApplication();
             AutoUpdater.OpenDownloadPage = true;
             AutoUpdater.Start(Properties.Resources.txt_app_update);
         }
 
-        private void BtnGenerateXML_Click(object sender, RoutedEventArgs e)
+        private void InitializeApplication()
         {
-            if (!SetupForExport()) return;
-            if (!GenerateBuildingsXml()) return;
-            if (!GenerateCivilizationXml()) return;
-            if (!GeneratePlayerColorXml()) return;
-            if (!GenerateLeaderXml()) return;
-            if (!GenerateTraitXml()) return;
-            if (!GenerateBuildingsXml()) return;
-            if (!GenerateUnitsXml()) return;
-            if (!GenerateIconAtlasXml()) return;
-            if (!GenerateGameTextXml()) return;
+            if (!Directory.Exists(_outputPath + "\\XML"))
+                Directory.CreateDirectory(_outputPath + "\\XML");
+
+            using (var image = new MagickImage(_outputPath + "\\Art\\IconAtlas256.psd"))
+            {
+                image.Write("IconAtlas256.jpg");
+            }
+
+            // Civilization
+            TbType.Text = Settings.Default.civ_name.Replace("CIVILIZATION_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(ArtStyles)))
+                CbArtStyle.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Civs)))
+                CbSoundtrack.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Buildings)))
+                CbFreeBuilding.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Units)))
+                CbFreeUnit.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Technologies)))
+                CbFreeTech.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Religions)))
+                CbReligion.Items.Add(item.ToString());
+
+            // Leader
+            TbLeaderType.Text = Settings.Default.leader_name.Replace("LEADER_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(Flavors)))
+                CbFlavors.Items.Add(item.ToString());
+
+            // Trait
+            TbTraitType.Text = Settings.Default.trait_name.Replace("TRAIT_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(TraitAttributes)))
+                CbTraitAttributes.Items.Add(item.ToString());
+
+            // Building
+            TbBuildingType.Text = Settings.Default.building_name.Replace("BUILDING_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(Buildings)))
+                CbBuildingOverride.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Eras)))
+                CbBuildingStartEra.Items.Add(item.ToString());
+
+            foreach (var item in Enum.GetValues(typeof(Technologies)))
+                CbBuildingReqTech.Items.Add(item.ToString());
+
+            // Unit
+            TbUnitType.Text = Settings.Default.unit_name.Replace("UNIT_", string.Empty);
+
+            foreach (var item in Enum.GetValues(typeof(Units)))
+                CbUnitOverride.Items.Add(item.ToString());
         }
 
-        private bool SetupForExport()
+        private bool PrepareForExport()
         {
             try
             {
-                if (!Directory.Exists(_outputPath))
-                    Directory.CreateDirectory(_outputPath);
                 var settings = Settings.Default;
                 settings.civ_name = TbType.Text;
                 settings.leader_name = TbLeaderType.Text;
@@ -113,58 +159,48 @@ namespace CivModTool
             return result;
         }
 
-        private void LoadGuiElements()
+        private bool ProcessImages(string filePath, string fileName, int width, int height, bool alpha = false)
         {
-            // Civilization
-            TbType.Text = Settings.Default.civ_name.Replace("CIVILIZATION_", string.Empty);
+            try
+            {
+                int[] iconSizes;
+                if (alpha)
+                    iconSizes = new[] {128, 80, 64, 48, 45, 32, 24, 16};
+                else
+                    iconSizes = new[] {256, 128, 80, 64, 45, 32};
+                var size = new MagickGeometry(width * 2, height * 2);
+                for (var x = 0; x <= iconSizes.Length; x++)
+                    using (var image = new MagickImage(filePath))
+                    {
+                        size = new MagickGeometry(width / 2, height / 2);
+                        image.Resize(size);
+                        image.Write($"{_outputPath}\\Art\\{fileName}{iconSizes[x]}.psd");
+                    }
 
-            foreach (var item in Enum.GetValues(typeof(ArtStyles)))
-                CbArtStyle.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Civs)))
-                CbSoundtrack.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Buildings)))
-                CbFreeBuilding.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Units)))
-                CbFreeUnit.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Technologies)))
-                CbFreeTech.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Religions)))
-                CbReligion.Items.Add(item.ToString());
-
-            // Leader
-            TbLeaderType.Text = Settings.Default.leader_name.Replace("LEADER_", string.Empty);
-
-            foreach (var item in Enum.GetValues(typeof(Flavors)))
-                CbFlavors.Items.Add(item.ToString());
-
-            // Trait
-            TbTraitType.Text = Settings.Default.trait_name.Replace("TRAIT_", string.Empty);
-
-            // Building
-            TbBuildingType.Text = Settings.Default.building_name.Replace("BUILDING_", string.Empty);
-
-            foreach (var item in Enum.GetValues(typeof(Buildings)))
-                CbBuildingOverride.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Eras)))
-                CbBuildingStartEra.Items.Add(item.ToString());
-
-            foreach (var item in Enum.GetValues(typeof(Technologies)))
-                CbBuildingReqTech.Items.Add(item.ToString());
-
-            // Unit
-            TbUnitType.Text = Settings.Default.unit_name.Replace("UNIT_", string.Empty);
-
-            foreach (var item in Enum.GetValues(typeof(Units)))
-                CbUnitOverride.Items.Add(item.ToString());
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return false;
+            }
         }
 
         #region CLICK_EVENTS
+
+        private void BtnGenerateXML_Click(object sender, RoutedEventArgs e)
+        {
+            if (!PrepareForExport()) return;
+            if (!GenerateBuildingsXml()) return;
+            if (!GenerateCivilizationXml()) return;
+            if (!GeneratePlayerColorXml()) return;
+            if (!GenerateLeaderXml()) return;
+            if (!GenerateTraitXml()) return;
+            if (!GenerateBuildingsXml()) return;
+            if (!GenerateUnitsXml()) return;
+            if (!GenerateIconAtlasXml()) return;
+            if (!GenerateGameTextXml()) return;
+        }
 
         private void BtnRandomizeStats_Click(object sender, RoutedEventArgs e)
         {
@@ -242,6 +278,12 @@ namespace CivModTool
             BtnAddFlavor.IsEnabled = false;
         }
 
+        private void BtnRemoveFlavors_Click(object sender, RoutedEventArgs e)
+        {
+            if (LbFlavors.SelectedItem == null) return;
+            LbFlavors.Items.RemoveAt(LbFlavors.Items.IndexOf(LbFlavors.SelectedItem));
+        }
+
         private void BtnClearFlavors_Click(object sender, RoutedEventArgs e)
         {
             LbFlavors.Items.Clear();
@@ -251,6 +293,108 @@ namespace CivModTool
                 CbFlavors.Items.Add(item.ToString());
 
             CbFlavors.SelectedIndex = 0;
+        }
+
+        private void BtnAddAttribute_Click(object sender, RoutedEventArgs e)
+        {
+            LbTraitAttributes.Items.Add($"{CbTraitAttributes.Text}-{IntAttributeValue.Value}");
+            CbTraitAttributes.Items.RemoveAt(CbTraitAttributes.SelectedIndex);
+            CbTraitAttributes.SelectedIndex = 0;
+
+            if (CbTraitAttributes.Items.Count > 0) return;
+            CbTraitAttributes.IsEnabled = false;
+            IntAttributeValue.IsEnabled = false;
+            BtnAddAttribute.IsEnabled = false;
+        }
+
+        private void BtnRemoveAttribute_Click(object sender, RoutedEventArgs e)
+        {
+            if (LbTraitAttributes.SelectedItem == null) return;
+            LbTraitAttributes.Items.RemoveAt(LbTraitAttributes.Items.IndexOf(LbTraitAttributes.SelectedItem));
+        }
+
+        private void BtnClearAttributes_Click(object sender, RoutedEventArgs e)
+        {
+            LbTraitAttributes.Items.Clear();
+            CbTraitAttributes.Items.Clear();
+
+            foreach (var item in Enum.GetValues(typeof(TraitAttributes)))
+                CbTraitAttributes.Items.Add(item.ToString());
+
+            CbTraitAttributes.SelectedIndex = 0;
+        }
+
+        private void BtnUploadImage_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog
+            {
+                InitialDirectory = _outputPath,
+                DefaultExt = ".psd", // Required file extension
+                Filter = "PhotoShop files (.psd)|*.psd" // Optional file extensions
+            };
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                using (var image = new MagickImage(fileDialog.FileName))
+                {
+                    image.Write(_outputPath + "\\IconAtlas256.jpg");
+                }
+
+                lblImagePath.Content = fileDialog.FileName;
+
+                var dynamicImage = new Image
+                {
+                    Width = 1024,
+                    Height = 512
+                };
+
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(_outputPath + "\\IconAtlas256.jpg");
+                bitmap.EndInit();
+
+                dynamicImage.Source = bitmap;
+                imgIconPreview.Source = bitmap;
+            }
+        }
+
+        private void BtnUploadAlpha_Click(object sender, RoutedEventArgs e)
+        {
+            var fileDialog = new OpenFileDialog
+            {
+                InitialDirectory = _outputPath,
+                DefaultExt = ".psd", // Required file extension
+                Filter = "PhotoShop files (.psd)|*.psd" // Optional file extensions
+            };
+
+            if (fileDialog.ShowDialog() == true)
+            {
+                using (var image = new MagickImage(fileDialog.FileName))
+                {
+                    image.Write(_outputPath + "\\AlphaAtlas128.jpg");
+                }
+
+                lblAlphaPath.Content = fileDialog.FileName;
+
+                var dynamicImage = new Image
+                {
+                    Width = 128,
+                    Height = 128
+                };
+
+                var bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(_outputPath + "\\AlphaAtlas128.jpg");
+                bitmap.EndInit();
+
+                dynamicImage.Source = bitmap;
+                imgAlphaPreview.Source = bitmap;
+            }
+        }
+
+        private void BtnGetTemplate_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(_outputPath + "\\Art");
         }
 
         #endregion CLICK_EVENTS
@@ -271,8 +415,11 @@ namespace CivModTool
                 ShortDescription = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text),
                 Adjective = string.Format(Properties.Resources.key_civ_adjective, TbType.Text),
                 DefaultPlayerColor = string.Format(Properties.Resources.txt_civ_color, TbType.Text),
-                ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style, CbArtStyle.SelectedValue.ToString().ToUpper()),
-                ArtStyleSuffix = XmlController.GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles), CbArtStyle.SelectedValue.ToString())),
+                ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,
+                    CbArtStyle.SelectedValue.ToString().ToUpper()),
+                ArtStyleSuffix =
+                    XmlController.GetArtPrefix((ArtStyles) Enum.Parse(typeof(ArtStyles),
+                        CbArtStyle.SelectedValue.ToString())),
                 ArtStylePrefix = CbArtStyle.SelectedValue.ToString().ToUpper(),
                 PortraitIndex = IntCivPortraitIndex.Value ?? default,
                 IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, TbType.Text),
@@ -282,11 +429,15 @@ namespace CivModTool
                 DawnOfManImage = string.Format(Properties.Resources.txt_civ_dom_image, TbLeaderType.Text),
                 DawnOfManAudio = CbSoundtrack.SelectedValue.ToString(),
                 LeaderheadType = string.Format(Properties.Resources.txt_leader, TbLeaderType.Text),
-                FreeBuilding = string.Format(Properties.Resources.txt_building_class, CbFreeBuilding.SelectedValue.ToString().ToUpper()),
+                FreeBuilding = string.Format(Properties.Resources.txt_building_class,
+                    CbFreeBuilding.SelectedValue.ToString().ToUpper()),
                 FreeTech = string.Format(Properties.Resources.txt_tech, CbFreeTech.SelectedValue.ToString().ToUpper()),
-                FreeUnit = string.Format(Properties.Resources.txt_unit_class, CbFreeUnit.SelectedValue.ToString().ToUpper()),
-                FreeUnitAi = string.Format(Properties.Resources.txt_unit_ai, Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper()),
-                Religion = string.Format(Properties.Resources.txt_religion, CbReligion.SelectedValue.ToString().ToUpper()),
+                FreeUnit = string.Format(Properties.Resources.txt_unit_class,
+                    CbFreeUnit.SelectedValue.ToString().ToUpper()),
+                FreeUnitAi = string.Format(Properties.Resources.txt_unit_ai,
+                    Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper()),
+                Religion = string.Format(Properties.Resources.txt_religion,
+                    CbReligion.SelectedValue.ToString().ToUpper()),
                 UniqueBuildings = new List<BuildingOverride>(),
                 UniqueUnits = new List<UnitOverride>(),
                 Cities = new List<string>(),
@@ -296,10 +447,12 @@ namespace CivModTool
             // TO-DO: Add BuildingOverride, UnitOverride
 
             foreach (var x in LbCityNames.Items)
-                gameData.Cities.Add(string.Format(Properties.Resources.key_city_name, settings.civ_name, x.ToString().Replace(' ', '_').ToUpper()));
+                gameData.Cities.Add(string.Format(Properties.Resources.key_city_name, settings.civ_name,
+                    x.ToString().Replace(' ', '_').ToUpper()));
 
             foreach (var x in LbSpyNames.Items)
-                gameData.Spies.Add(string.Format(Properties.Resources.key_spy_name, settings.civ_name, x.ToString().Replace(' ', '_').ToUpper()));
+                gameData.Spies.Add(string.Format(Properties.Resources.key_spy_name, settings.civ_name,
+                    x.ToString().Replace(' ', '_').ToUpper()));
 
             return XmlController.GenerateCivilizationXml(gameData);
         }
@@ -310,19 +463,34 @@ namespace CivModTool
             var settings = Settings.Default;
 
             Tuple<string, int?>[] majorApproaches =
-                    { new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "WAR"), IntWarBias.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "HOSTILE"), IntHostileBias.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "DECEPTIVE"), IntDeceptiveBias.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "GUARDED"), IntGuardedBias.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "AFRAID"), IntAfraidBias.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "FRIENDLY"), IntFriendlyBias.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "NEUTRAL"), IntNeutralBias.Value ?? default) };
+            {
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "WAR"),
+                    IntWarBias.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "HOSTILE"),
+                    IntHostileBias.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "DECEPTIVE"),
+                    IntDeceptiveBias.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "GUARDED"),
+                    IntGuardedBias.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "AFRAID"),
+                    IntAfraidBias.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "FRIENDLY"),
+                    IntFriendlyBias.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_major_approach, "NEUTRAL"),
+                    IntNeutralBias.Value ?? default)
+            };
 
             Tuple<string, int?>[] minorApproaches =
-                    { new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "IGNORE"), IntIgnoreApproach.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "FRIENDLY"), IntFriendlyApproach.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "PROTECTIVE"), IntProtectiveApproach.Value ?? default),
-                      new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "CONQUEST"), IntConquestApproach.Value ?? default) };
+            {
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "IGNORE"),
+                    IntIgnoreApproach.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "FRIENDLY"),
+                    IntFriendlyApproach.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "PROTECTIVE"),
+                    IntProtectiveApproach.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "CONQUEST"),
+                    IntConquestApproach.Value ?? default)
+            };
 
             var gameData = new Leader
             {
@@ -356,7 +524,11 @@ namespace CivModTool
             foreach (var item in LbFlavors.Items)
             {
                 var split = item.ToString().Split('-');
-                gameData.Flavors.Add(new Flavor { FlavorType = string.Format(Properties.Resources.txt_flavor, split[0].ToUpper()), Count = Convert.ToInt32(split[1]) });
+                gameData.Flavors.Add(new Flavor
+                {
+                    FlavorType = string.Format(Properties.Resources.txt_flavor, split[0].ToUpper()),
+                    Count = Convert.ToInt32(split[1])
+                });
             }
 
             return XmlController.GenerateLeaderXml(gameData);
@@ -367,100 +539,28 @@ namespace CivModTool
             var gameData = new Trait
             {
                 Type = string.Format(Properties.Resources.txt_trait, Settings.Default.trait_name),
-                ShortDescription = string.Format(Properties.Resources.key_trait, TbTraitType.Text),
                 Description = string.Format(Properties.Resources.key_trait_desc, TbTraitType.Text),
-                LevelExperienceModifier = 0,
-                GreatPeopleRateModifier = 0,
-                GreatScientistRateModifier = 0,
-                GreatGeneralRateModifier = 0,
-                GreatGeneralExtraBonus = 0,
-                GreatPersonGiftInfluence = 0,
-                MaxGlobalBuildingProductionModifier = 0,
-                MaxTeamBuildingProductionModifier = 0,
-                MaxPlayerBuildingProductionModifier = 0,
-                CityUnhappinessModifier = 0,
-                PopulationUnhappinessModifier = 0,
-                CityStateBonusModifier = 0,
-                CityStateFriendshipModifier = 0,
-                CityStateCombatModifier = 0,
-                LandBarbarianConversionPercent = 0,
-                LandBarbarianConversionExtraUnits = 0,
-                SeaBarbarianConversionPercent = 0,
-                LandUnitMaintenanceModifier = 0,
-                NavalUnitMaintenanceModifier = 0,
-                CapitalBuildingModifier = 0,
-                PlotBuyCostModifier = -50,
-                PlotCultureCostModifier = 0,
-                CultureFromKills = 0,
-                CityCultureBonus = 0,
-                CapitalThemingBonusModifier = 0,
-                PolicyCostModifier = 0,
-                CityConnectionTradeRouteChange = 0,
-                WonderProductionModifier = 0,
-                PlunderModifier = 0,
-                ImprovementMaintenanceModifier = 0,
-                GoldenAgeDurationModifier = 0,
-                GoldenAgeMoveChange = 0,
-                GoldenAgeCombatModifier = 0,
-                GoldenAgeTourismModifier = 0,
-                GoldenAgeGreatArtistRateModifier = 0,
-                GoldenAgeGreatMusicianRateModifier = 0,
-                GoldenAgeGreatWriterRateModifier = 0,
-                ExtraEmbarkMoves = 0,
-                NaturalWonderFirstFinderGold = 0,
-                NaturalWonderSubsequentFinderGold = 0,
-                NaturalWonderYieldModifier = 0,
-                NaturalWonderHappinessModifier = 0,
-                NearbyImprovementCombatBonus = 0,
-                NearbyImprovementBonusRange = 0,
-                CultureBuildingYieldChange = 0,
-                CombatBonusVsHigherTech = 0,
-                CombatBonusVsLargerCiv = 0,
-                RazeSpeedModifier = 0,
-                DofGreatPersonModifier = 0,
-                LuxuryHappinessRetention = 0,
-                ExtraSpies = 0,
-                UnresearchedTechBonusFromKills = 0,
-                ExtraFoundedCityTerritoryClaimRange = 0,
-                FreeSocialPoliciesPerEra = 0,
-                NumTradeRoutesModifier = 0,
-                TradeRouteResourceModifier = 0,
-                UniqueLuxuryCities = 0,
-                UniqueLuxuryQuantity = 0,
-                WorkerSpeedModifier = 0,
-                AfraidMinorPerTurnInfluence = 0,
-                LandTradeRouteRangeBonus = 0,
-                TradeReligionModifier = 0,
-                TradeBuildingModifier = 0,
-                FightWellDamaged = false,
-                MoveFriendlyWoodsAsRoad = false,
-                FasterAlongRiver = false,
-                FasterInHills = 0,
-                EmbarkedAllWater = 0,
-                EmbarkedToLandFlatCost = 0,
-                NoHillsImprovementMaintenance = 0,
-                TechBoostFromCapitalScienceBuildings = 0,
-                StaysAliveZeroCities = 0,
-                FaithFromUnimprovedForest = 0,
-                BonusReligiousBelief = 0,
-                AbleToAnnexCityStates = 0,
-                CrossesMountainsAfterGreatGeneral = 0,
-                MayaCalendarBonuses = 0,
-                NoAnnexing = 0,
-                TechFromCityConquer = 0,
-                UniqueLuxuryRequiresNewArea = 0,
-                RiverTradeRoad = 0,
-                AngerFreeIntrusionOfCityStates = 0,
-                FreeUnit = " ",
-                FreeUnitPrereqTech = " ",
+                ShortDescription = string.Format(Properties.Resources.key_trait, TbTraitType.Text),
                 CombatBonusImprovement = " ",
                 FreeBuilding = " ",
                 FreeBuildingOnConquest = " ",
+                FreeUnit = " ",
+                FreeUnitPrereqTech = " ",
                 ObsoleteTech = " ",
                 PrereqTech = " ",
+                EmbarkedNotCivilian = false,
+                FasterAlongRiver = false,
+                FightWellDamaged = false,
+                MoveFriendlyWoodsAsRoad = false,
                 YieldChangesStrategicResources = new List<YieldChangesStrategicResources>(),
                 ResourceQuantityModifiers = new List<ResourceQuantityModifiers>()
             };
+
+            foreach (var x in LbTraitAttributes.Items)
+            {
+                var split = x.ToString().Split('-');
+                gameData.GetType().GetField(split[0]).SetValue(gameData, int.Parse(split[1]));
+            }
 
             var yieldChangeStrategicResource = new YieldChangesStrategicResources
             {
@@ -497,9 +597,21 @@ namespace CivModTool
         {
             var gameData = new List<PlayerColor>
             {
-                new PlayerColor { Type = string.Format(Properties.Resources.txt_civ_color_primary, TbType.Text), Color = CpPrimaryColor.SelectedColor.Value },
-                new PlayerColor { Type = string.Format(Properties.Resources.txt_civ_color_secondary, TbType.Text), Color = CpSecondaryColor.SelectedColor.Value },
-                new PlayerColor { Type = string.Format(Properties.Resources.txt_civ_color_text, TbType.Text), Color = CpTextColor.SelectedColor.Value }
+                new PlayerColor
+                {
+                    Type = string.Format(Properties.Resources.txt_civ_color_primary, TbType.Text),
+                    Color = CpPrimaryColor.SelectedColor.Value
+                },
+                new PlayerColor
+                {
+                    Type = string.Format(Properties.Resources.txt_civ_color_secondary, TbType.Text),
+                    Color = CpSecondaryColor.SelectedColor.Value
+                },
+                new PlayerColor
+                {
+                    Type = string.Format(Properties.Resources.txt_civ_color_text, TbType.Text),
+                    Color = CpTextColor.SelectedColor.Value
+                }
             };
             return XmlController.GeneratePlayerColorXml(gameData);
         }
@@ -700,16 +812,36 @@ namespace CivModTool
 
         private bool GenerateIconAtlasXml()
         {
+            if (!string.IsNullOrEmpty(lblImagePath.Content.ToString()))
+                ProcessImages(lblImagePath.Content.ToString(), "IconAtlas", 1024, 512);
+            if (!string.IsNullOrEmpty(lblAlphaPath.Content.ToString()))
+                ProcessImages(lblAlphaPath.Content.ToString(), "AlphaAtlas", 128, 128, true);
+
             var gameData = new List<IconAtlas>();
-            var image = new IconAtlas
+            foreach (var x in Directory.GetFiles(_outputPath + "\\Art").ToList())
             {
-                Atlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, TbType.Text),
-                IconSize = 128,
-                Filename = string.Format(Properties.Resources.txt_civ_atlas_alpha_file, TbType.Text, "128"),
-                IconsPerRow = 1,
-                IconsPerColumn = 1
-            };
-            gameData.Add(image);
+                var isAlpha = x.Contains("AlphaAtlas");
+                var key = isAlpha ? "AlphaAtlas" : "IconAtlas";
+                var pFrom = x.IndexOf(key) + key.Length;
+                var pTo = x.LastIndexOf(".psd");
+                var size = x.Substring(pFrom, pTo - pFrom);
+
+                var image = new IconAtlas
+                {
+                    Atlas = string.Format(
+                        isAlpha ? Properties.Resources.txt_civ_atlas_alpha : Properties.Resources.txt_civ_atlas_icon,
+                        TbType.Text),
+                    IconSize = int.Parse(size),
+                    Filename = string.Format(
+                        isAlpha
+                            ? Properties.Resources.txt_civ_atlas_alpha_file
+                            : Properties.Resources.txt_civ_atlas_icon_file, TbType.Text, size),
+                    IconsPerRow = isAlpha ? 1 : 4,
+                    IconsPerColumn = isAlpha ? 1 : 2
+                };
+                gameData.Add(image);
+            }
+
             return XmlController.GenerateIconAtlasXml(gameData);
         }
 
@@ -718,21 +850,54 @@ namespace CivModTool
             var settings = Settings.Default;
             var gameData = new List<GameText>
             {
-                new GameText { Tag = string.Format(Properties.Resources.key_civ_adjective, TbType.Text), Text = TbAdjective.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_civ_desc, TbType.Text), Text = TbDescription.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text), Text = TbDescriptionShort.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text), Text = TbCivilopedia.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text), Text = TbDOMQuote.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_leader, TbLeaderType.Text), Text = TbLeaderDescription.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text), Text = TbLeaderCivilopedia.Text },
-                new GameText { Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text), Text = TbLeaderCivilopediaTag.Text }
+                new GameText
+                    {Tag = string.Format(Properties.Resources.key_civ_adjective, TbType.Text), Text = TbAdjective.Text},
+                new GameText
+                    {Tag = string.Format(Properties.Resources.key_civ_desc, TbType.Text), Text = TbDescription.Text},
+                new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text),
+                    Text = TbDescriptionShort.Text
+                },
+                new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text),
+                    Text = TbCivilopedia.Text
+                },
+                new GameText
+                    {Tag = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text), Text = TbDOMQuote.Text},
+                new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_leader, TbLeaderType.Text),
+                    Text = TbLeaderDescription.Text
+                },
+                new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
+                    Text = TbLeaderCivilopedia.Text
+                },
+                new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text),
+                    Text = TbLeaderCivilopediaTag.Text
+                }
             };
 
             foreach (var x in LbCityNames.Items)
-                gameData.Add(new GameText { Tag = string.Format(Properties.Resources.key_city_name, settings.civ_name, x.ToString().Replace(' ', '_').ToUpper()), Text = x.ToString() });
+                gameData.Add(new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_city_name, settings.civ_name,
+                        x.ToString().Replace(' ', '_').ToUpper()),
+                    Text = x.ToString()
+                });
 
             foreach (var x in LbSpyNames.Items)
-                gameData.Add(new GameText { Tag = string.Format(Properties.Resources.key_spy_name, settings.civ_name, x.ToString().Replace(' ', '_').ToUpper()), Text = x.ToString() });
+                gameData.Add(new GameText
+                {
+                    Tag = string.Format(Properties.Resources.key_spy_name, settings.civ_name,
+                        x.ToString().Replace(' ', '_').ToUpper()),
+                    Text = x.ToString()
+                });
 
             return XmlController.GenerateGameTextXml(gameData);
         }
