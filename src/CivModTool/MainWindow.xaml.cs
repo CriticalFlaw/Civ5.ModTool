@@ -7,10 +7,14 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using AutoUpdaterDotNET;
 using CivModTool.Common;
 using CivModTool.Models;
 using CivModTool.Properties;
 using CivModTool.Resources;
+using ImageMagick;
+using log4net;
+using log4net.Config;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
 
@@ -48,53 +52,53 @@ namespace CivModTool
             // Civilization
             TbType.Text = Settings.Default.civ_name.Replace("CIVILIZATION_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(ArtStyles)))
-                CbArtStyle.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(ArtStyles)))
+                CbArtStyle.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Civs)))
-                CbSoundtrack.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Civs)))
+                CbSoundtrack.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Buildings)))
-                CbFreeBuilding.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Buildings)))
+                CbFreeBuilding.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Units)))
-                CbFreeUnit.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Units)))
+                CbFreeUnit.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Technologies)))
-                CbFreeTech.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Technologies)))
+                CbFreeTech.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Religions)))
-                CbReligion.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Religions)))
+                CbReligion.Items.Add(GetStringValue(item));
 
             // Leader
             TbLeaderType.Text = Settings.Default.leader_name.Replace("LEADER_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(Flavors)))
-                CbFlavors.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Flavors)))
+                CbFlavors.Items.Add(GetStringValue(item));
 
             // Trait
             TbTraitType.Text = Settings.Default.trait_name.Replace("TRAIT_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(TraitAttributes)))
-                CbTraitAttributes.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(TraitAttributes)))
+                CbTraitAttributes.Items.Add(GetStringValue(item));
 
             // Building
             TbBuildingType.Text = Settings.Default.building_name.Replace("BUILDING_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(Buildings)))
-                CbBuildingOverride.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Buildings)))
+                CbBuildingOverride.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Eras)))
-                CbBuildingStartEra.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Eras)))
+                CbBuildingStartEra.Items.Add(GetStringValue(item));
 
-            foreach (var item in Enum.GetValues(typeof(Technologies)))
-                CbBuildingReqTech.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Technologies)))
+                CbBuildingReqTech.Items.Add(GetStringValue(item));
 
             // Unit
             TbUnitType.Text = Settings.Default.unit_name.Replace("UNIT_", string.Empty);
 
-            foreach (var item in Enum.GetValues(typeof(Units)))
-                CbUnitOverride.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Units)))
+                CbUnitOverride.Items.Add(GetStringValue(item));
         }
 
         private bool PrepareForExport()
@@ -165,9 +169,9 @@ namespace CivModTool
             {
                 int[] iconSizes;
                 if (alpha)
-                    iconSizes = new[] {128, 80, 64, 48, 45, 32, 24, 16};
+                    iconSizes = new[] { 128, 80, 64, 48, 45, 32, 24, 16 };
                 else
-                    iconSizes = new[] {256, 128, 80, 64, 45, 32};
+                    iconSizes = new[] { 256, 128, 80, 64, 45, 32 };
                 var size = new MagickGeometry(width * 2, height * 2);
                 for (var x = 0; x <= iconSizes.Length; x++)
                     using (var image = new MagickImage(filePath))
@@ -186,6 +190,17 @@ namespace CivModTool
             }
         }
 
+        public string GetStringValue(Enum value)
+        {
+            // Get the type, FieldInfo for this type and StringValue attributes
+            var type = value.GetType();
+            var fieldInfo = type.GetField(value.ToString());
+            var attribs = fieldInfo.GetCustomAttributes(typeof(StringValueAttribute), false) as StringValueAttribute[];
+
+            // Return the first if there was a match, or enum value if no match
+            return attribs.Length > 0 ? attribs[0].StringValue : value.ToString();
+        }
+
         #region CLICK_EVENTS
 
         private void BtnGenerateXML_Click(object sender, RoutedEventArgs e)
@@ -200,6 +215,14 @@ namespace CivModTool
             if (!GenerateUnitsXml()) return;
             if (!GenerateIconAtlasXml()) return;
             if (!GenerateGameTextXml()) return;
+        }
+
+        private void BtnReadFromXML_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void BtnResetForm_Click(object sender, RoutedEventArgs e)
+        {
         }
 
         private void BtnRandomizeStats_Click(object sender, RoutedEventArgs e)
@@ -289,8 +312,8 @@ namespace CivModTool
             LbFlavors.Items.Clear();
             CbFlavors.Items.Clear();
 
-            foreach (var item in Enum.GetValues(typeof(Flavors)))
-                CbFlavors.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(Flavors)))
+                CbFlavors.Items.Add(GetStringValue(item));
 
             CbFlavors.SelectedIndex = 0;
         }
@@ -318,8 +341,8 @@ namespace CivModTool
             LbTraitAttributes.Items.Clear();
             CbTraitAttributes.Items.Clear();
 
-            foreach (var item in Enum.GetValues(typeof(TraitAttributes)))
-                CbTraitAttributes.Items.Add(item.ToString());
+            foreach (Enum item in Enum.GetValues(typeof(TraitAttributes)))
+                CbTraitAttributes.Items.Add(GetStringValue(item));
 
             CbTraitAttributes.SelectedIndex = 0;
         }
@@ -418,7 +441,7 @@ namespace CivModTool
                 ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,
                     CbArtStyle.SelectedValue.ToString().ToUpper()),
                 ArtStyleSuffix =
-                    XmlController.GetArtPrefix((ArtStyles) Enum.Parse(typeof(ArtStyles),
+                    XmlController.GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles),
                         CbArtStyle.SelectedValue.ToString())),
                 ArtStylePrefix = CbArtStyle.SelectedValue.ToString().ToUpper(),
                 PortraitIndex = IntCivPortraitIndex.Value ?? default,
@@ -850,37 +873,38 @@ namespace CivModTool
             var settings = Settings.Default;
             var gameData = new List<GameText>
             {
+                // Civilization
                 new GameText
                     {Tag = string.Format(Properties.Resources.key_civ_adjective, TbType.Text), Text = TbAdjective.Text},
                 new GameText
                     {Tag = string.Format(Properties.Resources.key_civ_desc, TbType.Text), Text = TbDescription.Text},
                 new GameText
-                {
-                    Tag = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text),
-                    Text = TbDescriptionShort.Text
-                },
+                    { Tag = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text), Text = TbDescriptionShort.Text },
                 new GameText
-                {
-                    Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text),
-                    Text = TbCivilopedia.Text
-                },
+                    { Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text), Text = TbCivilopedia.Text },
                 new GameText
                     {Tag = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text), Text = TbDOMQuote.Text},
+                // Leader
                 new GameText
-                {
-                    Tag = string.Format(Properties.Resources.key_leader, TbLeaderType.Text),
-                    Text = TbLeaderDescription.Text
-                },
+                    { Tag = string.Format(Properties.Resources.key_leader, TbLeaderType.Text), Text = TbLeaderDescription.Text },
                 new GameText
-                {
-                    Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
-                    Text = TbLeaderCivilopedia.Text
-                },
+                    { Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text), Text = TbLeaderCivilopedia.Text },
                 new GameText
-                {
-                    Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text),
-                    Text = TbLeaderCivilopediaTag.Text
-                }
+                    { Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text), Text = TbLeaderCivilopediaTag.Text },
+                // Trait
+                new GameText
+                    { Tag = string.Format(Properties.Resources.key_trait, TbTraitType.Text), Text = TbTraitDescription.Text },
+                new GameText
+                    { Tag = string.Format(Properties.Resources.key_trait_desc, TbTraitType.Text), Text = TbTraitDescriptionShort.Text },
+                //// Building
+                new GameText
+                    { Tag = string.Format(Properties.Resources.key_building_desc, TbType.Text, TbBuildingType.Text), Text = TbBuildingDesc.Text },
+                new GameText
+                    { Tag = string.Format(Properties.Resources.key_building_pedia, TbType.Text, TbBuildingType.Text), Text = TbBuildingPedia.Text },
+                new GameText
+                    { Tag = string.Format(Properties.Resources.key_building_strategy, TbType.Text, TbBuildingType.Text), Text = TbBuildingStrat.Text },
+                new GameText
+                    { Tag = string.Format(Properties.Resources.key_building_help, TbType.Text, TbBuildingType.Text), Text = TbBuildingHelp.Text }
             };
 
             foreach (var x in LbCityNames.Items)

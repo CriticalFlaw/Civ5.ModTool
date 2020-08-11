@@ -25,64 +25,59 @@
                     <Grid.Background>
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
-                    <Label Content="Civilization:" HorizontalAlignment="Left" Margin="10,10,0,0"
+                    <Label Content="Civilization:" HorizontalAlignment="Left" Margin="10,15,0,0"
                            VerticalAlignment="Top" />
-                    <Label Content="Adjective:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
-                    <Label Content="Description:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
-                    <Label Content="Short Description:" HorizontalAlignment="Left" Margin="10,100,0,0"
-                           VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="10,130,0,0"
-                           VerticalAlignment="Top" />
-                    <Label Content="Art Style:" HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" />
-                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="175,100,0,0"
+                    <Label Content="Adjective:" HorizontalAlignment="Left" Margin="175,15,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Description:" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" />
+                    <Label Content="Civilopedia:" HorizontalAlignment="Left" Margin="175,40,0,0"
                            VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Soundtrack:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" />
-                    <Label Content="Dawn of Man Quote:" HorizontalAlignment="Left" Margin="175,130,0,0"
+                    <Label Content="Art Style:" HorizontalAlignment="Left" Margin="10,190,0,0" VerticalAlignment="Top" />
+                    <Label Content="Portrait Index:" HorizontalAlignment="Left" Margin="175,310,0,0"
                            VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="175,10,0,0"
+                    <Label Content="Soundtrack:" HorizontalAlignment="Left" Margin="175,190,0,0" VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Dawn of Man Quote:" HorizontalAlignment="Left" Margin="432.8,40,0,0"
                            VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="175,40,0,0"
+                    <Label Content="Primary Color:" HorizontalAlignment="Left" Margin="175,220,0,0"
                            VerticalAlignment="Top" Grid.Column="1" />
-                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="175,70,0,0" VerticalAlignment="Top"
+                    <Label Content="Secondary Color:" HorizontalAlignment="Left" Margin="175,250,0,0"
+                           VerticalAlignment="Top" Grid.Column="1" />
+                    <Label Content="Text Color:" HorizontalAlignment="Left" Margin="175,280,0,0" VerticalAlignment="Top"
                            Grid.Column="1" />
-                    <Label Content="Free Building:" HorizontalAlignment="Left" Margin="10,190,0,0"
+                    <Label Content="Free Building:" HorizontalAlignment="Left" Margin="10,220,0,0"
                            VerticalAlignment="Top" />
-                    <Label Content="Free Unit:" HorizontalAlignment="Left" Margin="10,220,0,0" VerticalAlignment="Top" />
-                    <Label Content="Free Technology:" HorizontalAlignment="Left" Margin="10,250,0,0"
+                    <Label Content="Free Unit:" HorizontalAlignment="Left" Margin="10,250,0,0" VerticalAlignment="Top" />
+                    <Label Content="Free Technology:" HorizontalAlignment="Left" Margin="10,280,0,0"
                            VerticalAlignment="Top" Grid.ColumnSpan="2" />
-                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="10,280,0,0" VerticalAlignment="Top" />
+                    <Label Content="Religion:" HorizontalAlignment="Left" Margin="10,310,0,0" VerticalAlignment="Top" />
 
-                    <TextBox x:Name="TbType" HorizontalAlignment="Left" Margin="26.6,10,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" CharacterCasing="Upper" Grid.Column="1" />
-                    <TextBox x:Name="TbAdjective" HorizontalAlignment="Left" Margin="26.6,40,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
-                    <TextBox x:Name="TbDescription" HorizontalAlignment="Left" Margin="26.6,70,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
-                    <TextBox x:Name="TbDescriptionShort" HorizontalAlignment="Left" Margin="26.6,100,0,0"
+                    <TextBox x:Name="TbType" HorizontalAlignment="Left" Margin="90,18,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="160" CharacterCasing="Upper" Grid.ColumnSpan="2" />
+                    <TextBox x:Name="TbAdjective" HorizontalAlignment="Left" Margin="254.8,18,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="160" Grid.Column="1" />
+                    <TextBox x:Name="TbDescription" HorizontalAlignment="Left" Margin="10,63,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="240" Grid.ColumnSpan="2" Height="122" />
+                    <TextBox x:Name="TbCivilopedia" HorizontalAlignment="Left" Margin="174.8,63,0,0"
                              TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
-                    <TextBox x:Name="TbCivilopedia" HorizontalAlignment="Left" Margin="26.6,130,0,0"
-                             TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="120" Grid.Column="1" />
-                    <ComboBox x:Name="CbArtStyle" HorizontalAlignment="Left" Margin="26.6,160,0,0"
+                             VerticalAlignment="Top" Width="240" Grid.Column="1" Height="122" />
+                    <ComboBox x:Name="CbArtStyle" HorizontalAlignment="Left" Margin="26.8,190,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="1" Grid.Column="1" />
-                    <ComboBox x:Name="CbFreeBuilding" HorizontalAlignment="Left" Margin="27,190,0,0"
+                    <ComboBox x:Name="CbFreeBuilding" HorizontalAlignment="Left" Margin="26.8,220,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="64" Grid.Column="1" />
-                    <ComboBox x:Name="CbFreeUnit" HorizontalAlignment="Left" Margin="27,220,0,0"
+                    <ComboBox x:Name="CbFreeUnit" HorizontalAlignment="Left" Margin="26.8,250,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="60" Grid.Column="1" />
-                    <ComboBox x:Name="CbFreeTech" HorizontalAlignment="Left" Margin="27,250,0,0"
+                    <ComboBox x:Name="CbFreeTech" HorizontalAlignment="Left" Margin="26.8,280,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
-                    <ComboBox x:Name="CbReligion" HorizontalAlignment="Left" Margin="27,280,0,0"
+                    <ComboBox x:Name="CbReligion" HorizontalAlignment="Left" Margin="26.8,310,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
-                    <ComboBox x:Name="CbSoundtrack" HorizontalAlignment="Left" Margin="27,310,0,0"
+                    <ComboBox x:Name="CbSoundtrack" HorizontalAlignment="Left" Margin="295,190,0,0"
                               VerticalAlignment="Top" Width="120" SelectedIndex="0" Grid.Column="1" />
-                    <TextBox x:Name="TbDOMQuote" HorizontalAlignment="Left" Margin="175,160,0,0" TextWrapping="Wrap"
-                             VerticalAlignment="Top" Width="240" Grid.Column="1" Height="171" />
+                    <TextBox x:Name="TbDOMQuote" HorizontalAlignment="Left" Margin="432.8,63,0,0" TextWrapping="Wrap"
+                             VerticalAlignment="Top" Width="422" Grid.Column="1" Height="122" />
 
                     <x2:ColorPicker
                         x:Name="CpPrimaryColor"
                         Width="120"
-                        Margin="294.8,10,0,0"
+                        Margin="295,220,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
@@ -93,7 +88,7 @@
                     <x2:ColorPicker
                         x:Name="CpSecondaryColor"
                         Width="120"
-                        Margin="294.8,40,0,0"
+                        Margin="295,250,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
@@ -104,7 +99,7 @@
                     <x2:ColorPicker
                         x:Name="CpTextColor"
                         Width="120"
-                        Margin="294.8,70,0,0"
+                        Margin="295,280,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         ColorMode="ColorCanvas"
@@ -113,14 +108,20 @@
                         ShowDropDownButton="False"
                         SelectedColor="White" Grid.Column="1" />
 
-                    <x2:IntegerUpDown x:Name="IntCivPortraitIndex" Margin="295,100,0,0" HorizontalAlignment="Left"
+                    <x2:IntegerUpDown x:Name="IntCivPortraitIndex" Margin="295,310,0,0" HorizontalAlignment="Left"
                                       VerticalAlignment="Top" FormatString="N0" Value="0" Increment="1" Minimum="0"
                                       Maximum="4" Width="120" AllowTextInput="False" Grid.Column="1" />
-                    <Button x:Name="BtnGenerateXML" Content="Generate" HorizontalAlignment="Left"
+                    <Button x:Name="BtnGenerateXML" Content="Generate the XMLs" HorizontalAlignment="Left"
                             Margin="10,340,0,0" VerticalAlignment="Top" Height="25" Width="240"
                             Click="BtnGenerateXML_Click" Grid.ColumnSpan="2" />
-                    <GroupBox Grid.Column="1" Header="City Names" HorizontalAlignment="Left" Height="142"
-                              Margin="432.8,0,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
+                    <Button x:Name="BtnReadFromXML" Content="Load from XML" HorizontalAlignment="Left"
+                            Margin="10,370,0,0" VerticalAlignment="Top" Height="25" Width="115"
+                            Click="BtnReadFromXML_Click"  Grid.ColumnSpan="2" />
+                    <Button x:Name="BtnResetForm" Content="Reset Form" HorizontalAlignment="Left"
+                            Margin="31.8,370,0,0" VerticalAlignment="Top" Height="25" Width="115"
+                            Click="BtnResetForm_Click" Grid.Column="1" />
+                    <GroupBox Grid.Column="1" Header="City Names" HorizontalAlignment="Left" Height="130"
+                              Margin="432.8,204,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
                         <Grid>
                             <Button x:Name="BtnAddCity" Content="Add" HorizontalAlignment="Left" Margin="10,15,0,0"
                                     VerticalAlignment="Top" Width="75" Click="BtnAddCity_OnClick" />
@@ -129,12 +130,12 @@
                                     VerticalAlignment="Top" Width="75" Click="BtnRemoveCity_OnClick" />
                             <Button x:Name="BtnClearCity" Content="Clear" HorizontalAlignment="Left" Margin="10,75,0,0"
                                     VerticalAlignment="Top" Width="75" Click="BtnClearCity_OnClick" />
-                            <ListBox x:Name="LbCityNames" HorizontalAlignment="Left" Height="102" Margin="93,10,0,0"
+                            <ListBox x:Name="LbCityNames" HorizontalAlignment="Left" Height="89" Margin="93,10,0,0"
                                      VerticalAlignment="Top" Width="307" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Spy Names" HorizontalAlignment="Left" Height="142"
-                              Margin="432.8,160,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
+                    <GroupBox Grid.Column="1" Header="Spy Names" HorizontalAlignment="Left" Height="130"
+                              Margin="432.8,334,0,0" VerticalAlignment="Top" Width="422" Foreground="White">
                         <Grid>
                             <Button x:Name="BtnAddSpy" Content="Add" HorizontalAlignment="Left" Margin="10,15,0,0"
                                     VerticalAlignment="Top" Width="75" Click="BtnAddSpy_Click" />
@@ -143,7 +144,7 @@
                                     VerticalAlignment="Top" Width="75" Click="BtnRemoveSpy_Click" />
                             <Button x:Name="BtnClearSpy" Content="Clear" HorizontalAlignment="Left" Margin="10,75,0,0"
                                     VerticalAlignment="Top" Width="75" Click="BtnClearSpy_Click" />
-                            <ListBox x:Name="LbSpyNames" HorizontalAlignment="Left" Height="102" Margin="90,10,0,0"
+                            <ListBox x:Name="LbSpyNames" HorizontalAlignment="Left" Height="88" Margin="90,10,0,0"
                                      VerticalAlignment="Top" Width="310" />
                         </Grid>
                     </GroupBox>
@@ -489,9 +490,7 @@
                                     Click="BtnGetTemplate_Click" />
                             <Image x:Name="imgIconPreview" HorizontalAlignment="Left" Height="299" Margin="10,64,0,0"
                                    VerticalAlignment="Top" Width="577">
-                                <Image.Source>
-                                    <BitmapImage UriSource="IconAtlas256.jpg" />
-                                </Image.Source>
+                                <!--<BitmapImage x:Name="biIconPreview" UriSource="" />-->
                             </Image>
                         </Grid>
                     </GroupBox>
@@ -512,9 +511,7 @@
                                     Click="BtnGetTemplate_Click" />
                             <Image x:Name="imgAlphaPreview" HorizontalAlignment="Left" Height="302" Margin="10,64,0,0"
                                    VerticalAlignment="Top" Width="302" Grid.RowSpan="2">
-                                <Image.Source>
-                                    <BitmapImage UriSource="AlphaAtlas128.jpg" />
-                                </Image.Source>
+                                <!--<BitmapImage x:Name="biAlphaPreview" />-->
                             </Image>
                         </Grid>
                     </GroupBox>

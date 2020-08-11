@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using log4net;
+using log4net.Config;
+using System.IO;
 using System.Reflection;
 using System.Windows;
 

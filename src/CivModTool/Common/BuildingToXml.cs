@@ -206,12 +206,12 @@ namespace CivModTool.Common
                 var flavor = new Models.XML.Buildings.Flavors.Row
                 {
                     BuildingType = data.Type,
-                    FlavorType = string.Format(Properties.Resources.txt_flavor, ResourceList.Gold.ToString().ToUpper()),
+                    FlavorType = string.Format(Properties.Resources.txt_flavor, nameof(ResourceList.Gold).ToUpper()),
                     Flavor = "25"
                 };
                 gameData.Building_Flavors.Row.Add(flavor);
 
-                XmlController.SerializeXml(gameData, FileCategories.Buildings.ToString());
+                XmlController.SerializeXml(gameData, nameof(FileCategories.Buildings));
                 return true;
             }
             catch (Exception e)
