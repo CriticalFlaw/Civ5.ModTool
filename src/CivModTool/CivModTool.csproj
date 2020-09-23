@@ -86,37 +86,31 @@
     <Compile Include="Common\XMLController.cs" />
     <Compile Include="Resources\Dictionaries.cs" />
     <Compile Include="Resources\EnumTypes.cs" />
-    <Compile Include="Resources\Models\Building.cs" />
-    <Compile Include="Resources\Models\Civilization.cs" />
-    <Compile Include="Resources\Models\Misc.cs" />
-    <Compile Include="Resources\Models\Leader.cs" />
-    <Compile Include="Resources\Models\Trait.cs" />
-    <Compile Include="Resources\Models\XML\Buildings\Buildings.cs" />
-    <Compile Include="Resources\Models\XML\Buildings\Building_Flavors.cs" />
-    <Compile Include="Resources\Models\XML\Buildings\Building_YieldChanges.cs" />
-    <Compile Include="Resources\Models\XML\Buildings\Building_YieldChangesPerPop.cs" />
-    <Compile Include="Resources\Models\XML\Buildings\Building_YieldModifiers.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_BuildingClassOverrides.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_CityNames.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_FreeBuildingClasses.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_FreeTechs.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_FreeUnits.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_Leaders.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_Religions.cs" />
-    <Compile Include="Resources\Models\XML\Civilization\Civilization_SpyNames.cs" />
-    <Compile Include="Resources\Models\XML\GameText.cs" />
-    <Compile Include="Resources\Models\XML\IconAtlas.cs" />
-    <Compile Include="Resources\Models\XML\Leader\Leader.cs" />
-    <Compile Include="Resources\Models\XML\Leader\Leader_Flavors.cs" />
-    <Compile Include="Resources\Models\XML\Leader\Leader_MajorCivApproachBiases.cs" />
-    <Compile Include="Resources\Models\XML\Leader\Leader_MinorCivApproachBiases.cs" />
-    <Compile Include="Resources\Models\XML\Leader\Leader_Traits.cs" />
-    <Compile Include="Resources\Models\XML\PlayerColor\Color.cs" />
-    <Compile Include="Resources\Models\XML\PlayerColor\PlayerColor.cs" />
-    <Compile Include="Resources\Models\XML\Trait\Trait.cs" />
-    <Compile Include="Resources\Models\XML\Trait\Trait_ResourceQuantityModifiers.cs" />
-    <Compile Include="Resources\Models\XML\Trait\Trait_YieldChangesStrategicResources.cs" />
+    <Compile Include="Models\Building\Building.cs" />
+    <Compile Include="Models\Building\Building_Flavors.cs" />
+    <Compile Include="Models\Building\Building_YieldChanges.cs" />
+    <Compile Include="Models\Building\Building_YieldChangesPerPop.cs" />
+    <Compile Include="Models\Building\Building_YieldModifiers.cs" />
+    <Compile Include="Models\Civilization\Civilization.cs" />
+    <Compile Include="Models\Civilization\Civilization_BuildingClassOverrides.cs" />
+    <Compile Include="Models\Civilization\Civilization_CityNames.cs" />
+    <Compile Include="Models\Civilization\Civilization_FreeBuildingClasses.cs" />
+    <Compile Include="Models\Civilization\Civilization_FreeTechs.cs" />
+    <Compile Include="Models\Civilization\Civilization_FreeUnits.cs" />
+    <Compile Include="Models\Civilization\Civilization_Leaders.cs" />
+    <Compile Include="Models\Civilization\Civilization_Religions.cs" />
+    <Compile Include="Models\Civilization\Civilization_SpyNames.cs" />
+    <Compile Include="Models\GameText.cs" />
+    <Compile Include="Models\IconAtlas.cs" />
+    <Compile Include="Models\Leader\Leader.cs" />
+    <Compile Include="Models\Leader\Leader_Flavors.cs" />
+    <Compile Include="Models\Leader\Leader_MajorCivApproachBiases.cs" />
+    <Compile Include="Models\Leader\Leader_MinorCivApproachBiases.cs" />
+    <Compile Include="Models\Leader\Leader_Traits.cs" />
+    <Compile Include="Models\PlayerColor.cs" />
+    <Compile Include="Models\Trait\Trait.cs" />
+    <Compile Include="Models\Trait\Trait_ResourceQuantityModifiers.cs" />
+    <Compile Include="Models\Trait\Trait_YieldChangesStrategicResources.cs" />
     <Compile Include="Resources\StringValueAttribute.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -192,7 +186,7 @@
       <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="log4net">
-      <Version>2.0.11</Version>
+      <Version>2.0.10</Version>
     </PackageReference>
     <PackageReference Include="Magick.NET-Q16-AnyCPU">
       <Version>7.22.0</Version>

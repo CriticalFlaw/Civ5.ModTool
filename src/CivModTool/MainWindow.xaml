@@ -394,19 +394,6 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Units" Visibility="Hidden">
-                <Grid>
-                    <Grid.Background>
-                        <SolidColorBrush Color="#191919" Opacity="0.85" />
-                    </Grid.Background>
-                    <TextBlock Text="Unit:" Margin="10,10,0,0" />
-                    <TextBlock Text="Unit Type:" Margin="10,40,0,0" />
-                    <TextBox x:Name="TbUnitType" Margin="125,10,0,0" TextWrapping="Wrap"
-                              Width="120" CharacterCasing="Upper" />
-                    <ComboBox x:Name="CbUnitOverride" Margin="125,40,0,0"
-                               Width="120" SelectedIndex="0" />
-                </Grid>
-            </TabItem>
         </TabControl>
         <Button x:Name="BtnGenerateXML" Content="Generate the XMLs" Margin="15,498,0,0"  Height="25" Width="200" Click="BtnGenerateXML_Click" />
         <Button x:Name="BtnResetForm" Content="Reset Form" Margin="220,498,0,0"  Height="25" Width="200" Click="BtnResetForm_Click" />

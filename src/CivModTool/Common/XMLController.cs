@@ -1,5 +1,4 @@
-﻿using CivModTool.Models;
-using CivModTool.Resources;
+﻿using CivModTool.Resources;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
@@ -10,37 +9,37 @@ namespace CivModTool.Common
     {
         #region WRITE_XML
 
-        public static bool GenerateBuildingsXml(Building gameData)
+        public static bool GenerateBuildingsXml(CivModTool.Models.Building.GameData gameData)
         {
             return BuildingToXml.GenerateBuildingsXml(gameData);
         }
 
-        public static bool GenerateCivilizationXml(Civilization gameData)
+        public static bool GenerateCivilizationXml(CivModTool.Models.Civilization.GameData gameData)
         {
             return CivilizationToXml.GenerateCivilizationXml(gameData);
         }
 
-        public static bool GenerateGameTextXml(List<GameText> gameData)
+        public static bool GenerateGameTextXml(CivModTool.Models.GameText.GameData gameData)
         {
             return MiscToXml.GenerateGameTextXml(gameData);
         }
 
-        public static bool GenerateIconAtlasXml(List<IconAtlas> gameData)
+        public static bool GenerateIconAtlasXml(CivModTool.Models.IconAtlas.GameData gameData)
         {
             return MiscToXml.GenerateIconAtlasXml(gameData);
         }
 
-        public static bool GeneratePlayerColorXml(List<PlayerColor> gameData)
+        public static bool GeneratePlayerColorXml(CivModTool.Models.PlayerColor.GameData gameData)
         {
             return MiscToXml.GeneratePlayerColorXml(gameData);
         }
 
-        public static bool GenerateLeaderXml(Leader gameData)
+        public static bool GenerateLeaderXml(CivModTool.Models.Leader.GameData gameData)
         {
             return LeaderToXml.GenerateLeaderXml(gameData);
         }
 
-        public static bool GenerateTraitXml(Trait gameData)
+        public static bool GenerateTraitXml(CivModTool.Models.Trait.GameData gameData)
         {
             return TraitToXml.GenerateTraitXml(gameData);
         }
@@ -49,24 +48,14 @@ namespace CivModTool.Common
 
         #region READ_XML
 
-        public static Models.XML.Civilization.GameData ReadCivilizationXml(string path)
+        public static CivModTool.Models.Civilization.GameData ReadCivilizationXml(string path)
         {
             return CivilizationToXml.ReadCivilizationXml(path);
         }
 
-        public static Models.XML.GameText.GameData ReadGameTextXml(string path)
+        public static CivModTool.Models.GameText.GameData ReadGameTextXml(string path)
         {
             return MiscToXml.ReadGameTextXml(path);
-        }
-
-        public static Models.XML.IconAtlas.GameData ReadIconAtlasXml(string path)
-        {
-            return MiscToXml.ReadIconAtlasXml(path);
-        }
-
-        public static Models.XML.PlayerColor.GameData ReadPlayerColorXml(string path)
-        {
-            return MiscToXml.ReadPlayerColorXml(path);
         }
 
         #endregion READ_XML
