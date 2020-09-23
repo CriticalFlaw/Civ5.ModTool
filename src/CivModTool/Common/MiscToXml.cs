@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using CivModTool.Models;
+﻿using CivModTool.Models;
 using CivModTool.Models.XML.GameText;
 using CivModTool.Models.XML.IconAtlas;
 using CivModTool.Models.XML.PlayerColor;
 using CivModTool.Models.XML.PlayerColor.Color;
 using CivModTool.Properties;
 using CivModTool.Resources;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Xml.Serialization;
 using GameData = CivModTool.Models.XML.GameText.GameData;
 using Row = CivModTool.Models.XML.GameText.Row;
 
@@ -28,7 +30,7 @@ namespace CivModTool.Common
                 };
 
                 foreach (var text in data)
-                    gameData.Language_en_US.Row.Add(new Row {Tag = text.Tag, Text = text.Text});
+                    gameData.Language_en_US.Row.Add(new Row { Tag = text.Tag, Text = text.Text });
 
                 XmlController.SerializeXml(gameData, nameof(FileCategories.GameText));
                 return true;
@@ -126,6 +128,57 @@ namespace CivModTool.Common
         {
             var color = Convert.ToDouble(value);
             return Math.Round(color / 255, 3).ToString(CultureInfo.InvariantCulture);
+        }
+
+        internal static GameData ReadGameTextXml(string path)
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(GameData), "GameText");
+                var reader = new StreamReader(path);
+                var gameData = (GameData)serializer.Deserialize(reader);
+                reader.Close();
+                return gameData;
+            }
+            catch (Exception e)
+            {
+                MainWindow.Logger.Error(e.Message);
+                return null;
+            }
+        }
+
+        internal static Models.XML.IconAtlas.GameData ReadIconAtlasXml(string path)
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(Models.XML.IconAtlas.GameData), nameof(FileCategories.IconAtlas));
+                var reader = new StreamReader(path);
+                var gameData = (Models.XML.IconAtlas.GameData)serializer.Deserialize(reader);
+                reader.Close();
+                return gameData;
+            }
+            catch (Exception e)
+            {
+                MainWindow.Logger.Error(e.Message);
+                return null;
+            }
+        }
+
+        internal static Models.XML.PlayerColor.GameData ReadPlayerColorXml(string path)
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(Models.XML.PlayerColor.GameData), nameof(FileCategories.PlayerColor));
+                var reader = new StreamReader(path);
+                var gameData = (Models.XML.PlayerColor.GameData)serializer.Deserialize(reader);
+                reader.Close();
+                return gameData;
+            }
+            catch (Exception e)
+            {
+                MainWindow.Logger.Error(e.Message);
+                return null;
+            }
         }
     }
 }

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using AutoUpdaterDotNET;
+﻿using AutoUpdaterDotNET;
 using CivModTool.Common;
 using CivModTool.Models;
 using CivModTool.Properties;
@@ -17,6 +8,16 @@ using log4net;
 using log4net.Config;
 using Microsoft.VisualBasic;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace CivModTool
 {
@@ -121,7 +122,7 @@ namespace CivModTool
             }
         }
 
-        public bool ValidationForm(FileCategories civilization)
+        public bool ValidateForm(FileCategories civilization)
         {
             var result = true;
             switch (civilization)
@@ -215,14 +216,31 @@ namespace CivModTool
             if (!GenerateUnitsXml()) return;
             if (!GenerateIconAtlasXml()) return;
             if (!GenerateGameTextXml()) return;
+            Process.Start(_outputPath + "\\XML");
         }
 
         private void BtnReadFromXML_Click(object sender, RoutedEventArgs e)
         {
+            using (var browser = new System.Windows.Forms.FolderBrowserDialog { SelectedPath = _outputPath })
+            {
+                if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    var gameText = XmlController.ReadGameTextXml(Directory.GetFiles(browser.SelectedPath, "GameText.xml").FirstOrDefault());
+
+                    foreach (var file in Directory.GetFiles(browser.SelectedPath))
+                    {
+                        if (file.Contains("Civilization.xml"))
+                        {
+                            ReadCivilizationXml(file);
+                        }
+                    }
+                }
+            }
         }
 
         private void BtnResetForm_Click(object sender, RoutedEventArgs e)
         {
+            TabControls.Items.Refresh();
         }
 
         private void BtnRandomizeStats_Click(object sender, RoutedEventArgs e)
@@ -363,7 +381,7 @@ namespace CivModTool
                     image.Write(_outputPath + "\\IconAtlas256.jpg");
                 }
 
-                lblImagePath.Content = fileDialog.FileName;
+                lblImagePath.Text = fileDialog.FileName;
 
                 var dynamicImage = new Image
                 {
@@ -397,7 +415,7 @@ namespace CivModTool
                     image.Write(_outputPath + "\\AlphaAtlas128.jpg");
                 }
 
-                lblAlphaPath.Content = fileDialog.FileName;
+                lblAlphaPath.Text = fileDialog.FileName;
 
                 var dynamicImage = new Image
                 {
@@ -426,7 +444,7 @@ namespace CivModTool
 
         private bool GenerateCivilizationXml()
         {
-            if (!ValidationForm(FileCategories.Civilization)) return false;
+            if (!ValidateForm(FileCategories.Civilization)) return false;
             var settings = Settings.Default;
             Enum.TryParse(CbFreeUnit.SelectedValue.ToString(), out Units unit);
 
@@ -440,11 +458,10 @@ namespace CivModTool
                 DefaultPlayerColor = string.Format(Properties.Resources.txt_civ_color, TbType.Text),
                 ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,
                     CbArtStyle.SelectedValue.ToString().ToUpper()),
-                ArtStyleSuffix =
-                    XmlController.GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles),
-                        CbArtStyle.SelectedValue.ToString())),
+                ArtStyleSuffix = XmlController.GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles),
+                    CbArtStyle.SelectedValue.ToString())),
                 ArtStylePrefix = CbArtStyle.SelectedValue.ToString().ToUpper(),
-                PortraitIndex = IntCivPortraitIndex.Value ?? default,
+                PortraitIndex = 1,
                 IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, TbType.Text),
                 AlphaIconAtlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, TbType.Text),
                 MapImage = string.Format(Properties.Resources.txt_civ_map, TbType.Text),
@@ -482,7 +499,7 @@ namespace CivModTool
 
         private bool GenerateLeaderXml()
         {
-            if (!ValidationForm(FileCategories.Leader)) return false;
+            if (!ValidateForm(FileCategories.Leader)) return false;
             var settings = Settings.Default;
 
             Tuple<string, int?>[] majorApproaches =
@@ -522,7 +539,7 @@ namespace CivModTool
                 Civilopedia = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
                 CivilopediaTag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text),
                 ArtDefineTag = string.Format(Properties.Resources.txt_leader_scene, TbLeaderType.Text),
-                PortraitIndex = IntLeaderPortraitIndex.Value ?? default,
+                PortraitIndex = 2,
                 VictoryCompetitiveness = IntCompVictory.Value ?? default,
                 WonderCompetitiveness = IntCompWonder.Value ?? default,
                 MinorCivCompetitiveness = IntCompMinor.Value ?? default,
@@ -587,28 +604,28 @@ namespace CivModTool
 
             var yieldChangeStrategicResource = new YieldChangesStrategicResources
             {
-                YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
+                YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
                 Yield = 3
             };
             gameData.YieldChangesStrategicResources.Add(yieldChangeStrategicResource);
 
             var resourceQuantityModifier = new ResourceQuantityModifiers
             {
-                ResourceType = string.Format(Properties.Resources.txt_resource, ResourceList.Iron.ToString().ToUpper()),
+                ResourceType = string.Format(Properties.Resources.txt_resource, nameof(ResourceList.Iron).ToUpper()),
                 ResourceQuantityModifier = 100
             };
             gameData.ResourceQuantityModifiers.Add(resourceQuantityModifier);
 
             resourceQuantityModifier = new ResourceQuantityModifiers
             {
-                ResourceType = string.Format(Properties.Resources.txt_resource, ResourceList.Coal.ToString().ToUpper()),
+                ResourceType = string.Format(Properties.Resources.txt_resource, nameof(ResourceList.Coal).ToUpper()),
                 ResourceQuantityModifier = 100
             };
             gameData.ResourceQuantityModifiers.Add(resourceQuantityModifier);
 
             resourceQuantityModifier = new ResourceQuantityModifiers
             {
-                ResourceType = string.Format(Properties.Resources.txt_resource, ResourceList.Oil.ToString().ToUpper()),
+                ResourceType = string.Format(Properties.Resources.txt_resource, nameof(ResourceList.Oil).ToUpper()),
                 ResourceQuantityModifier = 100
             };
             gameData.ResourceQuantityModifiers.Add(resourceQuantityModifier);
@@ -788,7 +805,7 @@ namespace CivModTool
                 ReplacementBuildingClass = "",
                 PolicyBranchType = "",
                 SpecialistType =
-                    string.Format(Properties.Resources.txt_specialist, Units.Merchant.ToString().ToUpper()),
+                    string.Format(Properties.Resources.txt_specialist, nameof(Units.Merchant).ToUpper()),
                 SpecialistCount = 1,
                 GreatWorkSlotType = "",
                 FreeGreatWork = "",
@@ -798,7 +815,7 @@ namespace CivModTool
                 ExtraLeagueVotes = 0,
                 CityWall = false,
                 DisplayPosition = 0,
-                PortraitIndex = IntBuildingPortraitIndex.Value ?? default,
+                PortraitIndex = 3,
                 WonderSplashImage = "",
                 WonderSplashAnchor = "R,T",
                 WonderSplashAudio = "",
@@ -811,14 +828,14 @@ namespace CivModTool
 
             var yieldChange = new YieldChanges
             {
-                YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
+                YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
                 Yield = 5
             };
             gameData.YieldChanges.Add(yieldChange);
 
             var yieldModifier = new YieldChanges
             {
-                YieldType = string.Format(Properties.Resources.txt_yield, Yields.Gold.ToString().ToUpper()),
+                YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
                 Yield = 25
             };
             gameData.YieldModifiers.Add(yieldModifier);
@@ -835,10 +852,10 @@ namespace CivModTool
 
         private bool GenerateIconAtlasXml()
         {
-            if (!string.IsNullOrEmpty(lblImagePath.Content.ToString()))
-                ProcessImages(lblImagePath.Content.ToString(), "IconAtlas", 1024, 512);
-            if (!string.IsNullOrEmpty(lblAlphaPath.Content.ToString()))
-                ProcessImages(lblAlphaPath.Content.ToString(), "AlphaAtlas", 128, 128, true);
+            if (!string.IsNullOrEmpty(lblImagePath.Text))
+                ProcessImages(lblImagePath.Text, "IconAtlas", 1024, 512);
+            if (!string.IsNullOrEmpty(lblAlphaPath.Text))
+                ProcessImages(lblAlphaPath.Text, "AlphaAtlas", 128, 128, true);
 
             var gameData = new List<IconAtlas>();
             foreach (var x in Directory.GetFiles(_outputPath + "\\Art").ToList())
@@ -879,8 +896,6 @@ namespace CivModTool
                 new GameText
                     {Tag = string.Format(Properties.Resources.key_civ_desc, TbType.Text), Text = TbDescription.Text},
                 new GameText
-                    { Tag = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text), Text = TbDescriptionShort.Text },
-                new GameText
                     { Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text), Text = TbCivilopedia.Text },
                 new GameText
                     {Tag = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text), Text = TbDOMQuote.Text},
@@ -890,7 +905,7 @@ namespace CivModTool
                 new GameText
                     { Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text), Text = TbLeaderCivilopedia.Text },
                 new GameText
-                    { Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text), Text = TbLeaderCivilopediaTag.Text },
+                    { Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text), Text = TbLeaderType.Text },
                 // Trait
                 new GameText
                     { Tag = string.Format(Properties.Resources.key_trait, TbTraitType.Text), Text = TbTraitDescription.Text },
@@ -927,5 +942,52 @@ namespace CivModTool
         }
 
         #endregion CREATE_XML
+
+        #region READ_XML
+
+        private bool ReadCivilizationXml(string path)
+        {
+            try
+            {
+                var gameData = XmlController.ReadCivilizationXml(path);
+                if (gameData is null) return false;
+                TbType.Text = FormatString(gameData.Civilizations.Row.Type, Properties.Resources.txt_civ);
+                TbAdjective.Text = gameData.Civilizations.Row.Adjective;
+                TbDescription.Text = gameData.Civilizations.Row.Description;
+                TbCivilopedia.Text = gameData.Civilizations.Row.Civilopedia;
+                CbArtStyle.SelectedValue = gameData.Civilizations.Row.ArtStyleType;
+                CbFreeBuilding.SelectedValue = gameData.Civilization_FreeBuildingClasses.Row.CivilizationType;
+                CbFreeUnit.SelectedValue = gameData.Civilization_FreeUnits.Row.UnitClassType;
+                CbFreeTech.SelectedValue = gameData.Civilization_FreeTechs.Row.TechType;
+                CbReligion.SelectedValue = gameData.Civilization_Religions.Row.ReligionType;
+                CbSoundtrack.SelectedValue = gameData.Civilizations.Row.SoundtrackTag;
+                TbDOMQuote.Text = gameData.Civilizations.Row.DawnOfManQuote;
+                foreach (var city in gameData.Civilization_CityNames.Row)
+                    LbCityNames.Items.Add(city.CityName);
+                foreach (var spy in gameData.Civilization_SpyNames.Row)
+                    LbSpyNames.Items.Add(spy.SpyName);
+
+                Models.XML.PlayerColor.GameData colors = XmlController.ReadPlayerColorXml(path);
+                if (colors.PlayerColors is null) return true;
+                var cc = new ColorConverter();
+                CpPrimaryColor.SelectedColor = (Color)cc.ConvertFrom(colors.PlayerColors.Row.PrimaryColor);
+                CpSecondaryColor.SelectedColor = (Color)cc.ConvertFrom(colors.PlayerColors.Row.SecondaryColor);
+                CpTextColor.SelectedColor = (Color)cc.ConvertFrom(colors.PlayerColors.Row.TextColor);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+                return false;
+            }
+        }
+
+        private string FormatString(string value, string remove)
+        {
+            remove = remove.Replace("{0}", string.Empty);
+            return value.Replace(remove, string.Empty);
+        }
+
+        #endregion READ_XML
     }
 }

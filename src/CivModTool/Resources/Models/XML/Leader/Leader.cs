@@ -1,8 +1,8 @@
-﻿using System.Xml.Serialization;
-using CivModTool.Models.XML.Leader.Flavors;
+﻿using CivModTool.Models.XML.Leader.Flavors;
 using CivModTool.Models.XML.Leader.MajorCivApproachBiases;
 using CivModTool.Models.XML.Leader.MinorCivApproachBiases;
 using CivModTool.Models.XML.Leader.Traits;
+using System.Xml.Serialization;
 
 namespace CivModTool.Models.XML.Leader
 {

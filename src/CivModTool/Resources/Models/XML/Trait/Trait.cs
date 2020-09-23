@@ -1,6 +1,6 @@
-﻿using System.Xml.Serialization;
-using CivModTool.Models.XML.Trait.ResourceQuantityModifiers;
+﻿using CivModTool.Models.XML.Trait.ResourceQuantityModifiers;
 using CivModTool.Models.XML.Trait.YieldChangesStrategicResources;
+using System.Xml.Serialization;
 
 namespace CivModTool.Models.XML.Trait
 {

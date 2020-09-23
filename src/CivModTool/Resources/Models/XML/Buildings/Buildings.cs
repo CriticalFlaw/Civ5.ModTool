@@ -1,8 +1,8 @@
-﻿using System.Xml.Serialization;
-using CivModTool.Models.XML.Buildings.Flavors;
+﻿using CivModTool.Models.XML.Buildings.Flavors;
 using CivModTool.Models.XML.Buildings.YieldChanges;
 using CivModTool.Models.XML.Buildings.YieldChangesPerPop;
 using CivModTool.Models.XML.Buildings.YieldModifiers;
+using System.Xml.Serialization;
 
 namespace CivModTool.Models.XML.Buildings
 {

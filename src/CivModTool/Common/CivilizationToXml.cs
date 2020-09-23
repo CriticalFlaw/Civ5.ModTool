@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CivModTool.Models;
+﻿using CivModTool.Models;
 using CivModTool.Models.XML.Civilization;
 using CivModTool.Models.XML.Civilization.BuildingClassOverrides;
 using CivModTool.Models.XML.Civilization.CityNames;
@@ -11,6 +9,10 @@ using CivModTool.Models.XML.Civilization.Leaders;
 using CivModTool.Models.XML.Civilization.Religions;
 using CivModTool.Models.XML.Civilization.SpyNames;
 using CivModTool.Resources;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
 using Row = CivModTool.Models.XML.Civilization.Row;
 
 namespace CivModTool.Common
@@ -119,11 +121,11 @@ namespace CivModTool.Common
 
                 foreach (var x in data.Cities)
                     gameData.Civilization_CityNames.Row.Add(new Models.XML.Civilization.CityNames.Row
-                        {CivilizationType = data.Type, CityName = x.ToUpper()});
+                    { CivilizationType = data.Type, CityName = x.ToUpper() });
 
                 foreach (var x in data.Spies)
                     gameData.Civilization_SpyNames.Row.Add(new Models.XML.Civilization.SpyNames.Row
-                        {CivilizationType = data.Type, SpyName = x.ToUpper()});
+                    { CivilizationType = data.Type, SpyName = x.ToUpper() });
 
                 foreach (var x in data.UniqueBuildings)
                     gameData.Civilization_BuildingClassOverrides.Row.Add(
@@ -152,6 +154,23 @@ namespace CivModTool.Common
             {
                 MainWindow.Logger.Error(e.Message);
                 return false;
+            }
+        }
+
+        internal static GameData ReadCivilizationXml(string path)
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(GameData), nameof(FileCategories.Civilization));
+                var reader = new StreamReader(path);
+                var gameData = (GameData)serializer.Deserialize(reader);
+                reader.Close();
+                return gameData;
+            }
+            catch (Exception e)
+            {
+                MainWindow.Logger.Error(e.Message);
+                return null;
             }
         }
     }

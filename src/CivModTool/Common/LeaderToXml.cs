@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using CivModTool.Models;
+﻿using CivModTool.Models;
 using CivModTool.Models.XML.Leader;
 using CivModTool.Models.XML.Leader.Flavors;
 using CivModTool.Models.XML.Leader.MajorCivApproachBiases;
@@ -8,6 +6,8 @@ using CivModTool.Models.XML.Leader.MinorCivApproachBiases;
 using CivModTool.Models.XML.Leader.Traits;
 using CivModTool.Properties;
 using CivModTool.Resources;
+using System;
+using System.Collections.Generic;
 using Row = CivModTool.Models.XML.Leader.Row;
 
 namespace CivModTool.Common
@@ -75,15 +75,15 @@ namespace CivModTool.Common
 
                 foreach (var x in data.MajorApproaches)
                     gameData.Leader_MajorCivApproachBiases.Row.Add(new Models.XML.Leader.MajorCivApproachBiases.Row
-                        {LeaderType = data.Type, MajorCivApproachType = x.Item1, Bias = x.Item2 ?? default});
+                    { LeaderType = data.Type, MajorCivApproachType = x.Item1, Bias = x.Item2 ?? default });
 
                 foreach (var x in data.MinorApproaches)
                     gameData.Leader_MinorCivApproachBiases.Row.Add(new Models.XML.Leader.MinorCivApproachBiases.Row
-                        {LeaderType = data.Type, MinorCivApproachType = x.Item1, Bias = x.Item2 ?? default});
+                    { LeaderType = data.Type, MinorCivApproachType = x.Item1, Bias = x.Item2 ?? default });
 
                 foreach (var x in data.Flavors)
                     gameData.Leader_Flavors.Row.Add(new Models.XML.Leader.Flavors.Row
-                        {LeaderType = data.Type, FlavorType = x.FlavorType, Flavor = x.Count});
+                    { LeaderType = data.Type, FlavorType = x.FlavorType, Flavor = x.Count });
 
                 XmlController.SerializeXml(gameData, nameof(FileCategories.Leader));
                 return true;

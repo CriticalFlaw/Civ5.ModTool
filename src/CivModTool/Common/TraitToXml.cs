@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using CivModTool.Models;
+﻿using CivModTool.Models;
 using CivModTool.Models.XML.Trait;
 using CivModTool.Models.XML.Trait.ResourceQuantityModifiers;
 using CivModTool.Models.XML.Trait.YieldChangesStrategicResources;
 using CivModTool.Resources;
+using System;
+using System.Collections.Generic;
 using Row = CivModTool.Models.XML.Trait.Row;
 
 namespace CivModTool.Common

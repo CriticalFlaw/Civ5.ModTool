@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace CivModTool.Resources
+﻿namespace CivModTool.Resources
 {
     public enum Civs
     {

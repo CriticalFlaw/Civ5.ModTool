@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using CivModTool.Models;
+﻿using CivModTool.Models;
 using CivModTool.Models.XML.Buildings;
 using CivModTool.Models.XML.Buildings.Flavors;
 using CivModTool.Models.XML.Buildings.YieldChanges;
 using CivModTool.Models.XML.Buildings.YieldModifiers;
 using CivModTool.Resources;
+using System;
+using System.Collections.Generic;
 using Buildings = CivModTool.Models.XML.Buildings.Buildings;
 using Row = CivModTool.Models.XML.Buildings.Row;
 

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CivModTool.Models.XML.PlayerColor.Color;
+using System.Collections.Generic;
 using System.Xml.Serialization;
-using CivModTool.Models.XML.PlayerColor.Color;
 
 namespace CivModTool.Models.XML.PlayerColor
 {

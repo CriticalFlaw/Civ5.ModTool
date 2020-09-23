@@ -1,5 +1,4 @@
-﻿using System.Xml.Serialization;
-using CivModTool.Models.XML.Civilization.BuildingClassOverrides;
+﻿using CivModTool.Models.XML.Civilization.BuildingClassOverrides;
 using CivModTool.Models.XML.Civilization.CityNames;
 using CivModTool.Models.XML.Civilization.FreeBuildingClasses;
 using CivModTool.Models.XML.Civilization.FreeTechs;
@@ -7,6 +6,7 @@ using CivModTool.Models.XML.Civilization.FreeUnits;
 using CivModTool.Models.XML.Civilization.Leaders;
 using CivModTool.Models.XML.Civilization.Religions;
 using CivModTool.Models.XML.Civilization.SpyNames;
+using System.Xml.Serialization;
 
 namespace CivModTool.Models.XML.Civilization
 {

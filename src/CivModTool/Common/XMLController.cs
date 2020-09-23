@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using CivModTool.Models;
+using CivModTool.Resources;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
-using CivModTool.Models;
-using CivModTool.Resources;
 
 namespace CivModTool.Common
 {
     internal static class XmlController
     {
+        #region WRITE_XML
+
         public static bool GenerateBuildingsXml(Building gameData)
         {
             return BuildingToXml.GenerateBuildingsXml(gameData);
@@ -28,14 +30,14 @@ namespace CivModTool.Common
             return MiscToXml.GenerateIconAtlasXml(gameData);
         }
 
-        public static bool GenerateLeaderXml(Leader gameData)
-        {
-            return LeaderToXml.GenerateLeaderXml(gameData);
-        }
-
         public static bool GeneratePlayerColorXml(List<PlayerColor> gameData)
         {
             return MiscToXml.GeneratePlayerColorXml(gameData);
+        }
+
+        public static bool GenerateLeaderXml(Leader gameData)
+        {
+            return LeaderToXml.GenerateLeaderXml(gameData);
         }
 
         public static bool GenerateTraitXml(Trait gameData)
@@ -43,19 +45,40 @@ namespace CivModTool.Common
             return TraitToXml.GenerateTraitXml(gameData);
         }
 
-        public static bool GenerateUnitsXml(Unit gameData)
+        #endregion WRITE_XML
+
+        #region READ_XML
+
+        public static Models.XML.Civilization.GameData ReadCivilizationXml(string path)
         {
-            return UnitToXml.GenerateUnitsXml(gameData);
+            return CivilizationToXml.ReadCivilizationXml(path);
         }
+
+        public static Models.XML.GameText.GameData ReadGameTextXml(string path)
+        {
+            return MiscToXml.ReadGameTextXml(path);
+        }
+
+        public static Models.XML.IconAtlas.GameData ReadIconAtlasXml(string path)
+        {
+            return MiscToXml.ReadIconAtlasXml(path);
+        }
+
+        public static Models.XML.PlayerColor.GameData ReadPlayerColorXml(string path)
+        {
+            return MiscToXml.ReadPlayerColorXml(path);
+        }
+
+        #endregion READ_XML
 
         internal static void SerializeXml<T>(T gameData, string fileName)
         {
-            var writer = new XmlSerializer(typeof(T));
+            var serializer = new XmlSerializer(typeof(T));
             var ns = new XmlSerializerNamespaces();
             ns.Add("", "");
             var path = string.Format(Properties.Resources.txt_output, Directory.GetCurrentDirectory(), fileName);
             var file = File.Create(path);
-            writer.Serialize(file, gameData, ns);
+            serializer.Serialize(file, gameData, ns);
             file.Close();
         }
 
