@@ -1,12 +1,4 @@
-﻿using CivModTool.Models.Civilization.BuildingClassOverrides;
-using CivModTool.Models.Civilization.CityNames;
-using CivModTool.Models.Civilization.FreeBuildingClasses;
-using CivModTool.Models.Civilization.FreeTechs;
-using CivModTool.Models.Civilization.FreeUnits;
-using CivModTool.Models.Civilization.Leaders;
-using CivModTool.Models.Civilization.Religions;
-using CivModTool.Models.Civilization.SpyNames;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace CivModTool.Models.Civilization
 {
@@ -17,28 +9,28 @@ namespace CivModTool.Models.Civilization
         public Civilizations Civilizations { get; set; }
 
         [XmlElement(ElementName = "Civilization_Leaders")]
-        public Civilization_Leaders Civilization_Leaders { get; set; }
+        public Leaders Leaders { get; set; }
 
         [XmlElement(ElementName = "Civilization_CityNames")]
-        public Civilization_CityNames Civilization_CityNames { get; set; }
+        public CityNames CityNames { get; set; }
 
         [XmlElement(ElementName = "Civilization_FreeBuildingClasses")]
-        public Civilization_FreeBuildingClasses Civilization_FreeBuildingClasses { get; set; }
+        public FreeBuildingClasses FreeBuildingClasses { get; set; }
 
         [XmlElement(ElementName = "Civilization_FreeTechs")]
-        public Civilization_FreeTechs Civilization_FreeTechs { get; set; }
+        public FreeTechs FreeTechs { get; set; }
 
         [XmlElement(ElementName = "Civilization_FreeUnits")]
-        public Civilization_FreeUnits Civilization_FreeUnits { get; set; }
+        public FreeUnits FreeUnits { get; set; }
 
         [XmlElement(ElementName = "Civilization_Religions")]
-        public Civilization_Religion Civilization_Religions { get; set; }
+        public Religions Religions { get; set; }
 
         [XmlElement(ElementName = "Civilization_BuildingClassOverrides")]
-        public Civilization_BuildingClassOverrides Civilization_BuildingClassOverrides { get; set; }
+        public BuildingClassOverrides BuildingClassOverrides { get; set; }
 
         [XmlElement(ElementName = "Civilization_SpyNames")]
-        public Civilization_SpyNames Civilization_SpyNames { get; set; }
+        public SpyNames SpyNames { get; set; }
     }
 
     [XmlRoot(ElementName = "Civilization")]

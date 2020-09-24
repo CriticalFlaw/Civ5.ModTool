@@ -1,8 +1,4 @@
-﻿using CivModTool.Models.Building.Flavors;
-using CivModTool.Models.Building.YieldChanges;
-using CivModTool.Models.Building.YieldChangesPerPop;
-using CivModTool.Models.Building.YieldModifiers;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace CivModTool.Models.Building
 {
@@ -13,16 +9,16 @@ namespace CivModTool.Models.Building
         public Buildings Buildings { get; set; }
 
         [XmlElement(ElementName = "Building_Flavors")]
-        public Building_Flavors Building_Flavors { get; set; }
+        public Flavors Flavors { get; set; }
 
         [XmlElement(ElementName = "Building_YieldChanges")]
-        public Building_YieldChanges Building_YieldChanges { get; set; }
+        public YieldChanges YieldChanges { get; set; }
 
         [XmlElement(ElementName = "Building_YieldChangesPerPop")]
-        public Building_YieldChangesPerPop Building_YieldChangesPerPop { get; set; }
+        public YieldChangesPerPop YieldChangesPerPop { get; set; }
 
         [XmlElement(ElementName = "Building_YieldModifiers")]
-        public Building_YieldModifiers Building_YieldModifiers { get; set; }
+        public YieldModifiers YieldModifiers { get; set; }
     }
 
     [XmlRoot(ElementName = "Building")]

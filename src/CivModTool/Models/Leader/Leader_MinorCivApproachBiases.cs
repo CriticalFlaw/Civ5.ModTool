@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CivModTool.Models.Leader.MinorCivApproachBiases
+namespace CivModTool.Models.Leader
 {
     [XmlRoot(ElementName = "Leader_MinorCivApproachBiases", Namespace = "MinorCivApproachBiases")]
-    public class Leader_MinorCivApproachBiases
+    public class MinorCivApproachBiases
     {
         [XmlElement(ElementName = "Row")]
-        public List<MinorCivApproachBiases> Row { get; set; }
+        public List<MinorCivApproachBias> Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class MinorCivApproachBiases
+    public class MinorCivApproachBias
     {
         [XmlElement(ElementName = "LeaderType")]
         public string LeaderType { get; set; }

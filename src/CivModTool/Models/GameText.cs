@@ -7,11 +7,11 @@ namespace CivModTool.Models.GameText
     public class GameData
     {
         [XmlElement(ElementName = "Language_en_US")]
-        public Language_en_US Language_en_US { get; set; }
+        public Text Text { get; set; }
     }
 
     [XmlRoot(ElementName = "Language_en_US")]
-    public class Language_en_US
+    public class Text
     {
         [XmlElement(ElementName = "Row")]
         public List<Row> Row { get; set; }

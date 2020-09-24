@@ -2,14 +2,14 @@
 
 namespace CivModTool.Resources
 {
-    [AttributeUsage(AttributeTargets.All, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.All)]
     public class StringValueAttribute : Attribute
     {
-        public string StringValue { get; protected set; }
-
         public StringValueAttribute(string value)
         {
-            this.StringValue = value;
+            StringValue = value;
         }
+
+        public string StringValue { get; protected set; }
     }
 }

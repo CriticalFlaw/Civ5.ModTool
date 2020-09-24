@@ -1,16 +1,16 @@
 ﻿using System.Xml.Serialization;
 
-namespace CivModTool.Models.Civilization.FreeBuildingClasses
+namespace CivModTool.Models.Civilization
 {
     [XmlRoot(ElementName = "Civilization_FreeBuildingClasses", Namespace = "FreeBuildingClasses")]
-    public class Civilization_FreeBuildingClasses
+    public class FreeBuildingClasses
     {
         [XmlElement(ElementName = "Row")]
-        public FreeBuildingClasses Row { get; set; }
+        public FreeBuildingClass Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class FreeBuildingClasses
+    public class FreeBuildingClass
     {
         [XmlElement(ElementName = "CivilizationType")]
         public string CivilizationType { get; set; }

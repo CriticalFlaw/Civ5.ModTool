@@ -1,8 +1,4 @@
-﻿using CivModTool.Models.Leader.Flavors;
-using CivModTool.Models.Leader.MajorCivApproachBiases;
-using CivModTool.Models.Leader.MinorCivApproachBiases;
-using CivModTool.Models.Leader.Traits;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace CivModTool.Models.Leader
 {
@@ -13,16 +9,16 @@ namespace CivModTool.Models.Leader
         public Leaders Leaders { get; set; }
 
         [XmlElement(ElementName = "Leader_Traits")]
-        public Leader_Traits Leader_Traits { get; set; }
+        public Traits Traits { get; set; }
 
         [XmlElement(ElementName = "Leader_MajorCivApproachBiases")]
-        public Leader_MajorCivApproachBiases Leader_MajorCivApproachBiases { get; set; }
+        public MajorCivApproachBiases MajorCivApproachBiases { get; set; }
 
         [XmlElement(ElementName = "Leader_MinorCivApproachBiases")]
-        public Leader_MinorCivApproachBiases Leader_MinorCivApproachBiases { get; set; }
+        public MinorCivApproachBiases MinorCivApproachBiases { get; set; }
 
         [XmlElement(ElementName = "Leader_Flavors")]
-        public Leader_Flavors Leader_Flavors { get; set; }
+        public Flavors Flavors { get; set; }
     }
 
     [XmlRoot(ElementName = "Leader")]

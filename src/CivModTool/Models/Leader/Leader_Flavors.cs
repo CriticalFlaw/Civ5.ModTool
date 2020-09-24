@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CivModTool.Models.Leader.Flavors
+namespace CivModTool.Models.Leader
 {
     [XmlRoot(ElementName = "Leader_Flavors", Namespace = "Flavors")]
-    public class Leader_Flavors
+    public class Flavors
     {
         [XmlElement(ElementName = "Row")]
         public List<Flavor> Row { get; set; }

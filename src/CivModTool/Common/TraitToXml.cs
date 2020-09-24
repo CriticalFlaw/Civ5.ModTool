@@ -6,11 +6,11 @@ namespace CivModTool.Common
 {
     internal static class TraitToXml
     {
-        internal static bool GenerateTraitXml(GameData gameData)
+        internal static bool WriteTraitXml(GameData gameData)
         {
             try
             {
-                XmlController.SerializeXml(gameData, nameof(FileCategories.Trait));
+                XmlController.SerializeXml(gameData, nameof(Categories.Trait));
                 return true;
             }
             catch (Exception e)

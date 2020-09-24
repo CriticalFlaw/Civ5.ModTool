@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace CivModTool.Models.Building.YieldChanges
+namespace CivModTool.Models.Building
 {
     [XmlRoot(ElementName = "Building_YieldChanges", Namespace = "YieldChanges")]
-    public class Building_YieldChanges
+    public class YieldChanges
     {
         [XmlElement(ElementName = "Row")]
         public YieldChange Row { get; set; }

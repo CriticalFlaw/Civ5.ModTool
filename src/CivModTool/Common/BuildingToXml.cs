@@ -6,11 +6,11 @@ namespace CivModTool.Common
 {
     internal static class BuildingToXml
     {
-        internal static bool GenerateBuildingsXml(GameData gameData)
+        internal static bool WriteBuildingsXml(GameData gameData)
         {
             try
             {
-                XmlController.SerializeXml(gameData, nameof(FileCategories.Buildings));
+                XmlController.SerializeXml(gameData, nameof(Categories.Building));
                 return true;
             }
             catch (Exception e)

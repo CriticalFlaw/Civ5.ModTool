@@ -6,11 +6,11 @@ namespace CivModTool.Common
 {
     internal static class LeaderToXml
     {
-        internal static bool GenerateLeaderXml(GameData gameData)
+        internal static bool WriteLeaderXml(GameData gameData)
         {
             try
             {
-                XmlController.SerializeXml(gameData, nameof(FileCategories.Leader));
+                XmlController.SerializeXml(gameData, nameof(Categories.Leader));
                 return true;
             }
             catch (Exception e)

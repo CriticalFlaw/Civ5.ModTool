@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CivModTool.Models.Trait.ResourceQuantityModifiers
+namespace CivModTool.Models.Trait
 {
     [XmlRoot(ElementName = "Trait_ResourceQuantityModifiers", Namespace = "ResourceQuantityModifiers")]
-    public class Trait_ResourceQuantityModifiers
+    public class ResourceQuantityModifiers
     {
         [XmlElement(ElementName = "Row")]
-        public List<ResourceQuantityModifiers> Row { get; set; }
+        public List<ResourceQuantityModifier> Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class ResourceQuantityModifiers
+    public class ResourceQuantityModifier
     {
         [XmlElement(ElementName = "TraitType")]
         public string TraitType { get; set; }
@@ -20,6 +20,6 @@ namespace CivModTool.Models.Trait.ResourceQuantityModifiers
         public string ResourceType { get; set; }
 
         [XmlElement(ElementName = "ResourceQuantityModifier")]
-        public int ResourceQuantityModifier { get; set; }
+        public int Yield { get; set; }
     }
 }

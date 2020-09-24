@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace CivModTool.Models.Civilization.Religions
+namespace CivModTool.Models.Civilization
 {
     [XmlRoot(ElementName = "Civilization_Religions", Namespace = "Religions")]
-    public class Civilization_Religion
+    public class Religions
     {
         [XmlElement(ElementName = "Row")]
         public Religion Row { get; set; }

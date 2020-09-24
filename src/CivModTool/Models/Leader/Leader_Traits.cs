@@ -1,16 +1,16 @@
 ﻿using System.Xml.Serialization;
 
-namespace CivModTool.Models.Leader.Traits
+namespace CivModTool.Models.Leader
 {
     [XmlRoot(ElementName = "Leader_Traits", Namespace = "Traits")]
-    public class Leader_Traits
+    public class Traits
     {
         [XmlElement(ElementName = "Row")]
-        public Traits Row { get; set; }
+        public Trait Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class Traits
+    public class Trait
     {
         [XmlElement(ElementName = "LeaderType")]
         public string LeaderType { get; set; }

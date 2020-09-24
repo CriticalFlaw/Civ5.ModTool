@@ -1,22 +1,18 @@
 ﻿using AutoUpdaterDotNET;
 using CivModTool.Common;
+using CivModTool.Models.Building;
 using CivModTool.Models.Civilization;
-using CivModTool.Models.Civilization.CityNames;
-using CivModTool.Models.Civilization.FreeBuildingClasses;
-using CivModTool.Models.Civilization.FreeTechs;
-using CivModTool.Models.Civilization.FreeUnits;
-using CivModTool.Models.Civilization.Religions;
-using CivModTool.Models.Civilization.SpyNames;
+using CivModTool.Models.GameText;
+using CivModTool.Models.IconAtlas;
 using CivModTool.Models.Leader;
-using CivModTool.Models.Leader.MajorCivApproachBiases;
-using CivModTool.Models.Leader.MinorCivApproachBiases;
+using CivModTool.Models.PlayerColor;
+using CivModTool.Models.Trait;
 using CivModTool.Properties;
 using CivModTool.Resources;
 using ImageMagick;
 using log4net;
 using log4net.Config;
 using Microsoft.VisualBasic;
-using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,12 +22,18 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Forms;
 using System.Windows.Media.Imaging;
-using CivModTool.Models.Building;
-using CivModTool.Models.Building.YieldChanges;
-using CivModTool.Models.GameText;
 using Buildings = CivModTool.Resources.Buildings;
+using Flavors = CivModTool.Resources.Flavors;
+using GameData = CivModTool.Models.Civilization.GameData;
+using Leader = CivModTool.Models.Civilization.Leader;
+using Leaders = CivModTool.Models.Leader.Leaders;
+using MessageBox = System.Windows.MessageBox;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using Religions = CivModTool.Resources.Religions;
+using Trait = CivModTool.Models.Leader.Trait;
+using Traits = CivModTool.Models.Trait.Traits;
 
 namespace CivModTool
 {
@@ -54,17 +56,26 @@ namespace CivModTool
             AutoUpdater.Start(Properties.Resources.txt_app_update);
         }
 
+        /// <summary>
+        ///     Perform tasks while initializing the application
+        /// </summary>
         private void InitializeApplication()
         {
+            // Create the XML directory if it doesn't already exist
             if (!Directory.Exists(_outputPath + "\\XML"))
                 Directory.CreateDirectory(_outputPath + "\\XML");
 
+            // Format the icon atlas template to JPG
             using (var image = new MagickImage(_outputPath + "\\Art\\IconAtlas256.psd"))
                 image.Write("IconAtlas256.jpg");
 
-            // Civilization
+            // Prefix the individual type fields
             TbType.Text = Settings.Default.civ_name.Replace("CIVILIZATION_", string.Empty);
+            TbLeaderType.Text = Settings.Default.leader_name.Replace("LEADER_", string.Empty);
+            TbTraitType.Text = Settings.Default.trait_name.Replace("TRAIT_", string.Empty);
+            TbBuildingType.Text = Settings.Default.building_name.Replace("BUILDING_", string.Empty);
 
+            // Load all the combo-boxes with descriptive enumerations
             foreach (Enum item in Enum.GetValues(typeof(ArtStyles)))
                 CbArtStyle.Items.Add(GetStringValue(item));
 
@@ -83,20 +94,11 @@ namespace CivModTool
             foreach (Enum item in Enum.GetValues(typeof(Religions)))
                 CbReligion.Items.Add(GetStringValue(item));
 
-            // Leader
-            TbLeaderType.Text = Settings.Default.leader_name.Replace("LEADER_", string.Empty);
-
             foreach (Enum item in Enum.GetValues(typeof(Flavors)))
                 CbFlavors.Items.Add(GetStringValue(item));
 
-            // Trait
-            TbTraitType.Text = Settings.Default.trait_name.Replace("TRAIT_", string.Empty);
-
             foreach (Enum item in Enum.GetValues(typeof(TraitAttributes)))
                 CbTraitAttributes.Items.Add(GetStringValue(item));
-
-            // Building
-            TbBuildingType.Text = Settings.Default.building_name.Replace("BUILDING_", string.Empty);
 
             foreach (Enum item in Enum.GetValues(typeof(Buildings)))
                 CbBuildingOverride.Items.Add(GetStringValue(item));
@@ -108,7 +110,174 @@ namespace CivModTool
                 CbBuildingReqTech.Items.Add(GetStringValue(item));
         }
 
-        private bool PrepareForExport()
+        /// <summary>
+        ///     Validate a given page before it is exported to XML
+        /// </summary>
+        public bool ValidateForm(Categories civilization)
+        {
+            var result = true;
+            switch (civilization)
+            {
+                case Categories.Civilization:
+                    if (string.IsNullOrWhiteSpace(TbType.Text))
+                    {
+                        MessageBox.Show("Invalid Civilization Name", "Invalid Civilization Name", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        TabControls.SelectedIndex = 0;
+                        result = false;
+                    }
+
+                    break;
+
+                case Categories.Leader:
+                    if (string.IsNullOrWhiteSpace(TbLeaderType.Text))
+                    {
+                        MessageBox.Show("Invalid Leader Name", "Invalid Leader Name", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        TabControls.SelectedIndex = 1;
+                        result = false;
+                    }
+
+                    break;
+
+                case Categories.Trait:
+                    if (string.IsNullOrWhiteSpace(TbTraitType.Text))
+                    {
+                        MessageBox.Show("Invalid Trait Name", "Invalid Trait Name", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                        TabControls.SelectedIndex = 2;
+                        result = false;
+                    }
+
+                    break;
+
+                case Categories.Building:
+                case Categories.GameText:
+                case Categories.IconAtlas:
+                case Categories.PlayerColor:
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(civilization), civilization, null);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        ///     Convert a given image to different sizes using MagickImage
+        /// </summary>
+        private void ProcessImages(string filePath, string fileName, int width, int height, bool alpha = false)
+        {
+            try
+            {
+                var iconSizes = alpha ? new[] { 128, 80, 64, 48, 45, 32, 24, 16 } : new[] { 256, 128, 80, 64, 45, 32 };
+                for (var x = 0; x <= iconSizes.Length; x++)
+                {
+                    using (var image = new MagickImage(filePath))
+                    {
+                        var size = new MagickGeometry(width / 2, height / 2);
+                        image.Resize(size);
+                        image.Write($"{_outputPath}\\Art\\{fileName}{iconSizes[x]}.psd");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e.Message);
+            }
+        }
+
+        /// <summary>
+        ///     Process the uploaded Alpha of Icon atlas image
+        /// </summary>
+        private BitmapImage ProcessUpload(bool alpha = false)
+        {
+            var fileDialog = new OpenFileDialog
+            {
+                InitialDirectory = _outputPath,
+                DefaultExt = ".psd", // Required file extension
+                Filter = "PhotoShop files (.psd)|*.psd" // Optional file extensions
+            };
+
+            if (fileDialog.ShowDialog() != true) return null;
+
+            using (var image = new MagickImage(fileDialog.FileName))
+            {
+                image.Write(_outputPath + (alpha ? "\\AlphaAtlas128.jpg" : "\\IconAtlas256.jpg"));
+            }
+
+            LblImagePath.Text = fileDialog.FileName;
+
+            var dynamicImage = new Image
+            {
+                Width = 1024,
+                Height = 512
+            };
+
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(_outputPath + (alpha ? "\\AlphaAtlas128.jpg" : "\\IconAtlas256.jpg"));
+            bitmap.EndInit();
+            dynamicImage.Source = bitmap;
+
+            return bitmap;
+        }
+
+        /// <summary>
+        ///     Convert the enumeration name to a user-friendly string value
+        /// </summary>
+        public string GetStringValue(Enum value)
+        {
+            // Get the type, FieldInfo for this type and StringValue attributes
+            var type = value.GetType();
+            var fieldInfo = type.GetField(value.ToString());
+            var attributes = fieldInfo.GetCustomAttributes(typeof(StringValueAttribute), false) as StringValueAttribute[];
+
+            // Return the first if there was a match, or enum value if no match
+            return attributes.Length > 0 ? attributes[0].StringValue : value.ToString();
+        }
+
+        /// <summary>
+        ///     Convert the color value to a user-friendly string value
+        /// </summary>
+        private static string FormatColorSelection(byte value)
+        {
+            var color = Convert.ToDouble(value);
+            return Math.Round(color / 255, 3).ToString(CultureInfo.InvariantCulture);
+        }
+
+        /// <summary>
+        ///     Apply the correct art style suffix
+        /// </summary>
+        internal static string GetArtSuffix(ArtStyles style)
+        {
+            switch (style)
+            {
+                case ArtStyles.African:
+                    return "_AFRI";
+
+                case ArtStyles.American:
+                    return "_AMER";
+
+                case ArtStyles.Asian:
+                    return "_ASIA";
+
+                case ArtStyles.European:
+                    return "_EURO";
+
+                case ArtStyles.Mediterranean:
+                    return "_MED";
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(style), style, null);
+            }
+        }
+
+        /// <summary>
+        ///     Update the settings file before continuing with the export
+        /// </summary>
+        private bool UpdateSettings()
         {
             try
             {
@@ -128,99 +297,11 @@ namespace CivModTool
             }
         }
 
-        public bool ValidateForm(FileCategories civilization)
-        {
-            var result = true;
-            switch (civilization)
-            {
-                case FileCategories.Civilization:
-                    if (string.IsNullOrWhiteSpace(TbType.Text))
-                    {
-                        MessageBox.Show("Invalid Civilization Name", "Invalid Civilization Name", MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                        TabControls.SelectedIndex = 0;
-                        result = false;
-                    }
-
-                    break;
-
-                case FileCategories.Leader:
-                    if (string.IsNullOrWhiteSpace(TbLeaderType.Text))
-                    {
-                        MessageBox.Show("Invalid Leader Name", "Invalid Leader Name", MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                        TabControls.SelectedIndex = 1;
-                        result = false;
-                    }
-
-                    break;
-
-                case FileCategories.Trait:
-                    if (string.IsNullOrWhiteSpace(TbTraitType.Text))
-                    {
-                        MessageBox.Show("Invalid Trait Name", "Invalid Trait Name", MessageBoxButton.OK,
-                            MessageBoxImage.Error);
-                        TabControls.SelectedIndex = 2;
-                        result = false;
-                    }
-
-                    break;
-            }
-
-            return result;
-        }
-
-        private bool ProcessImages(string filePath, string fileName, int width, int height, bool alpha = false)
-        {
-            try
-            {
-                int[] iconSizes;
-                if (alpha)
-                    iconSizes = new[] { 128, 80, 64, 48, 45, 32, 24, 16 };
-                else
-                    iconSizes = new[] { 256, 128, 80, 64, 45, 32 };
-                var size = new MagickGeometry(width * 2, height * 2);
-                for (var x = 0; x <= iconSizes.Length; x++)
-                {
-                    using (var image = new MagickImage(filePath))
-                    {
-                        size = new MagickGeometry(width / 2, height / 2);
-                        image.Resize(size);
-                        image.Write(string.Format("{0}\\Art\\{1}{2}.psd", _outputPath, fileName, iconSizes[x]));
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                Logger.Error(e.Message);
-                return false;
-            }
-        }
-
-        public string GetStringValue(Enum value)
-        {
-            // Get the type, FieldInfo for this type and StringValue attributes
-            var type = value.GetType();
-            var fieldInfo = type.GetField(value.ToString());
-            var attribs = fieldInfo.GetCustomAttributes(typeof(StringValueAttribute), false) as StringValueAttribute[];
-
-            // Return the first if there was a match, or enum value if no match
-            return attribs.Length > 0 ? attribs[0].StringValue : value.ToString();
-        }
-
-        private static string FormatColorSelection(byte value)
-        {
-            var color = Convert.ToDouble(value);
-            return Math.Round(color / 255, 3).ToString(CultureInfo.InvariantCulture);
-        }
-
         #region CLICK_EVENTS
 
         private void BtnGenerateXML_Click(object sender, RoutedEventArgs e)
         {
-            if (!PrepareForExport()) return;
+            if (!UpdateSettings()) return;
             if (!GenerateBuildingsXml()) return;
             if (!GenerateCivilizationXml()) return;
             if (!GeneratePlayerColorXml()) return;
@@ -234,20 +315,13 @@ namespace CivModTool
 
         private void BtnReadFromXML_Click(object sender, RoutedEventArgs e)
         {
-            using (var browser = new System.Windows.Forms.FolderBrowserDialog { SelectedPath = _outputPath })
+            using (var browser = new FolderBrowserDialog { SelectedPath = _outputPath })
             {
-                if (browser.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    var gameText = XmlController.ReadGameTextXml(Directory.GetFiles(browser.SelectedPath, "GameText.xml").FirstOrDefault());
-
-                    foreach (var file in Directory.GetFiles(browser.SelectedPath))
-                    {
-                        if (file.Contains("Civilization.xml"))
-                        {
-                            ReadCivilizationXml(file);
-                        }
-                    }
-                }
+                if (browser.ShowDialog() != System.Windows.Forms.DialogResult.OK) return;
+                //var gameText = XmlController.ReadGameTextXml(Directory.GetFiles(browser.SelectedPath, "GameText.xml").FirstOrDefault());
+                foreach (var file in Directory.GetFiles(browser.SelectedPath))
+                    if (file.Contains("Civilization.xml"))
+                        ReadCivilizationXml(file);
             }
         }
 
@@ -380,70 +454,12 @@ namespace CivModTool
 
         private void BtnUploadImage_Click(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new OpenFileDialog
-            {
-                InitialDirectory = _outputPath,
-                DefaultExt = ".psd", // Required file extension
-                Filter = "PhotoShop files (.psd)|*.psd" // Optional file extensions
-            };
-
-            if (fileDialog.ShowDialog() == true)
-            {
-                using (var image = new MagickImage(fileDialog.FileName))
-                {
-                    image.Write(_outputPath + "\\IconAtlas256.jpg");
-                }
-
-                lblImagePath.Text = fileDialog.FileName;
-
-                var dynamicImage = new Image
-                {
-                    Width = 1024,
-                    Height = 512
-                };
-
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(_outputPath + "\\IconAtlas256.jpg");
-                bitmap.EndInit();
-
-                dynamicImage.Source = bitmap;
-                imgIconPreview.Source = bitmap;
-            }
+            ImgIconPreview.Source = ProcessUpload();
         }
 
         private void BtnUploadAlpha_Click(object sender, RoutedEventArgs e)
         {
-            var fileDialog = new OpenFileDialog
-            {
-                InitialDirectory = _outputPath,
-                DefaultExt = ".psd", // Required file extension
-                Filter = "PhotoShop files (.psd)|*.psd" // Optional file extensions
-            };
-
-            if (fileDialog.ShowDialog() == true)
-            {
-                using (var image = new MagickImage(fileDialog.FileName))
-                {
-                    image.Write(_outputPath + "\\AlphaAtlas128.jpg");
-                }
-
-                lblAlphaPath.Text = fileDialog.FileName;
-
-                var dynamicImage = new Image
-                {
-                    Width = 128,
-                    Height = 128
-                };
-
-                var bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(_outputPath + "\\AlphaAtlas128.jpg");
-                bitmap.EndInit();
-
-                dynamicImage.Source = bitmap;
-                imgAlphaPreview.Source = bitmap;
-            }
+            ImgAlphaPreview.Source = ProcessUpload(true);
         }
 
         private void BtnGetTemplate_Click(object sender, RoutedEventArgs e)
@@ -457,90 +473,96 @@ namespace CivModTool
 
         private bool GenerateCivilizationXml()
         {
-            if (!ValidateForm(FileCategories.Civilization)) return false;
+            if (!ValidateForm(Categories.Civilization)) return false;
 
-            var settings = Settings.Default;
+            var civilization = Settings.Default.civ_name;
 
-            var gameData = new CivModTool.Models.Civilization.GameData()
+            var gameData = new GameData
             {
                 Civilizations = new Civilizations
                 {
                     Row = new Civilization
                     {
                         PortraitIndex = 0,
-                        Type = string.Format(Properties.Resources.txt_civ, settings.civ_name),
+                        Type = string.Format(Properties.Resources.txt_civ, civilization),
                         Description = string.Format(Properties.Resources.key_civ_desc, TbType.Text),
                         CivilopediaTag = string.Format(Properties.Resources.key_civ_pedia_text, TbType.Text),
                         ShortDescription = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text),
                         Adjective = string.Format(Properties.Resources.key_civ_adjective, TbType.Text),
                         DefaultPlayerColor = string.Format(Properties.Resources.txt_civ_color, TbType.Text),
-                        ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style, CbArtStyle.SelectedValue.ToString().ToUpper()),
-                        ArtStyleSuffix = XmlController.GetArtPrefix((ArtStyles)Enum.Parse(typeof(ArtStyles), CbArtStyle.SelectedValue.ToString())),
+                        ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,
+                            CbArtStyle.SelectedValue.ToString().ToUpper()),
+                        ArtStyleSuffix = GetArtSuffix((ArtStyles)Enum.Parse(typeof(ArtStyles),
+                            CbArtStyle.SelectedValue.ToString())),
                         ArtStylePrefix = CbArtStyle.SelectedValue.ToString().ToUpper(),
                         IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, TbType.Text),
                         AlphaIconAtlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, TbType.Text),
                         MapImage = string.Format(Properties.Resources.txt_civ_map, TbType.Text),
                         DawnOfManQuote = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text),
                         DawnOfManImage = string.Format(Properties.Resources.txt_civ_dom_image, TbLeaderType.Text)
-                        //DawnOfManAudio = CbSoundtrack.SelectedValue.ToString()
                     }
                 }
             };
 
             foreach (var x in LbCityNames.Items)
             {
-                var city = new CityNames
+                var city = new CityName
                 {
-                    CityName = (string.Format(Properties.Resources.key_city_name, settings.civ_name,
-                    x.ToString().Replace(' ', '_').ToUpper())),
+                    Name = string.Format(Properties.Resources.key_city_name, civilization,
+                        x.ToString().Replace(' ', '_').ToUpper()),
                     CivilizationType = gameData.Civilizations.Row.Type
                 };
 
-                gameData.Civilization_CityNames.Row.Add(city);
+                gameData.CityNames.Row.Add(city);
             }
 
             foreach (var x in LbSpyNames.Items)
             {
-                var spy = new SpyNames
+                var spy = new SpyName
                 {
-                    SpyName = (string.Format(Properties.Resources.key_spy_name, settings.civ_name, x.ToString().Replace(' ', '_').ToUpper())),
+                    Name = string.Format(Properties.Resources.key_spy_name, civilization,
+                        x.ToString().Replace(' ', '_').ToUpper()),
                     CivilizationType = gameData.Civilizations.Row.Type
                 };
 
-                gameData.Civilization_SpyNames.Row.Add(spy);
+                gameData.SpyNames.Row.Add(spy);
             }
 
             Enum.TryParse(CbFreeUnit.SelectedValue.ToString(), out Units unit);
 
-            gameData.Civilization_Leaders.Row = new Models.Civilization.Leaders.Leader
+            gameData.Leaders.Row = new Leader
             {
                 LeaderheadType = string.Format(Properties.Resources.txt_leader, TbLeaderType.Text),
                 CivilizationType = gameData.Civilizations.Row.Type
             };
 
-            gameData.Civilization_FreeBuildingClasses.Row = new FreeBuildingClasses
+            gameData.FreeBuildingClasses.Row = new FreeBuildingClass
             {
-                BuildingClassType = string.Format(Properties.Resources.txt_building_class, CbFreeBuilding.SelectedValue.ToString().ToUpper()),
+                BuildingClassType = string.Format(Properties.Resources.txt_building_class,
+                    CbFreeBuilding.SelectedValue.ToString().ToUpper()),
                 CivilizationType = gameData.Civilizations.Row.Type
             };
 
-            gameData.Civilization_FreeTechs.Row = new FreeTechs
+            gameData.FreeTechs.Row = new FreeTech
             {
                 TechType = string.Format(Properties.Resources.txt_tech, CbFreeTech.SelectedValue.ToString().ToUpper()),
                 CivilizationType = gameData.Civilizations.Row.Type
             };
 
-            gameData.Civilization_FreeUnits.Row = new FreeUnits
+            gameData.FreeUnits.Row = new FreeUnit
             {
-                UnitClassType = string.Format(Properties.Resources.txt_unit_class, CbFreeUnit.SelectedValue.ToString().ToUpper()),
-                UnitAiType = string.Format(Properties.Resources.txt_unit_ai, Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper()),
+                UnitClassType = string.Format(Properties.Resources.txt_unit_class,
+                    CbFreeUnit.SelectedValue.ToString().ToUpper()),
+                UnitAiType = string.Format(Properties.Resources.txt_unit_ai,
+                    Dictionaries.UnitDictionary[unit].Item2.ToString().ToUpper()),
                 Count = 1,
                 CivilizationType = gameData.Civilizations.Row.Type
             };
 
-            gameData.Civilization_Religions.Row = new Religion
+            gameData.Religions.Row = new Religion
             {
-                ReligionType = string.Format(Properties.Resources.txt_religion, CbReligion.SelectedValue.ToString().ToUpper()),
+                ReligionType = string.Format(Properties.Resources.txt_religion,
+                    CbReligion.SelectedValue.ToString().ToUpper()),
                 CivilizationType = gameData.Civilizations.Row.Type
             };
 
@@ -549,18 +571,16 @@ namespace CivModTool
 
         private bool GenerateLeaderXml()
         {
-            if (!ValidateForm(FileCategories.Leader)) return false;
+            if (!ValidateForm(Categories.Leader)) return false;
 
-            var settings = Settings.Default;
-
-            var gameData = new CivModTool.Models.Leader.GameData
+            var gameData = new Models.Leader.GameData
             {
                 Leaders = new Leaders
                 {
                     Row = new Models.Leader.Leader
                     {
                         PortraitIndex = 1,
-                        Type = string.Format(Properties.Resources.txt_leader, settings.leader_name),
+                        Type = string.Format(Properties.Resources.txt_leader, Settings.Default.leader_name),
                         Description = string.Format(Properties.Resources.key_leader, TbLeaderType.Text),
                         Civilopedia = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
                         CivilopediaTag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text),
@@ -584,9 +604,9 @@ namespace CivModTool
                 }
             };
 
-            gameData.Leader_Traits.Row = new Models.Leader.Traits.Traits
+            gameData.Traits.Row = new Trait
             {
-                TraitType = string.Format(Properties.Resources.txt_trait, settings.trait_name),
+                TraitType = string.Format(Properties.Resources.txt_trait, Settings.Default.trait_name),
                 LeaderType = gameData.Leaders.Row.Type
             };
 
@@ -608,16 +628,16 @@ namespace CivModTool
                     IntNeutralBias.Value ?? default)
             };
 
-            foreach (var x in majorApproaches)
+            foreach (var (approach, bias) in majorApproaches)
             {
-                var major = new MajorCivApproachBiases
+                var major = new MajorCivApproachBias
                 {
-                    MajorCivApproachType = x.Item1,
-                    Bias = x.Item2 ?? default,
+                    MajorCivApproachType = approach,
+                    Bias = bias ?? default,
                     LeaderType = gameData.Leaders.Row.Type
                 };
 
-                gameData.Leader_MajorCivApproachBiases.Row.Add(major);
+                gameData.MajorCivApproachBiases.Row.Add(major);
             }
 
             Tuple<string, int?>[] minorApproaches =
@@ -632,16 +652,16 @@ namespace CivModTool
                     IntConquestApproach.Value ?? default)
             };
 
-            foreach (var x in minorApproaches)
+            foreach (var (approach, bias) in minorApproaches)
             {
-                var minor = new MinorCivApproachBiases
+                var minor = new MinorCivApproachBias
                 {
-                    MinorCivApproachType = x.Item1,
-                    Bias = x.Item2 ?? default,
+                    MinorCivApproachType = approach,
+                    Bias = bias ?? default,
                     LeaderType = gameData.Leaders.Row.Type
                 };
 
-                gameData.Leader_MinorCivApproachBiases.Row.Add(minor);
+                gameData.MinorCivApproachBiases.Row.Add(minor);
             }
 
             return XmlController.GenerateLeaderXml(gameData);
@@ -649,9 +669,9 @@ namespace CivModTool
 
         private bool GenerateTraitXml()
         {
-            var gameData = new CivModTool.Models.Trait.GameData
+            var gameData = new Models.Trait.GameData
             {
-                Traits = new Models.Trait.Traits
+                Traits = new Traits
                 {
                     Row = new Models.Trait.Trait
                     {
@@ -665,12 +685,9 @@ namespace CivModTool
                         FreeUnitPrereqTech = " ",
                         ObsoleteTech = " ",
                         PrereqTech = " ",
-                        //EmbarkedNotCivilian = false,
-                        //FasterAlongRiver = false,
-                        //FightWellDamaged = false,
-                        //MoveFriendlyWoodsAsRoad = false,
-                        //YieldChangesStrategicResources = new List<YieldChangesStrategicResources>(),
-                        //ResourceQuantityModifiers = new List<ResourceQuantityModifiers>()
+                        FasterAlongRiver = 0,
+                        FightWellDamaged = 0,
+                        MoveFriendlyWoodsAsRoad = 0
                     }
                 }
             };
@@ -681,28 +698,28 @@ namespace CivModTool
             //    gameData.GetType().GetField(split[0]).SetValue(gameData, int.Parse(split[1]));
             //}
 
-            gameData.Trait_YieldChangesStrategicResources.Row.Add(new Models.Trait.YieldChangesStrategicResources.YieldChangesStrategicResources
+            gameData.YieldChangesStrategicResources.Row.Add(new YieldChangesStrategicResource
             {
                 YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
                 Yield = 3
             });
 
-            gameData.Trait_ResourceQuantityModifiers.Row.Add(new Models.Trait.ResourceQuantityModifiers.ResourceQuantityModifiers
+            gameData.ResourceQuantityModifiers.Row.Add(new ResourceQuantityModifier
             {
                 ResourceType = string.Format(Properties.Resources.txt_resource, nameof(ResourceList.Iron).ToUpper()),
-                ResourceQuantityModifier = 100
+                Yield = 100
             });
 
-            gameData.Trait_ResourceQuantityModifiers.Row.Add(new Models.Trait.ResourceQuantityModifiers.ResourceQuantityModifiers
+            gameData.ResourceQuantityModifiers.Row.Add(new ResourceQuantityModifier
             {
                 ResourceType = string.Format(Properties.Resources.txt_resource, nameof(ResourceList.Coal).ToUpper()),
-                ResourceQuantityModifier = 100
+                Yield = 100
             });
 
-            gameData.Trait_ResourceQuantityModifiers.Row.Add(new Models.Trait.ResourceQuantityModifiers.ResourceQuantityModifiers
+            gameData.ResourceQuantityModifiers.Row.Add(new ResourceQuantityModifier
             {
                 ResourceType = string.Format(Properties.Resources.txt_resource, nameof(ResourceList.Oil).ToUpper()),
-                ResourceQuantityModifier = 100
+                Yield = 100
             });
 
             return XmlController.GenerateTraitXml(gameData);
@@ -710,83 +727,122 @@ namespace CivModTool
 
         private bool GeneratePlayerColorXml()
         {
-            var gameData = new CivModTool.Models.PlayerColor.GameData
+            var gameData = new Models.PlayerColor.GameData
             {
-                PlayerColors = new Models.PlayerColor.PlayerColors(),
-                Colors = new List<Models.PlayerColor.Colors>()
+                PlayerColors = new PlayerColors(),
+                Colors = new List<Colors>()
             };
 
-            gameData.PlayerColors.Row = new Models.PlayerColor.PlayerColor
+            gameData.PlayerColors.Row = new PlayerColor
             {
-                PrimaryColor = CpPrimaryColor.SelectedColor.Value.ToString(),
-                SecondaryColor = CpSecondaryColor.SelectedColor.Value.ToString(),
-                TextColor = CpTextColor.SelectedColor.Value.ToString(),
+                PrimaryColor = CpPrimaryColor.SelectedColor?.ToString(),
+                SecondaryColor = CpSecondaryColor.SelectedColor?.ToString(),
+                TextColor = CpTextColor.SelectedColor?.ToString(),
                 Type = string.Format(Properties.Resources.txt_civ_color_primary, TbType.Text)
             };
 
-            gameData.Colors.Add(new Models.PlayerColor.Colors
+            // Primary Color
+            if (CpPrimaryColor.SelectedColor != null)
             {
-                Row = new Models.PlayerColor.Color
+                gameData.Colors.Add(new Colors
                 {
-                    Type = gameData.PlayerColors.Row.Type,
-                    Red = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.R),
-                    Green = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.G),
-                    Blue = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.B),
-                    Alpha = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.A)
-                }
-            });
+                    Row = new Color
+                    {
+                        Type = gameData.PlayerColors.Row.Type,
+                        Red = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.R),
+                        Green = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.G),
+                        Blue = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.B),
+                        Alpha = FormatColorSelection(CpPrimaryColor.SelectedColor.Value.A)
+                    }
+                });
+            }
+
+            // Secondary Color
+            if (CpSecondaryColor.SelectedColor != null)
+            {
+                gameData.Colors.Add(new Colors
+                {
+                    Row = new Color
+                    {
+                        Type = gameData.PlayerColors.Row.Type,
+                        Red = FormatColorSelection(CpSecondaryColor.SelectedColor.Value.R),
+                        Green = FormatColorSelection(CpSecondaryColor.SelectedColor.Value.G),
+                        Blue = FormatColorSelection(CpSecondaryColor.SelectedColor.Value.B),
+                        Alpha = FormatColorSelection(CpSecondaryColor.SelectedColor.Value.A)
+                    }
+                });
+            }
+
+            // Text Color
+            if (CpTextColor.SelectedColor != null)
+            {
+                gameData.Colors.Add(new Colors
+                {
+                    Row = new Color
+                    {
+                        Type = gameData.PlayerColors.Row.Type,
+                        Red = FormatColorSelection(CpTextColor.SelectedColor.Value.R),
+                        Green = FormatColorSelection(CpTextColor.SelectedColor.Value.G),
+                        Blue = FormatColorSelection(CpTextColor.SelectedColor.Value.B),
+                        Alpha = FormatColorSelection(CpTextColor.SelectedColor.Value.A)
+                    }
+                });
+            }
 
             return XmlController.GeneratePlayerColorXml(gameData);
         }
 
         private bool GenerateBuildingsXml()
         {
-            var settings = Settings.Default;
-            var buildingType = string.Format(Properties.Resources.txt_building, settings.civ_name, settings.building_name);
+            var building = Settings.Default.building_name;
 
-            var gameData = new CivModTool.Models.Building.GameData
+            var gameData = new Models.Building.GameData
             {
                 Buildings = new Models.Building.Buildings
                 {
-                    Row = new Models.Building.Building
+                    Row = new Building
                     {
                         PortraitIndex = 3,
-                        Type = buildingType,
-                        Description = string.Format(Properties.Resources.key_building_desc, TbType.Text, settings.building_name),
-                        Civilopedia = string.Format(Properties.Resources.key_building_pedia, TbType.Text, settings.building_name),
-                        Strategy = string.Format(Properties.Resources.key_building_strategy, TbType.Text, settings.building_name),
-                        Help = string.Format(Properties.Resources.key_building_help, TbType.Text, settings.building_name),
-                        BuildingClass = string.Format(Properties.Resources.txt_building_class, CbBuildingOverride.SelectedValue.ToString().ToUpper()),
-                        ArtDefineTag = string.Format(Properties.Resources.txt_building_art_def, CbBuildingOverride.SelectedValue.ToString().ToUpper()),
-                        FreeStartEra = string.Format(Properties.Resources.txt_era, CbBuildingStartEra.SelectedValue.ToString().ToUpper()),
-                        PrereqTech = string.Format(Properties.Resources.txt_tech, CbBuildingReqTech.SelectedValue.ToString().ToUpper()),
+                        Type = string.Format(Properties.Resources.txt_building, Settings.Default.civ_name, building),
+                        Description = string.Format(Properties.Resources.key_building_desc, TbType.Text, building),
+                        Civilopedia = string.Format(Properties.Resources.key_building_pedia, TbType.Text, building),
+                        Strategy = string.Format(Properties.Resources.key_building_strategy, TbType.Text, building),
+                        Help = string.Format(Properties.Resources.key_building_help, TbType.Text, building),
+                        BuildingClass = string.Format(Properties.Resources.txt_building_class,
+                            CbBuildingOverride.SelectedValue.ToString().ToUpper()),
+                        ArtDefineTag = string.Format(Properties.Resources.txt_building_art_def,
+                            CbBuildingOverride.SelectedValue.ToString().ToUpper()),
+                        FreeStartEra = string.Format(Properties.Resources.txt_era,
+                            CbBuildingStartEra.SelectedValue.ToString().ToUpper()),
+                        PrereqTech = string.Format(Properties.Resources.txt_tech,
+                            CbBuildingReqTech.SelectedValue.ToString().ToUpper()),
                         IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, TbType.Text),
                         ThemingBonusHelp = "",
                         Quote = "",
                         GoldMaintenance = 0,
                         MutuallyExclusiveGroup = -1,
-                        //TeamShare = false,
-                        //Water = false,
-                        //River = false,
-                        //FreshWater = false,
-                        //Mountain = false,
-                        //NearbyMountainRequired = false,
-                        //Hill = false,
-                        //Flat = false,
-                        //FoundsReligion = false,
-                        //IsReligious = false,
-                        //BorderObstacle = false,
-                        //PlayerBorderObstacle = false,
-                        //Capital = false,
-                        //GoldenAge = false,
-                        //MapCentering = false,
-                        //NeverCapture = false,
-                        //NukeImmune = false,
-                        //AllowsWaterRoutes = false,
-                        //ExtraLuxuries = false,
-                        //DiplomaticVoting = false,
-                        //AffectSpiesNow = false,
-                        //NullifyInfluenceModifier = false,
+                        TeamShare = 0,
+                        Water = 0,
+                        River = 0,
+                        FreshWater = 0,
+                        Mountain = 0,
+                        NearbyMountainRequired = 0,
+                        Hill = 0,
+                        Flat = 0,
+                        FoundsReligion = 0,
+                        IsReligious = 0,
+                        BorderObstacle = 0,
+                        PlayerBorderObstacle = 0,
+                        Capital = 0,
+                        GoldenAge = 0,
+                        MapCentering = 0,
+                        NeverCapture = 0,
+                        NukeImmune = 0,
+                        AllowsWaterRoutes = 0,
+                        ExtraLuxuries = 0,
+                        DiplomaticVoting = 0,
+                        AffectSpiesNow = 0,
+                        NullifyInfluenceModifier = 0,
                         Cost = 100,
                         FaithCost = 0,
                         LeagueCost = 0,
@@ -821,7 +877,7 @@ namespace CivModTool
                         HappinessPerCity = 0,
                         HappinessPerXPolicies = 0,
                         CityCountUnhappinessMod = 0,
-                        //NoOccupiedUnhappiness = false,
+                        NoOccupiedUnhappiness = 0,
                         WorkerSpeedModifier = 0,
                         MilitaryProductionModifier = 0,
                         SpaceProductionModifier = 0,
@@ -842,10 +898,10 @@ namespace CivModTool
                         FreeGreatPeople = 0,
                         MedianTechPercentChange = 0,
                         Gold = 0,
-                        //AllowsRangeStrike = false,
-                        //Espionage = false,
-                        //AllowsFoodTradeRoutes = false,
-                        //AllowsProductionTradeRoutes = false,
+                        AllowsRangeStrike = 0,
+                        Espionage = 0,
+                        AllowsFoodTradeRoutes = 0,
+                        AllowsProductionTradeRoutes = 0,
                         Defense = 0,
                         ExtraCityHitPoints = 0,
                         GlobalDefenseMod = 0,
@@ -893,28 +949,32 @@ namespace CivModTool
                         SpecialistExtraCulture = 0,
                         GreatPeopleRateChange = 0,
                         ExtraLeagueVotes = 0,
-                        //CityWall = false,
+                        CityWall = 0,
                         DisplayPosition = 0,
                         WonderSplashImage = "",
                         WonderSplashAnchor = "R,T",
                         WonderSplashAudio = "",
-                        //ArtInfoCulturalVariation = false,
-                        //ArtInfoEraVariation = false,
-                        //ArtInfoRandomVariation = false
+                        ArtInfoCulturalVariation = 0,
+                        ArtInfoEraVariation = 0,
+                        ArtInfoRandomVariation = 0
+                    }
+                },
+                YieldChanges =
+                {
+                    Row = new YieldChange
+                    {
+                        YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
+                        Yield = 5
+                    }
+                },
+                YieldModifiers =
+                {
+                    Row = new YieldModifier
+                    {
+                        YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
+                        Yield = 25
                     }
                 }
-            };
-
-            gameData.Building_YieldChanges.Row = new Models.Building.YieldChanges.YieldChange
-            {
-                YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
-                Yield = 5
-            };
-
-            gameData.Building_YieldModifiers.Row = new Models.Building.YieldModifiers.YieldModifier
-            {
-                YieldType = string.Format(Properties.Resources.txt_yield, nameof(Yields.Gold).ToUpper()),
-                Yield = 25
             };
 
             return XmlController.GenerateBuildingsXml(gameData);
@@ -922,23 +982,23 @@ namespace CivModTool
 
         private bool GenerateIconAtlasXml()
         {
-            if (!string.IsNullOrEmpty(lblImagePath.Text))
-                ProcessImages(lblImagePath.Text, "IconAtlas", 1024, 512);
+            if (!string.IsNullOrEmpty(LblImagePath.Text))
+                ProcessImages(LblImagePath.Text, "IconAtlas", 1024, 512);
 
-            if (!string.IsNullOrEmpty(lblAlphaPath.Text))
-                ProcessImages(lblAlphaPath.Text, "AlphaAtlas", 128, 128, true);
+            if (!string.IsNullOrEmpty(LblAlphaPath.Text))
+                ProcessImages(LblAlphaPath.Text, "AlphaAtlas", 128, 128, true);
 
-            var gameData = new CivModTool.Models.IconAtlas.GameData();
+            var gameData = new Models.IconAtlas.GameData();
 
             foreach (var x in Directory.GetFiles(_outputPath + "\\Art").ToList())
             {
                 var isAlpha = x.Contains("AlphaAtlas");
                 var key = isAlpha ? "AlphaAtlas" : "IconAtlas";
-                var pFrom = x.IndexOf(key) + key.Length;
-                var pTo = x.LastIndexOf(".psd");
+                var pFrom = x.IndexOf(key, StringComparison.Ordinal) + key.Length;
+                var pTo = x.LastIndexOf(".psd", StringComparison.Ordinal);
                 var size = x.Substring(pFrom, pTo - pFrom);
 
-                var image = new Models.IconAtlas.IconTexture
+                var image = new IconTexture
                 {
                     Atlas = string.Format(
                         isAlpha ? Properties.Resources.txt_civ_atlas_alpha : Properties.Resources.txt_civ_atlas_icon,
@@ -959,60 +1019,95 @@ namespace CivModTool
 
         private bool GenerateGameTextXml()
         {
-            var settings = Settings.Default;
+            var gameData = new Models.GameText.GameData();
 
-            var gameData = new CivModTool.Models.GameText.GameData();
-
-            var gameText = new List<CivModTool.Models.GameText.Row>()
+            var gameText = new List<Row>
             {
                 // Civilization
                 new Row
-                    {Tag = string.Format(Properties.Resources.key_civ_adjective, TbType.Text), Text = TbAdjective.Text},
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_adjective, TbType.Text),
+                    Text = TbAdjective.Text
+                },
                 new Row
-                    {Tag = string.Format(Properties.Resources.key_civ_desc, TbType.Text), Text = TbDescription.Text},
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_desc, TbType.Text),
+                    Text = TbDescription.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text), Text = TbCivilopedia.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_pedia_header, TbType.Text),
+                    Text = TbCivilopedia.Text
+                },
                 new Row
-                    {Tag = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text), Text = TbDOMQuote.Text},
+                {
+                    Tag = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text),
+                    Text = TbDomQuote.Text
+                },
                 // Leader
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_leader, TbLeaderType.Text), Text = TbLeaderDescription.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_leader, TbLeaderType.Text),
+                    Text = TbLeaderDescription.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text), Text = TbLeaderCivilopedia.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
+                    Text = TbLeaderCivilopedia.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text), Text = TbLeaderType.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text),
+                    Text = TbLeaderType.Text
+                },
                 // Trait
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_trait, TbTraitType.Text), Text = TbTraitDescription.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_trait, TbTraitType.Text),
+                    Text = TbTraitDescription.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_trait_desc, TbTraitType.Text), Text = TbTraitDescriptionShort.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_trait_desc, TbTraitType.Text),
+                    Text = TbTraitDescriptionShort.Text
+                },
                 //// Building
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_building_desc, TbType.Text, TbBuildingType.Text), Text = TbBuildingDesc.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_building_desc, TbType.Text, TbBuildingType.Text),
+                    Text = TbBuildingDesc.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_building_pedia, TbType.Text, TbBuildingType.Text), Text = TbBuildingPedia.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_building_pedia, TbType.Text, TbBuildingType.Text),
+                    Text = TbBuildingPedia.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_building_strategy, TbType.Text, TbBuildingType.Text), Text = TbBuildingStrat.Text },
+                {
+                    Tag = string.Format(Properties.Resources.key_building_strategy, TbType.Text, TbBuildingType.Text),
+                    Text = TbBuildingStrategy.Text
+                },
                 new Row
-                    { Tag = string.Format(Properties.Resources.key_building_help, TbType.Text, TbBuildingType.Text), Text = TbBuildingHelp.Text }
+                {
+                    Tag = string.Format(Properties.Resources.key_building_help, TbType.Text, TbBuildingType.Text),
+                    Text = TbBuildingHelp.Text
+                }
             };
 
             foreach (var x in gameText)
-                gameData.Language_en_US.Row.Add(x);
+                gameData.Text.Row.Add(x);
 
             foreach (var x in LbCityNames.Items)
-                gameData.Language_en_US.Row.Add(new Row
+                gameData.Text.Row.Add(new Row
                 {
-                    Tag = string.Format(Properties.Resources.key_city_name, settings.civ_name,
-                        x.ToString().Replace(' ', '_').ToUpper()),
+                    Tag = string.Format(Properties.Resources.key_city_name, Settings.Default.civ_name, x.ToString().Replace(' ', '_').ToUpper()),
                     Text = x.ToString()
                 });
 
             foreach (var x in LbSpyNames.Items)
-                gameData.Language_en_US.Row.Add(new Row
+                gameData.Text.Row.Add(new Row
                 {
-                    Tag = string.Format(Properties.Resources.key_spy_name, settings.civ_name,
-                        x.ToString().Replace(' ', '_').ToUpper()),
+                    Tag = string.Format(Properties.Resources.key_spy_name, Settings.Default.civ_name, x.ToString().Replace(' ', '_').ToUpper()),
                     Text = x.ToString()
                 });
 
@@ -1023,46 +1118,37 @@ namespace CivModTool
 
         #region READ_XML
 
-        private bool ReadCivilizationXml(string path)
+        private void ReadCivilizationXml(string path)
         {
             try
             {
                 var gameData = XmlController.ReadCivilizationXml(path);
 
-                if (gameData is null) return false;
+                if (gameData is null) return;
 
                 TbType.Text = FormatString(gameData.Civilizations.Row.Type, Properties.Resources.txt_civ);
                 TbAdjective.Text = gameData.Civilizations.Row.Adjective;
                 TbDescription.Text = gameData.Civilizations.Row.Description;
                 TbCivilopedia.Text = gameData.Civilizations.Row.Civilopedia;
                 CbArtStyle.SelectedValue = gameData.Civilizations.Row.ArtStyleType;
-                CbFreeBuilding.SelectedValue = gameData.Civilization_FreeBuildingClasses.Row.CivilizationType;
-                CbFreeUnit.SelectedValue = gameData.Civilization_FreeUnits.Row.UnitClassType;
-                CbFreeTech.SelectedValue = gameData.Civilization_FreeTechs.Row.TechType;
-                CbReligion.SelectedValue = gameData.Civilization_Religions.Row.ReligionType;
+                CbFreeBuilding.SelectedValue = gameData.FreeBuildingClasses.Row.CivilizationType;
+                CbFreeUnit.SelectedValue = gameData.FreeUnits.Row.UnitClassType;
+                CbFreeTech.SelectedValue = gameData.FreeTechs.Row.TechType;
+                CbReligion.SelectedValue = gameData.Religions.Row.ReligionType;
                 CbSoundtrack.SelectedValue = gameData.Civilizations.Row.SoundtrackTag;
-                TbDOMQuote.Text = gameData.Civilizations.Row.DawnOfManQuote;
-                foreach (var city in gameData.Civilization_CityNames.Row)
-                    LbCityNames.Items.Add(city.CityName);
-                foreach (var spy in gameData.Civilization_SpyNames.Row)
-                    LbSpyNames.Items.Add(spy.SpyName);
-
-                //Models.PlayerColor.GameData colors = XmlController.ReadPlayerColorXml(path);
-                //if (colors.PlayerColors is null) return true;
-                //var cc = new ColorConverter();
-                //CpPrimaryColor.SelectedColor = (Color)cc.ConvertFrom(colors.PlayerColors.Row.PrimaryColor);
-                //CpSecondaryColor.SelectedColor = (Color)cc.ConvertFrom(colors.PlayerColors.Row.SecondaryColor);
-                //CpTextColor.SelectedColor = (Color)cc.ConvertFrom(colors.PlayerColors.Row.TextColor);
-                return true;
+                TbDomQuote.Text = gameData.Civilizations.Row.DawnOfManQuote;
+                foreach (var city in gameData.CityNames.Row)
+                    LbCityNames.Items.Add(city.Name);
+                foreach (var spy in gameData.SpyNames.Row)
+                    LbSpyNames.Items.Add(spy.Name);
             }
             catch (Exception e)
             {
                 Logger.Error(e.Message);
-                return false;
             }
         }
 
-        private string FormatString(string value, string remove)
+        private static string FormatString(string value, string remove)
         {
             remove = remove.Replace("{0}", string.Empty);
             return value.Replace(remove, string.Empty);

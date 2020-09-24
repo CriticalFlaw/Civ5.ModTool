@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CivModTool.Models.Building.Flavors
+namespace CivModTool.Models.Building
 {
     [XmlRoot(ElementName = "Building_Flavors", Namespace = "Flavors")]
-    public class Building_Flavors
+    public class Flavors
     {
         [XmlElement(ElementName = "Row")]
-        public List<Flavors> Row { get; set; }
+        public List<Flavor> Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class Flavors
+    public class Flavor
     {
         [XmlElement(ElementName = "BuildingType")]
         public string BuildingType { get; set; }
@@ -20,6 +20,6 @@ namespace CivModTool.Models.Building.Flavors
         public string FlavorType { get; set; }
 
         [XmlElement(ElementName = "Flavor")]
-        public string Flavor { get; set; }
+        public string Value { get; set; }
     }
 }

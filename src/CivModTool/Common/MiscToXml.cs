@@ -8,11 +8,11 @@ namespace CivModTool.Common
 {
     internal static class MiscToXml
     {
-        internal static bool GenerateGameTextXml(CivModTool.Models.GameText.GameData gameData)
+        internal static bool WriteGameTextXml(GameData gameData)
         {
             try
             {
-                XmlController.SerializeXml(gameData, nameof(FileCategories.GameText));
+                XmlController.SerializeXml(gameData, nameof(Categories.GameText));
                 return true;
             }
             catch (Exception e)
@@ -22,11 +22,11 @@ namespace CivModTool.Common
             }
         }
 
-        internal static bool GenerateIconAtlasXml(CivModTool.Models.IconAtlas.GameData gameData)
+        internal static bool WriteIconAtlasXml(Models.IconAtlas.GameData gameData)
         {
             try
             {
-                XmlController.SerializeXml(gameData, nameof(FileCategories.IconAtlas));
+                XmlController.SerializeXml(gameData, nameof(Categories.IconAtlas));
                 return true;
             }
             catch (Exception e)
@@ -36,11 +36,11 @@ namespace CivModTool.Common
             }
         }
 
-        internal static bool GeneratePlayerColorXml(CivModTool.Models.PlayerColor.GameData gameData)
+        internal static bool WritePlayerColorXml(Models.PlayerColor.GameData gameData)
         {
             try
             {
-                XmlController.SerializeXml(gameData, nameof(FileCategories.PlayerColor));
+                XmlController.SerializeXml(gameData, nameof(Categories.PlayerColor));
                 return true;
             }
             catch (Exception e)
@@ -50,7 +50,7 @@ namespace CivModTool.Common
             }
         }
 
-        internal static Models.GameText.GameData ReadGameTextXml(string path)
+        internal static GameData ReadGameTextXml(string path)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace CivModTool.Common
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(Models.IconAtlas.GameData), nameof(FileCategories.IconAtlas));
+                var serializer = new XmlSerializer(typeof(Models.IconAtlas.GameData), nameof(Categories.IconAtlas));
                 var reader = new StreamReader(path);
                 var gameData = (Models.IconAtlas.GameData)serializer.Deserialize(reader);
                 reader.Close();
@@ -88,7 +88,8 @@ namespace CivModTool.Common
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(Models.PlayerColor.GameData), nameof(FileCategories.PlayerColor));
+                var serializer = new XmlSerializer(typeof(Models.PlayerColor.GameData),
+                    nameof(Categories.PlayerColor));
                 var reader = new StreamReader(path);
                 var gameData = (Models.PlayerColor.GameData)serializer.Deserialize(reader);
                 reader.Close();

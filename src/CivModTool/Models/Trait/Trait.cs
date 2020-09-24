@@ -1,6 +1,4 @@
-﻿using CivModTool.Models.Trait.ResourceQuantityModifiers;
-using CivModTool.Models.Trait.YieldChangesStrategicResources;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace CivModTool.Models.Trait
 {
@@ -11,10 +9,10 @@ namespace CivModTool.Models.Trait
         public Traits Traits { get; set; }
 
         [XmlElement(ElementName = "Trait_YieldChangesStrategicResources")]
-        public Trait_YieldChangesStrategicResources Trait_YieldChangesStrategicResources { get; set; }
+        public YieldChangesStrategicResources YieldChangesStrategicResources { get; set; }
 
         [XmlElement(ElementName = "Trait_ResourceQuantityModifiers")]
-        public Trait_ResourceQuantityModifiers Trait_ResourceQuantityModifiers { get; set; }
+        public ResourceQuantityModifiers ResourceQuantityModifiers { get; set; }
     }
 
     [XmlRoot(ElementName = "Traits")]

@@ -1,5 +1,16 @@
 ﻿namespace CivModTool.Resources
 {
+    public enum Categories
+    {
+        Building,
+        Civilization,
+        GameText,
+        IconAtlas,
+        Leader,
+        PlayerColor,
+        Trait
+    }
+
     public enum Civs
     {
         America,
@@ -54,18 +65,6 @@
         Asian,
         European,
         Mediterranean
-    }
-
-    public enum FileCategories
-    {
-        Buildings,
-        Civilization,
-        GameText,
-        IconAtlas,
-        Leader,
-        PlayerColor,
-        Trait,
-        Units
     }
 
     public enum Religions
@@ -483,7 +482,7 @@
         Bomber,
 
         [StringValue("Bomber (B17)")]
-        Bomber_B17,
+        BomberB17,
 
         Cannon,
         Caravel,
@@ -491,38 +490,38 @@
         Catapult,
 
         [StringValue("Catapult (Ballista)")]
-        Catapult_Ballista,
+        CatapultBallista,
 
         Cavalry,
-        Cavalry_Cossack,
+        CavalryCossack,
 
         [StringValue("Chariot Archer")]
         ChariotArcher,
 
         [StringValue("Chariot Archer (War Chariot)")]
-        ChariotArcher_WarChariot,
+        ChariotArcherWarChariot,
 
         [StringValue("Chariot Archer (Warelephant)")]
-        ChariotArcher_Warelephant,
+        ChariotArcherWarelephant,
 
         Crossbowman,
 
         [StringValue("Crossbowman (Chukonu)")]
-        Crossbowman_Chukonu,
+        CrossbowmanChukonu,
 
         [StringValue("Crossbowman (Longbowman)")]
-        Crossbowman_Longbowman,
+        CrossbowmanLongbowman,
 
         Destroyer,
         Fighter,
 
         [StringValue("Fighter (Japanese Zero)")]
-        Fighter_JapaneseZero,
+        FighterJapaneseZero,
 
         Frigate,
 
         [StringValue("Frigate (Ship of the Line)")]
-        Frigate_ShipOfTheLine,
+        FrigateShipOfTheLine,
 
         Galley,
 
@@ -535,12 +534,12 @@
         Horseman,
 
         [StringValue("Horseman (Companion Cavalry)")]
-        Horseman_CompanionCavalry,
+        HorsemanCompanionCavalry,
 
         Infantry,
 
         [StringValue("Infantry (Foreign Legion)")]
-        Infantry_ForeignLegion,
+        InfantryForeignLegion,
 
         Ironclad,
 
@@ -550,23 +549,23 @@
         Knight,
 
         [StringValue("Knight (Camelarcher)")]
-        Knight_Camelarcher,
+        KnightCamelarcher,
 
         [StringValue("Knight (Muslim Cavalry)")]
-        Knight_MuslimCavalry,
+        KnightMuslimCavalry,
 
         [StringValue("Knight (Warelephant)")]
-        Knight_Warelephant,
+        KnightWarelephant,
 
         Lancer,
 
         [StringValue("Lancer (Sipahi)")]
-        Lancer_Sipahi,
+        LancerSipahi,
 
         Longswordman,
 
         [StringValue("Longswordman (Samurai)")]
-        Longswordman_Samurai,
+        LongswordmanSamurai,
 
         Mech,
 
@@ -577,7 +576,7 @@
         MissleCruiser,
 
         [StringValue("Mobile SAM")]
-        MobileSAM,
+        MobileSam,
 
         [StringValue("Modern Armor")]
         ModernArmor,
@@ -585,13 +584,13 @@
         Musketman,
 
         [StringValue("Musketman (Janissary)")]
-        Musketman_Janissary,
+        MusketmanJanissary,
 
         [StringValue("Musketman (Minuteman)")]
-        Musketman_Minuteman,
+        MusketmanMinuteman,
 
         [StringValue("Musketman (Musketeer)")]
-        Musketman_Musketeer,
+        MusketmanMusketeer,
 
         [StringValue("Nuclear Missle")]
         NuclearMissle,
@@ -603,7 +602,7 @@
         Pikeman,
 
         [StringValue("Pikeman (Landsknecht)")]
-        Pikeman_Landsknecht,
+        PikemanLandsknecht,
 
         Rifleman,
 
@@ -615,10 +614,10 @@
         Spearman,
 
         [StringValue("Spearman (Hoplite)")]
-        Spearman_Hoplite,
+        SpearmanHoplite,
 
         [StringValue("Spearman (Immortal)")]
-        Spearman_Immortal,
+        SpearmanImmortal,
 
         [StringValue("Stealth Bomber")]
         StealthBomber,
@@ -627,51 +626,51 @@
         Swordman,
 
         [StringValue("Swordman (Legion)")]
-        Swordman_Legion,
+        SwordmanLegion,
 
         [StringValue("Swordman (Mohawk Warrior)")]
-        Swordman_MohawkWarrior,
+        SwordmanMohawkWarrior,
 
         Tank,
 
         [StringValue("Tank (Panzer)")]
-        Tank_Panzer,
+        TankPanzer,
 
         Trebuchet,
         Trireme,
         Warrior,
 
         [StringValue("Warrior (Jaguar)")]
-        Warrior_Jaguar,
+        WarriorJaguar,
 
         Workboat,
         Worker,
 
         // Barbarians
         [StringValue("Barbarian (Archer)")]
-        Barbarian_Archer,
+        BarbarianArcher,
 
         [StringValue("Barbarian (Spearman)")]
-        Barbarian_Spearman,
+        BarbarianSpearman,
 
         [StringValue("Barbarian (Swordman)")]
-        Barbarian_Swordman,
+        BarbarianSwordman,
 
         [StringValue("Barbarian (Warrior)")]
-        Barbarian_Warrior,
+        BarbarianWarrior,
 
         // SpaceShip
         [StringValue("SpaceShip (Booster)")]
-        SpaceShip_Booster,
+        SpaceShipBooster,
 
         [StringValue("SpaceShip (Cockpit)")]
-        SpaceShip_Cockpit,
+        SpaceShipCockpit,
 
         [StringValue("SpaceShip (Engine)")]
-        SpaceShip_Engine,
+        SpaceShipEngine,
 
         [StringValue("SpaceShip (Stasis Chamber)")]
-        SpaceShip_StasisChamber,
+        SpaceShipStasisChamber,
 
         // Great Person
 
@@ -688,35 +687,35 @@
         Settle,
         Worker,
         Attack,
-        City_Bombard,
-        Fast_Attack,
+        CityBombard,
+        FastAttack,
         Defense,
         Counter,
         Ranged,
-        City_Special,
+        CitySpecial,
         Explore,
         Artist,
         Scientist,
         General,
         Merchant,
         Engineer,
-        ICBM,
-        Worker_Sea,
-        Attack_Sea,
-        Reserve_Sea,
-        Escort_Sea,
-        Explore_Sea,
-        Assault_Sea,
-        Settler_Sea,
-        Carrier_Sea,
-        Missle_Carrier_Sea,
-        Pirate_Sea,
-        Attack_Air,
-        Defense_Air,
-        Carrier_Air,
-        Missle_Air,
+        Icbm,
+        SeaWorker,
+        SeaAttack,
+        SeaReserve,
+        SeaEscort,
+        SeaExplore,
+        SeaAssault,
+        SeaSettler,
+        SeaCarrier,
+        SeaMissleCarrier,
+        SeaPirate,
+        AirAttack,
+        AirDefense,
+        AirCarrier,
+        AirMissle,
         Paradrop,
-        Spaceship_Part,
+        SpaceshipPart,
         Treasure,
         Prophet,
         Missionary,
@@ -747,33 +746,33 @@
     {
         Offense,
         Defense,
-        Military_Training,
+        MilitaryTraining,
         Recon,
         Ranged,
         Mobile,
         Naval,
-        Naval_Recon,
-        Naval_Growth,
-        Naval_Tile_Improvement,
+        NavalRecon,
+        NavalGrowth,
+        NavalImprovement,
         Air,
         Expansion,
         Growth,
-        Tile_Improvement,
+        TileImprovement,
         Infrastructure,
         Production,
         Gold,
         Science,
         Culture,
         Happiness,
-        Great_People,
+        GreatPeople,
         Wonder,
         Religion,
         Diplomacy,
         Spaceship,
-        Water_Connection,
+        WaterConnection,
         Nuke,
-        Use_Nuke,
-        Air_Carrier
+        UseNuke,
+        AirCarrier
     }
 
     public enum TraitAttributes

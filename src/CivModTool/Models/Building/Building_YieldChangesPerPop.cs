@@ -1,16 +1,16 @@
 ﻿using System.Xml.Serialization;
 
-namespace CivModTool.Models.Building.YieldChangesPerPop
+namespace CivModTool.Models.Building
 {
     [XmlRoot(ElementName = "Building_YieldChangesPerPop", Namespace = "YieldChangesPerPop")]
-    public class Building_YieldChangesPerPop
+    public class YieldChangesPerPop
     {
         [XmlElement(ElementName = "Row")]
-        public YieldChangesPerPop Row { get; set; }
+        public YieldChangePerPop Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class YieldChangesPerPop
+    public class YieldChangePerPop
     {
         [XmlElement(ElementName = "BuildingType")]
         public string BuildingType { get; set; }

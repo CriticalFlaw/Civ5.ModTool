@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CivModTool.Models.Civilization.SpyNames
+namespace CivModTool.Models.Civilization
 {
     [XmlRoot(ElementName = "Civilization_SpyNames", Namespace = "SpyNames")]
-    public class Civilization_SpyNames
+    public class SpyNames
     {
         [XmlElement(ElementName = "Row")]
-        public List<SpyNames> Row { get; set; }
+        public List<SpyName> Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class SpyNames
+    public class SpyName
     {
         [XmlElement(ElementName = "CivilizationType")]
         public string CivilizationType { get; set; }
 
         [XmlElement(ElementName = "SpyName")]
-        public string SpyName { get; set; }
+        public string Name { get; set; }
     }
 }

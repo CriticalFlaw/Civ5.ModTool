@@ -83,7 +83,7 @@
     <Compile Include="Common\LeaderToXml.cs" />
     <Compile Include="Common\MiscToXml.cs" />
     <Compile Include="Common\TraitToXml.cs" />
-    <Compile Include="Common\XMLController.cs" />
+    <Compile Include="Common\XmlController.cs" />
     <Compile Include="Resources\Dictionaries.cs" />
     <Compile Include="Resources\EnumTypes.cs" />
     <Compile Include="Models\Building\Building.cs" />

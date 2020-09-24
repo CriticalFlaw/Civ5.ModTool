@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CivModTool.Models.Civilization.BuildingClassOverrides
+namespace CivModTool.Models.Civilization
 {
     [XmlRoot(ElementName = "Civilization_BuildingClassOverrides", Namespace = "BuildingClassOverrides")]
-    public class Civilization_BuildingClassOverrides
+    public class BuildingClassOverrides
     {
         [XmlElement(ElementName = "Row")]
         public List<BuildingClassOverrides> Row { get; set; }
     }
 
     [XmlRoot(ElementName = "Row")]
-    public class BuildingClassOverrides
+    public class BuildingClassOverride
     {
         [XmlElement(ElementName = "CivilizationType")]
         public string CivilizationType { get; set; }

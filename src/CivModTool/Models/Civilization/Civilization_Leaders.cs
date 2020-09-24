@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace CivModTool.Models.Civilization.Leaders
+namespace CivModTool.Models.Civilization
 {
     [XmlRoot(ElementName = "Civilization_Leaders", Namespace = "Leaders")]
-    public class Civilization_Leaders
+    public class Leaders
     {
         [XmlElement(ElementName = "Row")]
         public Leader Row { get; set; }
