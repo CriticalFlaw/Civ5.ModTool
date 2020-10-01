@@ -5,7 +5,7 @@ namespace CivModTool.Models.Civilization
     [XmlRoot(ElementName = "GameData", Namespace = "Civilization")]
     public class GameData
     {
-        [XmlElement(ElementName = "Civilization")]
+        [XmlElement(ElementName = "Civilizations")]
         public Civilizations Civilizations { get; set; }
 
         [XmlElement(ElementName = "Civilization_Leaders")]

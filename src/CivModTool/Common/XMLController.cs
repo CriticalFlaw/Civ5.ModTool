@@ -1,5 +1,8 @@
 ﻿using CivModTool.Models.Building;
+using System;
 using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace CivModTool.Common
@@ -10,37 +13,37 @@ namespace CivModTool.Common
 
         public static bool GenerateBuildingsXml(GameData gameData)
         {
-            return BuildingToXml.WriteBuildingsXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.Building));
         }
 
         public static bool GenerateCivilizationXml(Models.Civilization.GameData gameData)
         {
-            return CivilizationToXml.WriteCivilizationXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.Civilization));
         }
 
         public static bool GenerateGameTextXml(Models.GameText.GameData gameData)
         {
-            return MiscToXml.WriteGameTextXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.GameText));
         }
 
         public static bool GenerateIconAtlasXml(Models.IconAtlas.GameData gameData)
         {
-            return MiscToXml.WriteIconAtlasXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.IconAtlas));
         }
 
         public static bool GeneratePlayerColorXml(Models.PlayerColor.GameData gameData)
         {
-            return MiscToXml.WritePlayerColorXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.PlayerColor));
         }
 
         public static bool GenerateLeaderXml(Models.Leader.GameData gameData)
         {
-            return LeaderToXml.WriteLeaderXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.Leader));
         }
 
         public static bool GenerateTraitXml(Models.Trait.GameData gameData)
         {
-            return TraitToXml.WriteTraitXml(gameData);
+            return SerializeXml(gameData, nameof(Categories.Trait));
         }
 
         #endregion WRITE_XML
@@ -49,25 +52,51 @@ namespace CivModTool.Common
 
         public static Models.Civilization.GameData ReadCivilizationXml(string path)
         {
-            return CivilizationToXml.ReadCivilizationXml(path);
+            return DeserializeXml<Models.Civilization.GameData>(nameof(Categories.Civilization), path);
         }
 
-        public static Models.GameText.GameData ReadGameTextXml(string path)
+        public static Models.GameText.GameData ReadGameTextXml<T>(string path)
         {
-            return MiscToXml.ReadGameTextXml(path);
+            return DeserializeXml<Models.GameText.GameData>(nameof(Categories.GameText), path);
         }
 
         #endregion READ_XML
 
-        internal static void SerializeXml<T>(T gameData, string fileName)
+        internal static bool SerializeXml<T>(T gameData, string fileName)
         {
-            var serializer = new XmlSerializer(typeof(T));
-            var ns = new XmlSerializerNamespaces();
-            ns.Add("", "");
-            var path = string.Format(Properties.Resources.txt_output, Directory.GetCurrentDirectory(), fileName);
-            var file = File.Create(path);
-            serializer.Serialize(file, gameData, ns);
-            file.Close();
+            try
+            {
+                var serializer = new XmlSerializer(typeof(T));
+                var ns = new XmlSerializerNamespaces();
+                ns.Add("", "x");
+                var path = string.Format(Properties.Resources.txt_output, Directory.GetCurrentDirectory(), fileName);
+                var file = File.Create(path);
+                serializer.Serialize(file, gameData, ns);
+                file.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MainWindow.Logger.Error(e.Message);
+                return false;
+            }
+        }
+
+        internal static T DeserializeXml<T>(string dataType, string path)
+        {
+            try
+            {
+                var serializer = new XmlSerializer(typeof(T), dataType);
+                var reader = new StreamReader(path);
+                var gameData = (T)serializer.Deserialize(reader);
+                reader.Close();
+                return gameData;
+            }
+            catch (Exception e)
+            {
+                MainWindow.Logger.Error(e.Message);
+                return default;
+            }
         }
     }
 }

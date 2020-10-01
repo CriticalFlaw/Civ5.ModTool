@@ -1,4 +1,4 @@
-﻿namespace CivModTool.Resources
+﻿namespace CivModTool.Common
 {
     public enum Categories
     {

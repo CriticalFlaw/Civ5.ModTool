@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CivModTool.Resources
+namespace CivModTool.Common
 {
     public static class Dictionaries
     {

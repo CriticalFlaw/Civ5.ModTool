@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Civilization V - Mod Tool"
         Height="575" Width="1015"
-        FontFamily="./Resources/style/tf2secondary.ttf #TF2 Secondary"
+        FontFamily="./Resources/tf2secondary.ttf #TF2 Secondary"
         FontSize="15px"
         SizeToContent="Manual"
         ResizeMode="CanMinimize">

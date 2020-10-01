@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CivModTool.Resources
+namespace CivModTool.Common
 {
     [AttributeUsage(AttributeTargets.All)]
     public class StringValueAttribute : Attribute

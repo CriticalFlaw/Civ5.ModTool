@@ -5,9 +5,9 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <Setter x:Key="Tf2" Property="TextElement.FontFamily"
-                Value="./Resources/Style/TF2.ttf #TF2" />
+                Value="./Resources/TF2.ttf #TF2" />
         <Setter x:Key="Tf2Secondary" Property="TextElement.FontFamily"
-                Value="./Resources/Style/TF2Secondary.ttf #TF2 Secondary" />
+                Value="./Resources/TF2Secondary.ttf #TF2 Secondary" />
 
         <Style TargetType="Label">
             <Setter Property="HorizontalAlignment" Value="Left" />
