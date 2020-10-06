@@ -12,7 +12,7 @@ namespace CivModTool.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.6.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,7 +25,7 @@ namespace CivModTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("CIV")]
+        [global::System.Configuration.DefaultSettingValueAttribute("MANNCO")]
         public string civ_name {
             get {
                 return ((string)(this["civ_name"]));
@@ -37,7 +37,7 @@ namespace CivModTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("JOHN")]
+        [global::System.Configuration.DefaultSettingValueAttribute("SAXTON")]
         public string leader_name {
             get {
                 return ((string)(this["leader_name"]));
@@ -49,37 +49,526 @@ namespace CivModTool.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("POWER")]
-        public string trait_name {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string civ_adjective {
             get {
-                return ((string)(this["trait_name"]));
+                return ((string)(this["civ_adjective"]));
             }
             set {
-                this["trait_name"] = value;
+                this["civ_adjective"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("HOUSE")]
-        public string building_name {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int civ_art_style {
             get {
-                return ((string)(this["building_name"]));
+                return ((int)(this["civ_art_style"]));
             }
             set {
-                this["building_name"] = value;
+                this["civ_art_style"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("SOLDIER")]
-        public string unit_name {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int civ_free_building {
             get {
-                return ((string)(this["unit_name"]));
+                return ((int)(this["civ_free_building"]));
             }
             set {
-                this["unit_name"] = value;
+                this["civ_free_building"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int civ_free_unit {
+            get {
+                return ((int)(this["civ_free_unit"]));
+            }
+            set {
+                this["civ_free_unit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int civ_free_tech {
+            get {
+                return ((int)(this["civ_free_tech"]));
+            }
+            set {
+                this["civ_free_tech"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int civ_religion {
+            get {
+                return ((int)(this["civ_religion"]));
+            }
+            set {
+                this["civ_religion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int civ_soundtrack {
+            get {
+                return ((int)(this["civ_soundtrack"]));
+            }
+            set {
+                this["civ_soundtrack"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string color_primary {
+            get {
+                return ((string)(this["color_primary"]));
+            }
+            set {
+                this["color_primary"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string color_secondary {
+            get {
+                return ((string)(this["color_secondary"]));
+            }
+            set {
+                this["color_secondary"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string color_text {
+            get {
+                return ((string)(this["color_text"]));
+            }
+            set {
+                this["color_text"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string civ_description {
+            get {
+                return ((string)(this["civ_description"]));
+            }
+            set {
+                this["civ_description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string civ_civilopedia {
+            get {
+                return ((string)(this["civ_civilopedia"]));
+            }
+            set {
+                this["civ_civilopedia"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] civ_cities {
+            get {
+                return ((string[])(this["civ_cities"]));
+            }
+            set {
+                this["civ_cities"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] civ_spies {
+            get {
+                return ((string[])(this["civ_spies"]));
+            }
+            set {
+                this["civ_spies"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string leader_civilopedia {
+            get {
+                return ((string)(this["leader_civilopedia"]));
+            }
+            set {
+                this["leader_civilopedia"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string leader_description {
+            get {
+                return ((string)(this["leader_description"]));
+            }
+            set {
+                this["leader_description"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string leader_dom_quote {
+            get {
+                return ((string)(this["leader_dom_quote"]));
+            }
+            set {
+                this["leader_dom_quote"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_victory {
+            get {
+                return ((int)(this["leader_victory"]));
+            }
+            set {
+                this["leader_victory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_wonder {
+            get {
+                return ((int)(this["leader_wonder"]));
+            }
+            set {
+                this["leader_wonder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_minor {
+            get {
+                return ((int)(this["leader_minor"]));
+            }
+            set {
+                this["leader_minor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_hate {
+            get {
+                return ((int)(this["leader_hate"]));
+            }
+            set {
+                this["leader_hate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_work_vs {
+            get {
+                return ((int)(this["leader_work_vs"]));
+            }
+            set {
+                this["leader_work_vs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_work_with {
+            get {
+                return ((int)(this["leader_work_with"]));
+            }
+            set {
+                this["leader_work_with"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_denounce {
+            get {
+                return ((int)(this["leader_denounce"]));
+            }
+            set {
+                this["leader_denounce"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_diplomacy {
+            get {
+                return ((int)(this["leader_diplomacy"]));
+            }
+            set {
+                this["leader_diplomacy"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_boldness {
+            get {
+                return ((int)(this["leader_boldness"]));
+            }
+            set {
+                this["leader_boldness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_loyalty {
+            get {
+                return ((int)(this["leader_loyalty"]));
+            }
+            set {
+                this["leader_loyalty"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_neediness {
+            get {
+                return ((int)(this["leader_neediness"]));
+            }
+            set {
+                this["leader_neediness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_forgiveness {
+            get {
+                return ((int)(this["leader_forgiveness"]));
+            }
+            set {
+                this["leader_forgiveness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_chattiness {
+            get {
+                return ((int)(this["leader_chattiness"]));
+            }
+            set {
+                this["leader_chattiness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_meanness {
+            get {
+                return ((int)(this["leader_meanness"]));
+            }
+            set {
+                this["leader_meanness"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_war {
+            get {
+                return ((int)(this["leader_civ_war"]));
+            }
+            set {
+                this["leader_civ_war"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_hostile {
+            get {
+                return ((int)(this["leader_civ_hostile"]));
+            }
+            set {
+                this["leader_civ_hostile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_deceptive {
+            get {
+                return ((int)(this["leader_civ_deceptive"]));
+            }
+            set {
+                this["leader_civ_deceptive"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_guarded {
+            get {
+                return ((int)(this["leader_civ_guarded"]));
+            }
+            set {
+                this["leader_civ_guarded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_afraid {
+            get {
+                return ((int)(this["leader_civ_afraid"]));
+            }
+            set {
+                this["leader_civ_afraid"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_friendly {
+            get {
+                return ((int)(this["leader_civ_friendly"]));
+            }
+            set {
+                this["leader_civ_friendly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_civ_neutral {
+            get {
+                return ((int)(this["leader_civ_neutral"]));
+            }
+            set {
+                this["leader_civ_neutral"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_city_ignore {
+            get {
+                return ((int)(this["leader_city_ignore"]));
+            }
+            set {
+                this["leader_city_ignore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_city_friendly {
+            get {
+                return ((int)(this["leader_city_friendly"]));
+            }
+            set {
+                this["leader_city_friendly"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_city_protect {
+            get {
+                return ((int)(this["leader_city_protect"]));
+            }
+            set {
+                this["leader_city_protect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_city_conquest {
+            get {
+                return ((int)(this["leader_city_conquest"]));
+            }
+            set {
+                this["leader_city_conquest"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int leader_city_bully {
+            get {
+                return ((int)(this["leader_city_bully"]));
+            }
+            set {
+                this["leader_city_bully"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] leader_flavors {
+            get {
+                return ((string[])(this["leader_flavors"]));
+            }
+            set {
+                this["leader_flavors"] = value;
             }
         }
     }

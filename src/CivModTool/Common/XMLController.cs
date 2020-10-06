@@ -1,8 +1,5 @@
-﻿using CivModTool.Models.Building;
-using System;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace CivModTool.Common
@@ -10,11 +7,6 @@ namespace CivModTool.Common
     internal static class XmlController
     {
         #region WRITE_XML
-
-        public static bool GenerateBuildingsXml(GameData gameData)
-        {
-            return SerializeXml(gameData, nameof(Categories.Building));
-        }
 
         public static bool GenerateCivilizationXml(Models.Civilization.GameData gameData)
         {
@@ -41,11 +33,6 @@ namespace CivModTool.Common
             return SerializeXml(gameData, nameof(Categories.Leader));
         }
 
-        public static bool GenerateTraitXml(Models.Trait.GameData gameData)
-        {
-            return SerializeXml(gameData, nameof(Categories.Trait));
-        }
-
         #endregion WRITE_XML
 
         #region READ_XML
@@ -55,9 +42,24 @@ namespace CivModTool.Common
             return DeserializeXml<Models.Civilization.GameData>(nameof(Categories.Civilization), path);
         }
 
-        public static Models.GameText.GameData ReadGameTextXml<T>(string path)
+        public static Models.GameText.GameData ReadGameTextXml(string path)
         {
             return DeserializeXml<Models.GameText.GameData>(nameof(Categories.GameText), path);
+        }
+
+        public static Models.IconAtlas.GameData ReadIconAtlasXml(string path)
+        {
+            return DeserializeXml<Models.IconAtlas.GameData>(nameof(Categories.IconAtlas), path);
+        }
+
+        public static Models.PlayerColor.GameData ReadPlayerColorXml(string path)
+        {
+            return DeserializeXml<Models.PlayerColor.GameData>(nameof(Categories.PlayerColor), path);
+        }
+
+        public static Models.Leader.GameData ReadLeaderXml(string path)
+        {
+            return DeserializeXml<Models.Leader.GameData>(nameof(Categories.Leader), path);
         }
 
         #endregion READ_XML

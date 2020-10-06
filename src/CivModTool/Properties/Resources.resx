@@ -186,7 +186,7 @@
     <comment>0 = Trait</comment>
   </data>
   <data name="txt_app_update" xml:space="preserve">
-    <value>https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml</value>
+    <value>https://raw.githubusercontent.com/CriticalFlaw/Civ5.ModTool/master/Update.xml</value>
   </data>
   <data name="txt_building" xml:space="preserve">
     <value>BUILDING_{0}_{1}</value>

@@ -27,99 +27,73 @@
                         <SolidColorBrush Color="#191919" Opacity="0.85" />
                     </Grid.Background>
                     <TextBlock Text="Civilization:" Margin="10,15,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbType" Margin="40,10,0,0" TextWrapping="Wrap" CharacterCasing="Upper"
-                             Grid.Column="1" />
+                    <TextBox x:Name="TbType" Margin="40,10,0,0" TextWrapping="Wrap" CharacterCasing="Upper" Grid.Column="1" />
 
-                    <TextBlock Text="Adjective:" Margin="10,55,0,0" Foreground="GhostWhite" Grid.Column="0" />
-                    <TextBox x:Name="TbAdjective" Margin="40,50,0,0" TextWrapping="Wrap" CharacterCasing="Upper"
-                             Grid.Column="1" />
+                    <TextBlock Text="Adjective:" Margin="10,55,0,0" Grid.Column="0" Foreground="GhostWhite" />
+                    <TextBox x:Name="TbAdjective" Margin="40,50,0,0" TextWrapping="Wrap" CharacterCasing="Upper" Grid.Column="1" />
 
-                    <TextBlock Text="Art Style:" Margin="10,95,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Art Style:" Margin="10,95,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <ComboBox x:Name="CbArtStyle" Margin="40,90,0,0" SelectedIndex="1" Width="160" Grid.Column="1" />
 
-                    <TextBlock Text="Free Building:" Margin="10,135,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Free Building:" Margin="10,135,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <ComboBox x:Name="CbFreeBuilding" Margin="40,130,0,0" SelectedIndex="64" Width="160" Grid.Column="1" />
 
-                    <TextBlock Text="Free Unit:" Margin="10,175,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Free Unit:" Margin="10,175,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <ComboBox x:Name="CbFreeUnit" Margin="40,170,0,0" SelectedIndex="60" Width="160" Grid.Column="1" />
 
-                    <TextBlock Text="Free Technology:" Margin="10,215,0,0" Foreground="GhostWhite" Grid.Column="0" Grid.ColumnSpan="2" Width="125" />
+                    <TextBlock Text="Free Technology:" Margin="10,215,0,0" Grid.Column="0" Foreground="GhostWhite" Grid.ColumnSpan="2" Width="125" />
                     <ComboBox x:Name="CbFreeTech" Margin="40,210,0,0" SelectedIndex="0" Width="160" Grid.Column="1" />
 
-                    <TextBlock Text="Religion:" Margin="10,255,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Religion:" Margin="10,255,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <ComboBox x:Name="CbReligion" Margin="40,250,0,0" SelectedIndex="0" Width="160" Grid.Column="1" />
 
-                    <TextBlock Text="Soundtrack:" Margin="10,295,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Soundtrack:" Margin="10,295,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <ComboBox x:Name="CbSoundtrack" Margin="40,290,0,0" SelectedIndex="0" Width="160" Grid.Column="1" />
 
-                    <TextBlock Text="Primary Color:" Margin="10,330,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Primary Color:" Margin="10,330,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <x2:ColorPicker
                         x:Name="CpPrimaryColor"
                         Width="160"
                         Height="26"
                         Margin="40,330,0,0"
-                        VerticalAlignment="Top"
-                        ColorMode="ColorCanvas"
-                        ShowRecentColors="True"
-                        DisplayColorAndName="True"
-                        ShowDropDownButton="False"
                         SelectedColor="Black" Grid.Column="1" />
 
-                    <TextBlock Text="Secondary Color:" Margin="10,370,0,0" Foreground="GhostWhite" Grid.Column="0" Grid.ColumnSpan="2" Width="125" />
+                    <TextBlock Text="Secondary Color:" Margin="10,370,0,0" Grid.Column="0" Foreground="GhostWhite" Grid.ColumnSpan="2" Width="125" />
                     <x2:ColorPicker
                         x:Name="CpSecondaryColor"
                         Width="160"
                         Height="26"
                         Margin="40,370,0,0"
-                        VerticalAlignment="Top"
-                        ColorMode="ColorCanvas"
-                        ShowRecentColors="True"
-                        DisplayColorAndName="True"
-                        ShowDropDownButton="False"
                         SelectedColor="Yellow" Grid.Column="1" />
 
-                    <TextBlock Text="Text Color:" Margin="10,410,0,0" Foreground="GhostWhite" Grid.Column="0" />
+                    <TextBlock Text="Text Color:" Margin="10,410,0,0" Grid.Column="0" Foreground="GhostWhite" />
                     <x2:ColorPicker
                         x:Name="CpTextColor"
                         Width="160"
                         Height="26px"
                         Margin="40,410,0,0"
-                        VerticalAlignment="Top"
-                        ColorMode="ColorCanvas"
-                        ShowRecentColors="True"
-                        DisplayColorAndName="True"
-                        ShowDropDownButton="False"
                         SelectedColor="White" Grid.Column="1" />
 
-                    <TextBlock Text="Description:" Margin="235,10,0,0" Foreground="GhostWhite" Grid.Column="1" />
+                    <TextBlock Text="Description:" Margin="235,15,0,0" Grid.Column="1" Foreground="GhostWhite" />
                     <TextBox x:Name="TbDescription" Margin="360,10,0,0" TextWrapping="Wrap" Width="478" Height="70"
                              VerticalScrollBarVisibility="Auto" Grid.Column="1" />
 
-                    <TextBlock Text="Civilopedia:" Margin="235,90,0,0" Foreground="GhostWhite" Grid.Column="1" />
-                    <TextBox x:Name="TbCivilopedia" Margin="360,90,0,0" TextWrapping="Wrap" Width="478" Height="70"
-                             VerticalScrollBarVisibility="Auto" Grid.Column="1" />
+                    <TextBlock Text="Civilopedia:" Margin="235,95,0,0" Grid.Column="1" Foreground="GhostWhite" />
+                    <TextBox x:Name="TbCivilopedia" Margin="360,90,0,0" TextWrapping="Wrap" Width="478" Height="70" VerticalScrollBarVisibility="Auto" Grid.Column="1" />
 
-                    <GroupBox Header="City Names" Height="262" Margin="235,170,0,0" Width="300" Foreground="GhostWhite"
-                              Grid.Column="1">
+                    <GroupBox Header="City Names" Height="262" Margin="235,170,0,0" Width="300" Grid.Column="1" Foreground="GhostWhite">
                         <Grid>
-                            <Button x:Name="BtnAddCity" Content="Add" Margin="10,15,0,0" Width="75"
-                                    Click="BtnAddCity_OnClick" />
-                            <Button x:Name="BtnRemoveCity" Content="Remove" Margin="90,15,0,0" Width="75"
-                                    Click="BtnRemoveCity_OnClick" />
-                            <Button x:Name="BtnClearCity" Content="Clear" Margin="170,15,0,0" Width="75"
-                                    Click="BtnClearCity_OnClick" />
+                            <Button x:Name="BtnAddCity" Content="Add" Margin="10,15,0,0" Width="75" Click="BtnAddCity_OnClick" />
+                            <Button x:Name="BtnRemoveCity" Content="Remove" Margin="90,15,0,0" Width="75" Click="BtnRemoveCity_OnClick" />
+                            <Button x:Name="BtnClearCity" Content="Clear" Margin="170,15,0,0" Width="75" Click="BtnClearCity_OnClick" />
                             <ListBox x:Name="LbCityNames" Margin="10,53,10,10.4" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Spy Names" Height="262" Margin="540,170,0,0" Width="300" Foreground="GhostWhite"
-                              Grid.Column="1">
+                    <GroupBox Header="Spy Names" Height="262" Margin="540,170,0,0" Width="300" Grid.Column="1" Foreground="GhostWhite">
                         <Grid>
-                            <Button x:Name="BtnAddSpy" Content="Add" Margin="10,15,0,0" Width="75"
-                                    Click="BtnAddSpy_Click" />
-                            <Button x:Name="BtnRemoveSpy" Content="Remove" Margin="90,15,0,0" Width="75"
-                                    Click="BtnRemoveSpy_Click" />
-                            <Button x:Name="BtnClearSpy" Content="Clear" Margin="170,15,0,0" Width="75"
-                                    Click="BtnClearSpy_Click" />
+                            <Button x:Name="BtnAddSpy" Content="Add" Margin="10,15,0,0" Width="75" Click="BtnAddSpy_Click" />
+                            <Button x:Name="BtnRemoveSpy" Content="Remove" Margin="90,15,0,0" Width="75" Click="BtnRemoveSpy_Click" />
+                            <Button x:Name="BtnClearSpy" Content="Clear" Margin="170,15,0,0" Width="75" Click="BtnClearSpy_Click" />
                             <ListBox x:Name="LbSpyNames" Margin="10,53,10,10.4" />
                         </Grid>
                     </GroupBox>
@@ -139,21 +113,17 @@
                              VerticalScrollBarVisibility="Auto" />
 
                     <TextBlock Text="Description:" Margin="335,15,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbLeaderDescription" Margin="460,10,0,0" TextWrapping="Wrap" Width="478"
-                             Height="70" VerticalScrollBarVisibility="Auto" />
+                    <TextBox x:Name="TbLeaderDescription" Margin="460,10,0,0" TextWrapping="Wrap" Width="478" Height="70" VerticalScrollBarVisibility="Auto" />
 
-                    <TextBlock Text="Dawn of Man Quote:" Margin="335,95,0,0" Foreground="GhostWhite"
-                               TextWrapping="Wrap" Width="120" />
-                    <TextBox x:Name="TbDomQuote" Margin="460,90,0,0" TextWrapping="Wrap" Width="478" Height="70"
-                             VerticalScrollBarVisibility="Auto" />
+                    <TextBlock Text="Dawn of Man Quote:" Margin="335,95,0,0" TextWrapping="Wrap" Width="120" Foreground="GhostWhite" />
+                    <TextBox x:Name="TbDomQuote" Margin="460,90,0,0" TextWrapping="Wrap" Width="478" Height="70" VerticalScrollBarVisibility="Auto" />
 
-                    <Button x:Name="BtnRandomizeStats" Content="Randomize Stats" Margin="10,170,0,0" Width="290"
-                            Click="BtnRandomizeStats_Click" />
+                    <Button x:Name="BtnRandomizeStats" Content="Randomize Stats" Margin="10,170,0,0" Width="290" Click="BtnRandomizeStats_Click" />
 
                     <GroupBox Header="Flavors" Height="243" Margin="10,195,0,0" Width="235" Foreground="GhostWhite">
                         <Grid>
                             <ComboBox x:Name="CbFlavors" Margin="10,5,0,0" Width="98" SelectedIndex="0" Height="21" />
-                            <TextBlock Text="Count:" Margin="115,5,0,0" Width="53" />
+                            <TextBlock Text="Count:" Margin="115,7,0,0" Width="53" />
                             <x2:IntegerUpDown x:Name="IntFlavorCount" Margin="170,5,0,0" FormatString="N0" Value="1"
                                               Increment="1" Minimum="1" Maximum="10" Width="40" Height="21" />
                             <Button x:Name="BtnAddFlavor" Content="Add" Margin="10,31,0,0"
@@ -167,8 +137,7 @@
                             <ListBox x:Name="LbFlavors" Margin="10,55,13.2,7.2" Height="157" Width="200" />
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Characteristics" Height="243" Margin="250,195,0,0" Width="385"
-                              Foreground="GhostWhite">
+                    <GroupBox Header="Characteristics" Height="243" Margin="250,195,0,0" Width="385" Foreground="GhostWhite">
                         <Grid>
                             <TextBlock Text="Competitive - Victory:" Margin="5,10,0,0" />
                             <TextBlock Text="Competitive - Wonder:" Margin="5,40,0,0" />
@@ -243,8 +212,7 @@
                         </Grid>
                     </GroupBox>
 
-                    <GroupBox Header="Approach to Civilizations/City States" Height="243" Margin="641,195,0,0"
-                              Width="318" Foreground="GhostWhite">
+                    <GroupBox Header="Approach to Civilizations/City States" Height="243" Margin="641,195,0,0" Width="318" Foreground="GhostWhite">
                         <Grid>
                             <TextBlock Text="War:" Margin="5,10,0,0" />
                             <TextBlock Text="Hostile:" Margin="5,40,0,0" />
@@ -314,80 +282,6 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Trait">
-                <Grid>
-                    <Grid.Background>
-                        <SolidColorBrush Color="#191919" Opacity="0.85" />
-                    </Grid.Background>
-
-                    <TextBlock Text="Trait:" Margin="10,15,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbTraitType" Margin="140,10,0,0" TextWrapping="Wrap" CharacterCasing="Upper" Width="400" />
-
-                    <TextBlock Text="Description:" Margin="10,55,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbTraitDescription" Margin="140,55,0,0" TextWrapping="Wrap" Width="400"
-                             Height="70" VerticalScrollBarVisibility="Auto" />
-
-                    <TextBlock Text="Short Description:" Margin="10,155,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbTraitDescriptionShort" Margin="140,147,0,0" TextWrapping="Wrap" Width="400"
-                             Height="70" VerticalScrollBarVisibility="Auto" />
-
-                    <GroupBox Header="Attributes" Height="431" Margin="567,10,0,0" Width="406" Foreground="GhostWhite">
-                        <Grid>
-                            <ComboBox x:Name="CbTraitAttributes" Margin="10,10,0,0" Width="374" SelectedIndex="0" />
-                            <TextBlock Text="Attribute Value:" Margin="10,55,0,0" />
-                            <x2:IntegerUpDown x:Name="IntAttributeValue" Margin="129,51,0,0"
-                                              FormatString="N0" Value="1" Increment="1"
-                                              Minimum="1"
-                                              Maximum="10" Width="50" AllowTextInput="False" Height="21">
-                            </x2:IntegerUpDown>
-                            <Button x:Name="BtnAddAttribute" Content="Add"
-                                    Margin="184,51,0,0" Width="60" Click="BtnAddAttribute_Click" />
-                            <Button x:Name="BtnRemoveAttribute" Content="Remove"
-                                    Margin="314,50,0,0" Width="70"
-                                    Click="BtnRemoveAttribute_Click" Height="22" />
-                            <Button x:Name="BtnClearAttributes" Content="Clear"
-                                    Margin="249,51,0,0" Width="60"
-                                    Click="BtnClearAttributes_Click" Height="21" RenderTransformOrigin="0.367,0.474" />
-                            <ListBox x:Name="LbTraitAttributes"
-                                     Margin="10,86,9.2,9.8" />
-                        </Grid>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Buildings">
-                <Grid>
-                    <Grid.Background>
-                        <SolidColorBrush Color="#191919" Opacity="0.85" />
-                    </Grid.Background>
-                    <TextBlock Text="Building:" Margin="10,10,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbBuildingType" Margin="140,10,0,0" TextWrapping="Wrap" CharacterCasing="Upper" />
-
-                    <TextBlock Text="Building Type:" Margin="10,50,0,0" Foreground="GhostWhite" />
-                    <ComboBox x:Name="CbBuildingOverride" Margin="140,50,0,0" SelectedIndex="38" />
-
-                    <TextBlock Text="Starting Era:" Margin="10,90,0,0" Foreground="GhostWhite" />
-                    <ComboBox x:Name="CbBuildingStartEra" Margin="140,90,0,0" SelectedIndex="4" />
-
-                    <TextBlock Text="Required Tech:" Margin="10,130,0,0" Foreground="GhostWhite" />
-                    <ComboBox x:Name="CbBuildingReqTech" Margin="140,130,0,0" SelectedIndex="20" />
-
-                    <TextBlock Text="Description:" Margin="335,10,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbBuildingDesc" Margin="460,10,0,0" TextWrapping="Wrap" Width="478" Height="70"
-                             VerticalScrollBarVisibility="Auto" />
-
-                    <TextBlock Text="Civilopedia:" Margin="335,90,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbBuildingPedia" Margin="460,90,0,0" TextWrapping="Wrap" Width="478" Height="70"
-                             VerticalScrollBarVisibility="Auto" />
-
-                    <TextBlock Text="Strategy:" Margin="335,170,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbBuildingStrategy" Margin="460,170,0,0" TextWrapping="Wrap" Width="478" Height="70"
-                             VerticalScrollBarVisibility="Auto" />
-
-                    <TextBlock Text="Help:" Margin="335,250,0,0" Foreground="GhostWhite" />
-                    <TextBox x:Name="TbBuildingHelp" Margin="460,250,0,0" TextWrapping="Wrap" Width="478" Height="70"
-                             VerticalScrollBarVisibility="Auto" />
-                </Grid>
-            </TabItem>
             <TabItem Header="Icon Atlas">
                 <Grid>
                     <Grid.Background>
@@ -432,6 +326,6 @@
         <Button x:Name="BtnResetForm" Content="Reset Form" Margin="220,498,0,0" Height="25" Width="200"
                 Click="BtnResetForm_Click" />
         <Button x:Name="BtnReadFromXml" Content="Load from XML" Margin="425,498,0,0" Height="25" Width="200"
-                Click="BtnReadFromXML_Click" />
+                Click="BtnReadFromXML_Click" Visibility="Hidden" />
     </Grid>
 </Window>

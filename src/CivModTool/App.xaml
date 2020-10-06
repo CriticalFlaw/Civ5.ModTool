@@ -41,6 +41,10 @@
         <Style TargetType="x2:ColorPicker">
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Top" />
+            <Setter Property="ColorMode" Value="ColorCanvas" />
+            <Setter Property="ShowRecentColors" Value="True" />
+            <Setter Property="DisplayColorAndName" Value="True" />
+            <Setter Property="ShowDropDownButton" Value="False" />
         </Style>
 
         <Style TargetType="x2:IntegerUpDown">

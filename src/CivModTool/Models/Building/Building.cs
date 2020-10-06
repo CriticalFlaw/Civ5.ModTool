@@ -5,7 +5,7 @@ namespace CivModTool.Models.Building
     [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
-        [XmlElement(ElementName = "Building")]
+        [XmlElement(ElementName = "Buildings")]
         public Buildings Buildings { get; set; }
 
         [XmlElement(ElementName = "Building_Flavors")]
@@ -21,7 +21,7 @@ namespace CivModTool.Models.Building
         public YieldModifiers YieldModifiers { get; set; }
     }
 
-    [XmlRoot(ElementName = "Building")]
+    [XmlRoot(ElementName = "Buildings")]
     public class Buildings
     {
         [XmlElement(ElementName = "Row")]

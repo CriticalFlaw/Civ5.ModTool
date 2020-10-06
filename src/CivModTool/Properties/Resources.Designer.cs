@@ -214,7 +214,7 @@ namespace CivModTool.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://raw.githubusercontent.com/CriticalFlaw/CivModTool/master/Update.xml.
+        ///   Looks up a localized string similar to https://raw.githubusercontent.com/CriticalFlaw/Civ5.ModTool/master/Update.xml.
         /// </summary>
         internal static string txt_app_update {
             get {

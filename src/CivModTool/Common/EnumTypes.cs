@@ -2,7 +2,7 @@
 {
     public enum Categories
     {
-        Building,
+        Buildings,
         Civilization,
         GameText,
         IconAtlas,
