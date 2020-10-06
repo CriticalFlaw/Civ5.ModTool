@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Trait
 {
-    [XmlRoot(ElementName = "GameData", Namespace = "Trait")]
+    [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
         [XmlElement(ElementName = "Traits")]

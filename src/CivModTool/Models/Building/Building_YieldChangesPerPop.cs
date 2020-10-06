@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Building
 {
-    [XmlRoot(ElementName = "Building_YieldChangesPerPop", Namespace = "YieldChangesPerPop")]
+    [XmlRoot(ElementName = "Building_YieldChangesPerPop")]
     public class YieldChangesPerPop
     {
         [XmlElement(ElementName = "Row")]

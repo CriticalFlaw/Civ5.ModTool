@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Civilization
 {
-    [XmlRoot(ElementName = "GameData", Namespace = "Civilization")]
+    [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
         [XmlElement(ElementName = "Civilizations")]

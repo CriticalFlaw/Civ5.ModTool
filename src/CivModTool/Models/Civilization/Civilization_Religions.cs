@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Civilization
 {
-    [XmlRoot(ElementName = "Civilization_Religions", Namespace = "Religions")]
+    [XmlRoot(ElementName = "Civilization_Religions")]
     public class Religions
     {
         [XmlElement(ElementName = "Row")]

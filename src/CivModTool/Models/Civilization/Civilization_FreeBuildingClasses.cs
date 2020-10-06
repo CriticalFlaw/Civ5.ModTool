@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Civilization
 {
-    [XmlRoot(ElementName = "Civilization_FreeBuildingClasses", Namespace = "FreeBuildingClasses")]
+    [XmlRoot(ElementName = "Civilization_FreeBuildingClasses")]
     public class FreeBuildingClasses
     {
         [XmlElement(ElementName = "Row")]

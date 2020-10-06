@@ -19,11 +19,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
 using Buildings = CivModTool.Common.Buildings;
+using Flavor = CivModTool.Models.Leader.Flavor;
 using Flavors = CivModTool.Common.Flavors;
 using GameData = CivModTool.Models.Civilization.GameData;
 using Leader = CivModTool.Models.Civilization.Leader;
@@ -356,6 +358,7 @@ namespace CivModTool
             IntFriendlyApproach.Text = random.Next(1, 10).ToString();
             IntProtectiveApproach.Text = random.Next(1, 10).ToString();
             IntConquestApproach.Text = random.Next(1, 10).ToString();
+            IntBullyApproach.Text = random.Next(1, 10).ToString();
         }
 
         private void BtnAddCity_OnClick(object sender, RoutedEventArgs e)
@@ -483,13 +486,15 @@ namespace CivModTool
                     {
                         PortraitIndex = 0,
                         Type = civType,
-                        DerivativeCiv = "CIVILIZATION_AMERICA", // TO-DO
+                        DerivativeCiv = string.Format(Properties.Resources.txt_civ, CbSoundtrack.SelectedValue.ToString().ToUpper()),
                         Description = string.Format(Properties.Resources.key_civ_desc, TbType.Text),
                         Civilopedia = "TXT_KEY_CIV_MANNCO_PEDIA_HEADER1",   // TO-DO
                         CivilopediaTag = string.Format(Properties.Resources.key_civ_pedia_text, TbType.Text),
                         ShortDescription = string.Format(Properties.Resources.key_civ_desc_short, TbType.Text),
                         Adjective = string.Format(Properties.Resources.key_civ_adjective, TbType.Text),
                         DefaultPlayerColor = string.Format(Properties.Resources.txt_civ_color, TbType.Text),
+                        ArtDefineTag = string.Format(Properties.Resources.txt_civ_art_def,
+                            CbSoundtrack.SelectedValue.ToString().ToUpper()),
                         ArtStyleType = string.Format(Properties.Resources.txt_civ_art_style,
                             CbArtStyle.SelectedValue.ToString().ToUpper()),
                         ArtStyleSuffix = GetArtSuffix((ArtStyles)Enum.Parse(typeof(ArtStyles),
@@ -497,13 +502,20 @@ namespace CivModTool
                         ArtStylePrefix = CbArtStyle.SelectedValue.ToString().ToUpper(),
                         IconAtlas = string.Format(Properties.Resources.txt_civ_atlas_icon, TbType.Text),
                         AlphaIconAtlas = string.Format(Properties.Resources.txt_civ_atlas_alpha, TbType.Text),
+                        SoundtrackTag = CbSoundtrack.SelectedValue.ToString(),
                         MapImage = string.Format(Properties.Resources.txt_civ_map, TbType.Text),
                         DawnOfManQuote = string.Format(Properties.Resources.key_civ_dom_text, TbType.Text),
                         DawnOfManImage = string.Format(Properties.Resources.txt_civ_dom_image, TbLeaderType.Text)
                     }
                 },
-                CityNames = new CityNames(),
-                SpyNames = new SpyNames(),
+                CityNames = new CityNames
+                {
+                    Row = new List<CityName>()
+                },
+                SpyNames = new SpyNames
+                {
+                    Row = new List<SpyName>()
+                },
                 Leaders = new Models.Civilization.Leaders
                 {
                     Row = new Leader
@@ -592,7 +604,7 @@ namespace CivModTool
                         Type = string.Format(Properties.Resources.txt_leader, Settings.Default.leader_name),
                         Description = string.Format(Properties.Resources.key_leader, TbLeaderType.Text),
                         Civilopedia = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
-                        CivilopediaTag = string.Format(Properties.Resources.key_leader_pedia_tag, TbLeaderType.Text),
+                        CivilopediaTag = string.Format(Properties.Resources.key_leader_pedia, TbLeaderType.Text),
                         ArtDefineTag = string.Format(Properties.Resources.txt_leader_scene, TbLeaderType.Text),
                         VictoryCompetitiveness = IntCompVictory.Value ?? default,
                         WonderCompetitiveness = IntCompWonder.Value ?? default,
@@ -626,7 +638,11 @@ namespace CivModTool
                 MinorCivApproachBiases = new MinorCivApproachBiases
                 {
                     Row = new List<MinorCivApproachBias>()
-                }
+                },
+                Flavors = new Models.Leader.Flavors
+                {
+                    Row = new List<Flavor>()
+                },
             };
 
             Tuple<string, int?>[] majorApproaches =
@@ -668,7 +684,9 @@ namespace CivModTool
                 new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "PROTECTIVE"),
                     IntProtectiveApproach.Value ?? default),
                 new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "CONQUEST"),
-                    IntConquestApproach.Value ?? default)
+                    IntConquestApproach.Value ?? default),
+                new Tuple<string, int?>(string.Format(Properties.Resources.txt_minor_approach, "BULLY"),
+                    IntBullyApproach.Value ?? default)
             };
 
             foreach (var (approach, bias) in minorApproaches)
@@ -681,6 +699,19 @@ namespace CivModTool
                 };
 
                 gameData.MinorCivApproachBiases.Row.Add(minor);
+            }
+
+            foreach (var leaderFlavor in LbFlavors.Items)
+            {
+                var value = leaderFlavor.ToString().Split('-');
+                var flavor = new Flavor
+                {
+                    FlavorType = $"FLAVOR{Regex.Replace(value[0], @"(?<!_)([A-Z])", "_$1").ToUpper()}",
+                    Value = int.Parse(value[1]),
+                    LeaderType = gameData.Leaders.Row.Type
+                };
+
+                gameData.Flavors.Row.Add(flavor);
             }
 
             return XmlController.GenerateLeaderXml(gameData);

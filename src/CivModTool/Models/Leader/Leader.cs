@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Leader
 {
-    [XmlRoot(ElementName = "GameData", Namespace = "Leader")]
+    [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
         [XmlElement(ElementName = "Leaders")]

@@ -746,6 +746,7 @@
     {
         Offense,
         Defense,
+        CityDefense,
         MilitaryTraining,
         Recon,
         Ranged,
@@ -753,7 +754,7 @@
         Naval,
         NavalRecon,
         NavalGrowth,
-        NavalImprovement,
+        NavalTileImprovement,
         Air,
         Expansion,
         Growth,
@@ -772,7 +773,15 @@
         WaterConnection,
         Nuke,
         UseNuke,
-        AirCarrier
+        Espionage,
+        Antiair,
+        AirCarrier,
+        Archaeology,
+        ILandTradeRoute,
+        ISeaTradeRoute,
+        ITradeOrigin,
+        ITradeDestination,
+        Airlift
     }
 
     public enum TraitAttributes

@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Building
 {
-    [XmlRoot(ElementName = "GameData", Namespace = "Building")]
+    [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
         [XmlElement(ElementName = "Building")]

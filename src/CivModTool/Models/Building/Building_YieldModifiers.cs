@@ -2,7 +2,7 @@
 
 namespace CivModTool.Models.Building
 {
-    [XmlRoot(ElementName = "Building_YieldModifiers", Namespace = "YieldModifiers")]
+    [XmlRoot(ElementName = "Building_YieldModifiers")]
     public class YieldModifiers
     {
         [XmlElement(ElementName = "Row")]

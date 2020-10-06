@@ -6,7 +6,7 @@ namespace CivModTool.Models.IconAtlas
     [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
-        [XmlElement(ElementName = "IconTextureAtlases", Namespace = "IconAtlas")]
+        [XmlElement(ElementName = "IconTextureAtlases")]
         public IconTextureAtlases IconTextureAtlases { get; set; }
     }
 

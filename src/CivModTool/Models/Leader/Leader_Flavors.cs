@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.Leader
 {
-    [XmlRoot(ElementName = "Leader_Flavors", Namespace = "Flavors")]
+    [XmlRoot(ElementName = "Leader_Flavors")]
     public class Flavors
     {
         [XmlElement(ElementName = "Row")]

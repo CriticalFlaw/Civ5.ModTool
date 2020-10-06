@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.GameText
 {
-    [XmlRoot(ElementName = "GameData", Namespace = "GameText")]
+    [XmlRoot(ElementName = "GameData")]
     public class GameData
     {
         [XmlElement(ElementName = "Language_en_US")]

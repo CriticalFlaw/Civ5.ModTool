@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace CivModTool.Models.Trait
 {
-    [XmlRoot(ElementName = "Trait_YieldChangesStrategicResources", Namespace = "YieldChangesStrategicResources")]
+    [XmlRoot(ElementName = "Trait_YieldChangesStrategicResources")]
     public class YieldChangesStrategicResources
     {
         [XmlElement(ElementName = "Row")]
