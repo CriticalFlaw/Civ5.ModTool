@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created by ModBuddy on 5/24/2020 2:50:21 PM -->
+<GameData>
+	<Language_en_US>
+		<!--Civilization-->
+		<Row Tag="TXT_KEY_CIV_MANNCO_ADJECTIVE">
+			<Text>Mann Co.</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CIV_MANNCO_DESC">
+			<Text>Mann Co.</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CIV_MANNCO_DESC_SHORT">
+			<Text>Mann Co.</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CIV_MANNCO_PEDIA_HEADER1">
+			<Text>History</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CIV_MANNCO_PEDIA_TEXT1">
+			<Text>Mann Co. is a multinational division of TF Industries with headquarters in the Badlands, near Teufort, New Mexico. In the Badlands area alone, the company operates over 300 plants, office buildings, warehouses and outlet malls.The company was originally incorporated in the United States as Mann and Sons Munitions Concern by the arms-dealer Zepheniah Mann, who co-managed the firm with his brother, Silas Mann. Upon his death in 1850, Zepheniah Mann bequeathed ownership of Mann Co. to close friend and hunter Barnabas Hale. The company was subsequently owned and operated by three generations of Hales.</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CIV_MANNCO_DOM">
+			<Text>Mann Co. is a multinational division of TF Industries with headquarters in the Badlands, near Teufort, New Mexico. In the Badlands area alone, the company operates over 300 plants, office buildings, warehouses and outlet malls.The company was originally incorporated in the United States as Mann and Sons Munitions Concern by the arms-dealer Zepheniah Mann, who co-managed the firm with his brother, Silas Mann. Upon his death in 1850, Zepheniah Mann bequeathed ownership of Mann Co. to close friend and hunter Barnabas Hale. The company was subsequently owned and operated by three generations of Hales.</Text>
+		</Row>
+		
+		<!--Leader-->
+		<Row Tag="TXT_KEY_LEADER_SAXTON">
+			<Text>Saxton Hale</Text>
+		</Row>
+		<Row Tag="TXT_KEY_LEADER_SAXTON_PEDIA">
+			<Text>Saxton Hale</Text>
+		</Row>
+		<Row Tag="TXT_KEY_LEADER_SAXTON_LIVED">
+			<Text>1900s - Present</Text>
+		</Row>
+		<Row Tag="TXT_KEY_LEADER_SAXTON_SUBTITLE">
+			<Text>The President and CEO of Mann Co.</Text>
+		</Row>
+		
+		<!--City Names-->
+		<Row Tag="TXT_KEY_CITY_NAME_BADLANDS">
+			<Text>Badlands</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_BADWATER">
+			<Text>Badwater Basin</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_BANANABAY">
+			<Text>Banana Bay</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_BARNBLITZ">
+			<Text>Barnblitz</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_BIGROCK">
+			<Text>Bigrock</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_BORNEO">
+			<Text>Borneo</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_CACTUSCANYON">
+			<Text>Cactus Canyon</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_COALTOWN">
+			<Text>Coal Town</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_DEGROOTKEEP">
+			<Text>DeGroot Keep</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_DOUBLECROSS">
+			<Text>Double Cross</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_DUSTBOWL">
+			<Text>Dustbowl</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_EGYPT">
+			<Text>Egypt</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_FOUNDRY">
+			<Text>Foundry</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_FREIGHT">
+			<Text>Freight</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_FRONTIER">
+			<Text>Frontier</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_GORGE">
+			<Text>Gorge</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_GRANARY">
+			<Text>Granary</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_GRAVELPIT">
+			<Text>Gravel Pit</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_GULLYWASH">
+			<Text>Gullywash</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_HARVEST">
+			<Text>Harvest</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_HIGHTOWER">
+			<Text>Hightower</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_HOODOO">
+			<Text>Hoodoo</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_HYDRO">
+			<Text>Hydro</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_JUNCTION">
+			<Text>Junction</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_KONGKING">
+			<Text>Kong King</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_LAKESIDE">
+			<Text>Lakeside</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_LAZARUS">
+			<Text>Lazarus</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_MANNHATTAN">
+			<Text>Mannhattan</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_MANNWORKS">
+			<Text>Mannworks</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_MERCPARK">
+			<Text>Mercenary Park</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_MOSSROCK">
+			<Text>Mossrock</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_MOUNTAINLAB">
+			<Text>Mountain Lab</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_POWERHOUSE">
+			<Text>Powerhouse</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_PROCESS">
+			<Text>Process</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_ROTTENBURG">
+			<Text>Rottenburg</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_SAWMILL">
+			<Text>Sawmill</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_SNAKEWATER">
+			<Text>Snakewater</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_SNOWPLOW">
+			<Text>Snowplow</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_STEEL">
+			<Text>Steel</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_SUNSHINE">
+			<Text>Sunshine</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_SWIFTWATER">
+			<Text>Swiftwater</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_THUNDERMOUNTAIN">
+			<Text>Thunder Mountain</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_TIMBERTOWN">
+			<Text>Timbertown</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_TURBINE">
+			<Text>Turbine</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_UPWARD">
+			<Text>Upward</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_VANGUARD">
+			<Text>Vanguard</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_VIADUCT">
+			<Text>Viaduct</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_WATERGATE">
+			<Text>Watergate</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_WELL">
+			<Text>Well</Text>
+		</Row>
+		<Row Tag="TXT_KEY_CITY_NAME_YUKON">
+			<Text>Yukon</Text>
+		</Row>
+		
+		<!--Spy Names-->
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_1">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_2">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_3">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_4">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_5">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_6">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_7">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_8">
+			<Text>The Spy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_SPY_NAME_MANNCO_9">
+			<Text>The Spy</Text>
+		</Row>
+		
+		<!--Traits-->
+		<Row Tag="TXT_KEY_TRAIT_MANNCONOMY">
+			<Text>Mann-Conomy</Text>
+		</Row>
+		<Row Tag="TXT_KEY_TRAIT_MANNCONOMY_DESC">
+			<Text>Strategic Resources provide +3 [ICON_GOLD] Gold and Iron, Coal and Oil Resources provide double quantity.</Text>
+		</Row>
+		
+		<!--Buildings-->
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_STORE_DESC">
+			<Text>Mann Co. Store</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_STORE_HELP">
+			<Text>Mann Co. Store HELP</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_STORE_STRATEGY">
+			<Text>Mann Co. Store STRATEGY</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_STORE_TEXT">
+			<Text>Mann Co. Store TEXT</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_MANOR_DESC">
+			<Text>Mann Manor</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_MANOR_HELP">
+			<Text>Mann Manor HELP</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_MANOR_STRATEGY">
+			<Text>Mann Manor STRATEGY</Text>
+		</Row>
+		<Row Tag="TXT_KEY_BUILDING_MANNCO_MANOR_TEXT">
+			<Text>Mann Manor TEXT</Text>
+		</Row>
+	</Language_en_US>
+</GameData>

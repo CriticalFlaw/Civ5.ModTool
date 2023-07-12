@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Created by ModBuddy on 5/24/2020 5:16:36 PM -->
+<GameData>
+	<!--Core Definitions-->
+	<!--<Units>-->
+	
+	<!--Unit AI Types-->
+	<!--<Unit_AITypes>-->
+
+	<!--Unit Buildings-->
+	<!--<Unit_Buildings>-->
+	
+	<!--Building Class Requirement-->
+	<!--<Unit_BuildingClassRequireds>-->
+	
+	<!--Building Production Modifier-->
+	<!--<Unit_ProductionModifierBuildings>-->
+
+	<!--Builds-->
+	<!--<Unit_Builds>-->
+
+	<!--Class Upgrades-->
+	<!--<Unit_ClassUpgrades>-->
+	
+	<!--Free Unit Promotions-->
+	<!--<Unit_FreePromotions>-->
+	
+	<!--Free Flavours-->
+	<!--<Unit_Flavors>-->
+
+	<!--Great Person-->
+	<!--<Unit_GreatPersons>-->
+
+	<!--Resource Quantity Requirements-->
+	<!--<Unit_ResourceQuantityRequirements>-->
+
+	<!--Unique Names-->
+	<!--<Unit_UniqueNames>-->
+
+	<!--Yields From Kills-->
+	<!--<Unit_YieldFromKills>-->
+
+	<!--Non-AI Types-->
+	<!--<Unit_NotAITypes>-->
+
+	<!--Production Traits-->
+	<!--<Unit_ProductionTraits>-->
+
+	<!--Technology Types-->
+	<!--<Unit_TechTypes>-->
+
+	<!--Civilian Unit Promotions-->
+	<!--<UnitPromotions_CivilianUnitType>-->
+
+	<!--Unit Scripts-->
+	<!--<UnitGameplay2DScripts>-->
+</GameData>
